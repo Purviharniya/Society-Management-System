@@ -4,14 +4,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
 <!-- fontawesome-icons -->
-<link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css" type="text/css">
+<link rel="stylesheet" href="../../vendor/fontawesome-free/css/all.min.css" type="text/css">
 
 <!-- Custom styles for this template-->
-<link href="vendor/css/sb-admin-2.min.css" rel="stylesheet">
-<link href="vendor/css/sb-admin-2.css" rel="stylesheet">
+<link href="../../vendor/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="../../vendor/css/sb-admin-2.css" rel="stylesheet">
 
-<link href="vendor/css/fonts.css" rel="stylesheet">
-<link href="vendor/css/index.css" rel="stylesheet">
+<link href="../../vendor/css/fonts.css" rel="stylesheet">
+<link href="../../vendor/css/index.css" rel="stylesheet">
 <!-- SWIPER JS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
@@ -204,10 +204,10 @@
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/js/sb-admin-2.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/js/sb-admin-2.min.js"></script>
 
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
