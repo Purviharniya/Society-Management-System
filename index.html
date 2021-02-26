@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMS</title>
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+  <!-- fontawesome-icons -->
+  <link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="vendor/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="vendor/css/fonts.css" rel="stylesheet">
+  <link href="vendor/css/index.css" rel="stylesheet">
+  <!-- SWIPER JS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <style>
+    body {
+      background: #fff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      min-height: 100vh;
+    }
+
+    .carousel-wrapper {
+      background-color: #111;
+      min-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-container {
+      width: 100%;
+      padding-top: 50px;
+      padding-bottom: 150px;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 250px;
+      height: 250px;
+      background-color: #000;
+      -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0006);
+    }
+
+    .swiper-slide img {
+      width: 250px;
+      height: 250px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="home-nav fixed-top">
+    <!-- ADD NAVBAR HERE -->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+        <a class="navbar-brand logo" href="#">Society Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link home-links" href="#">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link home-links" href="admin/login.php">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link home-links" href="user/login.php">User</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      </nav>
+  </section>
+
+  <div class='carousel-wrapper'>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="vendor/img/carousel/car6.png" alt=""></div>
+        <div class="swiper-slide"><img src="vendor/img/carousel/car2.png" alt=""></div>
+        <div class="swiper-slide"><img src="vendor/img/carousel/car5.png" alt=""></div>
+        <div class="swiper-slide"><img src="vendor/img/carousel/car9.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="vendor/img/carousel/car8.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="vendor/img/carousel/car10.jpg" alt=""></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:1000px" >
+
+  </div>
+
+  <section>
+    <!-- ADD DESCRIPTION HERE -->
+  </section>
+
+  <section>
+    <!-- ADD FOOTER HERE -->
+  </section>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="vendor/js/sb-admin-2.min.js"></script>
+  <!-- SWIPER JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      loop: true,
+      autoplay: {
+        delay: 1500,
+        disableOnInteraction: false,
+      },
+      coverflowEffect: {
+        rotate: 20,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        slideShadows: true,
+      },
+    });
+  </script>
+
+  <script>
+    $(document).ready(function(){
+        $(window).scroll(function(){
+            var scroll = $(window).scrollTop();
+            if (scroll > 680) {
+              $(".home-nav").css("background" , "#0008");
+              $(".home-links").css("color" , "black");
+            }
+      
+            else{
+                $(".home-nav").css("background" , "");  
+                $(".home-links").css("color" , "white");	
+            }
+        })
+    });
+   
+    $(document).ready(function(){
+          $(window).scroll(function(){
+            var scroll = $(window).scrollTop();
+          if (scroll > 100) {
+          $(".home-nav").css("backdrop-filter","saturate(180%) blur(20px)");
+        }
+          
+        else{
+          $(".home-nav").css("backdrop-filter" , "");  	
+        }
+      })
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+.home-links {
+  font-family: PlayfairDisplay-Bold;
+  font-size: 1.3rem;
+  color: whitesmoke;
+  padding: 4px 20px !important;
+  transition: transform 1s;
+  margin: 0px 5px !important;
+}
+
+.logo {
+  font-family: PlayfairDisplay-Bold;
+  font-size: 1.5rem;
+  color: whitesmoke;
+  transition: transform 0.5s;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.home-links:hover {
+  transform: scale(1.1);
+  background-color: orangered;
+  border-radius: 10px;
+}
