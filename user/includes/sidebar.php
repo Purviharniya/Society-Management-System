@@ -1,20 +1,3 @@
-<link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- fontawesome-icons -->
-<link rel="stylesheet" href="../../vendor/fontawesome-free/css/all.min.css" type="text/css">
-
-<!-- Custom styles for this template-->
-<link href="../../vendor/css/sb-admin-2.min.css" rel="stylesheet">
-<link href="../../vendor/css/sb-admin-2.css" rel="stylesheet">
-
-<link href="../../vendor/css/fonts.css" rel="stylesheet">
-<link href="../../vendor/css/index.css" rel="stylesheet">
-<!-- SWIPER JS -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
@@ -164,10 +147,3 @@
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-        <script src="../../vendor/jquery/jquery.min.js"></script>
-        <script src="../../vendor/js/sb-admin-2.min.js"></script>
-
-        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
