@@ -1,6 +1,6 @@
 Add your TODOs here:
-Login-admin FE 
-Login-user FE
+
+Login FE 
 Login Admin Backend
 Login User Backend
 Forgot password
@@ -31,3 +31,13 @@ Shoutbox - 1 page
 Report - 1 pages
 Search - 1 pages
 Dashboard - 1 page
+
+
+---------------- EXTRA ------------------
+
+1. Excel import
+2. OTP
+3. Download as excel 
+4. Email 
+5. Payment - last priority
+
