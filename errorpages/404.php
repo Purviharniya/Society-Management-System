@@ -51,7 +51,6 @@
 					<!-- /.container-fluid -->
 				</div>
 				<!-- End of Main Content -->
-				<%- include('../partials/CopyRightFooter'); -%>
 			</div>
 			<!-- End of Content Wrapper -->
 		</div>
