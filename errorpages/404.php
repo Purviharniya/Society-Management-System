@@ -31,10 +31,12 @@
 			<!-- Content Wrapper -->
 			<div id="content-wrapper" class="d-flex flex-column">
 				<!-- Main Content -->
-				<div id="content" style="height: 90vh;">
+				<div id="content" style="height: 100vh;">
 
 					<!-- Begin Page Content -->
-					<div class="container-fluid">
+					<div class="container-fluid text-center p-5" style="min-height:100vh">
+						
+                        <img src='../vendor/img/errorpage/error.gif' class='img' height="40%" width="40%">
 						<!-- 404 Error Text -->
 						<div class="text-center">
 							<div class="error mx-auto" data-text="404">404</div>
