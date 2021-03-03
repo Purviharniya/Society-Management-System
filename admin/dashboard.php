@@ -1,6 +1,5 @@
-<?php include('./includes/header.php'); 
-// include('../config.php');
-session_start();
+<?php 
+include('./includes/header.php'); 
 ?>
 
 <?php include('./includes/sidebar.php'); ?>
@@ -21,6 +20,9 @@ session_start();
 </div>
 <!-- /.container-fluid -->
 
-<?php include('./includes/footer.php');
+<?php 
+
+include('./includes/footer.php');
 include('./includes/scripts.php');
+
 ?>

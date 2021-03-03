@@ -1,3 +1,11 @@
+<?php 
+
+include("config.php"); //to access the db connection and setting session if validation returns true
+include("./admin/includes/handlers/login.php"); //write admin validations, functions, etc in this file
+include("./user/includes/handlers/login.php"); //write user validations,functions etc in this file
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
