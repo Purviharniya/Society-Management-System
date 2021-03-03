@@ -24,6 +24,21 @@
     <hr class="sidebar-divider">
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse12" aria-expanded="true"
+            aria-controls="collapseTwoone">
+            <i class="fas fa-building fa-fw"></i>
+            <span>Flat Area</span>
+        </a>
+        <div id="collapse12" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="add_flat_area.php">Add Flat Area</a>
+                <a class="collapse-item" href="manage_flat_area.php">Manage Flat Area</a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider">
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fas fa-building fa-fw"></i>
