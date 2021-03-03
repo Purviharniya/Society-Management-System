@@ -10996,3 +10996,13 @@ body.sidebar-toggled footer.sticky-footer {
 ::-webkit-scrollbar {
     display: none;
 } */
+
+.profile-icon-parent{
+  background-color: rgb(231, 230, 230);
+  border-radius: 50%;
+  padding:8px;
+}
+
+.profile-icon-parent i{
+  color: rgb(129, 127, 127);
+}

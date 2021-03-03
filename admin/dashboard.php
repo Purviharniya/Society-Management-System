@@ -12,7 +12,7 @@ include('./includes/header.php');
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title text-info mb-4">Dashboard</h4>
+                    <h4 class="card-title text-info">Dashboard</h4>
                 </div>
             </div>
         </div>
