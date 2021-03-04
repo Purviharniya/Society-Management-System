@@ -17,7 +17,7 @@ include 'includes/topbar.php';
                     <h4 class="card-title text-info mb-5">Add Flat Area</h4>
                     <div class="col text-center">
                         <button type="button" class="btn btn-primary" name="addcourse" data-toggle="modal" data-target="#uploadarea">
-                            <i class="fas fa-upload"></i>
+                            Upload excel&nbsp;&nbsp;<i class="fas fa-upload"></i>
                         </button>
                     </div>
                     <!-- Modal for importing -->
