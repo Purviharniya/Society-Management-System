@@ -64,7 +64,12 @@ include 'includes/topbar.php';
                                                         <input type="text" class="form-control" id="farea" placeholder="Column name of Flat Area" name="farea" value="farea" required>
                                                     </div>
                                                 </div>
-                                
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="name"><b>Maintenance Rate per square feet</b></label>
+                                                        <input type="text" class="form-control" id="farea" placeholder="Column name of Rate per sq feet" name="frateps" value="frateps" required>
+                                                    </div>
+                                                </div>
                                                 <br>
                                                 <div class="form-group files color">
                                                     <!-- <input type="file" class="form-control" accept=".xls,.xlsx"> -->
@@ -167,9 +172,23 @@ include 'includes/topbar.php';
                             <small id="seriesHelp" class="form-text text-muted">Enter the flat series for eg- 01,02,03,04</small>
                         </div>
                         <div class="form-group">
+                            <label for="flattype">Flat Type:</label>
+                            <select class="form-control" id="flattype">
+                                <option>1BHK</option>
+                                <option>2BHK</option>
+                                <option>3BHK</option>
+                                <option>4BHK</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="area">Flat Area:</label>
                             <input type="text" class="form-control" id="area" name="area" aria-describedby="areaHelp" required>
-                            <small id="areaHelp" class="form-text text-muted">Enter the area for each flat in the series</small>
+                            <small id="areaHelp" class="form-text text-muted">Enter the area in sq feet for each flat in the series</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Maintenance Rate per sq feet: </label>
+                            <input type="text" class="form-control" id="area" name="area" aria-describedby="rateHelp" required>
+                            <small id="areaHelp" class="form-text text-muted">Enter the maintenance rate per sq feet for each flat in the series</small>
                         </div>
                     
                         <button type="submit" class="btn btn-primary">Add</button>
