@@ -55,34 +55,58 @@ include 'includes/topbar.php';
                                             </div>
                                             <div class="form-row mt-4">
                                                 <div class="form-group col-md-6">
-                                                    <label for="fcode"><b>Block</b></label>
-                                                    <input type="text" class="form-control" id="block"
-                                                        placeholder="Column name of Block" name="block" value="block"
-                                                        required>
+                                                    <label for="block">Block:</label>
+                                                    <input type="text" class="form-control" id="block" name="block"
+                                                        value="block" placeholder="Column name of Block" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="eid"><b>Flat Series</b></label>
-                                                    <input type="text" class="form-control" id="series"
-                                                        placeholder="Column name of Flat Series" name="series"
-                                                        value="series" required>
+                                                    <label for="fno">Flat no:</label>
+                                                    <input type="text" class="form-control" id="fno" name="fno"
+                                                        value="fno" placeholder="Column name of Flat number" required>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="name"><b>Flat Area</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Flat Area" name="farea"
-                                                        value="farea" required>
+                                                    <label for="name">Name:</label>
+                                                    <input type="text" class="form-control" id="name" name="name"
+                                                        value="name" placeholder="Column name of Owner" required>
                                                 </div>
-
-
-                                                <div class="form-group col-md-6">
-                                                    <label for="name"><b>Maintenance Rate /sq feet</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Rate per sq feet" name="frateps"
-                                                        value="frateps" required>
+                                                <div class="form-group">
+                                                    <label for="contact col-md-6">Contact No.:</label>
+                                                    <input type="text" class="form-control" id="contact" name="contact"
+                                                        value="contact" placeholder="Column name of Contact no"
+                                                        required>
                                                 </div>
                                             </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="contact1">Alternate Contact No.:</label>
+                                                    <input type="text" class="form-control" id="contact1"
+                                                        name="contact1" value="contact1"
+                                                        placeholder="Column name of contact no1" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="contact2">Alternate Contact No.:</label>
+                                                    <input type="text" class="form-control" id="contact2"
+                                                        name="contact2" value="contact2"
+                                                        placeholder="Column name of contact no2">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="contact">Email ID:</label>
+                                                    <input type="text" class="form-control" id="email" name="email"
+                                                        value="email" placeholder="Column name of Email" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="contact">Total members in the family:</label>
+                                                    <input type="text" class="form-control" id="members" name="members"
+                                                        value="members"
+                                                        placeholder="Column name of total members in the family"
+                                                        required>
+                                                </div>
+                                            </div>
+
                                             <br>
                                             <div class="form-group files color">
                                                 <!-- <input type="file" class="form-control" accept=".xls,.xlsx"> -->
