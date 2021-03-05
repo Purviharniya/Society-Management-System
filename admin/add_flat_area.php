@@ -74,10 +74,10 @@ include 'includes/topbar.php';
                                                         placeholder="Column name of Flat Area" name="farea"
                                                         value="farea" required>
                                                 </div>
-                                            </div>
-                                            <div class="form-row">
+
+
                                                 <div class="form-group col-md-6">
-                                                    <label for="name"><b>Maintenance Rate per square feet</b></label>
+                                                    <label for="name"><b>Maintenance Rate /sq feet</b></label>
                                                     <input type="text" class="form-control" id="farea"
                                                         placeholder="Column name of Rate per sq feet" name="frateps"
                                                         value="frateps" required>
