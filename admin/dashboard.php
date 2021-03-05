@@ -1,10 +1,10 @@
-<?php 
-include('./includes/header.php'); 
+<?php
+include './includes/header.php';
 ?>
 
-<?php include('./includes/sidebar.php'); ?>
+<?php include './includes/sidebar.php';?>
 
-<?php include('./includes/topbar.php'); ?>
+<?php include './includes/topbar.php';?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -20,9 +20,9 @@ include('./includes/header.php');
 </div>
 <!-- /.container-fluid -->
 
-<?php 
+<?php
 
-include('./includes/footer.php');
-include('./includes/scripts.php');
+include './includes/footer.php';
+include './includes/scripts.php';
 
 ?>
