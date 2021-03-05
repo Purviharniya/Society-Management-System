@@ -177,7 +177,7 @@ include 'includes/topbar.php';
                         </div>
                     </div>
                     <!-- Close upload modal -->
-                    <form action="">
+                    <form action="" autocomplete="off">
 
                         <div class="form-group">
                             <label for="block">Block:</label>

@@ -177,7 +177,7 @@ include 'includes/topbar.php';
                         </div>
                     </div>
                     <!-- Close upload modal -->
-                    <form action="">
+                    <form action="" autocomplete="off">
                         <div class="form-group">
                             <label for="fno">Flat no:</label>
                             <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
