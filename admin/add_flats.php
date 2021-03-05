@@ -9,20 +9,20 @@ include 'includes/topbar.php';
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <h3 class="my-4">Flat Area</h3>
+    <h3 class="my-4">Flats</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card pt-1 pb-5">
                 <div class="card-body">
-                    <h4 class="card-title text-info mb-5">Add Flat Area</h4>
+                    <h4 class="card-title text-info mb-5">Add Flat</h4>
                     <div class="col text-center">
                         <button type="button" class="btn btn-primary" name="addcourse" data-toggle="modal"
-                            data-target="#uploadarea">
+                            data-target="#uploadflat">
                             Upload excel&nbsp;&nbsp;<i class="fas fa-upload"></i>
                         </button>
                     </div>
                     <!-- Modal for importing -->
-                    <div class="modal fade" id="uploadarea" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="uploadflat" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle0" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -178,19 +178,23 @@ include 'includes/topbar.php';
                     </div>
                     <!-- Close upload modal -->
                     <form action="">
-
+                        <div class="form-group">
+                            <label for="fno">Flat no:</label>
+                            <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
+                                required>
+                            <small id="fnoHelp" class="form-text text-muted">Enter the Flat number</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="floorno">Floor no:</label>
+                            <input type="text" class="form-control" id="floorno" name="floorno"
+                                aria-describedby="floornoHelp" required>
+                            <small id="floornoHelp" class="form-text text-muted">Enter the floor number</small>
+                        </div>
                         <div class="form-group">
                             <label for="block">Block:</label>
                             <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
                                 required>
                             <small id="blockHelp" class="form-text text-muted">Enter the block name</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="series">Flat Series:</label>
-                            <input type="text" class="form-control" id="series" name="series"
-                                aria-describedby="seriesHelp" required>
-                            <small id="seriesHelp" class="form-text text-muted">Enter the flat series for eg-
-                                01,02,03,04</small>
                         </div>
                         <div class="form-group">
                             <label for="flattype">Flat Type:</label>
@@ -201,21 +205,6 @@ include 'includes/topbar.php';
                                 <option>4BHK</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="area">Flat Area:</label>
-                            <input type="text" class="form-control" id="area" name="area" aria-describedby="areaHelp"
-                                required>
-                            <small id="areaHelp" class="form-text text-muted">Enter the area in sq feet for each flat in
-                                the series</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="area">Maintenance Rate per sq feet: </label>
-                            <input type="text" class="form-control" id="area" name="area" aria-describedby="rateHelp"
-                                required>
-                            <small id="areaHelp" class="form-text text-muted">Enter the maintenance rate per sq feet for
-                                each flat in the series</small>
-                        </div>
-
                         <button type="submit" class="btn btn-primary">Add</button>
                         <button type="clear" class="btn btn-primary">Clear</button>
                     </form>
