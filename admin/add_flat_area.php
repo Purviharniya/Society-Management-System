@@ -76,14 +76,14 @@ include 'includes/topbar.php';
                                                 <div class="form-group col-md-6">
                                                     <label for="fcode"><b>Block</b></label>
                                                     <input type="text" class="form-control" id="block"
-                                                        placeholder="Column name of Block" name="block" value="block"
+                                                        placeholder="Column name of Block" name="block" value="Block Number"
                                                         required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="eid"><b>Flat Series</b></label>
                                                     <input type="text" class="form-control" id="series"
                                                         placeholder="Column name of Flat Series" name="series"
-                                                        value="series" required>
+                                                        value="Flat Series" required>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -91,7 +91,7 @@ include 'includes/topbar.php';
                                                     <label for="name"><b>Flat Area</b></label>
                                                     <input type="text" class="form-control" id="farea"
                                                         placeholder="Column name of Flat Area" name="farea"
-                                                        value="farea" required>
+                                                        value="Flat Area" required>
                                                 </div>
 
 
