@@ -9,6 +9,25 @@ include 'includes/topbar.php';
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <?php 
+    if(isset($_GET['success']))
+    {
+        if($_GET['success']=='true')
+        {
+    ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Area added successfully!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <?php 
+        }
+    }
+    ?>
+
+
     <h3 class="my-4">Flat Area</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
