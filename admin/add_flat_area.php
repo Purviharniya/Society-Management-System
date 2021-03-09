@@ -177,7 +177,7 @@ include 'includes/topbar.php';
                         </div>
                     </div>
                     <!-- Close upload modal -->
-                    <form action="" autocomplete="off">
+                    <form action="queries/flatarea.php" method="POST" autocomplete="off">
 
                         <div class="form-group">
                             <label for="block">Block:</label>
@@ -194,11 +194,12 @@ include 'includes/topbar.php';
                         </div>
                         <div class="form-group">
                             <label for="flattype">Flat Type:</label>
-                            <select class="form-control" id="flattype">
-                                <option>1BHK</option>
-                                <option>2BHK</option>
-                                <option>3BHK</option>
-                                <option>4BHK</option>
+                            <select class="form-control" name="flattype" required>
+                                <option selected value='1BHK'>1BHK</option>
+                                <option value='2BHK'>2BHK</option>
+                                <option value='3BHK'>3BHK</option>
+                                <option value='4BHK'>4BHK</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -209,15 +210,15 @@ include 'includes/topbar.php';
                                 the series</small>
                         </div>
                         <div class="form-group">
-                            <label for="area">Maintenance Rate per sq feet: </label>
-                            <input type="text" class="form-control" id="area" name="area" aria-describedby="rateHelp"
+                            <label for="rate">Maintenance Rate per sq feet: </label>
+                            <input type="text" class="form-control" id="rate" name="rate" aria-describedby="rateHelp"
                                 required>
-                            <small id="areaHelp" class="form-text text-muted">Enter the maintenance rate per sq feet for
+                            <small id="rateHelp" class="form-text text-muted">Enter the maintenance rate per sq feet for
                                 each flat in the series</small>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Add</button>
-                        <button type="clear" class="btn btn-primary">Clear</button>
+                        <button type="submit" class="btn btn-primary" name='addflatarea-btn'>Add</button>
+                        <button type="reset" class="btn btn-primary">Clear</button>
                     </form>
                 </div>
             </div>
