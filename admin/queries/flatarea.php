@@ -21,9 +21,12 @@ include('../../config.php');
         $query="INSERT INTO flatarea(`FlatAreaID`, `Block Number`, `Flat Series`, `Flat Area`, `Flat Type`, `Rate psq` , `Added by`, `Created At`, `Updated At`) VALUES ('' , '$block' , '$fseries' , '$farea' , '$ftype' , '$rate' , '$added_by' , '$timestamp' , '$timestamp' )";
         mysqli_query($con,$query);
 
-        // redirect to the form page again with success message or to the datatable page
+        //Start the session if already not started.
+        $_SESSION['success_message'] = "<strong>Success!</strong> Area added successfully!";
+        
         header("Location: ../add_flat_area.php?success=true");
-
+        exit();
+        // redirect to the form page again with success message or to the datatable page
     }
 // }
 

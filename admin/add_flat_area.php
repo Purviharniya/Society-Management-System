@@ -10,20 +10,19 @@ include 'includes/topbar.php';
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php 
-    if(isset($_GET['success']))
+    if(isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) 
     {
-        if($_GET['success']=='true')
-        {
     ?>
+
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Area added successfully!
+        <?php echo $_SESSION['success_message']; ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
 
     <?php 
-        }
+     unset($_SESSION['success_message']);
     }
     ?>
 
@@ -76,8 +75,8 @@ include 'includes/topbar.php';
                                                 <div class="form-group col-md-6">
                                                     <label for="fcode"><b>Block</b></label>
                                                     <input type="text" class="form-control" id="block"
-                                                        placeholder="Column name of Block" name="block" value="Block Number"
-                                                        required>
+                                                        placeholder="Column name of Block" name="block"
+                                                        value="Block Number" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="eid"><b>Flat Series</b></label>
