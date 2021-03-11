@@ -22,7 +22,7 @@ include 'includes/topbar.php';
     </div>
 
     <?php 
-     unset($_SESSION['success_message']);
+      unset($_SESSION['success_message']);
     }
     ?>
 

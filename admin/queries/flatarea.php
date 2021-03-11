@@ -24,7 +24,7 @@ include('../../config.php');
         //Start the session if already not started.
         $_SESSION['success_message'] = "<strong>Success!</strong> Area added successfully!";
         
-        header("Location: ../add_flat_area.php?success=true");
+        header("Location: ../add_flat_area.php");
         exit();
         // redirect to the form page again with success message or to the datatable page
     }
