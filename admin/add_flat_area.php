@@ -52,7 +52,7 @@ include 'includes/topbar.php';
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <form method="POST" enctype="multipart/form-data" id="bulkUploadInternal">
+                                        <form method="POST" enctype="multipart/form-data" id="bulkUploadAreaRate">
                                             <label for="">
                                                 <h6>Information for mapping Data from excel sheet columns to database
                                                     columns </h6>
@@ -76,31 +76,40 @@ include 'includes/topbar.php';
                                                     <label for="fcode"><b>Block</b></label>
                                                     <input type="text" class="form-control" id="block"
                                                         placeholder="Column name of Block" name="block"
-                                                        value="Block Number" required>
+                                                        value="BlockNumber" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="eid"><b>Flat Series</b></label>
                                                     <input type="text" class="form-control" id="series"
                                                         placeholder="Column name of Flat Series" name="series"
-                                                        value="Flat Series" required>
+                                                        value="FlatSeries" required>
                                                 </div>
                                             </div>
                                             <div class="form-row">
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="name"><b>Flat Type</b></label>
+                                                    <input type="text" class="form-control" id="flattype"
+                                                        placeholder="Column name of Flat Type" name="flattype"
+                                                        value="FlatType" required>
+                                                </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="name"><b>Flat Area</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Flat Area" name="farea"
-                                                        value="Flat Area" required>
-                                                </div>
-
-
-                                                <div class="form-group col-md-6">
-                                                    <label for="name"><b>Maintenance Rate /sq feet</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Rate per sq feet" name="frateps"
-                                                        value="frateps" required>
+                                                    <input type="text" class="form-control" id="area"
+                                                        placeholder="Column name of Flat Area" name="area"
+                                                        value="FlatArea" required>
                                                 </div>
                                             </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="name"><b>Maintenance Rate /sq feet</b></label>
+                                                    <input type="text" class="form-control" id="rate"
+                                                        placeholder="Column name of Rate per sq feet" name="rate"
+                                                        value="Ratepsq" required>
+                                                </div>
+                                            </div>
+
                                             <br>
                                             <div class="form-group files color">
                                                 <!-- <input type="file" class="form-control" accept=".xls,.xlsx"> -->
@@ -245,6 +254,43 @@ include 'includes/topbar.php';
 </div>
 <!-- /container-fluid -->
 
+<script>
+    $("#bulkUploadAreaRate").submit(function(e) {
+        e.preventDefault();
+        form = this;
+        var formData = new FormData(this);
+        // $("#upload_farea").attr("disabled", true);
+        // $("#upload_farea").text("Uploading...")
+        $.ajax({
+            url: "includes/bulkUpload/add_flat_area.php",
+            type: 'POST',
+            data: formData,
+            success: function(data) {
+                console.log(data);
+                let [status, response] = $.trim(data).split("+");
+                console.log(status);
+                if(status == "Successful") {
+                    const resData = JSON.parse(response);
+                    console.log(resData)
+                    $("#upload_farea").text("Upload Successfull!");
+                    $("#upload_farea").removeClass("btn-primary");
+                    $("#upload_farea").addClass("btn-success");
+                    alert("Status:"+ status +"\ninserted : " + resData.insertedRecords + "\nupdated : " + resData.updatedRecords + "\nno Operation : " + (resData.totalRecords - (resData.updatedRecords + resData.insertedRecords)))
+                } else {
+                    $("#upload_farea").text("Upload Failed");
+                    $("#upload_farea").addClass("btn-danger");
+                    alert(data);
+                }
+                // form.reset();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    })
+
+
+</script>
 
 
 <?php

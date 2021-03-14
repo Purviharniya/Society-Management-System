@@ -18,7 +18,7 @@ include('../../config.php');
         // echo "hi";
 
         // store in the database; check if error doesnt occur while storing
-        $query="INSERT INTO flatarea(`FlatAreaID`, `Block Number`, `Flat Series`, `Flat Area`, `Flat Type`, `Rate psq` , `Added by`, `Created At`, `Updated At`) VALUES ('' , '$block' , '$fseries' , '$farea' , '$ftype' , '$rate' , '$added_by' , '$timestamp' , '$timestamp' )";
+        $query="INSERT INTO flatarea(`FlatAreaID`, `BlockNumber`, `FlatSeries`, `FlatArea`, `FlatType`, `Ratepsq` , `Updatedby`, `UpdatedAt`) VALUES ('' , '$block' , '$fseries' , '$farea' , '$ftype' , '$rate' , '$added_by' , '$timestamp' )";
         mysqli_query($con,$query);
 
         //Start the session if already not started.
