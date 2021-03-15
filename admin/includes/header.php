@@ -31,14 +31,7 @@ include('../config.php');
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../vendor/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <?php 
-        if(basename($_SERVER['PHP_SELF']) == 'login.php'){ 
-    ?>
-            <link href="../vendor/css/login.css" rel="stylesheet" type="text/css">
-    <?php
-        }
-    ?>
+    
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.bootstrap4.min.css" rel="stylesheet">
