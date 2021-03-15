@@ -46,7 +46,6 @@
         </a>
         <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="add_flat_area.php">Add Flat Area</a>
                 <a class="collapse-item" href="add_flats.php">Add Flats</a>
                 <a class="collapse-item" href="manage_flats.php">Manage Flats</a>
             </div>

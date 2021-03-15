@@ -2,14 +2,16 @@
  
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
-// include('../config.php');
-// if(isset($_SESSION['username']) && isset($_SESSION['role'])){
+include('../config.php');
+// if(isset($_SESSION['username'])){
 //     $username = $_SESSION['username'];
 //     $role = $_SESSION['role'];
+//     echo $username;
 // }
 // else{
-//     redirect('../login.php');
+//     header("Location: ../login.php");
 // }
+
 
 ?>
 <!DOCTYPE html>
