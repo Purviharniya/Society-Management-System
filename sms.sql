@@ -364,6 +364,8 @@ ALTER TABLE `visitor_flow`
   DROP `Username`,
   DROP `Password`;
   
+ ALTER TABLE `flats` CHANGE `BlockNumber` `BlockNumber` VARCHAR(20) NOT NULL;
+  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
