@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 26, 2021 at 12:21 PM
+-- Host: 127.0.0.1:3306
+-- Generation Time: Mar 15, 2021 at 11:15 AM
 -- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- PHP Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,8 +47,8 @@ CREATE TABLE `allotments` (
   `FlatID` bigint(20) NOT NULL,
   `Date` datetime NOT NULL,
   `Duration` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `UpdatedBy` timestamp NOT NULL DEFAULT current_timestamp(),
+  `UpdatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -94,12 +94,23 @@ CREATE TABLE `complaints` (
 
 CREATE TABLE `flatarea` (
   `FlatAreaID` bigint(20) NOT NULL,
+  `BlockNumber` varchar(20) NOT NULL,
+  `FlatSeries` bigint(20) NOT NULL,
   `FlatArea` bigint(20) NOT NULL,
-  `BlockNumber` bigint(20) NOT NULL,
-  `FlatNumber` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `FlatType` varchar(10) NOT NULL,
+  `Ratepsq` double NOT NULL,
+  `Updatedby` varchar(20) NOT NULL,
+  `UpdatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `flatarea`
+--
+
+INSERT INTO `flatarea` (`FlatAreaID`, `BlockNumber`, `FlatSeries`, `FlatArea`, `FlatType`, `Ratepsq`, `Updatedby`, `UpdatedAt`) VALUES
+(7, 'A', 7, 2000, '2BHK', 20, 'Admin1', '2021-03-14 06:04:39'),
+(10, 'B', 2, 200, '1BHK', 10, 'admin1', '2021-03-14 06:28:00'),
+(15, 'A', 1, 2000, '1BHK', 20, 'admin1', '2021-03-15 09:52:19');
 
 -- --------------------------------------------------------
 
@@ -233,6 +244,12 @@ ALTER TABLE `complaints`
   ADD PRIMARY KEY (`RequestID`);
 
 --
+-- Indexes for table `flatarea`
+--
+ALTER TABLE `flatarea`
+  ADD PRIMARY KEY (`FlatAreaID`);
+
+--
 -- Indexes for table `flats`
 --
 ALTER TABLE `flats`
@@ -300,6 +317,12 @@ ALTER TABLE `bills`
 --
 ALTER TABLE `complaints`
   MODIFY `RequestID` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `flatarea`
+--
+ALTER TABLE `flatarea`
+  MODIFY `FlatAreaID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `flats`
