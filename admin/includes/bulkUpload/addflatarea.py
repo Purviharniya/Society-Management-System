@@ -97,8 +97,10 @@ try:
         # print("b",blockno)
         seriesno = data.cell(
             x, header_id[sys.argv[mapper['series_col']]]).value
+        seriesno = str(int(seriesno)).zfill(2)
+        # print(seriesno)
         flattype = data.cell(
-            x, header_id[sys.argv[mapper['flattype_col']]]).value
+            x, header_id[sys.argv[mapper['flattype_col']]]).value.upper()  
         flatarea = data.cell(
             x, header_id[sys.argv[mapper['area_col']]]).value
         frate = data.cell(

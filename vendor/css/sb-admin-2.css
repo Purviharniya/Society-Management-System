@@ -11006,3 +11006,9 @@ body.sidebar-toggled footer.sticky-footer {
 .profile-icon-parent i{
   color: rgb(129, 127, 127);
 }
+
+@media (min-width:768px){
+  .table-buttons-addfarea{
+    display: block !important;
+  }
+}

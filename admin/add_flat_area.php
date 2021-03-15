@@ -26,6 +26,22 @@ include 'includes/topbar.php';
     }
     ?>
 
+    <?php 
+        if(isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) 
+        {
+        ?>
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['error_message']; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <?php 
+        unset($_SESSION['error_message']);
+        }
+    ?>
 
     <h3 class="my-4">Flat Area</h3>
     <div class="row">
@@ -204,7 +220,7 @@ include 'includes/topbar.php';
                         </div>
                     </div>
                     <!-- Close upload modal -->
-                    <form action="queries/flatarea.php" method="POST" autocomplete="off">
+                    <form action="includes/queries/flatarea.php" method="POST" autocomplete="off">
 
                         <div class="form-group">
                             <label for="block">Block:</label>
