@@ -359,6 +359,11 @@ ALTER TABLE `visitors`
 --
 ALTER TABLE `visitor_flow`
   MODIFY `VisitorFlowID` bigint(20) NOT NULL AUTO_INCREMENT;
+  
+ ALTER TABLE `flats`
+  DROP `Username`,
+  DROP `Password`;
+  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
