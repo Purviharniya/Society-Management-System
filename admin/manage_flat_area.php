@@ -8,7 +8,6 @@ include './includes/header.php';
 
 <!-- Begin Page Content -->
 <div class="container-fluid">       
-    <h3 class="my-4">Flat Area</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card shadow mb-4">
@@ -408,18 +407,20 @@ include './includes/header.php';
             data: form_serialize,
             success: function(data) {
                 // alert(data); // show response from the php script.
-                console.log(data);
+                // console.log(data);
                 if (data === "Exists_record"){
                     $('#error_record').text('*This data already exists! Please change the Block or series value');
                     $("#update_flatarea_btn").text("Update");
                     $("#update_flatarea_btn").attr("disabled", false);
                 }else{
                     $("#update_flatarea_btn").text("Updated Successfully");
+                    $("#update_flatarea_btn").removeClass("btn-primary");
+                    $("#update_flatarea_btn").addClass("btn-success");
                     var row = $("#update-del-modal").closest('tr');
                     var aPos = $("#dataTable-flatarea").dataTable().fnGetPosition(row.get(0));
                     var temp = $("#dataTable-flatarea").DataTable().row(aPos).data();
-                    console.log(temp)
-                    console.log(form_serialize)
+                    // console.log(temp)
+                    // console.log(form_serialize)
                     temp['BlockNumber'] = form_serialize[0].value; //new values
                     temp['FlatArea'] = form_serialize[2].value; //new values
                     temp['FlatSeries'] = form_serialize[1].value; //new values
@@ -462,7 +463,7 @@ include './includes/header.php';
             url: "includes/queries/delete_multiple_flatarea.php",
             data: actual_delete_data_json,
             success: function(data) {
-                console.log("Returned data: "+data)
+                // console.log("Returned data: "+data)
                 $("#dataTable-flatarea").DataTable().draw(false);
             }
         })

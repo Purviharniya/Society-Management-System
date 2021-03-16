@@ -48,7 +48,6 @@ include 'includes/topbar.php';
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card pt-1 pb-5">
                 <div class="card-body">
-                    <h4 class="card-title text-info mb-5">Add Flat Area</h4>
                     <div class="col text-center">
                         <button type="button" class="btn btn-primary" name="addcourse" data-toggle="modal"
                             data-target="#uploadarea">
