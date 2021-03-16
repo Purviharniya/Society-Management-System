@@ -49,9 +49,6 @@ $allowed_roles = array("admin");
                                                 <button type="submit" class="btn btn-primary" id="delete_flatarea_btn" name="delete_flatarea">Yes</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" name="no">No</button>
                                             </div>
-                                            <div class="col-md-6 text-right">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" name="close">Close</button>
-                                            </div>
                                         </div>    
                                     </div>
                                 </form>
@@ -103,10 +100,7 @@ $allowed_roles = array("admin");
                                 <br>
                             </div>
                             <!--end Update-->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" name="close">Close</button>
-                                <button type="button" class="btn btn-primary" name="save_changes">Save changes</button>
-                            </div>
+                            
                         </div>
                     </div>
                     </div>

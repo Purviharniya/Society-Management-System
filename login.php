@@ -23,7 +23,7 @@
     <!-- Custom styles for this template-->
     <link href="vendor/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- <link href="vendor/css/login.css" eet" type="text/css"> -->
-    <link rel="stylesheet" href="vendor/login.css" type="text/css">
+    <link rel="stylesheet" href="vendor/css/login.css" type="text/css">
 
     <!-- Custom styles for this page -->
     <link href="vendor/css/fonts.css" rel="stylesheet">
@@ -36,33 +36,38 @@
         <div class="container forms-section mt-2 mb-4">
             <div class="col-sm-8 ml-auto mr-auto">
                 <ul class="nav nav-pills nav-fill mb-1" id="pills-tab" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" id="pills-user-tab" data-toggle="pill" href="#pills-user" role="tab" aria-controls="pills-user" aria-selected="true">User</a> </li>
-                    <li class="nav-item"> <a class="nav-link" id="pills-admin-tab" data-toggle="pill" href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a> </li>
+                    <li class="nav-item"> <a class="nav-link active" id="pills-user-tab" data-toggle="pill"
+                            href="#pills-user" role="tab" aria-controls="pills-user" aria-selected="true">User</a> </li>
+                    <li class="nav-item"> <a class="nav-link" id="pills-admin-tab" data-toggle="pill"
+                            href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
+                    </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-user" role="tabpanel" aria-labelledby="pills-user-tab">
-                    <div class="col-sm-12 border border-primary shadow rounded pt-2">
-                        <?php  include('./user/login.php')?>
+                    <div class="tab-pane fade show active" id="pills-user" role="tabpanel"
+                        aria-labelledby="pills-user-tab">
+                        <div class="col-sm-12 border border-primary shadow rounded pt-2">
+                            <?php  include('./user/login.php')?>
+                        </div>
                     </div>
-                </div>
-                <div class="tab-pane fade admin-section" id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
-                    <div class="col-sm-12 border border-primary shadow rounded pt-2">
-                        <?php  include('./admin/login.php')?>
+                    <div class="tab-pane fade admin-section" id="pills-admin" role="tabpanel"
+                        aria-labelledby="pills-admin-tab">
+                        <div class="col-sm-12 border border-primary shadow rounded pt-2">
+                            <?php  include('./admin/login.php')?>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="vendor/js/sb-admin-2.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="vendor/js/sb-admin-2.js"></script>
 
 </body>
 
