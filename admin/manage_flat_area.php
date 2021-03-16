@@ -223,15 +223,6 @@ include './includes/header.php';
                 exportOptions: {
                     columns: [1, 2, 3, 4, 5, 6, 7]  
                 },   
-            },{
-                extend: "csv",
-                title: "flat-area-data",
-                text: '<span> <i class="fas fa-download "></i> CSV </span>',
-                className: "btn btn-outline-primary  mx-2",
-                action: newExportAction,
-                exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7]
-                },
             },],
             ajax: {
                 'url': 'includes/loadInfo/manage_flat_area.php',
