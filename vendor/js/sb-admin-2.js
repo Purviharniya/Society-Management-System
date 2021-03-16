@@ -42,6 +42,7 @@
     var scrollDistance = $(this).scrollTop();
     if (scrollDistance > 100) {
       $('.scroll-to-top').fadeIn();
+      $('.scroll-to-top').addClass('d-flex justify-content-center align-items-center');
     } else {
       $('.scroll-to-top').fadeOut();
     }
