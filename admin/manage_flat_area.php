@@ -321,6 +321,124 @@ include './includes/header.php';
         }
         //   row.toggleClass('selected table-secondary')
     })
+    //action modal part
+    function loadModalCurrent() {
+        var target_row = $(this).closest("tr"); // this line did the trick
+        // console.log(target_row)
+        // var btn=$(this);
+        var aPos = $("#dataTable-flatarea").dataTable().fnGetPosition(target_row.get(0));
+        var areaData = $('#dataTable-flatarea').DataTable().row(aPos).data()
+        // console.log("AreaData"+areaData);
+        var json_areaData = JSON.stringify(areaData)
+        // console.log("Json Area data modal: "+json_areaData)
+        $.ajax({
+            type: "POST",
+            url: "includes/loadInfo/loadmodal_flatarea.php",
+            // data: form_serialize, 
+            // dataType: "json",
+            data: json_areaData,
+            success: function(output) {
+                // $("#"+x).text("Deleted Successfully");
+                target_row.append(output);
+                $('#update-del-modal').modal('show')
+                $(document).on('hidden.bs.modal', '#update-del-modal', function() {
+                    $("#update-del-modal").remove();
+                });
+                $('#delete_flatarea').submit(function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var form_serialize = form.serializeArray(); // serializes the form's elements.
+                    form_serialize.push({
+                        name: $("#delete_flatarea_btn").attr('name'),
+                        value: $("#delete_flatarea_btn").attr('value')
+                    });
+                    // alert('hi');
+                    console.log(form_serialize);
+                    $("#delete_flatarea_btn").text("Deleting...");
+                    $("#delete_flatarea_btn").attr("disabled", true);
+                    $.ajax({
+                        type: "POST",
+                        url: "includes/queries/flatarea.php",
+                        data: form_serialize,
+                        success: function(data) {
+                            //    alert(data); // show response from the php script.
+                            $("#delete_flatarea_btn").text("Deleted Successfully");
+                            var row = $("#update-del-modal").closest('tr');
+                            var aPos = $("#dataTable-flatarea").dataTable().fnGetPosition(row.get(0));
+                            $('#update-del-modal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                            // row.remove();
+                            loadCurrent();
+
+                            // console.log(aPos);
+                            // console.log(row)
+                        }
+                    });
+                });
+                $('#update_flatarea').submit(function(e) {
+                    update_flatarea(e);
+                    // $('#update-del-modal').modal('hide');
+                });
+            }
+        });
+    }
+
+    $("#filter_farea_form").submit(function(e) {
+        e.preventDefault();
+        console.log("hi");
+        $('#dataTable-flatarea').DataTable().ajax.reload();
+        $("#exampleModalCenter1").modal("hide")
+    })
+
+    function update_flatarea(e) {
+        e.preventDefault();
+        var form = $('#update_flatarea');
+        var form_serialize = form.serializeArray(); // serializes the form's elements.
+        // console.log(form_serialize)
+        form_serialize.push({
+            name: $("#update_flatarea_btn").attr('name'),
+            value: $("#update_flatarea_btn").attr('value')
+        });
+        $("#update_flatarea_btn").text("Updating...");
+        $("#update_flatarea_btn").attr("disabled", true);
+        $.ajax({
+            type: "POST",
+            url: "includes/queries/flatarea.php",
+            data: form_serialize,
+            success: function(data) {
+                // alert(data); // show response from the php script.
+                console.log(data);
+                if (data === "Exists_record"){
+                    $('#error_record').text('*This data already exists! Please change the Block or series value');
+                    $("#update_flatarea_btn").text("Update");
+                    $("#update_flatarea_btn").attr("disabled", false);
+                }else{
+                    $("#update_flatarea_btn").text("Updated Successfully");
+                    var row = $("#update-del-modal").closest('tr');
+                    var aPos = $("#dataTable-flatarea").dataTable().fnGetPosition(row.get(0));
+                    var temp = $("#dataTable-flatarea").DataTable().row(aPos).data();
+                    console.log(temp)
+                    console.log(form_serialize)
+                    temp['BlockNumber'] = form_serialize[0].value; //new values
+                    temp['FlatArea'] = form_serialize[2].value; //new values
+                    temp['FlatSeries'] = form_serialize[1].value; //new values
+                    temp['FlatType'] = form_serialize[5].value;
+                    temp['Ratepsq'] = form_serialize[5].value;
+                    temp['UpdatedAt'] = date("Y-m-d H:i:s");
+                    // temp['Updatedby'] = $_SESSION['username'];
+                    temp['Updatedby'] = 'Admin1';
+                    $('#dataTable-flatarea').dataTable().fnUpdate(temp, aPos, undefined, false);
+                    $('.action-btn').off('click')
+                    $('.action-btn').on('click', loadModalCurrent)
+                    // $("#dataTable-flatarea").DataTable().row(aPos).draw(false);
+                    $(".selectrow_student").attr("disabled", true);
+                    $('#error_record').remove();   
+                }
+            }
+        });
+    }
+
     
     $("#delete_selected_response_btn").click(function(e) {
         alert("You have selected " + $("#dataTable-flatarea tbody tr.selected").length + " record(s) for deletion");
