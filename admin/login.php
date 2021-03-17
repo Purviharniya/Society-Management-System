@@ -16,6 +16,7 @@
         <div class="input-group">
             <span><i class="fa fa-lock"></i></span>
             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <i class="fa fa-eye" id="togglePassword"></i>
         </div>
     </div>
     <div class="form-group">
@@ -61,3 +62,15 @@
         </form>
     </div>
 </div>
+
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+});
+</script>
