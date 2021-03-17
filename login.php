@@ -4,6 +4,9 @@
 //include("./admin/includes/handlers/login.php"); //write admin validations, functions, etc in this file
 //include("./user/includes/handlers/login.php"); //write user validations,functions etc in this file
 
+session_start();
+//session_unset();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +49,15 @@
                     <div class="tab-pane fade show active" id="pills-user" role="tabpanel"
                         aria-labelledby="pills-user-tab">
                         <div class="col-sm-12 border border-primary shadow rounded pt-2">
-                            <?php  include('./user/login.php')?>
+                            
+                            <?php
+                            if($_SESSION["otp"]==0){
+                                include('./user/login.php');
+                            }
+                            else{
+                                include('./user/verify.php');
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="tab-pane fade admin-section" id="pills-admin" role="tabpanel"
