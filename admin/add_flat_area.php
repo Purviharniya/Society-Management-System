@@ -9,9 +9,8 @@ include 'includes/topbar.php';
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <?php 
-    if(isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) 
-    {
+    <?php
+if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
     ?>
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,27 +20,26 @@ include 'includes/topbar.php';
         </button>
     </div>
 
-    <?php 
-      unset($_SESSION['success_message']);
-    }
+    <?php
+unset($_SESSION['success_message']);
+}
+?>
+
+    <?php
+if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
     ?>
 
-    <?php 
-        if(isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) 
-        {
-        ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?php echo $_SESSION['error_message']; ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php echo $_SESSION['error_message']; ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <?php 
-        unset($_SESSION['error_message']);
-        }
-    ?>
+    <?php
+unset($_SESSION['error_message']);
+}
+?>
 
     <h3 class="my-4">Flat Area</h3>
     <div class="row">
@@ -270,41 +268,41 @@ include 'includes/topbar.php';
 <!-- /container-fluid -->
 
 <script>
-    $("#bulkUploadAreaRate").submit(function(e) {
-        e.preventDefault();
-        form = this;
-        var formData = new FormData(this);
-        // $("#upload_farea").attr("disabled", true);
-        // $("#upload_farea").text("Uploading...")
-        $.ajax({
-            url: "includes/bulkUpload/add_flat_area.php",
-            type: 'POST',
-            data: formData,
-            success: function(data) {
-                console.log(data);
-                let [status, response] = $.trim(data).split("+");
-                console.log(status);
-                if(status == "Successful") {
-                    const resData = JSON.parse(response);
-                    console.log(resData)
-                    $("#upload_farea").text("Upload Successfull!");
-                    $("#upload_farea").removeClass("btn-primary");
-                    $("#upload_farea").addClass("btn-success");
-                    alert("Status:"+ status +"\ninserted : " + resData.insertedRecords + "\nupdated : " + resData.updatedRecords + "\nno Operation : " + (resData.totalRecords - (resData.updatedRecords + resData.insertedRecords)))
-                } else {
-                    $("#upload_farea").text("Upload Failed");
-                    $("#upload_farea").addClass("btn-danger");
-                    alert(data);
-                }
-                // form.reset();
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-    })
-
-
+$("#bulkUploadAreaRate").submit(function(e) {
+    e.preventDefault();
+    form = this;
+    var formData = new FormData(this);
+    // $("#upload_farea").attr("disabled", true);
+    // $("#upload_farea").text("Uploading...")
+    $.ajax({
+        url: "includes/bulkUpload/add_flat_area.php",
+        type: 'POST',
+        data: formData,
+        success: function(data) {
+            console.log(data);
+            let [status, response] = $.trim(data).split("+");
+            console.log(status);
+            if (status == "Successful") {
+                const resData = JSON.parse(response);
+                console.log(resData)
+                $("#upload_farea").text("Upload Successfull!");
+                $("#upload_farea").removeClass("btn-primary");
+                $("#upload_farea").addClass("btn-success");
+                alert("Status:" + status + "\ninserted : " + resData.insertedRecords +
+                    "\nupdated : " + resData.updatedRecords + "\nno Operation : " + (resData
+                        .totalRecords - (resData.updatedRecords + resData.insertedRecords)))
+            } else {
+                $("#upload_farea").text("Upload Failed");
+                $("#upload_farea").addClass("btn-danger");
+                alert(data);
+            }
+            // form.reset();
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+})
 </script>
 
 

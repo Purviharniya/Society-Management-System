@@ -1,6 +1,6 @@
 <?php
 // include_once('../../verify.php');
-include_once('../../../config.php');
+include_once '../../../config.php';
 
 $block = $_POST['block'];
 $series = $_POST['series'];
@@ -21,15 +21,14 @@ $ext = pathinfo($_FILES["Uploadfile"]["name"])['extension'];
 $rel_dir_path = "flat_area";
 $target_location_dir = $base_dir . $rel_dir_path;
 
-if(!is_dir($base_dir))
-{
-    mkdir($base_dir,0777,true);
+if (!is_dir($base_dir)) {
+    mkdir($base_dir, 0777, true);
 }
 if (!is_dir($target_location_dir)) {
     mkdir($target_location_dir, 0777, true);
 }
 
-$rel_file_path=$rel_dir_path. '/' . $file_name . "." . $ext;
+$rel_file_path = $rel_dir_path . '/' . $file_name . "." . $ext;
 $target_location = $base_dir . $rel_file_path;
 
 move_uploaded_file($_FILES['Uploadfile']['tmp_name'], $target_location);

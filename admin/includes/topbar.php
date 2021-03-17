@@ -161,7 +161,7 @@
                         <span class="prof-drop-name">Admin Test</span>
                         <br>
                         <span class="prof-drop-name">p.h@somaiya.edu</span>
-                    </div>                    
+                    </div>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">

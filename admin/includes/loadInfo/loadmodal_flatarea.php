@@ -2,20 +2,20 @@
 // echo 'Hi';
 $allowed_roles = array("admin");
 // if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
-    // echo 'Hi';
-    include_once('../../../config.php');
+// echo 'Hi';
+include_once '../../../config.php';
 
-    $data = json_decode(file_get_contents("php://input"), true);
-    $block = mysqli_escape_string($con, $data['BlockNumber']);
-    $fseries = mysqli_escape_string($con, $data['FlatSeries']);
-    $ftype = mysqli_escape_string($con, $data['FlatType']);
-    $result = mysqli_query($con, "select FlatAreaID,BlockNumber,FlatSeries,FlatType,FlatArea,Ratepsq from flatarea WHERE BlockNumber='$block' and FlatSeries='$fseries' and FlatType='$ftype'");
-    $row = mysqli_fetch_assoc($result);
-    $farea = $row['FlatArea'];
-    $rate = $row['Ratepsq'];
-    $recordID = $row['FlatAreaID'];
+$data = json_decode(file_get_contents("php://input"), true);
+$block = mysqli_escape_string($con, $data['BlockNumber']);
+$fseries = mysqli_escape_string($con, $data['FlatSeries']);
+$ftype = mysqli_escape_string($con, $data['FlatType']);
+$result = mysqli_query($con, "select FlatAreaID,BlockNumber,FlatSeries,FlatType,FlatArea,Ratepsq from flatarea WHERE BlockNumber='$block' and FlatSeries='$fseries' and FlatType='$ftype'");
+$row = mysqli_fetch_assoc($result);
+$farea = $row['FlatArea'];
+$rate = $row['Ratepsq'];
+$recordID = $row['FlatAreaID'];
 
-    echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
+echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -24,12 +24,12 @@ $allowed_roles = array("admin");
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    
+
                     <div class="modal-body">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-delete-tab" data-toggle="tab" href="#nav-delete" role="tab" aria-controls="nav-delete" aria-selected="true">Deletion</a>
-                                <a class="nav-item nav-link" id="nav-update-tab" data-toggle="tab" href="#nav-update" role="tab" aria-controls="nav-update" aria-selected="false">Update</a>                        
+                                <a class="nav-item nav-link" id="nav-update-tab" data-toggle="tab" href="#nav-update" role="tab" aria-controls="nav-update" aria-selected="false">Update</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -49,7 +49,7 @@ $allowed_roles = array("admin");
                                                 <button type="submit" class="btn btn-primary" id="delete_flatarea_btn" name="delete_flatarea">Yes</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" name="no">No</button>
                                             </div>
-                                        </div>    
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -61,25 +61,25 @@ $allowed_roles = array("admin");
                                 <form method="POST" id="update_flatarea">
                                     <div class="form-row mt-4">
                                         <div class="form-group col-md-6">
-                                            <label for="block"><b>Block Number</b></label> 
+                                            <label for="block"><b>Block Number</b></label>
                                             <input type="text" class="form-control"  placeholder="Block Number" name="blockno_new" value="' . $block . '">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="seri"><b>Flat Series</b></label> 
+                                            <label for="seri"><b>Flat Series</b></label>
                                             <input type="text" class="form-control"  placeholder="Flat Series" name="series_new" value="' . $fseries . '">
                                         </div>
-                                        <div class="col-12" id="error_record" class="text-danger"> 
+                                        <div class="col-12" id="error_record" class="text-danger">
 
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="areaf"><b>Flat Area</b></label> 
+                                            <label for="areaf"><b>Flat Area</b></label>
                                             <input type="text" class="form-control"  placeholder="Flat Area" name="area_new" value="' . $farea . '">
-                                        </div>  
+                                        </div>
                                         <div class="form-group col-md-6">
                                             <label for="frate"><b>Maintenance Rate</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="New Rate" name="rate_new" id="rate_new" value="' . $rate . '">
                                             <input type="hidden" class="form-control"  name="recordID" id="recordID" value="' . $recordID . '">
-                                        </div>                                   
+                                        </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
@@ -100,12 +100,12 @@ $allowed_roles = array("admin");
                                 <br>
                             </div>
                             <!--end Update-->
-                            
+
                         </div>
                     </div>
                     </div>
                 </div>
             </div>';
-    // echo 'Hi';
+// echo 'Hi';
 
 // }
