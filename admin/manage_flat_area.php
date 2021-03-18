@@ -392,7 +392,7 @@ function update_flatarea(e) {
     e.preventDefault();
     var form = $('#update_flatarea');
     var form_serialize = form.serializeArray(); // serializes the form's elements.
-    console.log(form_serialize)
+    // console.log(form_serialize)
     form_serialize.push({
         name: $("#update_flatarea_btn").attr('name'),
         value: $("#update_flatarea_btn").attr('value')
@@ -425,7 +425,7 @@ function update_flatarea(e) {
                 temp['FlatArea'] = form_serialize[4].value; //new values
                 temp['FlatSeries'] = form_serialize[2].value; //new values
                 temp['FlatType'] = form_serialize[7].value;
-                temp['Ratepsq'] = form_serialize[4].value;
+                temp['Ratepsq'] = form_serialize[5].value;
                 temp['UpdatedAt'] = form_serialize[8].value;
                 // temp['Updatedby'] = $_SESSION['username'];
                 temp['Updatedby'] = 'Admin1';

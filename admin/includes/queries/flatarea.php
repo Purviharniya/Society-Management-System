@@ -58,16 +58,21 @@ if (isset($_POST['update_flatarea'])) {
     $added_by = 'Admin1';
     // $added_by = $_SESSION['username'];
     $timestamp = date("Y-m-d H:i:s");
+    $block_old = mysqli_escape_string($con, $_POST['blockno_old']);
+    $series_old = mysqli_escape_string($con, $_POST['series_old']);
 
-    $check_query = "SELECT * from flatarea where BlockNumber='$block_new' AND FlatSeries='$series_new';";
-    // echo $check_query;
-    $check_result = mysqli_query($con, $check_query);
-    if (mysqli_num_rows($check_result) != 0) {
-        echo "Exists_record";
-    } else {
-        $sql = "UPDATE flatarea SET BlockNumber='$block_new', FlatSeries='$series_new',FlatArea='$area_new',FlatType='$flattype_new',Ratepsq='$rate_new',Updatedby='$added_by',UpdatedAt='$timestamp' WHERE FlatAreaID='$recordID';";
-        mysqli_query($con, $sql);
-        exit();
+    if ( ($block_new != $block_old) || ($series_new != $series_old) ) {
+        
+        $check_query = "SELECT * from flatarea where BlockNumber='$block_new' AND FlatSeries='$series_new';";
+        // echo $check_query;
+        $check_result = mysqli_query($con, $check_query);
+        if (mysqli_num_rows($check_result) != 0) {
+            echo "Exists_record";
+        } else {
+            $sql = "UPDATE flatarea SET BlockNumber='$block_new', FlatSeries='$series_new',FlatArea='$area_new',FlatType='$flattype_new',Ratepsq='$rate_new',Updatedby='$added_by',UpdatedAt='$timestamp' WHERE FlatAreaID='$recordID';";
+            mysqli_query($con, $sql);
+            exit();
+        }
     }
 
 }
