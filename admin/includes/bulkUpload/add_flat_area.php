@@ -24,6 +24,7 @@ $target_location_dir = $base_dir . $rel_dir_path;
 if (!is_dir($base_dir)) {
     mkdir($base_dir, 0777, true);
 }
+
 if (!is_dir($target_location_dir)) {
     mkdir($target_location_dir, 0777, true);
 }

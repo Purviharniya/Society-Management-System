@@ -19,6 +19,7 @@ mapper = {
     "upload_constraint": 14,
     "login_role": 15,
 }
+
 header = []
 header_id = {}
 end_col = 8

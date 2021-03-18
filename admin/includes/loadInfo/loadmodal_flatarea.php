@@ -64,10 +64,12 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <div class="form-group col-md-6">
                                             <label for="block"><b>Block Number</b></label>
                                             <input type="text" class="form-control"  placeholder="Block Number" name="blockno_new" value="' . $block . '">
+                                            <input type="hidden" name="blockno_old" value="' . $block . '">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="seri"><b>Flat Series</b></label>
                                             <input type="text" class="form-control"  placeholder="Flat Series" name="series_new" value="' . $fseries . '">
+                                            <input type="hidden" name="series_old" value="' . $fseries . '">
                                         </div>
                                         <div class="col-12" id="error_record">
                                         </div>
@@ -85,7 +87,6 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <div class="form-group col-md-6">
                                             <label for="ftyp"><b>Flat Type</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="New Faculty Code" name="flattype_new" value="' . $ftype . '">
-                                            <input type="hidden" class="form-control"  name="flattype_old" value="' . $ftype . '">
                                         </div>
                                         <input type="hidden" name="timestamp" value="' . $date .'">
                                     </div>
