@@ -1,27 +1,23 @@
-<?php
 
-//include("config.php"); //to access the db connection and setting session if validation returns true
-//include("./admin/includes/handlers/login.php"); //write admin validations, functions, etc in this file
-//include("./user/includes/handlers/login.php"); //write user validations,functions etc in this file
+<script src="vendor/jquery/login.js"></script>
 
-?>
-<form method="POST" class="adminForm p-3" id="adminForm">
+<form method="POST" class="adminForm p-3" id="adminForm" action="admin/includes/handlers/login.php">
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-user"></i></span>
-            <input type="username" class="form-control" name="username" placeholder="Username" id="username">
+            <input type="username" class="form-control" name="username" placeholder="Username" id="username" required >
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
         </div>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col">
-                <label><input type="checkbox" name="condition" id="condition"> Remember me</label>
+                <label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>
             </div>
             <div class="col text-right">
                 <a href="#" data-toggle="modal" data-target="#forgotPass">Forgot Password?</a>
@@ -29,14 +25,15 @@
         </div>
     </div>
     <div class="form-group">
-        <input type="submit" name="adminsubmit" value="Login" class="btn btn-block btn-primary">
+        <input type="submit" name="adminsubmit" id="adminsubmit" value="Login" class="btn btn-block btn-primary">
     </div>
 </form>
+
 
 <!-- Forgot Password Modal -->
 <div class="modal fade" id="forgotPass" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" id="forgotpassForm">
+        <form method="post" id="forgotpassForm" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Forgot Password</h5>
