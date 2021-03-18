@@ -1,19 +1,19 @@
 <?php
 //session_start();
 //session_unset();
-print_r($_SESSION);
+// print_r($_SESSION);
 ?>
-<!DOCTYPE html>
-<html>
-<body>
 
-<h2>Verify OTP</h2>
-
-
-<form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  <label for="otp">Enter OTP</label><br>
-  <input type="number" id="otp" name="otp"><br>
-  <button type="submit" name="submit">Verify</button>
+<form  method="POST" class ="userForm p-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  <div class="form-group">
+    <div class="input-group">
+      <span><i class="fa fa-key"></i></span>
+      <input type="number" class="form-control"name="otp" id="otp" placeholder ="Enter your OTP">
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="submit" name="submit" value="Verify" class="btn btn-block btn-primary">
+  </div>
 </form> 
 
 <?php
