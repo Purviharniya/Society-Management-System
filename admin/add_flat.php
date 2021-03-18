@@ -6,9 +6,39 @@ include 'includes/topbar.php';
 
 ?>
 
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <?php
+    if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
+    ?>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?php echo $_SESSION['success_message']; ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <?php
+        unset($_SESSION['success_message']);
+    }
+    ?>
+
+    <?php
+    if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
+    ?>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?php echo $_SESSION['error_message']; ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <?php
+        unset($_SESSION['error_message']);
+    }
+    ?>
     <h3 class="my-4">Flats</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
@@ -177,35 +207,55 @@ include 'includes/topbar.php';
                         </div>
                     </div>
                     <!-- Close upload modal -->
-                    <form action="" autocomplete="off">
+                    <form action="./includes/queries/flats.php" autocomplete="off" method="POST">
                         <div class="form-group">
-                            <label for="fno">Flat no:</label>
+                            <label for="fno">Flat number:</label>
                             <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
                                 required>
                             <small id="fnoHelp" class="form-text text-muted">Enter the Flat number</small>
                         </div>
+                        <!-- <div class="form-group">
+                            <label for="contactno">Contact number:</label>
+                            <input type="text" class="form-control" id="contactno" name="contactno"
+                                aria-describedby="contactnoHelp" required>
+                            <small id="contactnoHelp" class="form-text text-muted">Enter the Contact number of
+                                owner</small>
+                        </div> -->
                         <div class="form-group">
-                            <label for="floorno">Floor no:</label>
+                            <label for="flattype">Flat Type:</label>
+                            <select class="form-control" id="flattype" name="flattype">
+                                <option value="1 BHK">1BHK</option>
+                                <option value="2 BHK">2BHK</option>
+                                <option value="3 BHK">3BHK</option>
+                                <option value="4 BHK">4BHK</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="floorno">Floor:</label>
                             <input type="text" class="form-control" id="floorno" name="floorno"
                                 aria-describedby="floornoHelp" required>
                             <small id="floornoHelp" class="form-text text-muted">Enter the floor number</small>
                         </div>
                         <div class="form-group">
                             <label for="block">Block:</label>
-                            <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
-                                required>
+                            <input type="text" class="form-control" id="block" name="blockname"
+                                aria-describedby="blockHelp" required>
                             <small id="blockHelp" class="form-text text-muted">Enter the block name</small>
                         </div>
-                        <div class="form-group">
-                            <label for="flattype">Flat Type:</label>
-                            <select class="form-control" id="flattype">
-                                <option>1BHK</option>
-                                <option>2BHK</option>
-                                <option>3BHK</option>
-                                <option>4BHK</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <!-- <div class="form-group">
+                            <label for="maintenance">Maintenance:</label>
+                            <input type="text" class="form-control" id="maintenance" name="maintenance"
+                                aria-describedby="maintenanceHelp" required>
+                            <small id="maintenanceHelp" class="form-text text-muted">Enter the maintenance</small>
+                        </div> -->
+                        <!-- <div class="form-group">
+                            <label for="econtactno">Emergency Contact number:</label>
+                            <input type="text" class="form-control" id="econtactno" name="econtactno"
+                                aria-describedby="fnoHelp" required>
+                            <small id="fnoHelp" class="form-text text-muted">Enter the Emergency contact number of
+                                owner</small>
+                        </div> -->
+                        <button type="submit" class="btn btn-primary" name="flat">Add</button>
                         <button type="clear" class="btn btn-primary">Clear</button>
                     </form>
                 </div>

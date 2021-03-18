@@ -365,6 +365,10 @@ ALTER TABLE `visitor_flow`
   DROP `Password`;
   
  ALTER TABLE `flats` CHANGE `BlockNumber` `BlockNumber` VARCHAR(20) NOT NULL;
+
+ ALTER TABLE `flats`
+  DROP `ContactNumber`,
+  DROP `EmergencyContactNumber`;
   
 COMMIT;
 

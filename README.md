@@ -11,8 +11,8 @@ Login User Backend
 
 --------------  ADMIN  -------------------
 
-Flats - 3 pages    -j
-Flat Area - 3 pages    -p
+Flats - 3 pages -j
+Flat Area - 3 pages -p
 Bills - 3 page *
 Complaints - 5 pages
 Visitors - 5 pages
