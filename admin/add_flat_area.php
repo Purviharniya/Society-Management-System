@@ -46,6 +46,9 @@ unset($_SESSION['error_message']);
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card pt-1 pb-5">
                 <div class="card-body">
+                    <div class="col-12 mb-3">
+                        <h4 class="font-weight-bold text-primary">Add Flat Area</h4>
+                    </div>
                     <div class="col text-center">
                         <button type="button" class="btn btn-primary" name="addcourse" data-toggle="modal"
                             data-target="#uploadarea">

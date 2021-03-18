@@ -8,6 +8,7 @@ include './includes/header.php';
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <h3 class="my-4">Flat Area</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card shadow mb-4">
