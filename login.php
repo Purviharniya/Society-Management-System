@@ -55,7 +55,9 @@ session_start();
                                 include('./user/login.php');
                             }
                             else{
+                                
                                 include('./user/verify.php');
+                                
                             }
                             ?>
                         </div>

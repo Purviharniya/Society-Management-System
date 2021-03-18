@@ -45,6 +45,7 @@ if ($err) {
 } else {
   //echo $response;
   $_SESSION["otp"] = $otp;
+  echo'<script>window.location.replace("./login.php")</script>';
   //print_r($_SESSION);
 
   
