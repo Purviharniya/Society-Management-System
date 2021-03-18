@@ -14,6 +14,7 @@ $row = mysqli_fetch_assoc($result);
 $farea = $row['FlatArea'];
 $rate = $row['Ratepsq'];
 $recordID = $row['FlatAreaID'];
+$date =  date("Y-m-d H:i:s");
 
 echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -86,7 +87,9 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <input type="text" class="form-control" required="required" placeholder="New Faculty Code" name="flattype_new" value="' . $ftype . '">
                                             <input type="hidden" class="form-control"  name="flattype_old" value="' . $ftype . '">
                                         </div>
+                                        <input type="hidden" name="timestamp" value="' . $date .'">
                                     </div>
+                                    
                                     
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">

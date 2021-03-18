@@ -404,7 +404,7 @@ function update_flatarea(e) {
         url: "includes/queries/flatarea.php",
         data: form_serialize,
         success: function(data) {
-            alert(data); // show response from the php script.
+            // alert(data); // show response from the php script.
             // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
@@ -420,13 +420,13 @@ function update_flatarea(e) {
                 var aPos = $("#dataTable-flatarea").dataTable().fnGetPosition(row.get(0));
                 var temp = $("#dataTable-flatarea").DataTable().row(aPos).data();
                 // console.log(temp)
-                console.log("Hi", form_serialize)
+                // console.log("Hi", form_serialize)
                 temp['BlockNumber'] = form_serialize[0].value; //new values
                 temp['FlatArea'] = form_serialize[2].value; //new values
                 temp['FlatSeries'] = form_serialize[1].value; //new values
                 temp['FlatType'] = form_serialize[5].value;
-                temp['Ratepsq'] = form_serialize[5].value;
-                temp['UpdatedAt'] = Date();
+                temp['Ratepsq'] = form_serialize[3].value;
+                temp['UpdatedAt'] = form_serialize[7].value;
                 // temp['Updatedby'] = $_SESSION['username'];
                 temp['Updatedby'] = 'Admin1';
                 $('#dataTable-flatarea').dataTable().fnUpdate(temp, aPos, undefined, false);
