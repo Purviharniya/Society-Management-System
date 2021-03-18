@@ -199,7 +199,6 @@ function getFilters() {
 
 //DATATABLE CREATE
 function loadCurrent() {
-    // document.querySelector("#addCoursebtn").style.display="none"
     var table = $('#dataTable-flatarea').DataTable({
         processing: true,
         serverSide: true,
@@ -405,11 +404,12 @@ function update_flatarea(e) {
         url: "includes/queries/flatarea.php",
         data: form_serialize,
         success: function(data) {
-            // alert(data); // show response from the php script.
+            alert(data); // show response from the php script.
             // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
                     '*This data already exists! Please change the Block or series value');
+                $('#error_record').addClass('text-danger');
                 $("#update_flatarea_btn").text("Update");
                 $("#update_flatarea_btn").attr("disabled", false);
             } else {
@@ -420,13 +420,13 @@ function update_flatarea(e) {
                 var aPos = $("#dataTable-flatarea").dataTable().fnGetPosition(row.get(0));
                 var temp = $("#dataTable-flatarea").DataTable().row(aPos).data();
                 // console.log(temp)
-                // console.log(form_serialize)
+                console.log("Hi", form_serialize)
                 temp['BlockNumber'] = form_serialize[0].value; //new values
                 temp['FlatArea'] = form_serialize[2].value; //new values
                 temp['FlatSeries'] = form_serialize[1].value; //new values
                 temp['FlatType'] = form_serialize[5].value;
                 temp['Ratepsq'] = form_serialize[5].value;
-                temp['UpdatedAt'] = date("Y-m-d H:i:s");
+                temp['UpdatedAt'] = Date();
                 // temp['Updatedby'] = $_SESSION['username'];
                 temp['Updatedby'] = 'Admin1';
                 $('#dataTable-flatarea').dataTable().fnUpdate(temp, aPos, undefined, false);

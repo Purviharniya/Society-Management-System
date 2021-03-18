@@ -68,8 +68,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <label for="seri"><b>Flat Series</b></label>
                                             <input type="text" class="form-control"  placeholder="Flat Series" name="series_new" value="' . $fseries . '">
                                         </div>
-                                        <div class="col-12" id="error_record" class="text-danger">
-
+                                        <div class="col-12" id="error_record">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="areaf"><b>Flat Area</b></label>
@@ -88,6 +87,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <input type="hidden" class="form-control"  name="flattype_old" value="' . $ftype . '">
                                         </div>
                                     </div>
+                                    
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">
                                             <button type="submit" class="btn btn-primary" id="update_flatarea_btn" name="update_flatarea">Update</button>
