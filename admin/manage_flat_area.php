@@ -404,7 +404,7 @@ function update_flatarea(e) {
         url: "includes/queries/flatarea.php",
         data: form_serialize,
         success: function(data) {
-            // alert(data); // show response from the php script.
+            alert(data); // show response from the php script.
             // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(

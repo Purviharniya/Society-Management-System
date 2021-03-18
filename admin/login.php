@@ -1,11 +1,3 @@
-<?php
-
-//include("config.php"); //to access the db connection and setting session if validation returns true
-//include("./admin/includes/handlers/login.php"); //write admin validations, functions, etc in this file
-//include("./user/includes/handlers/login.php"); //write user validations,functions etc in this file
-
-?>
-
 <script src="vendor/jquery/login.js"></script>
 
 <form method="POST" class="adminForm p-3" id="adminForm" action="admin/includes/handlers/login.php">
@@ -67,13 +59,13 @@
 </div>
 
 <script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
-    togglePassword.addEventListener('click', function (e) {
-        // toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        // toggle the eye slash icon
-        this.classList.toggle('fa-eye-slash');
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+togglePassword.addEventListener('click', function(e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
 });
 </script>
