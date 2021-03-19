@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 15, 2021 at 11:15 AM
+-- Host: 127.0.0.1
+-- Generation Time: Mar 19, 2021 at 06:31 AM
 -- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.7
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -89,6 +89,36 @@ CREATE TABLE `complaints` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `complainttypes`
+--
+
+CREATE TABLE `complainttypes` (
+  `complaint_id` int(11) NOT NULL,
+  `complaint_type` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `complainttypes`
+--
+
+INSERT INTO `complainttypes` (`complaint_id`, `complaint_type`) VALUES
+(1, 'Carpenter'),
+(2, 'Electrical'),
+(3, 'Plumbing'),
+(4, 'Common Area'),
+(5, 'Security'),
+(6, 'Lift'),
+(7, 'Sports & Recreational'),
+(8, 'Parking'),
+(9, 'Fire'),
+(10, 'Billing & Payment'),
+(11, 'Events'),
+(12, 'Landscaping'),
+(13, 'Other');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `flatarea`
 --
 
@@ -108,9 +138,9 @@ CREATE TABLE `flatarea` (
 --
 
 INSERT INTO `flatarea` (`FlatAreaID`, `BlockNumber`, `FlatSeries`, `FlatArea`, `FlatType`, `Ratepsq`, `Updatedby`, `UpdatedAt`) VALUES
-(7, 'A', 7, 2000, '2BHK', 20, 'Admin1', '2021-03-14 06:04:39'),
-(10, 'B', 2, 200, '1BHK', 10, 'admin1', '2021-03-14 06:28:00'),
-(15, 'A', 1, 2000, '1BHK', 20, 'admin1', '2021-03-15 09:52:19');
+(7, 'H', 7, 2000, '2BHK', 50, 'Admin1', '2021-03-18 14:18:44'),
+(10, 'S', 2, 200, '1BHK', 10, 'Admin1', '2021-03-18 13:01:53'),
+(15, 'H', 1, 2000, '1BHK', 20, 'Admin1', '2021-03-18 14:21:44');
 
 -- --------------------------------------------------------
 
@@ -120,19 +150,20 @@ INSERT INTO `flatarea` (`FlatAreaID`, `BlockNumber`, `FlatSeries`, `FlatArea`, `
 
 CREATE TABLE `flats` (
   `FlatID` bigint(20) NOT NULL,
-  `Username` varchar(100) NOT NULL,
-  `Password` varchar(50) NOT NULL,
-  `ContactNumber` bigint(10) NOT NULL,
   `FlatNumber` bigint(20) NOT NULL,
   `FlatType` varchar(50) NOT NULL,
   `Maintenance` double NOT NULL,
-  `BlockNumber` bigint(20) NOT NULL,
-  `EmergencyContactNumber` bigint(10) NOT NULL,
+  `BlockNumber` varchar(20) NOT NULL,
   `Floor` bigint(20) NOT NULL,
-  `FlatAreaID` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `FlatAreaID` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `flats`
+--
+
+INSERT INTO `flats` (`FlatID`, `FlatNumber`, `FlatType`, `Maintenance`, `BlockNumber`, `Floor`, `FlatAreaID`) VALUES
+(1, 102, '', 0, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -244,6 +275,12 @@ ALTER TABLE `complaints`
   ADD PRIMARY KEY (`RequestID`);
 
 --
+-- Indexes for table `complainttypes`
+--
+ALTER TABLE `complainttypes`
+  ADD PRIMARY KEY (`complaint_id`);
+
+--
 -- Indexes for table `flatarea`
 --
 ALTER TABLE `flatarea`
@@ -319,6 +356,12 @@ ALTER TABLE `complaints`
   MODIFY `RequestID` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `complainttypes`
+--
+ALTER TABLE `complainttypes`
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `flatarea`
 --
 ALTER TABLE `flatarea`
@@ -328,7 +371,7 @@ ALTER TABLE `flatarea`
 -- AUTO_INCREMENT for table `flats`
 --
 ALTER TABLE `flats`
-  MODIFY `FlatID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `FlatID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `meetings`
@@ -359,17 +402,6 @@ ALTER TABLE `visitors`
 --
 ALTER TABLE `visitor_flow`
   MODIFY `VisitorFlowID` bigint(20) NOT NULL AUTO_INCREMENT;
-  
- ALTER TABLE `flats`
-  DROP `Username`,
-  DROP `Password`;
-  
- ALTER TABLE `flats` CHANGE `BlockNumber` `BlockNumber` VARCHAR(20) NOT NULL;
-
- ALTER TABLE `flats`
-  DROP `ContactNumber`,
-  DROP `EmergencyContactNumber`;
-  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

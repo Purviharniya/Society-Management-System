@@ -214,13 +214,7 @@ include 'includes/topbar.php';
                                 required>
                             <small id="fnoHelp" class="form-text text-muted">Enter the Flat number</small>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="contactno">Contact number:</label>
-                            <input type="text" class="form-control" id="contactno" name="contactno"
-                                aria-describedby="contactnoHelp" required>
-                            <small id="contactnoHelp" class="form-text text-muted">Enter the Contact number of
-                                owner</small>
-                        </div> -->
+
                         <div class="form-group">
                             <label for="flattype">Flat Type:</label>
                             <select class="form-control" id="flattype" name="flattype">
@@ -242,19 +236,6 @@ include 'includes/topbar.php';
                                 aria-describedby="blockHelp" required>
                             <small id="blockHelp" class="form-text text-muted">Enter the block name</small>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="maintenance">Maintenance:</label>
-                            <input type="text" class="form-control" id="maintenance" name="maintenance"
-                                aria-describedby="maintenanceHelp" required>
-                            <small id="maintenanceHelp" class="form-text text-muted">Enter the maintenance</small>
-                        </div> -->
-                        <!-- <div class="form-group">
-                            <label for="econtactno">Emergency Contact number:</label>
-                            <input type="text" class="form-control" id="econtactno" name="econtactno"
-                                aria-describedby="fnoHelp" required>
-                            <small id="fnoHelp" class="form-text text-muted">Enter the Emergency contact number of
-                                owner</small>
-                        </div> -->
                         <button type="submit" class="btn btn-primary" name="flat">Add</button>
                         <button type="clear" class="btn btn-primary">Clear</button>
                     </form>
