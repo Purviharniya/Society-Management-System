@@ -44,7 +44,7 @@ unset($_SESSION['error_message']);
     <h3 class="my-4">Flat Area</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
-            <div class="card pt-1 pb-5">
+            <div class="card shadow pt-1 pb-5">
                 <div class="card-body">
                     <div class="col-12 mb-3">
                         <h4 class="font-weight-bold text-primary">Add Flat Area</h4>

@@ -42,7 +42,7 @@ include 'includes/topbar.php';
     <h3 class="my-4">Flats</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
-            <div class="card pt-1 pb-5">
+            <div class="card shadow pt-1 pb-5">
                 <div class="card-body">
                     <h4 class="card-title text-info mb-5">Add Flat</h4>
                     <div class="col text-center">
@@ -67,7 +67,7 @@ include 'includes/topbar.php';
                                         <form method="POST" enctype="multipart/form-data" id="bulkUploadInternal">
                                             <label for="">
                                                 <h6>Information for mapping Data from excel sheet columns to database
-                                                    columns </h6>
+                                                    columns</h6>
                                             </label>
                                             <label for=""><small><b>Note:</b> The following fields should be column
                                                     names in excel sheet</small>

@@ -1,7 +1,4 @@
-<?php include './includes/header.php';
-// include('../config.php');
-session_start();
-?>
+<?php include './includes/header.php';?>
 
 <?php include './includes/sidebar.php';?>
 
@@ -9,9 +6,10 @@ session_start();
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <h3 class="my-4">Complaints</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title text-info mb-4">Raise a complaint</h4>
                 </div>

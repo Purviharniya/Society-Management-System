@@ -12,7 +12,7 @@ include 'includes/topbar.php';
     <h3 class="my-4">Allotment</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
-            <div class="card pt-1 pb-5">
+            <div class="card shadow pt-1 pb-5">
                 <div class="card-body">
                     <h4 class="card-title text-info mb-5">Add Allotments</h4>
                     <div class="col text-center">

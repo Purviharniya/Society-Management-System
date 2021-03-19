@@ -2,7 +2,7 @@
  
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
-// include('../config.php');
+ include('../config.php');
 // if(isset($_SESSION['username']) && isset($_SESSION['role'])){
 //     $username = $_SESSION['username'];
 //     $role = $_SESSION['role'];
