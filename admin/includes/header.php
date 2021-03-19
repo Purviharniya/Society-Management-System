@@ -3,15 +3,13 @@
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
 include('../config.php');
-// if(isset($_SESSION['username'])){
+// if(isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role']=='admin' ){
 //     $username = $_SESSION['username'];
 //     $role = $_SESSION['role'];
-//     echo $username;
 // }
 // else{
 //     header("Location: ../login.php");
 // }
-
 
 ?>
 <!DOCTYPE html>
@@ -31,7 +29,7 @@ include('../config.php');
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../vendor/css/sb-admin-2.min.css" rel="stylesheet">
-    
+
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.bootstrap4.min.css" rel="stylesheet">
