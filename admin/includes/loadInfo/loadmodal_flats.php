@@ -11,11 +11,12 @@ $fno = mysqli_escape_string($con, $data['FlatNumber']);
 $ftype = mysqli_escape_string($con, $data['FlatType']);
 $maintenance = mysqli_escape_string($con, $data['Maintenance']);
 $floor = mysqli_escape_string($con, $data['Floor']);
-$result = mysqli_query($con, "select FlatID,FlatNumber,FlatType,Maintenance,BlockNumber,Floor from flats WHERE BlockNumber='$block' and FlatNumber='$fno' and FlatType='$ftype'");
+$result = mysqli_query($con, "select FlatID,FlatNumber,FlatType,Maintenance,BlockNumber,Floor,FlatAreaID from flats WHERE BlockNumber='$block' and FlatNumber='$fno' and FlatType='$ftype'");
 $row = mysqli_fetch_assoc($result);
 //$floor = $row['Floor'];
 //echo "<script>console.log($floor)</script>";
 $recordID = $row['FlatID'];
+$flatareaID = $row['FlatAreaID'];
 echo "<script>console.log($recordID)</script>";
 echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -84,6 +85,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <label for="frate"><b>Maintenance</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="New maintenance" name="rate_new" id="rate_new" value="' . $maintenance . '">
                                             <input type="hidden" class="form-control"  name="recordID" id="recordID" value="' . $recordID . '">
+                                            <input type="hidden" class="form-control"  name="flatareaID" id="flatareaID" value="' . $flatareaID . '">
                                         </div>                                   
                                     </div>
                                     <div class="form-row">
