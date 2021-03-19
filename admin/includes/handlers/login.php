@@ -28,6 +28,7 @@ $count=mysqli_num_rows($result);
 	} else {
         
         $_SESSION["username"] =  $username;
+		$_SESSION["role"] =  "admin";
         //print_r($_SESSION);
         
         // remember me
@@ -51,4 +52,4 @@ $count=mysqli_num_rows($result);
 
 mysqli_close($db);
 
-}?> 
+}?>

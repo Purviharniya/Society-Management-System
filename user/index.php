@@ -1,6 +1,5 @@
 <?php include './includes/header.php';
 // include('../config.php');
-session_start();
 ?>
 
 <?php include './includes/sidebar.php';?>
