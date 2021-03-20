@@ -66,8 +66,8 @@ unset($_SESSION['error_message']);
                             <small id="flatnoHelp" class="form-text text-muted">Select the flat Number (Make
                                 dropdown)</small>
                         </div>
-                        <button type="submit" class="btn btn-primary" name='addflatarea-btn'>Search</button>
-                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-themeblack" name='addflatarea-btn'>Search</button>
+                        <button type="reset" class="btn btn-themeblack">Reset</button>
                     </form>
                 </div>
             </div>

@@ -46,7 +46,7 @@ include 'includes/topbar.php';
                 <div class="card-body">
                     <h4 class="card-title text-info mb-5">Add Flat</h4>
                     <div class="col text-center">
-                        <button type="button" class="btn btn-primary" name="addcourse" data-toggle="modal"
+                        <button type="button" class="btn btn-themeblack" name="addflats" data-toggle="modal"
                             data-target="#uploadflat">
                             Upload excel&nbsp;&nbsp;<i class="fas fa-upload"></i>
                         </button>
@@ -236,8 +236,8 @@ include 'includes/topbar.php';
                                 aria-describedby="blockHelp" required>
                             <small id="blockHelp" class="form-text text-muted">Enter the block name</small>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="flat">Add</button>
-                        <button type="clear" class="btn btn-primary">Clear</button>
+                        <button type="submit" class="btn btn-themeblack" name="flat">Add</button>
+                        <button type="clear" class="btn btn-themeblack">Clear</button>
                     </form>
                 </div>
             </div>

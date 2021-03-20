@@ -34,8 +34,8 @@
                                 placeholder="Enter complaint description...." rows="5"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" name='addcomplaint-btn'>Add</button>
-                        <button type="reset" class="btn btn-primary">Clear</button>
+                        <button type="submit" class="btn btn-themeblack" name='addcomplaint-btn'>Add</button>
+                        <button type="reset" class="btn btn-themeblack">Clear</button>
 
                     </form>
                 </div>

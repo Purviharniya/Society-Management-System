@@ -2245,6 +2245,19 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+.btn-themeblack{
+  background-image: linear-gradient(to top, #434343 50%, black 100%);
+  color: white;
+  border-color: #434343 ;
+}
+
+.btn-themeblack:hover{
+  background-image: linear-gradient(to bottom, #434343 50%, black 100%);
+  color: white;
+  border-color: #434343 ;
+}
+
+
 .btn-primary {
   color: #fff;
   background-color: #4e73df;
@@ -9656,6 +9669,10 @@ a:focus {
   animation-duration: 200ms;
   -webkit-animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
   animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
+}
+
+.bg-sidebar{
+  background-color: #1A237E;
 }
 
 .bg-gradient-primary {

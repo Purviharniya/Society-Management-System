@@ -50,7 +50,7 @@ unset($_SESSION['error_message']);
                         <h4 class="font-weight-bold text-primary">Add Flat Area</h4>
                     </div>
                     <div class="col text-center">
-                        <button type="button" class="btn btn-primary" name="addcourse" data-toggle="modal"
+                        <button type="button" class="btn btn-themeblack" name="addcourse" data-toggle="modal"
                             data-target="#uploadarea">
                             Upload excel&nbsp;&nbsp;<i class="fas fa-upload"></i>
                         </button>
@@ -260,8 +260,8 @@ unset($_SESSION['error_message']);
                                 each flat in the series</small>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" name='addflatarea-btn'>Add</button>
-                        <button type="reset" class="btn btn-primary">Clear</button>
+                        <button type="submit" class="btn btn-themeblack" name='addflatarea-btn'>Add</button>
+                        <button type="reset" class="btn btn-themeblack">Clear</button>
                     </form>
                 </div>
             </div>
