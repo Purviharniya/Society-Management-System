@@ -45,8 +45,7 @@
         <div id="collapsePages4" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="raise_complaint.php">Raise Complaint</a>
-                <a class="collapse-item" href="view_complaints.php">View Complaints</a>
-                <a class="collapse-item" href="delete_complaints.php">Delete Complaints</a>
+                <a class="collapse-item" href="manage_complaints.php">Manage Complaints</a>
             </div>
         </div>
     </li>
