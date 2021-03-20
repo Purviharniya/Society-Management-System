@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 19, 2021 at 06:31 AM
+-- Host: 127.0.0.1:3306
+-- Generation Time: Mar 20, 2021 at 05:22 PM
 -- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- PHP Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -77,14 +77,21 @@ CREATE TABLE `complaints` (
   `RequestID` bigint(20) NOT NULL,
   `ComplaintType` varchar(50) NOT NULL,
   `Description` varchar(1000) NOT NULL,
+  `FlatNumber` int(11) NOT NULL,
   `ContactNumber` bigint(10) NOT NULL,
   `RaisedDate` date NOT NULL,
   `AdminRemark` varchar(50) NOT NULL,
   `Status` varchar(50) NOT NULL,
   `ResolvedDate` datetime NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `complaints`
+--
+
+INSERT INTO `complaints` (`RequestID`, `ComplaintType`, `Description`, `FlatNumber`, `ContactNumber`, `RaisedDate`, `AdminRemark`, `Status`, `ResolvedDate`, `updated_at`) VALUES
+(1, '2', 'My electrical board is not working. Please look into this matter.', 802, 9029996333, '2021-03-20', 'no remark', '0', '0000-00-00 00:00:00', '2021-03-20 16:21:06');
 
 -- --------------------------------------------------------
 
@@ -140,7 +147,21 @@ CREATE TABLE `flatarea` (
 INSERT INTO `flatarea` (`FlatAreaID`, `BlockNumber`, `FlatSeries`, `FlatArea`, `FlatType`, `Ratepsq`, `Updatedby`, `UpdatedAt`) VALUES
 (7, 'H', 7, 2000, '2BHK', 50, 'Admin1', '2021-03-18 14:18:44'),
 (10, 'S', 2, 200, '1BHK', 10, 'Admin1', '2021-03-18 13:01:53'),
-(15, 'H', 1, 2000, '1BHK', 20, 'Admin1', '2021-03-18 14:21:44');
+(15, 'H', 1, 2000, '1BHK', 20, 'Admin1', '2021-03-18 14:21:44'),
+(17, 'C', 5, 2000, '2BHK', 20, 'Admin1', '2021-03-18 12:31:37'),
+(18, 'A', 1, 2000, '2BHK', 20, 'Admin1', '2021-03-16 12:51:21'),
+(20, 'A', 3, 2000, '2BHK', 25, 'Admin1', '2021-03-18 17:45:13'),
+(21, 'A', 4, 2000, '2BHK', 20, 'Admin1', '2021-03-18 17:45:25'),
+(32, 'A', 5, 2000, '1BHK', 20, 'admin1', '2021-03-18 17:48:19'),
+(33, 'B', 5, 400, '1BHK', 20, 'admin1', '2021-03-18 17:48:49'),
+(34, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:22:42'),
+(35, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:22:45'),
+(36, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:22:45'),
+(37, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:25:33'),
+(38, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:52:14'),
+(39, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:52:16'),
+(40, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:53:23'),
+(41, 'A', 2, 2000, '2BHK', 20, 'Admin1', '2021-03-19 06:50:33');
 
 -- --------------------------------------------------------
 
@@ -150,20 +171,26 @@ INSERT INTO `flatarea` (`FlatAreaID`, `BlockNumber`, `FlatSeries`, `FlatArea`, `
 
 CREATE TABLE `flats` (
   `FlatID` bigint(20) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Password` varchar(50) NOT NULL,
+  `ContactNumber` bigint(10) NOT NULL,
   `FlatNumber` bigint(20) NOT NULL,
   `FlatType` varchar(50) NOT NULL,
   `Maintenance` double NOT NULL,
-  `BlockNumber` varchar(20) NOT NULL,
+  `BlockNumber` bigint(20) NOT NULL,
+  `EmergencyContactNumber` bigint(10) NOT NULL,
   `Floor` bigint(20) NOT NULL,
-  `FlatAreaID` bigint(20) NOT NULL
+  `FlatAreaID` bigint(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `flats`
 --
 
-INSERT INTO `flats` (`FlatID`, `FlatNumber`, `FlatType`, `Maintenance`, `BlockNumber`, `Floor`, `FlatAreaID`) VALUES
-(1, 102, '', 0, '', 0, 0);
+INSERT INTO `flats` (`FlatID`, `Username`, `Password`, `ContactNumber`, `FlatNumber`, `FlatType`, `Maintenance`, `BlockNumber`, `EmergencyContactNumber`, `Floor`, `FlatAreaID`, `created_at`, `updated_at`) VALUES
+(1, '', '', 0, 102, '', 0, 0, 0, 0, 0, '2021-03-20 16:01:56', '2021-03-20 16:01:56');
 
 -- --------------------------------------------------------
 
@@ -353,7 +380,7 @@ ALTER TABLE `bills`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `RequestID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `RequestID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `complainttypes`
@@ -365,7 +392,7 @@ ALTER TABLE `complainttypes`
 -- AUTO_INCREMENT for table `flatarea`
 --
 ALTER TABLE `flatarea`
-  MODIFY `FlatAreaID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `FlatAreaID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `flats`

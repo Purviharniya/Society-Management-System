@@ -6,6 +6,21 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<?php
+if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
+    ?>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?php echo $_SESSION['success_message']; ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <?php
+unset($_SESSION['success_message']);
+}
+?>
     <h3 class="my-4">Complaints</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
@@ -22,7 +37,7 @@
                                 $sql = "SELECT * from complainttypes";
                                 $res = mysqli_query($con,$sql);
                                 while($row = mysqli_fetch_array($res)){
-                                    echo "<option value= '" .$row['complaint_type']. "'>" . $row['complaint_type'] . "</option>"; 
+                                    echo "<option value= '" .$row['complaint_id']. "'>" . $row['complaint_type'] . "</option>"; 
                                 }
                                 ?>
                             </select>
