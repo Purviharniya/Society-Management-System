@@ -29,9 +29,13 @@ if(isset($_POST['update_complaints']))
     $cdesc = mysqli_escape_string($con,$_POST['cdesc_new']);
     $recordID = mysqli_escape_string($con,$_POST['recordID']);
     $timestamp = mysqli_escape_string($con,$_POST['timestamp']);
+    // $flatno = $_SESSION['flatno'];
+    // $contact = $_SESSION['contactno'];
+    $flatno ='802';
+    $contact = '9029996333';
     $row = mysqli_fetch_array(mysqli_query($con,"SELECT complaint_id from complainttypes where complaint_type='$ctype ' "));
     $cid=$row['complaint_id'];
-    $query= "UPDATE complaints set ComplaintType= '$cid', Description='$cdesc ', updated_at='$timestamp ' where RequestID='$recordID' ";
+    $query= "UPDATE complaints set ComplaintType= '$cid', Description='$cdesc ', updated_at='$timestamp ' where RequestID='$recordID' and FlatNumber='$flatno' and ContactNumber='$contactno'";
     mysqli_query($con,$query);
 }
 
