@@ -5,9 +5,11 @@ $draw = $_POST['draw'];
 $row = $_POST['start'];
 // $flatno = $_SESSION['flatno'];
 // $contactno = $_SESSION['contactno'];
+// $block = $_SESSION['blockno'];
 
 $contactno = '9029996333';
 $flatno = '802';
+$block = 'A';
 
 $rowperpage = $_POST['length']; // Rows display per page
 if (isset($_POST['order'])) {
@@ -55,23 +57,21 @@ if (isset($_POST['filters'])) {
 }
 
 ## Total number of records without filtering
-$sel = mysqli_query($con, "select count(*) as totalcount from complaints c where FlatNumber=" . $flatno . " and ContactNumber=" . $contactno . ";");
+$sel = mysqli_query($con, "select count(*) as totalcount from complaints c where BlockNumber='" . $block ."' and FlatNumber=" . $flatno . " and ContactNumber=" . $contactno . ";");
 
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['totalcount'];
 
 ## Total number of record with filtering
-$sel = mysqli_query($con, "select count(*) as totalcountfilters from complaints c where FlatNumber=" . $flatno . " and ContactNumber=" . $contactno . " and " . $searchQuery . "&& (" . $filterQuery . ")");
+$sel = mysqli_query($con, "select count(*) as totalcountfilters from complaints c where BlockNumber='" . $block ."' and FlatNumber=" . $flatno . " and ContactNumber=" . $contactno . " and " . $searchQuery . "&& (" . $filterQuery . ")");
 
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['totalcountfilters'];
 
 ## Fetch records
 
-$sql = "select RequestID, complaint_type,Description,RaisedDate,AdminRemark,Status,ResolvedDate,updated_at FROM complaints inner join complainttypes on complainttypes.complaint_id = complaints.ComplaintType WHERE FlatNumber=" . $flatno . " and ContactNumber=" . $contactno . " and "
+$sql = "select RequestID, complaint_type,Description,RaisedDate,AdminRemark,Status,ResolvedDate,updated_at FROM complaints inner join complainttypes on complainttypes.complaint_id = complaints.ComplaintType WHERE BlockNumber='" . $block ."' and FlatNumber=" . $flatno . " and ContactNumber=" . $contactno . " and "
     . $searchQuery2 . "&& (" . $filterQuery . ")" . $orderQuery . " limit " . $row . "," . $rowperpage;
-
-// SELECT * FROM `complaints` inner join `complainttypes` on complainttypes.complaint_id = complaints.ComplaintType
 
 $complaintRecords = mysqli_query($con, $sql);
 $data = array();
