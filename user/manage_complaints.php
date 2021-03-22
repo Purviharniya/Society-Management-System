@@ -422,10 +422,9 @@ $("#delete_selected_response_btn").click(function(e) {
     var delete_rows = $("#dataTable-complaints").DataTable().rows('.selected').data()
     var delete_data = {}
     for (var i = 0; i < delete_rows.length; i++) {
-        // console.log("delete:"+delete_rows[i].FlatSeries)
+        // console.log("delete:" + delete_rows[i].RequestID)
         baseData = {}
-        baseData['block'] = delete_rows[i].BlockNumber
-        baseData['series'] = delete_rows[i].FlatSeries
+        baseData['record_id'] = delete_rows[i].RequestID
         delete_data[i] = baseData
         // console.log("Base Data:"+baseData);
     }
@@ -439,7 +438,7 @@ $("#delete_selected_response_btn").click(function(e) {
         url: "includes/queries/delete_multiple_complaints.php",
         data: actual_delete_data_json,
         success: function(data) {
-            // console.log("Returned data: "+data)
+            // console.log("Returned data: " + data)
             $("#dataTable-complaints").DataTable().draw(false);
         }
     })
