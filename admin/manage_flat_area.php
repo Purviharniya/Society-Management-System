@@ -435,7 +435,6 @@ function update_flatarea(e) {
                 $('.action-btn').off('click')
                 $('.action-btn').on('click', loadModalCurrent)
                 // $("#dataTable-flatarea").DataTable().row(aPos).draw(false);
-                $(".selectrow_student").attr("disabled", true);
                 $('#error_record').remove();
             }
         }

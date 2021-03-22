@@ -44,7 +44,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                         <div class="tab-content" id="nav-tabContent">
                             <!--Deletion-->
                             <div class="tab-pane fade show active" id="nav-delete" role="tabpanel" aria-labelledby="nav-delete-tab">
-                                <form id="delete_complaint">
+                                <form id="delete_complaints">
                                     <div class="form-group">
                                         <label>
                                             <i class="text-danger">*You can only delete the complaints that are not resolved.</i>                                        
@@ -57,7 +57,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <input type="hidden" name="record_id" value="' . $requestID . '">
                                         <div class="row">
                                             <div class="col-md-6 text-left">
-                                                <button type="submit" class="btn btn-primary" id="delete_ccmpaint_btn" name="delete_complaint">Yes</button>
+                                                <button type="submit" class="btn btn-primary" id="delete_complaints_btn" name="delete_complaints">Yes</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" name="no">No</button>
                                             </div>
                                         </div>

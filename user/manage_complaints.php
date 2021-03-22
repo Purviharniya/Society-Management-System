@@ -340,7 +340,7 @@ function loadModalCurrent() {
                 $("#delete_complaints_btn").attr("disabled", true);
                 $.ajax({
                     type: "POST",
-                    url: "includes/queries/raise_complaints.php",
+                    url: "includes/queries/raise_complaint.php",
                     data: form_serialize,
                     success: function(data) {
                         //    alert(data); // show response from the php script.
@@ -393,31 +393,24 @@ function update_complaints(e) {
         success: function(data) {
             // alert(data); // show response from the php script.
             // console.log(data);
-            if (data === "Exists_record") {
-                $('#error_record').text(
-                    '*This data already exists! Please change the Block or series value');
-                $('#error_record').addClass('text-danger');
-                $("#update_complaints_btn").text("Update");
-                $("#update_complaints_btn").attr("disabled", false);
-            } else {
-                $("#update_complaints_btn").text("Updated Successfully");
-                $("#update_complaints_btn").removeClass("btn-primary");
-                $("#update_complaints_btn").addClass("btn-success");
-                var row = $("#update-del-modal").closest('tr');
-                var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(row.get(0));
-                var temp = $("#dataTable-complaints").DataTable().row(aPos).data();
-                // console.log(temp)
-                // console.log("Hi", form_serialize)
-                temp['ComplaintType'] = form_serialize[0].value; //new values
-                temp['Description'] = form_serialize[2].value; //new values
-                temp['updated_at'] = form_serialize[5].value;
-                $('#dataTable-complaints').dataTable().fnUpdate(temp, aPos, undefined, false);
-                $('.action-btn').off('click')
-                $('.action-btn').on('click', loadModalCurrent)
-                // $("#dataTable-complaints").DataTable().row(aPos).draw(false);
-                $(".selectrow_student").attr("disabled", true);
-                $('#error_record').remove();
-            }
+
+            $("#update_complaints_btn").text("Updated Successfully");
+            $("#update_complaints_btn").removeClass("btn-primary");
+            $("#update_complaints_btn").addClass("btn-success");
+            var row = $("#update-del-modal").closest('tr');
+            var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(row.get(0));
+            var temp = $("#dataTable-complaints").DataTable().row(aPos).data();
+            // console.log(temp)
+            // console.log("Hi", form_serialize)
+            temp['ComplaintType'] = form_serialize[0].value; //new values
+            temp['Description'] = form_serialize[2].value; //new values
+            temp['updated_at'] = form_serialize[5].value;
+            $('#dataTable-complaints').dataTable().fnUpdate(temp, aPos, undefined, false);
+            $('.action-btn').off('click')
+            $('.action-btn').on('click', loadModalCurrent)
+            // $("#dataTable-complaints").DataTable().row(aPos).draw(false);
+            $('#error_record').remove();
+
         }
     });
 }

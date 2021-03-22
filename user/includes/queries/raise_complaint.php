@@ -23,7 +23,7 @@ if (isset($_POST['addcomplaint-btn'])){
     exit();
 }
 
-if(isset($_POST['update_complaints']))
+elseif(isset($_POST['update_complaints']))
 {
     $ctype = mysqli_escape_string($con,$_POST['ctype_new']);
     $cdesc = mysqli_escape_string($con,$_POST['cdesc_new']);
@@ -35,8 +35,24 @@ if(isset($_POST['update_complaints']))
     $contact = '9029996333';
     $row = mysqli_fetch_array(mysqli_query($con,"SELECT complaint_id from complainttypes where complaint_type='$ctype ' "));
     $cid=$row['complaint_id'];
-    $query= "UPDATE complaints set ComplaintType= '$cid', Description='$cdesc ', updated_at='$timestamp ' where RequestID='$recordID' and FlatNumber='$flatno' and ContactNumber='$contactno'";
+    $query= "UPDATE complaints set ComplaintType= '$cid', Description='$cdesc ', updated_at='$timestamp ' where RequestID='$recordID' and FlatNumber='$flatno' and ContactNumber='$contact'";
+    //echo $query;
     mysqli_query($con,$query);
+    exit();
+}
+
+elseif(isset($_POST['delete_complaints'])){
+    
+    $recordID = mysqli_escape_string($con,$_POST['record_id']);
+    // $flatno = $_SESSION['flatno'];
+    // $contact = $_SESSION['contactno'];
+    $flatno ='802';
+    $contact = '9029996333'; 
+    
+    $query = "DELETE from complaints where RequestID='$recordID' and FlatNumber='$flatno' and ContactNumber=' $contact'";
+    // echo $query;
+    mysqli_query($con,$query);
+    exit();
 }
 
 // }

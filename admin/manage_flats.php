@@ -465,7 +465,6 @@ function update_flats(e) {
                 $('.action-btn').off('click')
                 $('.action-btn').on('click', loadModalCurrent)
                 // $("#dataTable-flats").DataTable().row(aPos).draw(false);
-                $(".selectrow_student").attr("disabled", true);
                 $('#error_record').remove();
             }
         }
