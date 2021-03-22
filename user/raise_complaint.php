@@ -6,7 +6,7 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-<?php
+    <?php
 if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
     ?>
 
@@ -46,7 +46,7 @@ unset($_SESSION['success_message']);
                         <div class="form-group">
                             <label for="complaint_desc">Complaint Description:</label>
                             <textarea class="form-control" id="complaint_desc" name="complaint_desc"
-                                placeholder="Enter complaint description...." rows="5"></textarea>
+                                placeholder="Enter complaint description...." rows="5" required></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-themeblack" name='addcomplaint-btn'>Add</button>

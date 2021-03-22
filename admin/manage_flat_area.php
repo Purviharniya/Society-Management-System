@@ -52,7 +52,8 @@ include './includes/header.php';
                                         <?php
 
 $block_numbers = array();
-$user = $_SESSION['username'];
+// $user = $_SESSION['username'];
+
 $query = "SELECT distinct(BlockNumber) FROM flatarea";
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);

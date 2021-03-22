@@ -23,4 +23,16 @@ if (isset($_POST['addcomplaint-btn'])){
     exit();
 }
 
+if(isset($_POST['update_complaints']))
+{
+    $ctype = mysqli_escape_string($con,$_POST['ctype_new']);
+    $cdesc = mysqli_escape_string($con,$_POST['cdesc_new']);
+    $recordID = mysqli_escape_string($con,$_POST['recordID']);
+    $timestamp = mysqli_escape_string($con,$_POST['timestamp']);
+    $row = mysqli_fetch_array(mysqli_query($con,"SELECT complaint_id from complainttypes where complaint_type='$ctype ' "));
+    $cid=$row['complaint_id'];
+    $query= "UPDATE complaints set ComplaintType= '$cid', Description='$cdesc ', updated_at='$timestamp ' where RequestID='$recordID' ";
+    mysqli_query($con,$query);
+}
+
 // }

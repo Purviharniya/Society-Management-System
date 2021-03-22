@@ -38,7 +38,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                             <div class="tab-pane fade show active" id="nav-delete" role="tabpanel" aria-labelledby="nav-delete-tab">
                                 <form id="delete_flatarea">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1"><i class="text-danger">*This will delete all the information related to the Faculty</i>
+                                        <label for="exampleFormControlSelect1"><i class="text-danger">*This will delete all the information related to the flat area</i>
                                             <br>Are you sure you want to delete the record of <br> Block <i><small><b>' . $block . '</b></small></i>
                                             ,Series <i><small><b>' . $fseries . '</small></b></i> ,flat area <i><small><b>' . $farea . ' sq.ft.</b></small></i>
                                             ,maintanence rate <i><small><b> Rs.' . $rate . '/sqft.</b></small></i> ?
