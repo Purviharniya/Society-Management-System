@@ -60,9 +60,7 @@
         <div id="collapsePages5" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="add_visitors.php">Add Visitors</a>
-                <a class="collapse-item" href="manage_new_visitors.php">Manage New Visitors</a>
-                <a class="collapse-item" href="manage_old_visitors.php">Manage Old Visitors</a>
-                <a class="collapse-item" href="manage_all_visitors.php">Manage All Visitors</a>
+                <a class="collapse-item" href="manage_visitors.php">Manage Visitors</a>
             </div>
         </div>
     </li>

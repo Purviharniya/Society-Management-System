@@ -422,9 +422,10 @@ $("#delete_selected_response_btn").click(function(e) {
     var delete_rows = $("#dataTable-complaints").DataTable().rows('.selected').data()
     var delete_data = {}
     for (var i = 0; i < delete_rows.length; i++) {
-        // console.log("delete:" + delete_rows[i].RequestID)
+        // console.log("delete:" + delete_rows[i].Status)
         baseData = {}
         baseData['record_id'] = delete_rows[i].RequestID
+        baseData['status'] = delete_rows[i].Status
         delete_data[i] = baseData
         // console.log("Base Data:"+baseData);
     }
@@ -432,13 +433,14 @@ $("#delete_selected_response_btn").click(function(e) {
     actual_data['type'] = 'current'
     actual_data['delete_data'] = delete_data
     actual_delete_data_json = JSON.stringify(actual_data)
-    // console.log("Actual Data:"+actual_delete_data_json)
+    // console.log("Actual Data:" + actual_delete_data_json)
     $.ajax({
         type: "POST",
         url: "includes/queries/delete_multiple_complaints.php",
         data: actual_delete_data_json,
         success: function(data) {
             // console.log("Returned data: " + data)
+            alert(data + " record(s) have been deleted. ");
             $("#dataTable-complaints").DataTable().draw(false);
         }
     })

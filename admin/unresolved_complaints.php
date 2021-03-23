@@ -17,16 +17,10 @@ include './includes/header.php';
                         <div class="col-12 mb-3">
                             <h4 class="m-0 font-weight-bold text-primary">Unresolved Complaints</h4>
                         </div>
-                        <div class="col-6 offset-md-8 col-md-1 text-center">
+                        <div class="col-6 offset-md-11 col-md-1 text-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#exampleModalCenter1">
-                                <i class="fas fa-filter"></i>
-                            </button>
-                        </div>
-                        <div class="col-6 col-md-3 text-center" id="delete_selected_response_div">
-                            <button type="button" class="btn btn-danger" id="delete_selected_response_btn"
-                                name="delete_selected_current">
-                                <i class="fas fa-trash-alt">&nbsp;</i>Selected Records
+                                <i class="fas fa-filter"></i> Filter
                             </button>
                         </div>
                     </div>
@@ -52,8 +46,7 @@ include './includes/header.php';
                                         <?php
 
 $complaint_types = array();
-$flatno = '802';
-$query = "SELECT DISTINCT(complainttypes.complaint_type),complainttypes.complaint_id from complaints INNER JOIN complainttypes ON complainttypes.complaint_id = complaints.ComplaintType where complaints.FlatNumber=" . $flatno . "";
+$query = "SELECT DISTINCT(complainttypes.complaint_type),complainttypes.complaint_id from complaints INNER JOIN complainttypes ON complainttypes.complaint_id = complaints.ComplaintType";
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);
     while ($row = mysqli_fetch_array($result)) {
@@ -70,19 +63,17 @@ if ($result = mysqli_query($con, $query)) {
                                     <br />
 
                                     <div class="form-check">
-                                        <label for="">Flat Number</label>
+                                        <label for="">Block Number</label>
                                         <br>
                                         <?php
-$status = array();
-$statustype=array("0"=>"Unresolved", "1"=>"In-progress", "2"=>"Resolved");
-$query = "SELECT distinct(Status) FROM complaints where FlatNumber=" . $flatno . "";
+$query = "SELECT distinct(BlockNumber) FROM complaints";
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);
     while ($row = mysqli_fetch_array($result)) {
-        $status = $statustype[$row['Status']];
+       
         echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_status[]" class="custom-control-input" value="' . $row['Status'] . '" id="filter_status_' . $status . '">
-                                                            <label class="custom-control-label" for="filter_status_' . $status . '">' . $status . '</label>
+                                                            <input checked type="checkbox" name="filter_block[]" class="custom-control-input" value="' . $row['BlockNumber'] . '" id="filter_block_' . $row['BlockNumber'] . '">
+                                                            <label class="custom-control-label" for="filter_block_' .  $row['BlockNumber'] . '">' . $row['BlockNumber'] . '</label>
                                                         </div>';
     }
 }
@@ -114,6 +105,7 @@ if ($result = mysqli_query($con, $query)) {
                                     </div>
                                 </th>
                                 <th>Complaint ID</th>
+                                <th>Block Number </th>
                                 <th>Flat Number </th>
                                 <th>Complaint Type</th>
                                 <th>Complaint Description</th>
@@ -122,13 +114,14 @@ if ($result = mysqli_query($con, $query)) {
                                 <th>Status</th>
                                 <th>Resolved Date</th>
                                 <th>Updated At</th>
-                                <th>Action</th>
+                                <th>View</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th></th>
                                 <th>Complaint ID</th>
+                                <th>Block Number </th>
                                 <th>Flat Number </th>
                                 <th>Complaint Type</th>
                                 <th>Complaint Description</th>
@@ -137,7 +130,7 @@ if ($result = mysqli_query($con, $query)) {
                                 <th>Status</th>
                                 <th>Resolved Date</th>
                                 <th>Updated At</th>
-                                <th>Action</th>
+                                <th>View</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -240,10 +233,13 @@ function loadCurrent() {
             })
         },
         columns: [{
-                data: 'select-cbox'
+                data: 'RequestID'
             },
             {
-                data: 'RequestID'
+                data: 'BlockNumber'
+            },
+            {
+                data: 'FlatNumber'
             },
             {
                 data: 'ComplaintType'
@@ -271,7 +267,7 @@ function loadCurrent() {
             },
         ],
         columnDefs: [{
-                targets: [0, 9], // column index (start from 0)
+                targets: [0, 10], // column index (start from 0)
                 orderable: false, // set orderable false for selected columns
             },
             {
@@ -279,31 +275,20 @@ function loadCurrent() {
                 targets: [0],
             },
             {
-                className: "ComplaintType",
+                className: "RequestID",
                 "targets": [1],
             },
             {
                 width: "5%",
-                targets: [9]
+                targets: [10]
             },
 
         ],
     });
     table.columns.adjust()
 }
-//SELECT CHECKALL
-$("#select_all").click(function(e) {
-    // console.log("Hi")
-    //   var row=$(this).closest('tr')
-    if ($(this).is(":checked")) {
-        $("#dataTable-complaints tbody tr").addClass("selected table-secondary");
-        $(".selectrow").attr("checked", true);
-    } else {
-        $(".selectrow").attr("checked", false);
-        $("#dataTable-complaints tbody tr").removeClass("selected table-secondary");
-    }
-    //   row.toggleClass('selected table-secondary')
-})
+
+
 
 //action modal part
 function loadModalCurrent() {
@@ -327,40 +312,6 @@ function loadModalCurrent() {
             $('#update-del-modal').modal('show')
             $(document).on('hidden.bs.modal', '#update-del-modal', function() {
                 $("#update-del-modal").remove();
-            });
-            $('#delete_complaints').submit(function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var form_serialize = form.serializeArray(); // serializes the form's elements.
-                form_serialize.push({
-                    name: $("#delete_complaints_btn").attr('name'),
-                    value: $("#delete_complaints_btn").attr('value')
-                });
-                // alert('hi');
-                console.log(form_serialize);
-                $("#delete_complaints_btn").text("Deleting...");
-                $("#delete_complaints_btn").attr("disabled", true);
-                $.ajax({
-                    type: "POST",
-                    url: "includes/queries/raise_complaint.php",
-                    data: form_serialize,
-                    success: function(data) {
-                        //    alert(data); // show response from the php script.
-                        $("#delete_complaints_btn").text("Deleted Successfully");
-                        var row = $("#update-del-modal").closest('tr');
-                        var aPos = $("#dataTable-complaints").dataTable()
-                            .fnGetPosition(
-                                row.get(0));
-                        $('#update-del-modal').modal('hide');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
-                        // row.remove();
-                        loadCurrent();
-
-                        // console.log(aPos);
-                        // console.log(row)
-                    }
-                });
             });
             $('#update_complaints').submit(function(e) {
                 update_complaints(e);
@@ -417,34 +368,6 @@ function update_complaints(e) {
     });
 }
 
-
-$("#delete_selected_response_btn").click(function(e) {
-    alert("You have selected " + $("#dataTable-complaints tbody tr.selected").length +
-        " record(s) for deletion");
-    var delete_rows = $("#dataTable-complaints").DataTable().rows('.selected').data()
-    var delete_data = {}
-    for (var i = 0; i < delete_rows.length; i++) {
-        // console.log("delete:" + delete_rows[i].RequestID)
-        baseData = {}
-        baseData['record_id'] = delete_rows[i].RequestID
-        delete_data[i] = baseData
-        // console.log("Base Data:"+baseData);
-    }
-    var actual_data = {}
-    actual_data['type'] = 'current'
-    actual_data['delete_data'] = delete_data
-    actual_delete_data_json = JSON.stringify(actual_data)
-    // console.log("Actual Data:"+actual_delete_data_json)
-    $.ajax({
-        type: "POST",
-        url: "includes/queries/delete_multiple_complaints.php",
-        data: actual_delete_data_json,
-        success: function(data) {
-            // console.log("Returned data: " + data)
-            $("#dataTable-complaints").DataTable().draw(false);
-        }
-    })
-})
 
 $("#clear-filters").click(function(e) {
     $('#filter_complaints_form').trigger('reset');

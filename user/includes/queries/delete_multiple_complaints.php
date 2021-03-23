@@ -11,12 +11,20 @@ if ($data['type'] == 'current') {
     // $block = $_SESSION['blockno'];
     $block = 'A';
     // echo var_dump($delete_data);
+    $count = 0;
     foreach ($delete_data as $key => $val) {
+
+        if($val['status']=='Unresolved'){
         // echo var_dump($val);
         $sql = "DELETE from complaints where RequestID=" . $val['record_id'] . " AND BlockNumber='" .$block. "' AND FlatNumber=" . $flatno . ";";
-        echo $sql;
+        // echo $sql;
         mysqli_query($con, $sql);
+        $count++;
+        }
+        
     }
+
+    echo $count;
 
 }
 // }
