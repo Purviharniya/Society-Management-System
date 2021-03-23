@@ -91,7 +91,7 @@
         <div id="collapsePages4" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="unresolved_complaints.php">Unresolved</a>
-                <a class="collapse-item" href="progress_complaints.php">In Progress</a>
+                <a class="collapse-item" href="inprogress_complaints.php">In Progress</a>
                 <a class="collapse-item" href="resolved_complaints.php">Resolved</a>
                 <a class="collapse-item" href="total_complaints.php">Total Complaints</a>
             </div>

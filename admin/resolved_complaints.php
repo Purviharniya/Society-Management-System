@@ -15,7 +15,7 @@ include './includes/header.php';
                 <div class="card-header py-3">
                     <div class="row align-items-center">
                         <div class="col-12 mb-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Unresolved Complaints</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">Resolved Complaints</h4>
                         </div>
                         <div class="col-6 offset-md-11 col-md-1 text-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -198,7 +198,7 @@ function loadCurrent() {
             },
         }, ],
         ajax: {
-            'url': 'includes/loadInfo/unresolved_complaints.php',
+            'url': 'includes/loadInfo/inprogress_complaints.php',
             "data": function(d) {
                 console.log(d);
                 d.filters = getFilters();
