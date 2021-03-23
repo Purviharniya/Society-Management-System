@@ -87,7 +87,7 @@ while ($row = mysqli_fetch_assoc($complaintRecords)) {
         //"updated_at" => $row['updated_at'],
         "action" => '<!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary icon-btn action-btn" >
-                    <i class="fas fa-tools"></i>
+                    <i class="fas fa-pencil-alt"></i>
                   </button>',
     );
     $count++;

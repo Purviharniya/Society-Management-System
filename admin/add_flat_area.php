@@ -1,8 +1,8 @@
 <?php
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
-include 'includes/topbar.php';
+include 'includes/shared/header.php';
+include 'includes/shared/sidebar.php';
+include 'includes/shared/topbar.php';
 
 ?>
 
@@ -311,7 +311,7 @@ $("#bulkUploadAreaRate").submit(function(e) {
 
 <?php
 
-include './includes/footer.php';
-include './includes/scripts.php';
+include './includes/shared/footer.php';
+include './includes/shared/scripts.php';
 
 ?>

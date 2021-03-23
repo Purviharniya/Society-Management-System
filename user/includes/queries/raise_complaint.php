@@ -15,7 +15,7 @@ if (isset($_POST['addcomplaint-btn'])){
     // $block = $_SESSION['blockno'];
     $contactno = '9029996333';
     $block = 'A';
-    $admin_remark="no remark";
+    $admin_remark="No remark";
     // echo "hi";
     //define the default status, 0- unresolved, 1-in progress, 2- resolved
     $query = "INSERT INTO `complaints`(`RequestID`, `ComplaintType`, `Description`,`BlockNumber`,`FlatNumber`, `ContactNumber`, `RaisedDate`, `AdminRemark`, `Status`, `ResolvedDate`, `updated_at`) VALUES ('','$ctype','$cdesc','$block','$added_by' ,'$contactno','$timestamp','$admin_remark','0','0','$timestamp')"; //add the insert query

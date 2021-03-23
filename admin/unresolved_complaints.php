@@ -1,10 +1,10 @@
 <?php
-include './includes/header.php';
+include './includes/shared/header.php';
 ?>
 
-<?php include './includes/sidebar.php';?>
+<?php include './includes/shared/sidebar.php';?>
 
-<?php include './includes/topbar.php';?>
+<?php include './includes/shared/topbar.php';?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -80,7 +80,24 @@ if ($result = mysqli_query($con, $query)) {
 ?>
                                     </div>
                                     <br />
-
+                                    <div class="form-check">
+                                        <label for="">Flat Number</label>
+                                        <br>
+                                        <?php
+$query = "SELECT distinct(FlatNumber) FROM complaints";
+if ($result = mysqli_query($con, $query)) {
+    $rowcount = mysqli_num_rows($result);
+    while ($row = mysqli_fetch_array($result)) {
+       
+        echo '<div class="custom-control custom-checkbox custom-control-inline">
+                                                            <input checked type="checkbox" name="filter_flat[]" class="custom-control-input" value="' . $row['FlatNumber'] . '" id="filter_flat_' . $row['FlatNumber'] . '">
+                                                            <label class="custom-control-label" for="filter_flat_' .  $row['FlatNumber'] . '">' . $row['FlatNumber'] . '</label>
+                                                        </div>';
+    }
+}
+?>
+                                    </div>
+                                    <br />
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-primary" id="clear-filters"
                                             name="clear">Clear filters</button>
@@ -159,6 +176,13 @@ function getFilters() {
                     normalizedFilters.block = []
                 }
                 normalizedFilters.block.push(filter.value)
+                // console.log(filter.value)
+                break;
+            case "filter_flat[]":
+                if (!normalizedFilters.flat) {
+                    normalizedFilters.flat = []
+                }
+                normalizedFilters.flat.push(filter.value)
                 // console.log(filter.value)
                 break;
         }
@@ -299,7 +323,7 @@ function loadModalCurrent() {
     console.log("Json Area data modal: " + json_areaData)
     $.ajax({
         type: "POST",
-        url: "includes/loadInfo/loadmodal_complaints.php",
+        url: "includes/loadInfo/loadmodal_unresolved_complaints.php",
         // data: form_serialize,
         // dataType: "json",
         data: json_areaData,
@@ -343,7 +367,6 @@ function update_complaints(e) {
         success: function(data) {
             // alert(data); // show response from the php script.
             // console.log(data);
-
             $("#update_complaints_btn").text("Updated Successfully");
             $("#update_complaints_btn").removeClass("btn-primary");
             $("#update_complaints_btn").addClass("btn-success");
@@ -375,7 +398,7 @@ $("#clear-filters").click(function(e) {
 
 <?php
 
-include './includes/footer.php';
-include './includes/scripts.php';
+include './includes/shared/footer.php';
+include './includes/shared/scripts.php';
 
 ?>

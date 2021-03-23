@@ -1,6 +1,6 @@
-<?php include './includes/header.php'; ?>
-<?php include './includes/sidebar.php'; ?>
-<?php include './includes/topbar.php'; ?>
+<?php include './includes/shared/header.php'; ?>
+<?php include './includes/shared/sidebar.php'; ?>
+<?php include './includes/shared/topbar.php'; ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -509,7 +509,7 @@ $("#clear-filters").click(function(e) {
 
 <?php
 
-include './includes/footer.php';
-include './includes/scripts.php';
+include './includes/shared/footer.php';
+include './includes/shared/scripts.php';
 
 ?>
