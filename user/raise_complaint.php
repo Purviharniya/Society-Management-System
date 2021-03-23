@@ -1,8 +1,8 @@
-<?php include './includes/header.php';?>
+<?php include './includes/shared/header.php';?>
 
-<?php include './includes/sidebar.php';?>
+<?php include './includes/shared/sidebar.php';?>
 
-<?php include './includes/topbar.php';?>
+<?php include './includes/shared/topbar.php';?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -60,6 +60,6 @@ unset($_SESSION['success_message']);
 </div>
 <!-- /.container-fluid -->
 
-<?php include './includes/footer.php';
-include './includes/scripts.php';
+<?php include './includes/shared/footer.php';
+include './includes/shared/scripts.php';
 ?>
