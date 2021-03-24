@@ -291,8 +291,8 @@ $("#bulkUploadAreaRate").submit(function(e) {
                 $("#upload_farea").text("Upload Successfull!");
                 $("#upload_farea").removeClass("btn-primary");
                 $("#upload_farea").addClass("btn-success");
-                alert("Status:" + status + "\ninserted : " + resData.insertedRecords +
-                    "\nupdated : " + resData.updatedRecords + "\nno Operation : " + (resData
+                alert("Status:" + status + "\nInserted : " + resData.insertedRecords +
+                    "\nUpdated : " + resData.updatedRecords + "\nNo Operation : " + (resData
                         .totalRecords - (resData.updatedRecords + resData.insertedRecords)))
             } else {
                 $("#upload_farea").text("Upload Failed");

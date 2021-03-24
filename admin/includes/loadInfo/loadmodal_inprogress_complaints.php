@@ -99,7 +99,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">
-                                            <button type="submit" class="btn btn-primary" id="update_unresolved_complaints" name="update_unresolved_complaints">Update</button>
+                                            <button type="submit" class="btn btn-primary" id="update_inprogress_complaints" name="update_inprogress_complaints">Update</button>
                                         </div>
                                         <div class="form-group col-md-6 text-center">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" name="close">Close</button>

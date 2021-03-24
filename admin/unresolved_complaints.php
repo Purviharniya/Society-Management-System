@@ -314,13 +314,13 @@ function loadCurrent() {
 //action modal part
 function loadModalCurrent() {
     var target_row = $(this).closest("tr"); // this line did the trick
-    // console.log(target_row)
+    // console.log(target_row);
     // var btn=$(this);
     var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(target_row.get(0));
-    var areaData = $('#dataTable-complaints').DataTable().row(aPos).data()
+    var areaData = $('#dataTable-complaints').DataTable().row(aPos).data();
     // console.log("AreaData"+areaData);
-    var json_areaData = JSON.stringify(areaData)
-    console.log("Json Area data modal: " + json_areaData)
+    var json_areaData = JSON.stringify(areaData);
+    console.log("Json Area data modal: " + json_areaData);
     $.ajax({
         type: "POST",
         url: "includes/loadInfo/loadmodal_unresolved_complaints.php",
@@ -330,7 +330,7 @@ function loadModalCurrent() {
         success: function(output) {
             // $("#"+x).text("Deleted Successfully");
             target_row.append(output);
-            $('#update-del-modal').modal('show')
+            $('#update-del-modal').modal('show');
             $(document).on('hidden.bs.modal', '#update-del-modal', function() {
                 $("#update-del-modal").remove();
             });
@@ -346,7 +346,7 @@ $("#filter_complaints_form").submit(function(e) {
     e.preventDefault();
     console.log("hi");
     $('#dataTable-complaints').DataTable().ajax.reload();
-    $("#exampleModalCenter1").modal("hide")
+    $("#exampleModalCenter1").modal("hide");
 })
 
 function update_complaints(e) {
@@ -355,35 +355,38 @@ function update_complaints(e) {
     var form_serialize = form.serializeArray(); // serializes the form's elements.
     console.log("formser:", form_serialize)
     form_serialize.push({
-        name: $("#update_complaints_btn").attr('name'),
-        value: $("#update_complaints_btn").attr('value')
+        name: $("#update_unresolved_complaints").attr('name'),
+        value: $("#update_unresolved_complaints").attr('value')
     });
-    $("#update_complaints_btn").text("Updating...");
-    $("#update_complaints_btn").attr("disabled", true);
+    $("#update_unresolved_complaints").text("Updating...");
+    $("#update_unresolved_complaints").attr("disabled", true);
     $.ajax({
         type: "POST",
-        url: "includes/queries/raise_complaint.php",
+        url: "includes/queries/complaints.php",
         data: form_serialize,
         success: function(data) {
             // alert(data); // show response from the php script.
             // console.log(data);
-            $("#update_complaints_btn").text("Updated Successfully");
-            $("#update_complaints_btn").removeClass("btn-primary");
-            $("#update_complaints_btn").addClass("btn-success");
+            $("#update_unresolved_complaints").text("Updated Successfully");
+            $("#update_unresolved_complaints").removeClass("btn-primary");
+            $("#update_unresolved_complaints").addClass("btn-success");
             var row = $("#update-del-modal").closest('tr');
             var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(row.get(0));
-            var temp = $("#dataTable-complaints").DataTable().row(aPos).data();
+            // var temp = $("#dataTable-complaints").DataTable().row(aPos).data(); //no need to get data from the row
             // console.log(temp)
             // console.log("Hi", form_serialize)
-            temp['ComplaintType'] = form_serialize[0].value; //new values
-            temp['Description'] = form_serialize[2].value; //new values
-            temp['updated_at'] = form_serialize[5].value;
-            $('#dataTable-complaints').dataTable().fnUpdate(temp, aPos, undefined, false);
-            $('.action-btn').off('click')
-            $('.action-btn').on('click', loadModalCurrent)
-            // $("#dataTable-complaints").DataTable().row(aPos).draw(false);
+            if (data === '1') {
+                alert('The complaint has been shifted to the In-progress section!');
+            }
+            if (data === '2') {
+                alert('The complaint has been shifted to the Resolved section!');
+            }
+            $("#dataTable-complaints").DataTable().row(aPos).remove();
+            $("#dataTable-complaints").DataTable().draw(false);
+            $("div").removeClass("modal-backdrop"); //remove backdrop of modal as it gets dismissed 
+            $('.action-btn').off('click');
+            $('.action-btn').on('click', loadModalCurrent);
             $('#error_record').remove();
-
         }
     });
 }

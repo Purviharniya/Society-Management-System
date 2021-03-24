@@ -65,41 +65,21 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                                             <th scope="col"> Complaint Status: </th>
                                                             <td> '. $status . ' </td>
                                                         </tr>
+                                                        <tr>
+                                                            <th scope="col"> Admin Remark: </th>
+                                                            <td> '. $adminRemark . ' </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="col"> Resolved On: </th>
+                                                            <td> '. $resolveddate . ' </td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>   
-                                           
-                                            <label for="block"><b>Change Status:</b></label>
-                                            <select class="form-control" name="status_new" required>';                                              
-                                                foreach($statusarray as $i=>$value)
-                                                {
-                                                    if($i=='1'){
-                                                        echo "<option value= '" .$i. "' selected>" . $value . "</option>";
-                                                    }
-                                                    else{
-                                                        echo "<option value= '" .$i. "'>" . $value . "</option>";
-                                                    }
-                                                }                                                                                                                                    
-                                    echo '  </select>
-                                    <input type="hidden" name="status_old" value="' . $status . '">
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="cdesc_new"><b>Admin Remark</b></label>
-                                        <textarea class="form-control" id="admin_remark" name="remark_new"
-                                        placeholder="Enter admin remark...." rows="5" required></textarea>
-                                        <input type="hidden" name="remark_old" value="' . $adminRemark . '">
-                                        <input type="hidden" class="form-control" name="recordID" id="recordID" value="' . $requestID . '">
-                                        <input type="hidden" class="form-control" name="blockno" id="blockno" value="' . $block . '">
-                                        <input type="hidden" class="form-control" name="flatno" id="flatno" value="' . $flat . '">
-                                        <input type="hidden" name="timestamp" value="' . $date .'">
-                                        
-                                    </div>
-                                    <div class="col-12" id="error_record">
-                                    </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">
-                                            <button type="submit" class="btn btn-primary" id="update_unresolved_complaints" name="update_unresolved_complaints">Update</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" name="close">Okay</button>
                                         </div>
                                         <div class="form-group col-md-6 text-center">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal" name="close">Close</button>
