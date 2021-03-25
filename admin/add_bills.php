@@ -6,11 +6,10 @@ include 'includes/shared/topbar.php';
 
 ?>
 
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php
-if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
+        if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
     ?>
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,12 +20,12 @@ if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message']))
     </div>
 
     <?php
-unset($_SESSION['success_message']);
-}
-?>
+        unset($_SESSION['success_message']);
+        }
+    ?>
 
     <?php
-if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
+        if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
     ?>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -37,9 +36,9 @@ if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
     </div>
 
     <?php
-unset($_SESSION['error_message']);
-}
-?>
+        unset($_SESSION['error_message']);
+        }
+    ?>
 
     <h3 class="my-4">Bills</h3>
     <div class="row">
@@ -54,15 +53,26 @@ unset($_SESSION['error_message']);
 
                         <div class="form-group">
                             <label for="block">Block:</label>
-                            <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
-                                required>
-                            <small id="blockHelp" class="form-text text-muted">Select the block name (make
-                                dropdown)</small>
+                            <select class="form-control" id="block_select" name="block_select" required>
+                                <option value="" selected> Select a Block</option>
+                                <?php 
+                                
+                                $sql = "SELECT distinct(BlockNumber) from flats";
+                                $res = mysqli_query($con,$sql);
+
+                                while($row= mysqli_fetch_assoc($res)){
+                                    echo '
+                                    <option value="'. $row["BlockNumber"].'">' .$row["BlockNumber"]. ' </option>';
+                                }
+                                ?>
+                            </select>
+                            <small id="blockHelp" class="form-text text-muted">Select the block name </small>
                         </div>
                         <div class="form-group">
                             <label for="flatno">Flat Number:</label>
-                            <input type="text" class="form-control" id="flatno" name="flatno"
-                                aria-describedby="flatnoHelp" required>
+                            <select class="form-control" id="flat_select" name="flat_select" required>
+                                <option value="" selected> Select a Flat</option>
+                            </select>
                             <small id="flatnoHelp" class="form-text text-muted">Select the flat Number (Make
                                 dropdown)</small>
                         </div>
@@ -75,6 +85,30 @@ unset($_SESSION['error_message']);
     </div>
 </div>
 <!-- /container-fluid -->
+<script>
+$("#block_select").change(function() {
+    getflats();
+});
+
+function getflats() {
+    var data = $("#block_select").val();
+    console.log("Block selected: ", data);
+    $.ajax({
+        type: "POST",
+        data: {
+            block: data
+        },
+        url: "includes/handlers/add_bill_flat.php",
+        success: function(res) {
+            // alert(res);
+            // console.log(res);
+            $("#flat_select").html(res);
+        }
+    });
+
+}
+</script>
+
 
 <?php
 
