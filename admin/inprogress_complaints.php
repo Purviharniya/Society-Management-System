@@ -293,16 +293,16 @@ function loadModalCurrent() {
     // console.log(target_row);
     // var btn=$(this);
     var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(target_row.get(0));
-    var areaData = $('#dataTable-complaints').DataTable().row(aPos).data();
-    // console.log("AreaData"+areaData);
-    var json_areaData = JSON.stringify(areaData);
-    console.log("Json Area data modal: " + json_areaData);
+    var complaintData = $('#dataTable-complaints').DataTable().row(aPos).data();
+    // console.log("complaintData"+complaintData);
+    var json_complaintData = JSON.stringify(complaintData);
+    console.log("Json complaint data modal: " + json_complaintData);
     $.ajax({
         type: "POST",
         url: "includes/loadInfo/loadmodal_inprogress_complaints.php",
         // data: form_serialize,
         // dataType: "json",
-        data: json_areaData,
+        data: json_complaintData,
         success: function(output) {
             // $("#"+x).text("Deleted Successfully");
             target_row.append(output);

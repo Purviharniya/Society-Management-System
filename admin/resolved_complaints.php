@@ -180,7 +180,7 @@ function loadCurrent() {
         dom: '<"d-flex justify-content-between table-buttons-addcomplaints"fBl>tip',
         buttons: [{
             extend: 'excel',
-            title: "complaints-data",
+            title: "resolved-complaints-data",
             text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
             className: "btn btn-outline-primary  ",
             action: newExportAction,
@@ -189,7 +189,7 @@ function loadCurrent() {
             }
         }, {
             extend: "pdfHtml5",
-            title: "complaints-data",
+            title: "resolved-complaints-data",
             text: '<span> <i class="fas fa-download "></i> PDF</span>',
             className: "btn btn-outline-primary  mx-2",
             action: newExportAction,

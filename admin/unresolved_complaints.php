@@ -204,7 +204,7 @@ function loadCurrent() {
         dom: '<"d-flex justify-content-between table-buttons-addcomplaints"fBl>tip',
         buttons: [{
             extend: 'excel',
-            title: "complaints-data",
+            title: "unresolved-complaints-data",
             text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
             className: "btn btn-outline-primary  ",
             action: newExportAction,
@@ -213,7 +213,7 @@ function loadCurrent() {
             }
         }, {
             extend: "pdfHtml5",
-            title: "complaints-data",
+            title: "unresolved-complaints-data",
             text: '<span> <i class="fas fa-download "></i> PDF</span>',
             className: "btn btn-outline-primary  mx-2",
             action: newExportAction,
@@ -317,16 +317,16 @@ function loadModalCurrent() {
     // console.log(target_row);
     // var btn=$(this);
     var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(target_row.get(0));
-    var areaData = $('#dataTable-complaints').DataTable().row(aPos).data();
-    // console.log("AreaData"+areaData);
-    var json_areaData = JSON.stringify(areaData);
-    console.log("Json Area data modal: " + json_areaData);
+    var complaintData = $('#dataTable-complaints').DataTable().row(aPos).data();
+    // console.log("complaintData"+complaintData);
+    var json_complaintData = JSON.stringify(complaintData);
+    console.log("Json complaint data modal: " + json_complaintData);
     $.ajax({
         type: "POST",
         url: "includes/loadInfo/loadmodal_unresolved_complaints.php",
         // data: form_serialize,
         // dataType: "json",
-        data: json_areaData,
+        data: json_complaintData,
         success: function(output) {
             // $("#"+x).text("Deleted Successfully");
             target_row.append(output);
