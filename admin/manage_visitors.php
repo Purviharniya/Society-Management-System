@@ -189,24 +189,29 @@ function getFilters() {
             case "filter_block[]":
                 if (!normalizedFilters.block) {
                     normalizedFilters.block = []
+                    
                 }
                 normalizedFilters.block.push(filter.value)
+                // console.log(normalizedFilters.block);
                 break;
             case "filter_vname[]":
                 if (!normalizedFilters.vname) {
                     normalizedFilters.vname = []
                 }
                 normalizedFilters.vname.push(filter.value)
+                // console.log(normalizedFilters.vname);
                 break;
             case "filter_flatno[]":
                 if (!normalizedFilters.flatno) {
                     normalizedFilters.flatno = []
                 }
                 normalizedFilters.flatno.push(filter.value)
+                // console.log(normalizedFilters.flatno);
                 break;
         }
     }
-    console.log("Normalized Filters: "+normalizedFilters);
+    console.log("Normalized Filters: ");
+    console.log(normalizedFilters);
     return normalizedFilters
 }
 
@@ -228,7 +233,7 @@ function loadCurrent() {
             className: "btn btn-outline-primary  ",
             action: newExportAction,
             exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7]
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
         }, {
             extend: "pdfHtml5",
@@ -237,24 +242,29 @@ function loadCurrent() {
             className: "btn btn-outline-primary  mx-2",
             action: newExportAction,
             exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7]
+                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
         }, ],
         ajax: {
             'url': 'includes/loadInfo/manage_visitors.php',
             "data": function(d) {
+                console.log('Ajax data : ');
                 console.log(d);
                 d.filters = getFilters();
+                console.log('After getFilters d value : ')
+                console.log(d);
                 return d
             }
         },
         fnDrawCallback: function() {
+            console.log('Entered func fnDrawCallback');
             $(".action-btn").on('click', loadModalCurrent)
             $(".selectrow").attr("disabled", true);
             $("th").removeClass('selectbox');
             $(".selectbox").click(function(e) {
                 var row = $(this).closest('tr')
                 var checkbox = $(this).find('input');
+                console.log('Checkbox')
                 console.log(checkbox);
                 checkbox.attr("checked", !checkbox.attr("checked"));
                 row.toggleClass('selected table-secondary')
@@ -303,7 +313,7 @@ function loadCurrent() {
             },
         ],
         columnDefs: [{
-                targets: [0, 8], // column index (start from 0)
+                targets: [0, 10], // column index (start from 0)
                 orderable: false, // set orderable false for selected columns
             },
             {
@@ -316,12 +326,13 @@ function loadCurrent() {
             },
             {
                 width: "5%",
-                targets: [8]
+                targets: [10]
             },
 
         ],
     });
     table.columns.adjust()
+    console.log('Reached End');
 }
 //SELECT CHECKALL
 $("#select_all").click(function(e) {
@@ -345,7 +356,7 @@ function loadModalCurrent() {
     var areaData = $('#dataTable-visitors').DataTable().row(aPos).data()
     console.log("AreaData"+areaData);
     var json_areaData = JSON.stringify(areaData)
-    console.log("Json Area data modal: "+json_areaData)
+    // console.log("Json Area data modal: "+json_areaData)
     $.ajax({
         type: "POST",
         url: "includes/loadInfo/loadmodal_visitors.php",
@@ -423,11 +434,11 @@ function update_visitors(e) {
         url: "includes/queries/visitors.php",
         data: form_serialize,
         success: function(data) {
-            // alert(data); // show response from the php script.
-            // console.log(data);
+            alert(data); // show response from the php script.
+            console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
-                    '*This data already exists! Please change the Block or series value');
+                    '*This data already exists! Please change the Block or Flat Number value');
                 $('#error_record').addClass('text-danger');
                 $("#update_visitors_btn").text("Update");
                 $("#update_visitors_btn").attr("disabled", false);
@@ -438,14 +449,32 @@ function update_visitors(e) {
                 var row = $("#update-del-modal").closest('tr');
                 var aPos = $("#dataTable-visitors").dataTable().fnGetPosition(row.get(0));
                 var temp = $("#dataTable-visitors").DataTable().row(aPos).data();
-                console.log('temp: ' +temp);
-                // console.log("Hi", form_serialize)
+                console.log('temp: ');
+                console.log(temp);
+                console.log("form_serialize : ");
+                console.log(form_serialize);
+
                 temp['BlockNumber'] = form_serialize[0].value; //new values
-                // temp['FlatArea'] = form_serialize[4].value; //new values
-                // temp['FlatSeries'] = form_serialize[2].value; //new values
-                // temp['FlatType'] = form_serialize[7].value;
-                // temp['Ratepsq'] = form_serialize[5].value;
-                temp['UpdatedAt'] = form_serialize[8].value;
+                console.log(temp['BlockNumber'],form_serialize[0].value);
+                
+                temp['FlatNumber'] = form_serialize[2].value; //new values
+                console.log(temp['FlatNumber'],form_serialize[2].value);
+                
+                temp['VisitorName'] = form_serialize[4].value; //new values
+                console.log(temp['VisitorName'],form_serialize[4].value);
+                
+                temp['VisitorContactNo'] = form_serialize[6].value; //new values
+                console.log(temp['VisitorContactNo'],form_serialize[6].value);
+                
+                temp['WhomToMeet'] = form_serialize[8].value;
+                console.log(temp['WhomToMeet'],form_serialize[8].value);
+                
+                temp['ReasonToMeet'] = form_serialize[10].value;
+                console.log(temp['ReasonToMeet'],form_serialize[10].value);
+                
+                // temp['updated_at'] = form_serialize[8].value;
+
+                // console.log(temp['BlockNumber'],form_serialize[0].value);
                 // temp['Updatedby'] = $_SESSION['username'];
                 temp['Updatedby'] = 'Admin1';
                 $('#dataTable-visitors').dataTable().fnUpdate(temp, aPos, undefined, false);
@@ -460,28 +489,34 @@ function update_visitors(e) {
 
 // FROM HERE CHANGES ARE REMAINING
 $("#delete_selected_response_btn").click(function(e) {
+    console.log('Entered delete section')
     alert("You have selected " + $("#dataTable-visitors tbody tr.selected").length + " record(s) for deletion");
     var delete_rows = $("#dataTable-visitors").DataTable().rows('.selected').data()
     var delete_data = {}
     for (var i = 0; i < delete_rows.length; i++) {
+        console.log(delete_rows);
         // console.log("delete:"+delete_rows[i].FlatSeries)
+        console.log('Delete Rows : ');
+        console.log(delete_rows[i]);
         baseData = {}
         baseData['block'] = delete_rows[i].BlockNumber
-        baseData['series'] = delete_rows[i].FlatSeries
+        baseData['flatno'] = delete_rows[i].FlatNumber
+        baseData['vname'] = delete_rows[i].VisitorName
+        // baseData['series'] = delete_rows[i].FlatSeries
         delete_data[i] = baseData
-        // console.log("Base Data:"+baseData);
+        console.log("Base Data:"+baseData);
     }
     var actual_data = {}
     actual_data['type'] = 'current'
     actual_data['delete_data'] = delete_data
     actual_delete_data_json = JSON.stringify(actual_data)
-    // console.log("Actual Data:"+actual_delete_data_json)
+    console.log("Actual Data:"+actual_delete_data_json)
     $.ajax({
         type: "POST",
         url: "includes/queries/delete_multiple_visitors.php",
         data: actual_delete_data_json,
         success: function(data) {
-            // console.log("Returned data: "+data)
+            console.log("Returned data: "+data)
             $("#dataTable-visitors").DataTable().draw(false);
         }
     })
