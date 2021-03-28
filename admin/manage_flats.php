@@ -457,7 +457,7 @@ function update_flats(e) {
                 // console.log("Hi ", form_serialize)
                 temp['BlockNumber'] = form_serialize[0].value; //new values
                 temp['FlatNumber'] = form_serialize[1].value; //new values
-                temp['FlatType'] = form_serialize[5].value;
+                temp['FlatType'] = form_serialize[6].value;
                 temp['Floor'] = form_serialize[2].value;
                 temp['Maintenance'] = form_serialize[3].value; //new values
                 //temp['updated_at'] = date("Y-m-d H:i:s");

@@ -83,7 +83,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         </div>  
                                         <div class="form-group col-md-6">
                                             <label for="frate"><b>Maintenance</b></label>
-                                            <input type="text" class="form-control" required="required" placeholder="New maintenance" name="rate_new" id="rate_new" value="' . $maintenance . '">
+                                            <input type="text" class="form-control" required="required" placeholder="New maintenance" name="rate_new" id="rate_new" value="' . $maintenance . '" readonly>
                                             <input type="hidden" class="form-control"  name="recordID" id="recordID" value="' . $recordID . '">
                                             <input type="hidden" class="form-control"  name="flatareaID" id="flatareaID" value="' . $flatareaID . '">
                                         </div>                                   
