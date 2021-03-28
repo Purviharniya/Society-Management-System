@@ -10,8 +10,8 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="index.php">
-            <i class="fas fa-users fa-fw"></i>
-            <span>Users</span></a>
+            <i class="far fa-user fa-fw"></i>
+            <span>Admin</span></a>
     </li>
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
@@ -21,6 +21,51 @@
             <span>Dashboard</span></a>
     </li>
     <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse12" aria-expanded="true"
+            aria-controls="collapseTwoone">
+            <i class="fas fa-building fa-fw"></i>
+            <span>Flat Area</span>
+        </a>
+        <div id="collapse12" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="add_flat_area.php">Add Flat Area</a>
+                <a class="collapse-item" href="manage_flat_area.php">Manage Flat Area</a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider">
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fas fa-building fa-fw"></i>
+            <span>Flats</span>
+        </a>
+        <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="add_flat.php">Add Flats</a>
+                <a class="collapse-item" href="manage_flats.php">Manage Flats</a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider">
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true"
+            aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Allotments</span>
+        </a>
+        <div id="collapsePages2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="add_allotments.php">Add Allotments</a>
+                <a class="collapse-item" href="manage_allotments.php">Manage Allotments</a>
+            </div>
+        </div>
+    </li>
 
     <hr class="sidebar-divider">
     <li class="nav-item">
@@ -31,7 +76,8 @@
         </a>
         <div id="collapsePages3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="add_bills.php">View Bills</a>
+                <a class="collapse-item" href="add_bills.php">Add Bills</a>
+                <a class="collapse-item" href="manage_bills.php">Manage Bills</a>
             </div>
         </div>
     </li>
@@ -44,8 +90,10 @@
         </a>
         <div id="collapsePages4" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="raise_complaint.php">Raise Complaint</a>
-                <a class="collapse-item" href="manage_complaints.php">Manage Complaints</a>
+                <a class="collapse-item" href="unresolved_complaints.php">Unresolved</a>
+                <a class="collapse-item" href="inprogress_complaints.php">In Progress</a>
+                <a class="collapse-item" href="resolved_complaints.php">Resolved</a>
+                <a class="collapse-item" href="total_complaints.php">Total Complaints</a>
             </div>
         </div>
     </li>
@@ -76,7 +124,9 @@
         </a>
         <div id="collapsePages6" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="search_flat.php">Search Flat</a>
                 <a class="collapse-item" href="search_visitor.php">Search Visitor</a>
+                <a class="collapse-item" href="search_allotment.php">Search Allotment</a>
             </div>
         </div>
     </li>
@@ -91,6 +141,8 @@
         </a>
         <div id="collapsePages7" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="flat_reports.php">Flats b/w dates</a>
+                <a class="collapse-item" href="allotment_reports.php">Allotments b/w dates</a>
                 <a class="collapse-item" href="visitor_reports.php">Visitors b/w dates</a>
             </div>
         </div>
@@ -106,7 +158,8 @@
         </a>
         <div id="collapsePages8" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="add_security.php">View Security</a>
+                <a class="collapse-item" href="add_security.php">Add Security</a>
+                <a class="collapse-item" href="manage_security.php">Manage Security</a>
             </div>
         </div>
     </li>
@@ -121,7 +174,8 @@
         </a>
         <div id="collapsePages9" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="schedule_meetings.php">View Meetings</a>
+                <a class="collapse-item" href="schedule_meetings.php">Schedule Meetings</a>
+                <a class="collapse-item" href="manage_meetings.php">Manage Meetings</a>
             </div>
         </div>
     </li>

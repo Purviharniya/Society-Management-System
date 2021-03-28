@@ -15,7 +15,7 @@ include './includes/shared/header.php';
                 <div class="card-header py-3">
                     <div class="row align-items-center">
                         <div class="col-12 mb-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Unresolved Complaints</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">Resolved Complaints</h4>
                         </div>
                         <div class="col-6 offset-md-11 col-md-1 text-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -80,24 +80,7 @@ if ($result = mysqli_query($con, $query)) {
 ?>
                                     </div>
                                     <br />
-                                    <div class="form-check">
-                                        <label for="">Flat Number</label>
-                                        <br>
-                                        <?php
-$query = "SELECT distinct(FlatNumber) FROM complaints";
-if ($result = mysqli_query($con, $query)) {
-    $rowcount = mysqli_num_rows($result);
-    while ($row = mysqli_fetch_array($result)) {
-       
-        echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_flat[]" class="custom-control-input" value="' . $row['FlatNumber'] . '" id="filter_flat_' . $row['FlatNumber'] . '">
-                                                            <label class="custom-control-label" for="filter_flat_' .  $row['FlatNumber'] . '">' . $row['FlatNumber'] . '</label>
-                                                        </div>';
-    }
-}
-?>
-                                    </div>
-                                    <br />
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-primary" id="clear-filters"
                                             name="clear">Clear filters</button>
@@ -178,13 +161,6 @@ function getFilters() {
                 normalizedFilters.block.push(filter.value)
                 // console.log(filter.value)
                 break;
-            case "filter_flat[]":
-                if (!normalizedFilters.flat) {
-                    normalizedFilters.flat = []
-                }
-                normalizedFilters.flat.push(filter.value)
-                // console.log(filter.value)
-                break;
         }
     }
     // console.log("Normalized Filters: " + normalizedFilters);
@@ -204,7 +180,7 @@ function loadCurrent() {
         dom: '<"d-flex justify-content-between table-buttons-addcomplaints"fBl>tip',
         buttons: [{
             extend: 'excel',
-            title: "unresolved-complaints-data",
+            title: "resolved-complaints-data",
             text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
             className: "btn btn-outline-primary  ",
             action: newExportAction,
@@ -213,7 +189,7 @@ function loadCurrent() {
             }
         }, {
             extend: "pdfHtml5",
-            title: "unresolved-complaints-data",
+            title: "resolved-complaints-data",
             text: '<span> <i class="fas fa-download "></i> PDF</span>',
             className: "btn btn-outline-primary  mx-2",
             action: newExportAction,
@@ -222,7 +198,7 @@ function loadCurrent() {
             },
         }, ],
         ajax: {
-            'url': 'includes/loadInfo/unresolved_complaints.php',
+            'url': 'includes/loadInfo/resolved_complaints.php',
             "data": function(d) {
                 console.log(d);
                 d.filters = getFilters();
@@ -314,23 +290,23 @@ function loadCurrent() {
 //action modal part
 function loadModalCurrent() {
     var target_row = $(this).closest("tr"); // this line did the trick
-    // console.log(target_row);
+    // console.log(target_row)
     // var btn=$(this);
     var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(target_row.get(0));
-    var complaintData = $('#dataTable-complaints').DataTable().row(aPos).data();
-    // console.log("complaintData"+complaintData);
-    var json_complaintData = JSON.stringify(complaintData);
-    console.log("Json complaint data modal: " + json_complaintData);
+    var complaintData = $('#dataTable-complaints').DataTable().row(aPos).data()
+    // console.log("AreaData" + complaintData);
+    var json_complaintData = JSON.stringify(complaintData)
+    // console.log("Json complaint data modal: " + json_complaintData)
     $.ajax({
         type: "POST",
-        url: "includes/loadInfo/loadmodal_unresolved_complaints.php",
+        url: "includes/loadInfo/loadmodal_resolved_complaints.php",
         // data: form_serialize,
         // dataType: "json",
         data: json_complaintData,
         success: function(output) {
             // $("#"+x).text("Deleted Successfully");
             target_row.append(output);
-            $('#update-del-modal').modal('show');
+            $('#update-del-modal').modal('show')
             $(document).on('hidden.bs.modal', '#update-del-modal', function() {
                 $("#update-del-modal").remove();
             });
@@ -346,7 +322,7 @@ $("#filter_complaints_form").submit(function(e) {
     e.preventDefault();
     console.log("hi");
     $('#dataTable-complaints').DataTable().ajax.reload();
-    $("#exampleModalCenter1").modal("hide");
+    $("#exampleModalCenter1").modal("hide")
 })
 
 function update_complaints(e) {
@@ -355,38 +331,36 @@ function update_complaints(e) {
     var form_serialize = form.serializeArray(); // serializes the form's elements.
     console.log("formser:", form_serialize)
     form_serialize.push({
-        name: $("#update_unresolved_complaints").attr('name'),
-        value: $("#update_unresolved_complaints").attr('value')
+        name: $("#update_complaints_btn").attr('name'),
+        value: $("#update_complaints_btn").attr('value')
     });
-    $("#update_unresolved_complaints").text("Updating...");
-    $("#update_unresolved_complaints").attr("disabled", true);
+    $("#update_complaints_btn").text("Updating...");
+    $("#update_complaints_btn").attr("disabled", true);
     $.ajax({
         type: "POST",
-        url: "includes/queries/complaints.php",
+        url: "includes/queries/raise_complaint.php",
         data: form_serialize,
         success: function(data) {
             // alert(data); // show response from the php script.
             // console.log(data);
-            $("#update_unresolved_complaints").text("Updated Successfully");
-            $("#update_unresolved_complaints").removeClass("btn-primary");
-            $("#update_unresolved_complaints").addClass("btn-success");
+
+            $("#update_complaints_btn").text("Updated Successfully");
+            $("#update_complaints_btn").removeClass("btn-primary");
+            $("#update_complaints_btn").addClass("btn-success");
             var row = $("#update-del-modal").closest('tr');
             var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(row.get(0));
-            // var temp = $("#dataTable-complaints").DataTable().row(aPos).data(); //no need to get data from the row
+            var temp = $("#dataTable-complaints").DataTable().row(aPos).data();
             // console.log(temp)
             // console.log("Hi", form_serialize)
-            if (data === '1') {
-                alert('The complaint has been shifted to the In-progress section!');
-            }
-            if (data === '2') {
-                alert('The complaint has been shifted to the Resolved section!');
-            }
-            $("#dataTable-complaints").DataTable().row(aPos).remove();
-            $("#dataTable-complaints").DataTable().draw(false);
-            $("div").removeClass("modal-backdrop"); //remove backdrop of modal as it gets dismissed 
-            $('.action-btn').off('click');
-            $('.action-btn').on('click', loadModalCurrent);
+            temp['ComplaintType'] = form_serialize[0].value; //new values
+            temp['Description'] = form_serialize[2].value; //new values
+            temp['updated_at'] = form_serialize[5].value;
+            $('#dataTable-complaints').dataTable().fnUpdate(temp, aPos, undefined, false);
+            $('.action-btn').off('click')
+            $('.action-btn').on('click', loadModalCurrent)
+            // $("#dataTable-complaints").DataTable().row(aPos).draw(false);
             $('#error_record').remove();
+
         }
     });
 }

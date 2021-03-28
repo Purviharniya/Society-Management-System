@@ -1,8 +1,8 @@
 <?php
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
-include 'includes/topbar.php';
+include 'includes/shared/header.php';
+include 'includes/shared/sidebar.php';
+include 'includes/shared/topbar.php';
 
 ?>
 
@@ -291,8 +291,8 @@ $("#bulkUploadAreaRate").submit(function(e) {
                 $("#upload_farea").text("Upload Successfull!");
                 $("#upload_farea").removeClass("btn-primary");
                 $("#upload_farea").addClass("btn-success");
-                alert("Status:" + status + "\ninserted : " + resData.insertedRecords +
-                    "\nupdated : " + resData.updatedRecords + "\nno Operation : " + (resData
+                alert("Status:" + status + "\nInserted : " + resData.insertedRecords +
+                    "\nUpdated : " + resData.updatedRecords + "\nNo Operation : " + (resData
                         .totalRecords - (resData.updatedRecords + resData.insertedRecords)))
             } else {
                 $("#upload_farea").text("Upload Failed");
@@ -311,7 +311,7 @@ $("#bulkUploadAreaRate").submit(function(e) {
 
 <?php
 
-include './includes/footer.php';
-include './includes/scripts.php';
+include './includes/shared/footer.php';
+include './includes/shared/scripts.php';
 
 ?>

@@ -29,7 +29,8 @@ include('../config.php');
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../vendor/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="../vendor/css/shoutbox.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.bootstrap4.min.css" rel="stylesheet">
