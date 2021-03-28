@@ -49,3 +49,12 @@ Profile
 
 btn - linear-gradient(to top, #434343 50%, black 100%)
 sidebar - #1A237E
+
+
+To modify:
+
+1. allotments- make flat and block flied as a dropdown
+2. flats- on update the row data changes abruptly
+3. fix this error in manage flats: 
+Notice: Trying to access array offset on value of type null in C:\xampp\htdocs\Society-Management-System\admin\includes\loadInfo\loadmodal_flats.php on line 19
+4. Manage flats- remove maintenance field from update modal as it cant be changed(will always default to rate*area)
