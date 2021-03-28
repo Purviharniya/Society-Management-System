@@ -1,5 +1,5 @@
 <?php
-include '../config.php';
+//include '../config.php';
 include 'includes/shared/header.php';
 include 'includes/shared/sidebar.php';
 include 'includes/shared/topbar.php';
