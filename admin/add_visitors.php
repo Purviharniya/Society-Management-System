@@ -97,46 +97,42 @@ unset($_SESSION['error_message']);
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="fno">Flat no:</label>
-                                                    <input type="text" class="form-control" id="fno" name="fno"
-                                                        value="fno" placeholder="Column name of Flat number" required>
+                                                    <input type="text" class="form-control" id="flatno" name="flatno"
+                                                        value="flatno" placeholder="Column name of Flat number" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="name">Visitor Name:</label>
+                                                    <input type="text" class="form-control" id="vname" name="vname"
+                                                        value="vname" placeholder="Column name of Visitor Name" required>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="name">Name:</label>
-                                                    <input type="text" class="form-control" id="name" name="name"
-                                                        value="name" placeholder="Column name of Owner" required>
-                                                </div>
-                                                <div class="form-group">
                                                     <label for="contact col-md-6">Contact No.:</label>
                                                     <input type="text" class="form-control" id="contact" name="contact"
                                                         value="contact" placeholder="Column name of Contact no"
                                                         required>
                                                 </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group">
                                                     <label for="contact1">Alternate Contact No.:</label>
                                                     <input type="text" class="form-control" id="contact1"
                                                         name="contact1" value="contact1"
-                                                        placeholder="Column name of contact no1" required>
+                                                        placeholder="Column name of alternate contact no" required>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="contact">Email ID:</label>
-                                                    <input type="text" class="form-control" id="email" name="email"
-                                                        value="email" placeholder="Column name of Email" required>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="contact">Total members in the family:</label>
-                                                    <input type="text" class="form-control" id="members" name="members"
-                                                        value="members"
-                                                        placeholder="Column name of total members in the family"
-                                                        required>
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="whomToMeet">Whom to Meet:</label>
+                                                <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
+                                                       value="whomToMeet" placeholder="Column name of whom to meet" required>
                                             </div>
-
+                                            <div class="form-group">
+                                                <label for="reasonToMeet">Reason to Meet:</label>
+                                                <textarea class="form-control" id="reasonToMeet" name="reasonToMeet"
+                                                          value="reasonToMeet" placeholder="Column name of whom to meet" rows="3"  
+                                                        required></textarea>
+                                            </div>
                                             <br>
                                             <div class="form-group files color">
                                                 <!-- <input type="file" class="form-control" accept=".xls,.xlsx"> -->
@@ -162,7 +158,7 @@ unset($_SESSION['error_message']);
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                                     name="close">Close</button>
                                                 <button type="submit" class="btn btn-primary" name="save_changes"
-                                                    id="upload_farea">Upload</button>
+                                                    id="upload_visitors">Upload</button>
                                             </div>
                                         </form>
                                     </div>
@@ -269,13 +265,13 @@ unset($_SESSION['error_message']);
                                 contact number</small>
                         </div>
                         <div class="form-group">
-                            <label for="contact2">Whom to Meet:</label>
+                            <label for="whomToMeet">Whom to Meet:</label>
                             <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
                                 aria-describedby="whomToMeetHelp">
                             <small id="whomToMeetHelp" class="form-text text-muted">Enter the whom to meet(flat owner's name)</small>
                         </div>
                         <div class="form-group">
-                            <label for="contact2">Reason to Meet:</label>
+                            <label for="reasonToMeet">Reason to Meet:</label>
                             <textarea class="form-control" id="reasonToMeet" name="reasonToMeet"  
                                 aria-describedby="reasonToMeetHelp"rows="3"></textarea>
                             <small id="reasonToMeetHelp" class="form-text text-muted">Enter the reason to meet</small>
