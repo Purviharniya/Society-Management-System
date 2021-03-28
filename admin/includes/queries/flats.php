@@ -20,7 +20,7 @@ if (isset($_POST["flat"])) {
             $error = 0;
         }
     }
-    if (is_numeric($fno)) {
+    if (is_numeric($fno) && is_numeric($floor) && !is_numeric($block)) {
         if ($error == 0) {
             //$contactno = mysqli_real_escape_string($con, $_POST["contactno"]);
             //$econtactno = mysqli_real_escape_string($con, $_POST["econtactno"]);
