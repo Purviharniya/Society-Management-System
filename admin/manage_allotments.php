@@ -520,6 +520,6 @@ $("#clear-filters").click(function(e) {
 });
 </script>
 <?php
-include './includes/footer.php';
-include './includes/scripts.php';
+include './includes/shared/footer.php';
+include './includes/shared/scripts.php';
 ?>
