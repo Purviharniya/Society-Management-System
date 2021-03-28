@@ -1,13 +1,9 @@
 <?php
 include_once '../../../config.php';
-// echo "<script>console.log('Entered Main File' )</script>";
 
 $draw = $_POST['draw'];
 $row = $_POST['start'];
-// echo '<script>console.log('.$draw.')</script>'
-// echo '<script>console.log('.$row.')</script>'
 $rowperpage = $_POST['length']; // Rows display per page
-// echo '<script>console.log('.$rowperpage.')</script>'
 
 if (isset($_POST['order'])) {
     $columnIndex = $_POST['order'][0]['column']; // Column index
@@ -72,7 +68,6 @@ $data = array();
 $count = 0;
 $fullname = "";
 while ($row = mysqli_fetch_assoc($visitorsRecords)) {
-    // echo '<script>console.log('.$row + '\n'.')</script>'
     $data[] = array(
 
         // "select-cbox"=>'<input type="checkbox">',

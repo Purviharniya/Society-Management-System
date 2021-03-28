@@ -1,12 +1,9 @@
 <?php
-// echo 'Hi';
 $allowed_roles = array("admin");
 // if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
-// echo 'in loadmodal_visitors';
 include_once '../../../config.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
-// echo "<script>console.log(".$data.")</script>";
 
 $block = mysqli_escape_string($con, $data['BlockNumber']);
 $flatno = mysqli_escape_string($con, $data['FlatNumber']);
@@ -18,8 +15,6 @@ $whomTomeet = $row['WhomToMeet'];
 $reasonTomeet = $row['ReasonToMeet'];
 $visitorID = $row['VisitorID'];
 $date =  date("Y-m-d H:i:s");
-
-// echo "<script>console.log('$whomTomeet')</script>";
 
 echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
