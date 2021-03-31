@@ -1,3 +1,6 @@
+<!-- PENDING
+    1. UPLOAD EXCEL
+ -->
 <?php
 
 include 'includes/shared/header.php';
@@ -9,7 +12,7 @@ include 'includes/shared/topbar.php';
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php
-    if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
+if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
     ?>
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,12 +23,12 @@ include 'includes/shared/topbar.php';
     </div>
 
     <?php
-        unset($_SESSION['success_message']);
-    }
-    ?>
+unset($_SESSION['success_message']);
+}
+?>
 
-    <?php
-    if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
+<?php
+if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
     ?>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -36,25 +39,26 @@ include 'includes/shared/topbar.php';
     </div>
 
     <?php
-        unset($_SESSION['error_message']);
-    }
-    ?>
-    <h3 class="my-4">Flats</h3>
+unset($_SESSION['error_message']);
+}
+?>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <h3 class="my-4">Visitors</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card shadow pt-1 pb-5">
                 <div class="card-body">
-                    <div class="col-12 mb-3">
-                        <h4 class="font-weight-bold text-primary">Add Flats</h4>
-                    </div>
+                    <h4 class="card-title text-info mb-5">Add Visitors</h4>
                     <div class="col text-center">
-                        <button type="button" class="btn btn-themeblack" name="addflats" data-toggle="modal"
-                            data-target="#uploadflat">
+                        <button type="button" class="btn btn-themeblack" name="addcourse" data-toggle="modal"
+                            data-target="#uploadarea">
                             Upload excel&nbsp;&nbsp;<i class="fas fa-upload"></i>
                         </button>
                     </div>
                     <!-- Modal for importing -->
-                    <div class="modal fade" id="uploadflat" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="uploadarea" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle0" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -69,7 +73,7 @@ include 'includes/shared/topbar.php';
                                         <form method="POST" enctype="multipart/form-data" id="bulkUploadInternal">
                                             <label for="">
                                                 <h6>Information for mapping Data from excel sheet columns to database
-                                                    columns</h6>
+                                                    columns </h6>
                                             </label>
                                             <label for=""><small><b>Note:</b> The following fields should be column
                                                     names in excel sheet</small>
@@ -87,33 +91,47 @@ include 'includes/shared/topbar.php';
                                             </div>
                                             <div class="form-row mt-4">
                                                 <div class="form-group col-md-6">
-                                                    <label for="fcode"><b>Block</b></label>
-                                                    <input type="text" class="form-control" id="block"
-                                                        placeholder="Column name of Block" name="block" value="block"
+                                                    <label for="block">Block:</label>
+                                                    <input type="text" class="form-control" id="block" name="block"
+                                                        value="block" placeholder="Column name of Block" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="fno">Flat no:</label>
+                                                    <input type="text" class="form-control" id="flatno" name="flatno"
+                                                        value="flatno" placeholder="Column name of Flat number" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="name">Visitor Name:</label>
+                                                    <input type="text" class="form-control" id="vname" name="vname"
+                                                        value="vname" placeholder="Column name of Visitor Name" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="contact col-md-6">Contact No.:</label>
+                                                    <input type="text" class="form-control" id="contact" name="contact"
+                                                        value="contact" placeholder="Column name of Contact no"
                                                         required>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="eid"><b>Flat Series</b></label>
-                                                    <input type="text" class="form-control" id="series"
-                                                        placeholder="Column name of Flat Series" name="series"
-                                                        value="series" required>
+                                                <div class="form-group">
+                                                    <label for="contact1">Alternate Contact No.:</label>
+                                                    <input type="text" class="form-control" id="contact1"
+                                                        name="contact1" value="contact1"
+                                                        placeholder="Column name of alternate contact no" required>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="name"><b>Flat Area</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Flat Area" name="farea"
-                                                        value="farea" required>
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="whomToMeet">Whom to Meet:</label>
+                                                <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
+                                                       value="whomToMeet" placeholder="Column name of whom to meet" required>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="name"><b>Maintenance Rate per square feet</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Rate per sq feet" name="frateps"
-                                                        value="frateps" required>
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="reasonToMeet">Reason to Meet:</label>
+                                                <textarea class="form-control" id="reasonToMeet" name="reasonToMeet"
+                                                          value="reasonToMeet" placeholder="Column name of whom to meet" rows="3"  
+                                                        required></textarea>
                                             </div>
                                             <br>
                                             <div class="form-group files color">
@@ -140,7 +158,7 @@ include 'includes/shared/topbar.php';
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                                     name="close">Close</button>
                                                 <button type="submit" class="btn btn-primary" name="save_changes"
-                                                    id="upload_farea">Upload</button>
+                                                    id="upload_visitors">Upload</button>
                                             </div>
                                         </form>
                                     </div>
@@ -209,38 +227,73 @@ include 'includes/shared/topbar.php';
                         </div>
                     </div>
                     <!-- Close upload modal -->
-                    <form action="./includes/queries/flats.php" autocomplete="off" method="POST">
+                    <!--Main Form section starts-->
+                    <form action="includes/queries/visitors.php" method="POST" autocomplete="">
                         <div class="form-group">
-                            <label for="fno">Flat number:</label>
+                            <label for="block">Block:</label>
+                            <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
+                                required>
+                            <small id="blockHelp" class="form-text text-muted">Enter the block name (make it a drop down
+                                later)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="fno">Flat no:</label>
                             <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
                                 required>
-                            <small id="fnoHelp" class="form-text text-muted">Enter the Flat number</small>
+                            <small id="fnoHelp" class="form-text text-muted">Enter the Flat number (make it a drop down
+                                later)</small>
                         </div>
 
                         <div class="form-group">
-                            <label for="flattype">Flat Type:</label>
-                            <select class="form-control" id="flattype" name="flattype">
-                                <option value="1 BHK">1BHK</option>
-                                <option value="2 BHK">2BHK</option>
-                                <option value="3 BHK">3BHK</option>
-                                <option value="4 BHK">4BHK</option>
-                            </select>
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp"
+                                required>
+                            <small id="nameHelp" class="form-text text-muted">Enter the flat owner's name</small>
                         </div>
                         <div class="form-group">
-                            <label for="floorno">Floor:</label>
-                            <input type="text" class="form-control" id="floorno" name="floorno"
-                                aria-describedby="floornoHelp" required>
-                            <small id="floornoHelp" class="form-text text-muted">Enter the floor number</small>
+                            <label for="contact">Contact No.:</label>
+                            <input type="text" class="form-control" id="contact" name="contact"
+                                aria-describedby="contactHelp" required>
+                            <small id="contactHelp" class="form-text text-muted">Enter the visitor's contact
+                                number</small>
                         </div>
                         <div class="form-group">
-                            <label for="block">Block:</label>
-                            <input type="text" class="form-control" id="block" name="blockname"
-                                aria-describedby="blockHelp" required>
-                            <small id="blockHelp" class="form-text text-muted">Enter the block name</small>
+                            <label for="contact1">Alternate Contact No.:</label>
+                            <input type="text" class="form-control" id="contact1" name="contact1"
+                                aria-describedby="contact1Help" required>
+                            <small id="contact1Help" class="form-text text-muted">Enter the visitor's alternate
+                                contact number</small>
                         </div>
-                        <button type="submit" class="btn btn-themeblack" name="flat">Add</button>
-                        <button type="clear" class="btn btn-themeblack">Clear</button>
+                        <div class="form-group">
+                            <label for="whomToMeet">Whom to Meet:</label>
+                            <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
+                                aria-describedby="whomToMeetHelp">
+                            <small id="whomToMeetHelp" class="form-text text-muted">Enter the whom to meet(flat owner's name)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="reasonToMeet">Reason to Meet:</label>
+                            <textarea class="form-control" id="reasonToMeet" name="reasonToMeet"  
+                                aria-describedby="reasonToMeetHelp"rows="3"></textarea>
+                            <small id="reasonToMeetHelp" class="form-text text-muted">Enter the reason to meet</small>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="contact">Email ID:</label>
+                            <input type="text" class="form-control" id="contact" name="contact"
+                                aria-describedby="contactHelp" required>
+                            <small id="contactHelp" class="form-text text-muted">Enter the flat owner's email
+                                address</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">Total members in the family:</label>
+                            <input type="text" class="form-control" id="contact" name="contact"
+                                aria-describedby="contactHelp" required>
+                            <small id="contactHelp" class="form-text text-muted">Enter the flat owner's total
+                                family members</small>
+                        </div> -->
+                        <button type="submit" class="btn btn-themeblack" name='addvisitors-btn'>Add</button>
+                        <button type="reset" class="btn btn-themeblack">Clear</button>
                     </form>
+                    <!--Main Form section ends-->
                 </div>
             </div>
         </div>

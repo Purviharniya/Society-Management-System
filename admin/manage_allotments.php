@@ -1,17 +1,18 @@
-<?php include './includes/shared/header.php'; ?>
-<?php include './includes/shared/sidebar.php'; ?>
-<?php include './includes/shared/topbar.php'; ?>
-
-<!-- Begin Page Content -->
-<div class="container-fluid">
-    <h3 class="my-4">Flats</h3>
+<?php
+//include '../config.php';
+include 'includes/shared/header.php';
+include 'includes/shared/sidebar.php';
+include 'includes/shared/topbar.php';
+?>
+<div class='container-fluid'>
+    <h3 class="my-4">Allotments</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="row align-items-center">
                         <div class="col-12 mb-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Flat List</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">Allotment Records</h4>
                         </div>
                         <div class="col-6 offset-md-8 col-md-1 text-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -27,7 +28,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -39,16 +39,16 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <!-- Table -->
-
-                                <form class="forms-sample" id="filter_flats_form" method="POST" action="">
+                                <form class="forms-sample" id="filter_allotments_form" method="POST" action="">
                                     <div class="form-check">
                                         <label for="">Block</label>
                                         <br>
                                         <?php
+
                                         $block_numbers = array();
-                                        //$user = $_SESSION['username'];
-                                        $query = "SELECT distinct(BlockNumber) FROM flats";
+                                        // $user = $_SESSION['username'];
+
+                                        $query = "SELECT distinct(BlockNumber) FROM allotments";
                                         if ($result = mysqli_query($con, $query)) {
                                             $rowcount = mysqli_num_rows($result);
                                             while ($row = mysqli_fetch_array($result)) {
@@ -64,18 +64,18 @@
                                     <br />
 
                                     <div class="form-check">
-                                        <label for="">Flat Number</label>
+                                        <label for="">Flat Numbers</label>
                                         <br>
                                         <?php
-                                        $flatnumber = array();
-                                        $query = "SELECT distinct(FlatNumber) FROM flats";
+                                        $fno = array();
+                                        $query = "SELECT distinct(FlatNumber) FROM allotments";
                                         if ($result = mysqli_query($con, $query)) {
                                             $rowcount = mysqli_num_rows($result);
                                             while ($row = mysqli_fetch_array($result)) {
-                                                $flatnumber = $row['FlatNumber'];
+                                                $fno = $row['FlatNumber'];
                                                 echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_flatnumber[]" class="custom-control-input" value="' . $flatnumber . '" id="filter_series_' . $flatnumber . '">
-                                                            <label class="custom-control-label" for="filter_series_' . $flatnumber . '">' . $flatnumber . '</label>
+                                                            <input checked type="checkbox" name="filter_fno[]" class="custom-control-input" value="' . $fno . '" id="filter_fno_' . $fno . '">
+                                                            <label class="custom-control-label" for="filter_fno_' . $fno . '">' . $fno . '</label>
                                                         </div>';
                                             }
                                         }
@@ -83,56 +83,23 @@
                                     </div>
                                     <br />
                                     <div class="form-check">
-                                        <label for="">Flat Type</label>
+                                        <label for="">Is Flat on Rent</label>
                                         <br>
                                         <?php
-                                        $ftypes = array();
-                                        $query = "SELECT distinct(FlatType) FROM flats";
+                                        $isRent = array();
+                                        $query = "SELECT distinct(isRent) FROM allotments";
                                         if ($result = mysqli_query($con, $query)) {
                                             $rowcount = mysqli_num_rows($result);
                                             while ($row = mysqli_fetch_array($result)) {
-                                                $ftypes = $row['FlatType'];
+                                                if ($row['isRent'] == 0) {
+                                                    $isRentp = 'No';
+                                                } else {
+                                                    $isRentp = 'Yes';
+                                                }
+                                                $isRent = $row['isRent'];
                                                 echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_ftypes[]" class="custom-control-input" value="' . $ftypes . '" id="filter_ftypes_' . $ftypes . '">
-                                                            <label class="custom-control-label" for="filter_ftypes_' . $ftypes . '">' . $ftypes . '</label>
-                                                        </div>';
-                                            }
-                                        }
-                                        ?>
-                                    </div>
-                                    <br />
-                                    <div class="form-check">
-                                        <label for="">Maintenance</label>
-                                        <br>
-                                        <?php
-                                        $ftypes = array();
-                                        $query = "SELECT distinct(Maintenance) FROM flats";
-                                        if ($result = mysqli_query($con, $query)) {
-                                            $rowcount = mysqli_num_rows($result);
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $ftypes = $row['Maintenance'];
-                                                echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_ftypes[]" class="custom-control-input" value="' . $ftypes . '" id="filter_ftypes_' . $ftypes . '">
-                                                            <label class="custom-control-label" for="filter_ftypes_' . $ftypes . '">' . $ftypes . '</label>
-                                                        </div>';
-                                            }
-                                        }
-                                        ?>
-                                    </div>
-                                    <br />
-                                    <div class="form-check">
-                                        <label for="">Floor</label>
-                                        <br>
-                                        <?php
-                                        $ftypes = array();
-                                        $query = "SELECT distinct(Floor) FROM flats";
-                                        if ($result = mysqli_query($con, $query)) {
-                                            $rowcount = mysqli_num_rows($result);
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $ftypes = $row['Floor'];
-                                                echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_ftypes[]" class="custom-control-input" value="' . $ftypes . '" id="filter_ftypes_' . $ftypes . '">
-                                                            <label class="custom-control-label" for="filter_ftypes_' . $ftypes . '">' . $ftypes . '</label>
+                                                            <input checked type="checkbox" name="filter_isRent[]" class="custom-control-input" value="' . $isRent . '" id="filter_isRent_' . $isRent . '">
+                                                            <label class="custom-control-label" for="filter_isRent_' . $isRent . '">' . $isRentp . '</label>
                                                         </div>';
                                             }
                                         }
@@ -141,7 +108,8 @@
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-primary" id="clear-filters"
-                                            name="clear">Clear filters</button>
+                                            name="clear">clear
+                                            filters</button>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                             name="close">Close</button>
                                         <button type="submit" class="btn btn-primary" name="filter">Filter</button>
@@ -151,8 +119,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body ">
-                    <table class="table table-bordered table-responsive" id="dataTable-flats" width="100%"
+                <div class="card-body">
+                    <table class="table table-bordered table-responsive" id="dataTable-allotments" width="100%"
                         cellspacing="0">
                         <thead>
                             <tr>
@@ -164,10 +132,18 @@
                                 </th>
                                 <th>Flat Number</th>
                                 <th>Block Number</th>
-                                <th>Flat Type</th>
-                                <th>Floor</th>
-                                <th>Maintenance</th>
-                                <th>Action </th>
+                                <th>Owner Name</th>
+                                <th>Owner Email</th>
+                                <th>Owner Contact Number</th>
+                                <th>Owner Alternate Contact Number</th>
+                                <th>onRent</th>
+                                <th>Rentee Name</th>
+                                <th>Rentee Email</th>
+                                <th>Rentee Contact Number</th>
+                                <th>Rentee Alternate Contact Number</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -175,30 +151,34 @@
                                 <th></th>
                                 <th>Flat Number</th>
                                 <th>Block Number</th>
-                                <th>Flat Type</th>
-                                <th>Floor</th>
-                                <th>Maintenance</th>
-                                <th>Action </th>
+                                <th>Owner Name</th>
+                                <th>Owner Email</th>
+                                <th>Owner Contact Number</th>
+                                <th>Owner Alternate Contact Number</th>
+                                <th>onRent</th>
+                                <th>Rentee Name</th>
+                                <th>Rentee Email</th>
+                                <th>Rentee Contact Number</th>
+                                <th>Rentee Alternate Contact Number</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
-                    <!-- </div> -->
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-<!-- /.container-fluid -->
 
-<script type="text/javascript">
+<script>
 $(document).ready(function() {
     loadCurrent();
-    // filterTable();
 });
 
 function getFilters() {
-    const filters = $("#filter_flats_form").serializeArray();
+    const filters = $("#filter_allotments_form").serializeArray();
     let normalizedFilters = {};
     for (filter of filters) {
         switch (filter.name) {
@@ -209,76 +189,75 @@ function getFilters() {
                 }
                 normalizedFilters.block.push(filter.value)
                 break;
-            case "filter_ftypes[]":
-                if (!normalizedFilters.ftypes) {
-                    normalizedFilters.ftypes = []
+            case "filter_fno[]":
+                if (!normalizedFilters.fno) {
+                    normalizedFilters.fno = []
                 }
-                normalizedFilters.ftypes.push(filter.value)
+                normalizedFilters.fno.push(filter.value)
                 break;
-            case "filter_flatnumber[]":
-                if (!normalizedFilters.flatnumber) {
-                    normalizedFilters.flatnumber = []
+            case "filter_isRent[]":
+                if (!normalizedFilters.isRent) {
+                    normalizedFilters.isRent = []
                 }
-                normalizedFilters.flatnumber.push(filter.value)
+                normalizedFilters.isRent.push(filter.value)
                 break;
-            case "filter_maintenance[]":
-                if (!normalizedFilters.maintenance) {
-                    normalizedFilters.maintenance = []
-                }
-                normalizedFilters.maintenance.push(filter.value)
-                break;
-            case "filter_floor[]":
-                if (!normalizedFilters.floor) {
-                    normalizedFilters.floor = []
-                }
-                normalizedFilters.floor.push(filter.value)
-                break;
+
         }
     }
     // console.log("Normalized Filters: "+normalizedFilters);
     return normalizedFilters
-}
+};
 
-//DATATABLE CREATE
 function loadCurrent() {
-    // document.querySelector("#addCoursebtn").style.display="none"
-    var table = $('#dataTable-flats').DataTable({
+    var table = $("#dataTable-allotments").DataTable({
         processing: true,
         serverSide: true,
         destroy: true,
-        autoWidth: false,
+        autoWidth: true,
         responsive: true,
         serverMethod: 'post',
         aaSorting: [],
-        dom: '<"d-flex justify-content-between table-buttons-addflats"fBl>tip',
+        dom: '<"d-flex justify-content-between table-buttons-allotments"fBl>tip',
         buttons: [{
-            extend: 'excel',
-            title: "flats-data",
-            text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
-            className: "btn btn-outline-primary  ",
-            action: newExportAction,
-            exportOptions: {
-                columns: [1, 2, 3, 4, 5]
-            }
-        }, {
-            extend: "pdfHtml5",
-            title: "flats-data",
-            text: '<span> <i class="fas fa-download "></i> PDF</span>',
-            className: "btn btn-outline-primary  mx-2",
-            action: newExportAction,
-            exportOptions: {
-                columns: [1, 2, 3, 4, 5]
+                extend: 'excel',
+                title: "allotments-data",
+                text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
+                className: "btn btn-outline-primary  ",
+                action: newExportAction,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            }, {
+                extend: "pdfHtml5",
+                title: "allotments-data-owner",
+                text: '<span> <i class="fas fa-download "></i> PDF (owner)</span>',
+                className: "btn btn-outline-primary  mx-2",
+                action: newExportAction,
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7]
+                },
             },
-        }, ],
+            {
+                extend: "pdfHtml5",
+                title: "allotments-data-rentee",
+                text: '<span> <i class="fas fa-download "></i> PDF (rentee)</span>',
+                className: "btn btn-outline-primary  mx-2",
+                action: newExportAction,
+                exportOptions: {
+                    columns: [1, 3, 8, 9, 10, 11, 12, 13]
+                },
+            },
+        ],
         ajax: {
-            'url': 'includes/loadInfo/manage_flats.php',
+            'url': 'includes/loadInfo/manage_allotments.php',
             "data": function(d) {
+                console.log(d);
                 d.filters = getFilters();
                 return d
             }
         },
         fnDrawCallback: function() {
-            $(".action-btn").on('click', loadModalCurrent)
+            $(".action-btn").on('click', loadModalCurrent);
             $(".selectrow").attr("disabled", true);
             $("th").removeClass('selectbox');
             $(".selectbox").click(function(e) {
@@ -287,8 +266,8 @@ function loadCurrent() {
                 console.log(checkbox);
                 checkbox.attr("checked", !checkbox.attr("checked"));
                 row.toggleClass('selected table-secondary')
-                if ($("#dataTable-flats tbody tr.selected").length != $(
-                        "#dataTable-flats tbody tr").length) {
+                if ($("#dataTable-allotments tbody tr.selected").length != $(
+                        "#dataTable-allotments tbody tr").length) {
                     $("#select_all").prop("checked", true)
                     $("#select_all").prop("checked", false)
                 } else {
@@ -307,65 +286,90 @@ function loadCurrent() {
                 data: 'BlockNumber'
             },
             {
-                data: 'FlatType'
+                data: 'OwnerName'
             },
             {
-                data: 'Floor'
+                data: 'OwnerEmail'
             },
             {
-                data: 'Maintenance'
+                data: 'OwnerContactNumber'
+            },
+            {
+                data: 'OwnerAlternateContactNumber'
+            },
+            {
+                data: 'isRent'
+            },
+            {
+                data: 'RenteeName'
+            },
+            {
+                data: 'RenteeEmail'
+            },
+            {
+                data: 'RenteeContactNumber'
+            },
+            {
+                data: 'RenteeAlternateContactNumber'
+            },
+
+            {
+                data: 'updated_by'
+            },
+            {
+                data: 'updated_at'
             },
             {
                 data: 'action'
             },
         ],
         columnDefs: [{
-                targets: [0, 6], // column index (start from 0)
+                targets: [0, 14], // column index (start from 0)
                 orderable: false, // set orderable false for selected columns
             },
             {
                 className: "selectbox",
-                targets: [0]
+                targets: [0],
             },
             {
                 className: "BlockNumber",
-                "targets": [1]
+                "targets": [2],
             },
             {
                 width: "5%",
-                targets: [6]
-            }
+                targets: [14]
+            },
+
         ],
     });
-    table.columns.adjust()
-}
-//SELECT CHECKALL
+    table.columns.adjust();
+};
 $("#select_all").click(function(e) {
     // console.log("Hi")
     //   var row=$(this).closest('tr')
     if ($(this).is(":checked")) {
-        $("#dataTable-flats tbody tr").addClass("selected table-secondary");
+        $("#dataTable-allotments tbody tr").addClass("selected table-secondary");
         $(".selectrow").attr("checked", true);
     } else {
         $(".selectrow").attr("checked", false);
-        $("#dataTable-flats tbody tr").removeClass("selected table-secondary");
+        $("#dataTable-allotments tbody tr").removeClass("selected table-secondary");
     }
     //   row.toggleClass('selected table-secondary')
-})
-//action modal part
+});
+
 function loadModalCurrent() {
     var target_row = $(this).closest("tr"); // this line did the trick
     // console.log(target_row)
     // var btn=$(this);
-    var aPos = $("#dataTable-flats").dataTable().fnGetPosition(target_row.get(0));
-    var areaData = $('#dataTable-flats').DataTable().row(aPos).data()
+    var aPos = $("#dataTable-allotments").dataTable().fnGetPosition(target_row.get(0));
+    var areaData = $('#dataTable-allotments').DataTable().row(aPos).data()
     // console.log("AreaData"+areaData);
     var json_areaData = JSON.stringify(areaData)
     // console.log("Json Area data modal: "+json_areaData)
     $.ajax({
         type: "POST",
-        url: "includes/loadInfo/loadmodal_flats.php",
-        // data: form_serialize, 
+        url: "includes/loadInfo/loadmodal_allotments.php",
+        // data: form_serialize,
         // dataType: "json",
         data: json_areaData,
         success: function(output) {
@@ -375,27 +379,27 @@ function loadModalCurrent() {
             $(document).on('hidden.bs.modal', '#update-del-modal', function() {
                 $("#update-del-modal").remove();
             });
-            $('#delete_flats').submit(function(e) {
+            $('#delete_allotments').submit(function(e) {
                 e.preventDefault();
                 var form = $(this);
                 var form_serialize = form.serializeArray(); // serializes the form's elements.
                 form_serialize.push({
-                    name: $("#delete_flats_btn").attr('name'),
-                    value: $("#delete_flats_btn").attr('value')
+                    name: $("#delete_allotments_btn").attr('name'),
+                    value: $("#delete_allotments_btn").attr('value')
                 });
                 // alert('hi');
                 console.log(form_serialize);
-                $("#delete_flats_btn").text("Deleting...");
-                $("#delete_flats_btn").attr("disabled", true);
+                $("#delete_allotments_btn").text("Deleting...");
+                $("#delete_allotments_btn").attr("disabled", true);
                 $.ajax({
                     type: "POST",
-                    url: "includes/queries/flats.php",
+                    url: "includes/queries/allotments.php",
                     data: form_serialize,
                     success: function(data) {
                         //    alert(data); // show response from the php script.
-                        $("#delete_flats_btn").text("Deleted Successfully");
+                        $("#delete_allotments_btn").text("Deleted Successfully");
                         var row = $("#update-del-modal").closest('tr');
-                        var aPos = $("#dataTable-flats").dataTable().fnGetPosition(
+                        var aPos = $("#dataTable-allotments").dataTable().fnGetPosition(
                             row.get(0));
                         $('#update-del-modal').modal('hide');
                         $('body').removeClass('modal-open');
@@ -408,80 +412,88 @@ function loadModalCurrent() {
                     }
                 });
             });
-            $('#update_flats').submit(function(e) {
-                update_flats(e);
+            $('#update_allotments').submit(function(e) {
+                update_allotments(e);
                 // $('#update-del-modal').modal('hide');
             });
         }
     });
-}
+};
 
-$("#filter_flats_form").submit(function(e) {
+function update_allotments(e) {
     e.preventDefault();
-    console.log("hi");
-    $('#dataTable-flats').DataTable().ajax.reload();
-    $("#exampleModalCenter1").modal("hide")
-})
-
-function update_flats(e) {
-    e.preventDefault();
-    var form = $('#update_flats');
+    var form = $('#update_allotments');
     var form_serialize = form.serializeArray(); // serializes the form's elements.
     // console.log(form_serialize)
     form_serialize.push({
-        name: $("#update_flats_btn").attr('name'),
-        value: $("#update_flats_btn").attr('value')
+        name: $("#update_allotments_btn").attr('name'),
+        value: $("#update_allotments_btn").attr('value')
     });
-    $("#update_flats_btn").text("Updating...");
-    $("#update_flats_btn").attr("disabled", true);
+    $("#update_allotments_btn").text("Updating...");
+    $("#update_allotments_btn").attr("disabled", true);
     $.ajax({
         type: "POST",
-        url: "includes/queries/flats.php",
+        url: "includes/queries/allotments.php",
         data: form_serialize,
         success: function(data) {
             // alert(data); // show response from the php script.
             // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
-                    '*This data already exists! Please change the Block or flat value');
-                $("#update_flats_btn").text("Update");
-                $("#update_flats_btn").attr("disabled", false);
+                    '*This data already exists! Please change the Block or flat number value');
+                $('#error_record').addClass('text-danger');
+                $("#update_allotments_btn").text("Update");
+                $("#update_allotments_btn").attr("disabled", false);
             } else {
-                $("#update_flats_btn").text("Updated Successfully");
-                $("#update_flats_btn").removeClass("btn-primary");
-                $("#update_flats_btn").addClass("btn-success");
+                $("#update_allotments_btn").text("Updated Successfully");
+                $("#update_allotments_btn").removeClass("btn-primary");
+                $("#update_allotments_btn").addClass("btn-success");
                 var row = $("#update-del-modal").closest('tr');
-                var aPos = $("#dataTable-flats").dataTable().fnGetPosition(row.get(0));
-                var temp = $("#dataTable-flats").DataTable().row(aPos).data();
+                var aPos = $("#dataTable-allotments").dataTable().fnGetPosition(row.get(0));
+                var temp = $("#dataTable-allotments").DataTable().row(aPos).data();
                 // console.log(temp)
-                // console.log("Hi ", form_serialize)
+                console.log("Hi", form_serialize)
+                //temp['blocknoold']
                 temp['BlockNumber'] = form_serialize[0].value; //new values
-                temp['FlatNumber'] = form_serialize[1].value; //new values
-                temp['FlatType'] = form_serialize[6].value;
-                temp['Floor'] = form_serialize[2].value;
-                temp['Maintenance'] = form_serialize[3].value; //new values
-                //temp['updated_at'] = date("Y-m-d H:i:s");
+                //temp['allotments'] = form_serialize[4].value; //new values
+                temp['FlatNumber'] = form_serialize[2].value; //new values
+                temp['isRent'] = form_serialize[4].value;
+                temp['record_id'] = form_serialize[5].value;
+                //temp['RenteeName'] = form_serialize[4].value;
+                //temp['RenteeEmail'] = form_serialize[5].value;
+                //temp['RenteeContactNumber'] = form_serialize[6].value;
+                //temp['RenteeAlternateContactNumber'] = form_serialize[7].value;
+                //temp['RenteeMemberCount'] = form_serialize[8].value;
+                //temp['UpdatedAt'] = form_serialize[8].value;
                 // temp['Updatedby'] = $_SESSION['username'];
-                $('#dataTable-flats').dataTable().fnUpdate(temp, aPos, undefined, false);
+                //temp['Updatedby'] = 'Admin1';
+                $('#dataTable-allotments').dataTable().fnUpdate(temp, aPos, undefined, false);
                 $('.action-btn').off('click')
                 $('.action-btn').on('click', loadModalCurrent)
-                // $("#dataTable-flats").DataTable().row(aPos).draw(false);
+                // $("#dataTable-allotments").DataTable().row(aPos).draw(false);
                 $('#error_record').remove();
             }
         }
     });
 }
 
+$("#filter_allotments_form").submit(function(e) {
+    e.preventDefault();
+    console.log("hi");
+    $('#dataTable-allotments').DataTable().ajax.reload();
+    $("#exampleModalCenter1").modal("hide")
+});
 
 $("#delete_selected_response_btn").click(function(e) {
-    alert("You have selected " + $("#dataTable-flats tbody tr.selected").length + " record(s) for deletion");
-    var delete_rows = $("#dataTable-flats").DataTable().rows('.selected').data()
+    alert("You have selected " + $("#dataTable-allotments tbody tr.selected").length +
+        " record(s) for deletion");
+    var delete_rows = $("#dataTable-allotments").DataTable().rows('.selected').data()
     var delete_data = {}
     for (var i = 0; i < delete_rows.length; i++) {
-        // console.log("delete:"+delete_rows[i].FlatNumber)
+        // console.log("delete:"+delete_rows[i].FlatSeries)
         baseData = {}
         baseData['block'] = delete_rows[i].BlockNumber
-        baseData['flatnumber'] = delete_rows[i].FlatNumber
+        baseData['oname'] = delete_rows[i].OwnerName
         delete_data[i] = baseData
         // console.log("Base Data:"+baseData);
     }
@@ -492,25 +504,22 @@ $("#delete_selected_response_btn").click(function(e) {
     // console.log("Actual Data:"+actual_delete_data_json)
     $.ajax({
         type: "POST",
-        url: "includes/queries/delete_multiple_flats.php",
+        url: "includes/queries/delete_multiple_allotments.php",
         data: actual_delete_data_json,
         success: function(data) {
-            // console.log("Returned data: "+data)
-            $("#dataTable-flats").DataTable().draw(false);
+            //console.log("Returned data: " + data)
+            $("#dataTable-allotments").DataTable().draw(false);
         }
     })
-})
+});
+
 
 $("#clear-filters").click(function(e) {
-    $('#filter_flats_form').trigger('reset');
-    $('#dataTable-flats').DataTable().ajax.reload(false);
+    $('#filter_allotments_form').trigger('reset');
+    $('#dataTable-allotments').DataTable().ajax.reload(false);
 });
 </script>
-
-
 <?php
-
 include './includes/shared/footer.php';
 include './includes/shared/scripts.php';
-
 ?>
