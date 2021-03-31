@@ -13,9 +13,13 @@ if (isset($_POST['addallotment-btn'])) {
     $oacontact = mysqli_escape_string($con, $_POST['oacontact']);
     $oemail = mysqli_escape_string($con, $_POST['oemail']);
     $omembers = mysqli_escape_string($con, $_POST['omembers']);
-    echo $_POST['isRent'];
-    $isRent = mysqli_escape_string($con, $_POST['isRent']);
-    echo '<script>console.log($isRent)</script>';
+    $isRent = 0;
+    // echo $_POST['isRent'];
+    if(isset($_POST['isRent'])){
+        $isRent = mysqli_escape_string($con, $_POST['isRent']);
+    }
+    echo $isRent;
+    // echo '<script>console.log($isRent)</script>';
     $rname = mysqli_escape_string($con, $_POST['rname']);
     $rcontact = mysqli_escape_string($con, $_POST['rcontact']);
     $racontact = mysqli_escape_string($con, $_POST['racontact']);
@@ -29,8 +33,7 @@ if (isset($_POST['addallotment-btn'])) {
 
     $check_query = "SELECT * from allotments where BlockNumber='" . $block . "' AND FlatNumber=" . $fno . ";";
     $check_res = mysqli_query($con, $check_query);
-
-    if (mysqli_num_rows($check_res) != 0) {
+    if (mysqli_num_rows($check_res) > 0) {
         $_SESSION['error_message'] = "<strong>Failure!</strong> Record already exists!";
         header("Location: ../../add_allotments.php");
         exit();
@@ -46,17 +49,20 @@ if (isset($_POST['addallotment-btn'])) {
             $_SESSION['error_message'] = "<strong>Failure!</strong> Flat does not exist !";
             header("Location: ../../add_allotments.php");
         } else {
-            $flatid = mysqli_query($con, "SELECT FlatID from flats where FlatNumber = '$fno'");
+            $res2 = mysqli_query($con, "SELECT FlatID from flats where FlatNumber = '$fno'");
+            $row2 = mysqli_fetch_assoc($res2);
+            $flatid = $row2['FlatID'];
             if ($isRent == 1) {
                 if (strlen($rcontact) != 10 || strlen($racontact) != 10) {
                     $_SESSION['error_message'] = "<strong>Failure!</strong> Contact number should be of length 10 !";
                     header("Location: ../../add_allotments.php");
+                    exit();
                 } else {
-                    echo '<script>console.log($isRent)</script>';
+                    echo $isRent;
 
                     // store in the database; check if error doesnt occur while storing
-                    $query = "INSERT INTO allotments(`AllotmentID`,`FlatID`,`FlatNumber`, `BlockNumber`, `OwnerName`, `OwnerEmail`, `OwnerContactNumber`, `OwnerAlternateContactNumber`, `OwnerMemberCount`,`isRent`, `RenteeName`, `RenteeEmail`, `RenteeContactNumber`, `RenteeAlternateContactNumber`, `RenteeMemberCount`,   , `updated_by`, `updated_at`) VALUES ('' ,'$flatid','$fno', '$block' , '$oname', '$oemail', '$ocontact', '$oacontact','$omembers', '$isRent', '$rname', '$remail', '$rcontact', '$racontact','$rmembers','$updated_by','$updated_at')";
-                    echo '<script>console.log($query)</script>';
+                    $query = "INSERT INTO allotments(`AllotmentID`,`FlatID`,`FlatNumber`, `BlockNumber`, `OwnerName`, `OwnerEmail`, `OwnerContactNumber`, `OwnerAlternateContactNumber`, `OwnerMemberCount`,`isRent`, `RenteeName`, `RenteeEmail`, `RenteeContactNumber`, `RenteeAlternateContactNumber`, `RenteeMemberCount`,  `updated_by`, `updated_at`) VALUES ('' ,'$flatid','$fno', '$block' , '$oname', '$oemail', '$ocontact', '$oacontact','$omembers', '$isRent', '$rname', '$remail', '$rcontact', '$racontact','$rmembers','$updated_by','$updated_at')";
+                    echo $query;
                     mysqli_query($con, $query);
                 }
             } else {
@@ -64,11 +70,10 @@ if (isset($_POST['addallotment-btn'])) {
                 echo '<script>console.log($isRent)</script>';
                 // store in the database; check if error doesnt occur while storing
                 $query = "INSERT INTO allotments(`AllotmentID`,`FlatID`,`FlatNumber`, `BlockNumber`, `OwnerName`, `OwnerEmail`, `OwnerContactNumber`, `OwnerAlternateContactNumber`, `OwnerMemberCount`,`isRent`, `RenteeName`, `RenteeEmail`, `RenteeContactNumber`, `RenteeAlternateContactNumber`, `RenteeMemberCount`, `updated_by`, `updated_at`) VALUES ('' ,'$flatid','$fno', '$block' , '$oname', '$oemail', '$ocontact', '$oacontact','$omembers', '$isRent', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL','$updated_by','$updated_at')";
-                echo '<script>console.log($query)</script>';
+                // echo '<script>console.log($query)</script>';
                 mysqli_query($con, $query);
             }
-            //Start the session if already not started.
-            $_SESSION['success_message'] = "<strong>Success!</strong> Area added successfully!";
+            $_SESSION['success_message'] = "<strong>Success!</strong> Allotment added successfully!";
 
             // redirect to the form page again with success message or to the datatable page
             header("Location: ../../add_allotments.php");

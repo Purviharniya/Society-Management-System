@@ -101,8 +101,8 @@ include 'includes/shared/topbar.php';
                         </div>
                         <div class=" form-check">
                             <label class="form-check-label" for="isRent">
-                                <input class="form-check-input" type="checkbox" onclick="myFunction()" id="isRent"
-                                    name="isRent">
+                                <input class="form-check-input" type="checkbox" value="1" id="isRent" name="isRent"
+                                    onclick="myFunction()">
                                 Flat on rent?
                             </label>
                             <!--  <script>
@@ -164,7 +164,7 @@ function myFunction() {
 
     // If the checkbox is checked, display the output text
     if (checkBox.checked == true) {
-        checkBox.value = 1;
+        // checkBox.value = 1;
         console.log(checkBox.value);
         text.style.display = "block";
     } else {
