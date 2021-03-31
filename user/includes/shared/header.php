@@ -3,6 +3,8 @@
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
  include('../config.php');
+ $_SESSION['flatno'] = '801';
+ $_SESSION['blockno'] = 'A'; //comment later
 // if(isset($_SESSION['flatno']) && isset($_SESSION['role']) && $_SESSION['role]=='user'){
 //     $username = $_SESSION['username'];
 //     $role = $_SESSION['role'];
@@ -31,6 +33,8 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../vendor/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../vendor/css/shoutbox.css" rel="stylesheet">
+
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.bootstrap4.min.css" rel="stylesheet">

@@ -10,7 +10,7 @@ include('../config.php');
 // else{
 //     header("Location: ../login.php");
 // }
-
+$_SESSION['username']='Admin1';
 ?>
 <!DOCTYPE html>
 <html lang="en">

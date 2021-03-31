@@ -4,6 +4,12 @@
 
 <?php //SELECT shoutbox.FlatID, ShoutBoxID, Chat, FlatNumber, BlockNumber from shoutbox inner join flats on shoutbox.FlatID=flats.FlatID;
  
+ $sql = "SELECT FlatID from flats where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}'";
+ $res=mysqli_query($con,$sql);
+
+ $row = mysqli_fetch_assoc($res);
+$_SESSION['flatid'] = $row['FlatID'];
+ 
  
  ?>
 
@@ -18,7 +24,7 @@
                         <header class="sb-header rounded-top d-flex align-items-center">
                             <div class="mr-2 d-lg-inline profile-icon-parent"> <i class="fas fa-user fa-fw"></i></div>
                             <div style="font-size:1.5rem;">
-                                <?php echo $_SESSION['username']; ?>
+                                <?php echo $_SESSION['blockno'] . "-" . $_SESSION['flatno']; ?>
                             </div>
                         </header>
                         <div class="text-container-sb">
@@ -90,7 +96,7 @@
                         <form action="" class="typing-area">
                             <input type="text" placeholder="Type a message...." name="shout-msg" id="shout-msg">
                             <input type="hidden" name="shout-owner" id="shout-owner"
-                                value="<?php echo $_SESSION['username'];?>">
+                                value="<?php echo $_SESSION['flatid'];?>">
                             <button type="submit" name="submit-shout" id="submit-shout"><i class="fa fa-telegram">
                                 </i></button>
                         </form>
@@ -156,7 +162,6 @@ chatbox = document.querySelector(".text-container-sb");
 setInterval(function() {
     var name = $('#shout-owner').val();
     var datastring = 'name=' + name;
-
     $.ajax({
         type: "POST",
         url: "includes/handlers/load_messages.php",
