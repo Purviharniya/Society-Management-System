@@ -8,7 +8,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $block = mysqli_escape_string($con, $data['BlockNumber']);
 $flatno = mysqli_escape_string($con, $data['FlatNumber']);
 $vname = mysqli_escape_string($con, $data['VisitorName']);
-$result = mysqli_query($con, "select * from visitors WHERE BlockNumber='$block' and FlatNumber='$flatno' and VisitorName='$vname'");//VisitorID,BlockNumber,FlatNumber,VisitorName,VisitorContactNo,WhomToMeet,ReasonToMeet
+$result = mysqli_query($con, "select * from visitors WHERE BlockNumber='$block' and FlatNumber='$flatno' and VisitorName='$vname'"); //VisitorID,BlockNumber,FlatNumber,VisitorName,VisitorContactNo,WhomToMeet,ReasonToMeet
 $row = mysqli_fetch_assoc($result);
 $vcontact = $row['VisitorContactNo'];
 $whomTomeet = $row['WhomToMeet'];
@@ -86,17 +86,17 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label for="ftyp"><b>Whom to Meet/b></label>
+                                            <label for="ftyp"><b>Whom to Meet</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="Whom to Meet" name="whom_new" value="' . $whomTomeet . '">
                                         </div>
-                                        <input type="hidden" name="whom_old" value="' . $whomTomeet .'">
+                                        <input type="hidden" name="whom_old" value="' . $whomTomeet . '">
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label for="ftyp"><b>Reason to Meet/b></label>
+                                            <label for="ftyp"><b>Reason to Meet</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="Reason to Meet" name="reason_new" value="' . $reasonTomeet . '">
                                         </div>
-                                        <input type="hidden" name="reason_old" value="' . $reasonTomeet .'">
+                                        <input type="hidden" name="reason_old" value="' . $reasonTomeet . '">
                                     </div>
                                     
                                     <input type="hidden" name="visitor_id" value="' . $visitorID . '">

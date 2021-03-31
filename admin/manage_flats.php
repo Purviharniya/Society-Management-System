@@ -284,7 +284,7 @@ function loadCurrent() {
             $(".selectbox").click(function(e) {
                 var row = $(this).closest('tr')
                 var checkbox = $(this).find('input');
-                console.log(checkbox);
+                //console.log(checkbox);
                 checkbox.attr("checked", !checkbox.attr("checked"));
                 row.toggleClass('selected table-secondary')
                 if ($("#dataTable-flats tbody tr.selected").length != $(
@@ -384,7 +384,7 @@ function loadModalCurrent() {
                     value: $("#delete_flats_btn").attr('value')
                 });
                 // alert('hi');
-                console.log(form_serialize);
+                //console.log(form_serialize);
                 $("#delete_flats_btn").text("Deleting...");
                 $("#delete_flats_btn").attr("disabled", true);
                 $.ajax({
@@ -418,7 +418,7 @@ function loadModalCurrent() {
 
 $("#filter_flats_form").submit(function(e) {
     e.preventDefault();
-    console.log("hi");
+    //console.log("hi");
     $('#dataTable-flats').DataTable().ajax.reload();
     $("#exampleModalCenter1").modal("hide")
 })
