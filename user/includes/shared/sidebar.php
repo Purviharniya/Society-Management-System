@@ -104,7 +104,7 @@
         </a>
         <div id="collapsePages8" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="add_security.php">View Security</a>
+                <a class="collapse-item" href="view_security.php">View Security</a>
             </div>
         </div>
     </li>
