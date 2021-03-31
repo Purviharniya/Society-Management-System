@@ -343,15 +343,20 @@ function loadModalCurrent() {
                     url: "includes/queries/raise_complaint.php",
                     data: form_serialize,
                     success: function(data) {
-                        //    alert(data); // show response from the php script.
-                        $("#delete_complaints_btn").text("Deleted Successfully");
-                        var row = $("#update-del-modal").closest('tr');
-                        var aPos = $("#dataTable-complaints").dataTable()
-                            .fnGetPosition(
-                                row.get(0));
-                        $('#update-del-modal').modal('hide');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
+                        // alert(data); // show response from the php script.
+                        if (data == "Status_0") {
+                            $("#delete_complaints_btn").text("Can not be deleted");
+                            $('.modal-backdrop').remove();
+                        } else {
+                            $("#delete_complaints_btn").text("Deleted Successfully");
+                            var row = $("#update-del-modal").closest('tr');
+                            var aPos = $("#dataTable-complaints").dataTable()
+                                .fnGetPosition(
+                                    row.get(0));
+                            $('#update-del-modal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                        }
                         // row.remove();
                         loadCurrent();
 

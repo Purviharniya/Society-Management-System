@@ -55,6 +55,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         </label>
                                         <br>
                                         <input type="hidden" name="record_id" value="' . $requestID . '">
+                                        <input type="hidden" name="status" value="' . $status . '">
                                         <div class="row">
                                             <div class="col-md-6 text-left">
                                                 <button type="submit" class="btn btn-primary" id="delete_complaints_btn" name="delete_complaints">Yes</button>

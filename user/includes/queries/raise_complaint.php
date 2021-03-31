@@ -55,10 +55,16 @@ elseif(isset($_POST['delete_complaints'])){
     $flatno ='802';
     $contact = '9029996333'; 
     $block = 'A';
-    
+    $status = mysqli_escape_string($con,$_POST['status']);
+    if($status=='Unresolved'){
     $query = "DELETE from complaints where RequestID='$recordID' and BlockNumber='$block' and FlatNumber='$flatno' and ContactNumber=' $contact'";
     // echo $query;
     mysqli_query($con,$query);
+    exit();
+    }
+    else{
+        echo "Status_0";
+    }
     exit();
 }
 

@@ -37,7 +37,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                 <form method="POST" id="update_complaints">
                                     <div class="form-row mt-4">
                                         <div class="form-group col-md-12">
-                                            <label><i class="text-danger mx-auto">*The admin shall select the status and provide his remark.</i></label>
+                                            <label><i class="text-danger mx-auto">*The admin can only view resolved complaints.</i></label>
                                             <div class="table-responsive">  
                                                 <table class="table table-bordered">
                                                     <tbody>
