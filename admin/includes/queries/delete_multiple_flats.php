@@ -9,7 +9,6 @@ if ($data['type'] == 'current') {
     // echo var_dump($delete_data);
     foreach ($delete_data as $key => $val) {
         // echo var_dump($val);
-
         $sql = "DELETE from flats where BlockNumber='" . $val['block'] . "' AND FlatNumber=" . $val['flatnumber'] . ";";
         echo $sql;
         mysqli_query($con, $sql);

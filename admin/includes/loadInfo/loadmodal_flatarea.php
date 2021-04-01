@@ -86,7 +86,23 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="ftyp"><b>Flat Type</b></label>
-                                            <input type="text" class="form-control" required="required" placeholder="New Faculty Code" name="flattype_new" value="' . $ftype . '">
+                                            <select class="form-control" id="flattype_new" name="flattype_new">
+                                                <option value="1BHK" ';  
+                                                $ftype=='1BHK' ?  print("selected"): "";
+                                                echo' > 1BHK</option>
+                                                <option value="2BHK" ';  
+                                                $ftype=='2BHK' ?  print("selected"): "";
+                                                echo' > 2BHK </option>
+                                                <option value="3BHK" ';  
+                                                $ftype=='3BHK' ?  print("selected"): "";
+                                                echo' > 3BHK </option>
+                                                <option value="4BHK" ';  
+                                                $ftype=='4BHK' ?  print("selected"): "";
+                                                echo' > 4BHK </option>
+                                                <option value="other" ';  
+                                                $ftype=='other' ?  print("selected"): "";
+                                                echo' > other </option>
+                                            </select>
                                         </div>
                                         <input type="hidden" name="timestamp" value="' . $date .'">
                                     </div>
