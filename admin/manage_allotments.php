@@ -136,11 +136,13 @@ include 'includes/shared/topbar.php';
                                 <th>Owner Email</th>
                                 <th>Owner Contact Number</th>
                                 <th>Owner Alternate Contact Number</th>
+                                <th>Owner Member Count </th>
                                 <th>onRent</th>
                                 <th>Rentee Name</th>
                                 <th>Rentee Email</th>
                                 <th>Rentee Contact Number</th>
                                 <th>Rentee Alternate Contact Number</th>
+                                <th>Rentee Member Count </th>
                                 <th>Updated By</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
@@ -155,11 +157,13 @@ include 'includes/shared/topbar.php';
                                 <th>Owner Email</th>
                                 <th>Owner Contact Number</th>
                                 <th>Owner Alternate Contact Number</th>
+                                <th>Owner Member Count </th>
                                 <th>onRent</th>
                                 <th>Rentee Name</th>
                                 <th>Rentee Email</th>
                                 <th>Rentee Contact Number</th>
                                 <th>Rentee Alternate Contact Number</th>
+                                <th>Rentee Member Count </th>
                                 <th>Updated By</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
@@ -234,7 +238,7 @@ function loadCurrent() {
                 className: "btn btn-outline-primary  mx-2",
                 action: newExportAction,
                 exportOptions: {
-                    columns: [1, 2, 3, 4, 5, 6, 7]
+                    columns: [1, 2, 3, 4, 5, 6, 7, 8]
                 },
             },
             {
@@ -244,7 +248,7 @@ function loadCurrent() {
                 className: "btn btn-outline-primary  mx-2",
                 action: newExportAction,
                 exportOptions: {
-                    columns: [1, 3, 8, 9, 10, 11, 12, 13]
+                    columns: [1, 2, 3, 8, 9, 10, 11, 12, 13]
                 },
             },
         ],
@@ -298,6 +302,9 @@ function loadCurrent() {
                 data: 'OwnerAlternateContactNumber'
             },
             {
+                data: 'OwnerMemberCount'
+            },
+            {
                 data: 'isRent'
             },
             {
@@ -312,7 +319,9 @@ function loadCurrent() {
             {
                 data: 'RenteeAlternateContactNumber'
             },
-
+            {
+                data: 'RenteeMemberCount'
+            },
             {
                 data: 'updated_by'
             },
@@ -324,7 +333,7 @@ function loadCurrent() {
             },
         ],
         columnDefs: [{
-                targets: [0, 14], // column index (start from 0)
+                targets: [0, 16], // column index (start from 0)
                 orderable: false, // set orderable false for selected columns
             },
             {
@@ -333,17 +342,19 @@ function loadCurrent() {
             },
             {
                 className: "BlockNumber",
-                "targets": [2],
+                targets: [2],
             },
             {
                 width: "5%",
-                targets: [14]
+                targets: [16]
             },
 
         ],
     });
     table.columns.adjust();
 };
+
+
 $("#select_all").click(function(e) {
     // console.log("Hi")
     //   var row=$(this).closest('tr')
@@ -388,7 +399,7 @@ function loadModalCurrent() {
                     value: $("#delete_allotments_btn").attr('value')
                 });
                 // alert('hi');
-                console.log(form_serialize);
+                // console.log(form_serialize);
                 $("#delete_allotments_btn").text("Deleting...");
                 $("#delete_allotments_btn").attr("disabled", true);
                 $.ajax({
@@ -396,7 +407,7 @@ function loadModalCurrent() {
                     url: "includes/queries/allotments.php",
                     data: form_serialize,
                     success: function(data) {
-                        //    alert(data); // show response from the php script.
+                        // alert(data); // show response from the php script.
                         $("#delete_allotments_btn").text("Deleted Successfully");
                         var row = $("#update-del-modal").closest('tr');
                         var aPos = $("#dataTable-allotments").dataTable().fnGetPosition(
@@ -424,7 +435,7 @@ function update_allotments(e) {
     e.preventDefault();
     var form = $('#update_allotments');
     var form_serialize = form.serializeArray(); // serializes the form's elements.
-    // console.log(form_serialize)
+    console.log(form_serialize)
     form_serialize.push({
         name: $("#update_allotments_btn").attr('name'),
         value: $("#update_allotments_btn").attr('value')
@@ -437,14 +448,37 @@ function update_allotments(e) {
         data: form_serialize,
         success: function(data) {
             // alert(data); // show response from the php script.
+            // alert(jQuery.type(data)); //check dtype
             // console.log(data);
-            if (data === "Exists_record") {
-                $('#error_record').text(
-                    '*This data already exists! Please change the Block or flat number value');
-                $('#error_record').addClass('text-danger');
+            // data2 = data.split("#");
+            // alert(data2);
+            if (data === "Allotment_0") { //if allotment already exists
+                $('#allotment_error_record').text(
+                    '*Allotment for this flat already exists!');
+                $('#allotment_error_record').addClass('text-danger');
                 $("#update_allotments_btn").text("Update");
                 $("#update_allotments_btn").attr("disabled", false);
-            } else {
+                $('#flat_error_record').text('');
+                $('#other_error_record').text('');
+            } else if (data === "Flat_0") { // if flat does not exist
+                $('#flat_error_record').text(
+                    '*This flat doesn\'t exist! Please add the flat in the Add flats section');
+                $('#allotment_error_record').text('');
+                $('#other_error_record').text('');
+                $('#flat_error_record').addClass('text-danger');
+                $("#update_allotments_btn").text(
+                    "Update");
+                $("#update_allotments_btn").attr("disabled", false);
+            } else if (data.includes("#")) { //if fields are empty or with invalid values
+                data2 = data.split("#");
+                // alert(data2);
+                $('#other_error_record').text(data2.slice(1, data2.length));
+                $('#other_error_record').addClass('text-danger');
+                $("#update_allotments_btn").text("Update");
+                $("#update_allotments_btn").attr("disabled", false);
+                $('#flat_error_record').text('');
+                $('#allotment_error_record').text('');
+            } else { //updated the record successfully
                 $("#update_allotments_btn").text("Updated Successfully");
                 $("#update_allotments_btn").removeClass("btn-primary");
                 $("#update_allotments_btn").addClass("btn-success");
@@ -452,26 +486,33 @@ function update_allotments(e) {
                 var aPos = $("#dataTable-allotments").dataTable().fnGetPosition(row.get(0));
                 var temp = $("#dataTable-allotments").DataTable().row(aPos).data();
                 // console.log(temp)
-                console.log("Hi", form_serialize)
-                //temp['blocknoold']
+                // console.log("Hi", form_serialize)
                 temp['BlockNumber'] = form_serialize[0].value; //new values
-                //temp['allotments'] = form_serialize[4].value; //new values
                 temp['FlatNumber'] = form_serialize[2].value; //new values
-                temp['isRent'] = form_serialize[4].value;
-                temp['record_id'] = form_serialize[5].value;
-                //temp['RenteeName'] = form_serialize[4].value;
-                //temp['RenteeEmail'] = form_serialize[5].value;
-                //temp['RenteeContactNumber'] = form_serialize[6].value;
-                //temp['RenteeAlternateContactNumber'] = form_serialize[7].value;
-                //temp['RenteeMemberCount'] = form_serialize[8].value;
-                //temp['UpdatedAt'] = form_serialize[8].value;
-                // temp['Updatedby'] = $_SESSION['username'];
-                //temp['Updatedby'] = 'Admin1';
+                temp['OwnerName'] = form_serialize[4].value;
+                temp['OwnerEmail'] = form_serialize[6].value;
+                temp['OwnerContactNumber'] = form_serialize[8].value;
+                temp['OwnerAlternateContactNumber'] = form_serialize[10].value;
+                temp['OwnerMemberCount'] = form_serialize[12].value;
+                temp['isRent'] = form_serialize[14].value === '1' ? 'Yes' : 'No';
+                if (form_serialize[14].value === '1') {
+                    temp['RenteeName'] = form_serialize[16].value;
+                    temp['RenteeEmail'] = form_serialize[18].value;
+                    temp['RenteeContactNumber'] = form_serialize[20].value;
+                    temp['RenteeAlternateContactNumber'] = form_serialize[22].value;
+                    temp['RenteeMemberCount'] = form_serialize[24].value;
+                } else {
+                    temp['RenteeName'] = temp['RenteeEmail'] = temp['RenteeContactNumber'] = temp[
+                        'RenteeAlternateContactNumber'] = temp['RenteeMemberCount'] = '-';
+                }
+                temp['updated_at'] = form_serialize[25].value;
+                temp['updated_by'] = form_serialize[26].value;
+
                 $('#dataTable-allotments').dataTable().fnUpdate(temp, aPos, undefined, false);
                 $('.action-btn').off('click')
                 $('.action-btn').on('click', loadModalCurrent)
-                // $("#dataTable-allotments").DataTable().row(aPos).draw(false);
-                $('#error_record').remove();
+                $('#flat_error_record').remove();
+                $('#allotment_error_record').remove();
             }
         }
     });

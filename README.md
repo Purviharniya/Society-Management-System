@@ -58,3 +58,6 @@ To modify:
 3. fix this error in manage flats: 
 Notice: Trying to access array offset on value of type null in C:\xampp\htdocs\Society-Management-System\admin\includes\loadInfo\loadmodal_flats.php on line 19
 4. Manage flats- remove maintenance field from update modal as it cant be changed(will always default to rate*area)
+
+
+5. If flat on rent, add rentee contact to enable logging in -->> ??
