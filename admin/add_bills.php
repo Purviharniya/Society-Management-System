@@ -49,15 +49,14 @@ include 'includes/shared/topbar.php';
                         <h4 class="font-weight-bold text-primary">Add Bill</h4>
                     </div>
 
-                    <form action="includes/queries/addbill.php" method="POST" autocomplete="off">
-
+                    <form action="add_bill.php" method="POST" autocomplete="off" id="search_allotment_form">
                         <div class="form-group">
                             <label for="block">Block:</label>
                             <select class="form-control" id="block_select" name="block_select" required>
                                 <option value="" selected> Select a Block</option>
                                 <?php 
                                 
-                                $sql = "SELECT distinct(BlockNumber) from flats";
+                                $sql = "SELECT distinct(BlockNumber) from allotments";
                                 $res = mysqli_query($con,$sql);
 
                                 while($row= mysqli_fetch_assoc($res)){
@@ -73,10 +72,10 @@ include 'includes/shared/topbar.php';
                             <select class="form-control" id="flat_select" name="flat_select" required>
                                 <option value="" selected> Select a Flat</option>
                             </select>
-                            <small id="flatnoHelp" class="form-text text-muted">Select the flat Number (Make
-                                dropdown)</small>
+                            <small id="flatnoHelp" class="form-text text-muted">Select the flat Number</small>
                         </div>
-                        <button type="submit" class="btn btn-themeblack" name='addflatarea-btn'>Search</button>
+                        <button type="submit" class="btn btn-themeblack" id="searchallotment-btn"
+                            name='searchallotment-btn'>Search</button>
                         <button type="reset" class="btn btn-themeblack">Reset</button>
                     </form>
                 </div>
@@ -107,6 +106,18 @@ function getflats() {
     });
 
 }
+
+// $('#search_allotment_form').submit(function(e) {
+//     e.preventDefault();
+//     var form = $(this);
+//     var form_serialize = form.serializeArray(); //get the data 
+//     form_serialize.push({
+//         name: $("#searchallotment-btn").attr('name'),
+//         value: $("#searchallotment-btn").attr('value')
+//     });
+//     console.log(form_serialize)
+//     $("#searchallotment-btn").text("Searching...");
+// });
 </script>
 
 
