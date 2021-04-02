@@ -25,16 +25,16 @@ Add your TODOs here:
 
 -------------- USER -------------------
 
-Bills - 1 page - NC
-Complaints - 4 pages - C
-Visitors - NC
-Security - 1 page (view security guards) - C 
-Meetings - 3 pages - NC
-Shoutbox - 1 page - C
-Report - 1 pages - NC
-Search - 1 pages - NC
-Dashboard - 1 page - NC
-Profile - NC
+1. Bills - 1 page - NC
+2. Complaints - 4 pages - C
+3. Visitors - NC
+4. Security - 1 page (view security guards) - C 
+5. Meetings - 3 pages - NC
+6. Shoutbox - 1 page - C
+7. Report - 1 pages - NC
+8. Search - 1 pages - NC
+9. Dashboard - 1 page - NC
+10. Profile - NC
 
 ---------------- EXTRA ------------------
 
@@ -52,3 +52,4 @@ To modify:
 3. Complete EXCEL IMPORT for all the modules first
 4. For bills, after generating, should we give an option to modify? Because there are no fields except for additional charges
 5. After generating the bill, how will the admin come to know that the users have paid the bill or not
+6. How should we display the bill on the user side, other than mailing a pdf to him. 
