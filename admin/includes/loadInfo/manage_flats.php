@@ -21,7 +21,7 @@ $searchQuery = "1";
 if ($searchValue != '') {
     $searchQuery = "(BlockNumber like '%" . $searchValue . "%' or 
         FlatType like '%" . $searchValue . "%' or 
-        FlatNumber like '%" . $searchValue . "%' or Maintenance like '%" . $searchValue . "%') ";
+        FlatNumber like '%" . $searchValue . "%' ) ";
 }
 
 $filterQuery = "1 ";
@@ -39,9 +39,6 @@ if (isset($_POST['filters'])) {
 
     if (isset($filters['flatnumber'])) {
         $filterQuery .= "&& FlatNumber in(" . "'" . implode("', '", $filters['flatnumber']) . "'" . ")" . " ";
-    }
-    if (isset($filters['maintenance'])) {
-        $filterQuery .= "&& Maintenance in(" . "'" . implode("', '", $filters['maintenance']) . "'" . ")" . " ";
     }
     if (isset($filters['floor'])) {
         $filterQuery .= "&& Floor in(" . "'" . implode("', '", $filters['floor']) . "'" . ")" . " ";
@@ -62,14 +59,20 @@ $totalRecordwithFilter = $records['totalcountfilters'];
 
 ## Fetch records
 
-$sql = "select FlatID,FlatNumber,FlatType,BlockNumber,Maintenance,Floor from flats f WHERE 1 and "
+$sql = "select FlatID,FlatNumber,FlatType,BlockNumber,Floor,FlatAreaID from flats f WHERE 1 and "
     . $searchQuery . "&& (" . $filterQuery . ")" . $orderQuery . " limit " . $row . "," . $rowperpage;
 $areaRecords = mysqli_query($con, $sql);
 $data = array();
 $count = 0;
 $fullname = "";
-while ($row = mysqli_fetch_assoc($areaRecords)) {
 
+while ($row = mysqli_fetch_assoc($areaRecords)) {
+    $faid = $row['FlatAreaID'];
+    $maintenance = mysqli_query($con, "SELECT Ratepsq, FlatArea from flatarea where FlatAreaID = '$faid'");
+    $res = mysqli_fetch_assoc($maintenance);
+    $rate = $res['Ratepsq'];
+    $area = $res['FlatArea'];
+    $m = $rate * $area;
     $data[] = array(
 
         // "select-cbox"=>'<input type="checkbox">',
@@ -80,9 +83,8 @@ while ($row = mysqli_fetch_assoc($areaRecords)) {
         "FlatNumber" => $row['FlatNumber'],
         "BlockNumber" => $row['BlockNumber'],
         "FlatType" => $row['FlatType'],
-        "Maintenance" => $row['Maintenance'],
+        "Maintenance" => $m,
         "Floor" => $row['Floor'],
-        //"updated_at" => $row['updated_at'],
         "action" => '<!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary icon-btn action-btn" >
                     <i class="fas fa-tools"></i>

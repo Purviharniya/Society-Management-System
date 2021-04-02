@@ -13,7 +13,7 @@ $blockno = $_POST['blockno'];
 $db = mysqli_connect('localhost','root','','sms') or 
 die('Error connecting to MySQL server.');
 
-$query = "SELECT * FROM allotments INNER join flats on allotments.FlatID=flats.FlatID WHERE allotments.FlatNumber='{$flatno}' AND ( allotments.ContactNumber = '{$contactno}' OR allotments.AlternateContactNo ='{$contactno}') and flats.BlockNumber='{$blockno}';";
+$query = "SELECT * FROM allotments INNER join flats on allotments.FlatID=flats.FlatID WHERE allotments.FlatNumber='{$flatno}' AND ( allotments.OwnerContactNumber = '{$contactno}' OR allotments.OwnerAlternateContactNumber ='{$contactno}' or allotments.RenteeContactNumber = '{$contactno}' OR allotments.RenteeAlternateContactNumber ='{$contactno}') and flats.BlockNumber='{$blockno}';";
 //echo $query;
 $result = mysqli_query($db, $query); 
 
@@ -40,4 +40,4 @@ $count=mysqli_num_rows($result);
 
 mysqli_close($db);
 
-}?>
+}
