@@ -155,25 +155,25 @@
                 <div class="mr-2 d-lg-inline profile-icon-parent"> <i class="fas fa-user fa-fw"></i></div>
             </a>
             <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"
+                style="background:black;">
+                <a class="dropdown-item" href="#" style="color:white;">
                     <div>
                         <span class="prof-drop-name">Admin Test</span>
-                        <br>
-                        <span class="prof-drop-name">p.h@somaiya.edu</span>
+
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="admin_profile.php" style="color:white;">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     My Profile
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="admin_settings.php" style="color:white;">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Settings
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" style="color:white;">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>

@@ -22,35 +22,62 @@ if (isset($_POST["flat"])) {
     }
     if (is_numeric($fno) && is_numeric($floor) && !is_numeric($block)) {
         if ($error == 0) {
-            //$contactno = mysqli_real_escape_string($con, $_POST["contactno"]);
-            //$econtactno = mysqli_real_escape_string($con, $_POST["econtactno"]);
-
             //extracting the flat series
             $flatseries = $fno - 100 * $floor;
-            $queryforeign = "SELECT * FROM `flatarea` WHERE (FlatSeries = $flatseries and BlockNumber = '$block')";
-            $record = mysqli_query($con, $queryforeign);
-            if ($record) {
-                foreach ($record as $r) {
-                    $flatareaid = $r["FlatAreaID"];
-                    $flatarea = $r["FlatArea"];
-                    $rate = $r["Ratepsq"];
+            //checking if series present in flatarea table
+            $q = mysqli_query($con, "SELECT FlatSeries,BlockNumber from flatarea");
+            $recordd = mysqli_fetch_all($q);
+            $flag = 0;
+            foreach ($recordd as $r) {
+                if ($r['FlatSeries'] == $flatseries && $r['BlockNumber'] == $block) {
+                    $flag = 1;
                 }
-                $maintenance = $flatarea * $rate;
-                $query = "INSERT INTO flats(`FlatID`, `FlatNumber`, `FlatType`, `Maintenance`, `BlockNumber`, `Floor`, `FlatAreaID`) VALUES ('' , '$fno', '$flattype', '$maintenance', '$block', '$floor', '$flatareaid')";
-                mysqli_query($con, $query);
-                $_SESSION['success_message'] = "<strong>Success!</strong> Flat record added successfully!";
-                header("Location: ../../add_flat.php");
-            } else {
-                echo "no record";
             }
+            if ($flag == 1) {
+                $queryforeign = "SELECT * FROM `flatarea` WHERE (FlatSeries = $flatseries and BlockNumber = '$block')";
+                $record = mysqli_query($con, $queryforeign);
+                if ($record) {
+                    foreach ($record as $r) {
+                        $flatareaid = $r["FlatAreaID"];
+                        //$flatarea = $r["FlatArea"];
+                        //$rate = $r["Ratepsq"];
+                    }
+
+                    //$maintenance = $flatarea * $rate;
+                    $query = "INSERT INTO flats(`FlatID`, `FlatNumber`, `FlatType`, `BlockNumber`, `Floor`, `FlatAreaID`) VALUES ('' , '$fno', '$flattype', '$block', '$floor', '$flatareaid')";
+                    mysqli_query($con, $query);
+                    $_SESSION['success_message'] = "<strong>Success!</strong> Flat record added successfully!";
+                    header("Location: ../../add_flat.php");
+                } else {
+                    echo "no record";
+                }
+            } else {
+                $_SESSION['error_message'] = "<strong>Failure!</strong> Flat series not available!";
+                header("Location: ../../add_flat.php");
+            }
+
             /**/
         }
     }
 }
 if (isset($_POST['delete_flats'])) {
     $recordID = mysqli_escape_string($con, $_POST['record_id']);
-    $sql = "DELETE FROM flats WHERE flatID='$recordID'";
+    $sql1 = "DELETE FROM allotments WHERE FlatID='$recordID'";
+    mysqli_query($con, $sql1);
+    $sql2 = "DELETE FROM shoutbox WHERE FlatID='$recordID'";
+    mysqli_query($con, $sql2);
+    $sql3 = "DELETE FROM visitors WHERE FlatID='$recordID'";
+    mysqli_query($con, $sql3);
+    $sql4 = "DELETE FROM complaints WHERE FlatID='$recordID'";
+    mysqli_query($con, $sql4);
+    $sql = "DELETE FROM flats WHERE FlatID='$recordID'";
     mysqli_query($con, $sql);
+    /*
+    $sql = "DELETE FROM bills WHERE FlatID='$recordID'";
+    mysqli_query($con, $sql);    
+    $sql = "DELETE FROM meetings WHERE FlatID='$recordID'";
+    mysqli_query($con, $sql);
+    */
     // header("Location: ../bla.php");
     exit();
 }
@@ -60,7 +87,7 @@ if (isset($_POST['update_flats'])) {
     $block_new = mysqli_escape_string($con, $_POST['blockno_new']);
     $flatnumber_new = mysqli_escape_string($con, $_POST['number_new']);
     $floor_new = mysqli_escape_string($con, $_POST['floor_new']);
-    $rate_new = mysqli_escape_string($con, $_POST['rate_new']);
+    //$rate_new = mysqli_escape_string($con, $_POST['rate_new']);
     $recordID = mysqli_escape_string($con, $_POST['recordID']);
     $flattype_new = mysqli_escape_string($con, $_POST['flattype_new']);
     $flatareaid = mysqli_escape_string($con, $_POST['flatareaID']);
@@ -68,13 +95,12 @@ if (isset($_POST['update_flats'])) {
     // $added_by = $_SESSION['username'];        
     $updated_at = date("Y-m-d H:i:s");
 
-    $check_query = "SELECT * from flats where BlockNumber='$block_new' AND FlatNumber='$flatnumber_new' AND FlatType = '$flattype_new' AND Maintenance='$rate_new' AND FlatAreaID = '$flatareaid' AND Floor='$floor_new';";
-    // echo $check_query;
+    $check_query = "SELECT * from flats where BlockNumber='$block_new' AND FlatNumber='$flatnumber_new' AND FlatType = '$flattype_new' AND FlatAreaID = '$flatareaid' AND Floor='$floor_new';";
     $check_result = mysqli_query($con, $check_query);
     if (mysqli_num_rows($check_result) != 0) {
-        echo "Exists_record";
+        echo "Exists record";
     } else {
-        $sql = "UPDATE flats SET FlatNumber='$flatnumber_new',FlatType='$flattype_new',Maintenance='$rate_new',BlockNumber='$block_new',Floor='$floor_new',FlatAreaID='$flatareaid',updated_at='$updated_at' WHERE flatID='$recordID';";
+        $sql = "UPDATE flats SET FlatNumber='$flatnumber_new',FlatType='$flattype_new',BlockNumber='$block_new',Floor='$floor_new',FlatAreaID='$flatareaid',updated_at='$updated_at' WHERE flatID='$recordID';";
         mysqli_query($con, $sql);
         exit();
     }

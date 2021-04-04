@@ -100,25 +100,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <br />
-                                    <div class="form-check">
-                                        <label for="">Maintenance</label>
-                                        <br>
-                                        <?php
-                                        $ftypes = array();
-                                        $query = "SELECT distinct(Maintenance) FROM flats";
-                                        if ($result = mysqli_query($con, $query)) {
-                                            $rowcount = mysqli_num_rows($result);
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $ftypes = $row['Maintenance'];
-                                                echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_ftypes[]" class="custom-control-input" value="' . $ftypes . '" id="filter_ftypes_' . $ftypes . '">
-                                                            <label class="custom-control-label" for="filter_ftypes_' . $ftypes . '">' . $ftypes . '</label>
-                                                        </div>';
-                                            }
-                                        }
-                                        ?>
-                                    </div>
+
                                     <br />
                                     <div class="form-check">
                                         <label for="">Floor</label>
@@ -221,12 +203,7 @@ function getFilters() {
                 }
                 normalizedFilters.flatnumber.push(filter.value)
                 break;
-            case "filter_maintenance[]":
-                if (!normalizedFilters.maintenance) {
-                    normalizedFilters.maintenance = []
-                }
-                normalizedFilters.maintenance.push(filter.value)
-                break;
+
             case "filter_floor[]":
                 if (!normalizedFilters.floor) {
                     normalizedFilters.floor = []
@@ -284,7 +261,7 @@ function loadCurrent() {
             $(".selectbox").click(function(e) {
                 var row = $(this).closest('tr')
                 var checkbox = $(this).find('input');
-                console.log(checkbox);
+                //console.log(checkbox);
                 checkbox.attr("checked", !checkbox.attr("checked"));
                 row.toggleClass('selected table-secondary')
                 if ($("#dataTable-flats tbody tr.selected").length != $(
@@ -384,7 +361,7 @@ function loadModalCurrent() {
                     value: $("#delete_flats_btn").attr('value')
                 });
                 // alert('hi');
-                console.log(form_serialize);
+                //console.log(form_serialize);
                 $("#delete_flats_btn").text("Deleting...");
                 $("#delete_flats_btn").attr("disabled", true);
                 $.ajax({
@@ -418,7 +395,7 @@ function loadModalCurrent() {
 
 $("#filter_flats_form").submit(function(e) {
     e.preventDefault();
-    console.log("hi");
+    //console.log("hi");
     $('#dataTable-flats').DataTable().ajax.reload();
     $("#exampleModalCenter1").modal("hide")
 })
@@ -454,12 +431,11 @@ function update_flats(e) {
                 var aPos = $("#dataTable-flats").dataTable().fnGetPosition(row.get(0));
                 var temp = $("#dataTable-flats").DataTable().row(aPos).data();
                 // console.log(temp)
-                // console.log("Hi ", form_serialize)
+                //console.log("Hi ", form_serialize)
                 temp['BlockNumber'] = form_serialize[0].value; //new values
                 temp['FlatNumber'] = form_serialize[1].value; //new values
-                temp['FlatType'] = form_serialize[6].value;
+                temp['FlatType'] = form_serialize[5].value;
                 temp['Floor'] = form_serialize[2].value;
-                temp['Maintenance'] = form_serialize[3].value; //new values
                 //temp['updated_at'] = date("Y-m-d H:i:s");
                 // temp['Updatedby'] = $_SESSION['username'];
                 $('#dataTable-flats').dataTable().fnUpdate(temp, aPos, undefined, false);

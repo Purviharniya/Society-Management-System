@@ -9,12 +9,9 @@ $data = json_decode(file_get_contents("php://input"), true);
 $block = mysqli_escape_string($con, $data['BlockNumber']);
 $fno = mysqli_escape_string($con, $data['FlatNumber']);
 $ftype = mysqli_escape_string($con, $data['FlatType']);
-$maintenance = mysqli_escape_string($con, $data['Maintenance']);
 $floor = mysqli_escape_string($con, $data['Floor']);
-$result = mysqli_query($con, "select FlatID,FlatNumber,FlatType,Maintenance,BlockNumber,Floor,FlatAreaID from flats WHERE BlockNumber='$block' and FlatNumber='$fno' and FlatType='$ftype'");
+$result = mysqli_query($con, "select FlatID,FlatNumber,FlatType,BlockNumber,Floor,FlatAreaID from flats WHERE BlockNumber='$block' and FlatNumber='$fno' and FlatType='$ftype'");
 $row = mysqli_fetch_assoc($result);
-//$floor = $row['Floor'];
-//echo "<script>console.log($floor)</script>";
 $recordID = $row['FlatID'];
 $flatareaID = $row['FlatAreaID'];
 echo "<script>console.log($recordID)</script>";
@@ -43,7 +40,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <label for="exampleFormControlSelect1"><i class="text-danger">*This will delete all the information related to the Flat</i>
                                             <br>Are you sure you want to delete the record of <br> Block <i><small><b>' . $block . '</b></small></i>
                                             ,Flat Number <i><small><b>' . $fno . '</small></b></i> ,Floor <i><small><b>' . $floor . '</b></small></i>
-                                            ,Maintanence <i><small><b> Rs.' . $maintenance . '</b></small></i> ?
+                                            ?
                                         </label>
                                         <br>
                                         <input type="hidden" name="record_id" value="' . $recordID . '">
@@ -82,8 +79,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <input type="text" class="form-control"  placeholder="Floor" name="floor_new" value="' . $floor . '">
                                         </div>  
                                         <div class="form-group col-md-6">
-                                            <label for="frate"><b>Maintenance</b></label>
-                                            <input type="text" class="form-control" required="required" placeholder="New maintenance" name="rate_new" id="rate_new" value="' . $maintenance . '" readonly>
+                                            
                                             <input type="hidden" class="form-control"  name="recordID" id="recordID" value="' . $recordID . '">
                                             <input type="hidden" class="form-control"  name="flatareaID" id="flatareaID" value="' . $flatareaID . '">
                                         </div>                                   
