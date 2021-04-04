@@ -265,6 +265,12 @@ unset($_SESSION['error_message']);
                                 contact number</small>
                         </div>
                         <div class="form-group">
+                            <label for="people">Number of People:</label>
+                            <input type="number" class="form-control" id="people" name="people"
+                                aria-describedby="peopleHelp">
+                            <small id="peopleHelp" class="form-text text-muted">Enter the number of people</small>
+                        </div>
+                        <div class="form-group">
                             <label for="whomToMeet">Whom to Meet:</label>
                             <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
                                 aria-describedby="whomToMeetHelp">

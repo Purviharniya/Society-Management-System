@@ -135,8 +135,11 @@ if ($result = mysqli_query($con, $query)) {
                                 <th>Name</th>
                                 <th>Contact No</th>
                                 <th>Alternate Contact No</th>
+                                <th>Number of People</th>
                                 <th>Whom to Meet</th>
                                 <th>Reason to Meet</th>
+                                <th>Start Date</th>
+                                <th>Duration</th>
                                 <th>Last Updated By</th>
                                 <th>Last Updated At</th>
                                 <th>Action </th>
@@ -150,8 +153,11 @@ if ($result = mysqli_query($con, $query)) {
                                 <th>Name</th>
                                 <th>Contact No</th>
                                 <th>Alternate Contact No</th>
+                                <th>Number of People</th>
                                 <th>Whom to Meet</th>
                                 <th>Reason to Meet</th>
+                                <th>Start Date</th>
+                                <th>Duration</th>
                                 <th>Last Updated By</th>
                                 <th>Last Updated At</th>
                                 <th>Action </th>
@@ -286,10 +292,19 @@ function loadCurrent() {
                 data: 'AlternateVisitorContactNo'
             },
             {
+                data: 'NoOfPeople'
+            },
+            {
                 data: 'WhomToMeet'
             },
             {
                 data: 'ReasonToMeet'
+            },
+            {
+                data: 'StartDate'
+            },
+            {
+                data: 'Duration'
             },
             {
                 data: 'updated_by'
@@ -446,6 +461,7 @@ function update_visitors(e) {
                 temp['VisitorContactNo'] = form_serialize[6].value; //new values
                 temp['WhomToMeet'] = form_serialize[8].value;
                 temp['ReasonToMeet'] = form_serialize[10].value;
+                //BRO PENDING
                 // temp['updated_at'] = form_serialize[8].value;
                 // temp['Updatedby'] = $_SESSION['username'];
                 temp['Updatedby'] = 'Admin1';

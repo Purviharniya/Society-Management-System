@@ -123,6 +123,11 @@ unset($_SESSION['error_message']);
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label for="people">Number of People:</label>
+                                                <input type="number" class="form-control" id="people" name="people"
+                                                    value="people" placeholder="Column name of number of people">
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="whomToMeet">Whom to Meet:</label>
                                                 <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
                                                        value="whomToMeet" placeholder="Column name of whom to meet" required>
@@ -265,6 +270,12 @@ unset($_SESSION['error_message']);
                                 contact number</small>
                         </div>
                         <div class="form-group">
+                            <label for="people">Number of People:</label>
+                            <input type="number" class="form-control" id="people" name="people"
+                                aria-describedby="peopleHelp">
+                            <small id="peopleHelp" class="form-text text-muted">Enter the number of people</small>
+                        </div>
+                        <div class="form-group">
                             <label for="whomToMeet">Whom to Meet:</label>
                             <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
                                 aria-describedby="whomToMeetHelp">
@@ -275,6 +286,20 @@ unset($_SESSION['error_message']);
                             <textarea class="form-control" id="reasonToMeet" name="reasonToMeet"  
                                 aria-describedby="reasonToMeetHelp"rows="3"></textarea>
                             <small id="reasonToMeetHelp" class="form-text text-muted">Enter the reason to meet</small>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="startDate">Start Date:</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate"  
+                                    aria-describedby="startDateHelp">
+                                <small id="startDateHelp" class="form-text text-muted">Enter the start date to visit</small>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="duration">Duration:</label>
+                                <input type="number" class="form-control" id="duration" name="duration"  
+                                    aria-describedby="durationHelp">
+                                <small id="durationHelp" class="form-text text-muted">Enter the duration</small>
+                            </div>
                         </div>
                         <!-- <div class="form-group">
                             <label for="contact">Email ID:</label>

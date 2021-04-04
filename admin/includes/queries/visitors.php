@@ -10,8 +10,13 @@ if (isset($_POST['addvisitors-btn'])) {
     $altcontactno = mysqli_escape_string($con, $_POST['contact1']);
     $block = mysqli_escape_string($con, $_POST['block']);
     $flatno = mysqli_escape_string($con, $_POST['fno']);
+    $people = mysqli_escape_string($con, $_POST['people']);
     $whomtomeet = mysqli_escape_string($con, $_POST['whomToMeet']);
     $reasontomeet = mysqli_escape_string($con, $_POST['reasonToMeet']);
+    $otp = 1234; //WE HAVE TO DO THIS
+    $startdate = mysqli_escape_string($con, $_POST['startDate']);
+    $duration = mysqli_escape_string($con, $_POST['duration']);
+
     $timestamp = date("Y-m-d H:i:s");
     // $added_by = $_SESSION['username'];
     $added_by = 'admin1';
@@ -33,8 +38,8 @@ if (isset($_POST['addvisitors-btn'])) {
 
     } else {
         // store in the database; check if error doesnt occur while storing
-        $query = "INSERT INTO visitors(`VisitorID`,`FlatID`, `VisitorName`,`VisitorContactNo`,`AlternateVisitorContactNo`,`BlockNumber`, `FlatNumber`, `WhomToMeet`, `ReasonToMeet`, `updated_by`, `updated_at`) 
-                  VALUES ('' ,".$flatID['FlatID'].",'$vname' , '$contactno' , ' $altcontactno' , '$block' , '$flatno' ,'$whomtomeet' ,'$reasontomeet','$added_by' , '$timestamp' )";
+        $query = "INSERT INTO visitors(`VisitorID`,`FlatID`, `VisitorName`,`VisitorContactNo`,`AlternateVisitorContactNo`,`BlockNumber`, `FlatNumber`, `NoOfPeople`,`WhomToMeet`, `ReasonToMeet`, `OTP`,`StartDate`,`Duration`,`updated_by`, `updated_at`) 
+                  VALUES ('' ,".$flatID['FlatID'].",'$vname' , '$contactno' , ' $altcontactno' , '$block' , '$flatno' , '$people', '$whomtomeet' , '$reasontomeet', '$otp', '$startdate', '$duration', '$added_by' , '$timestamp' )";
     
         echo "\n".$query;
         echo "\n";
@@ -64,7 +69,7 @@ if (isset($_POST['delete_visitors'])) {
     // header("Location: ../bla.php");
     exit();
 }
-
+//CHECK CHECK
 if (isset($_POST['update_visitors'])) {
 
     $visitorID = mysqli_escape_string($con, $_POST['visitor_id']);

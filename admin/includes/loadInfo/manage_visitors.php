@@ -60,7 +60,7 @@ $totalRecordwithFilter = $records['totalcountfilters'];
 
 ## Fetch records
 
-$sql = "select BlockNumber, FlatNumber, VisitorName, VisitorContactNo, AlternateVisitorContactNo, WhomToMeet, ReasonToMeet, updated_by, updated_at from visitors v WHERE 1 and "
+$sql = "select BlockNumber, FlatNumber, VisitorName, VisitorContactNo, AlternateVisitorContactNo,NoOfPeople, WhomToMeet, ReasonToMeet, StartDate, Duration, updated_by, updated_at from visitors v WHERE 1 and "
     . $searchQuery . "&& (" . $filterQuery . ")" . $orderQuery . " limit " . $row . "," . $rowperpage;
 // echo $sql;
 $visitorsRecords = mysqli_query($con, $sql);
@@ -80,8 +80,11 @@ while ($row = mysqli_fetch_assoc($visitorsRecords)) {
         "VisitorName" => $row['VisitorName'],
         "VisitorContactNo" => $row['VisitorContactNo'],
         "AlternateVisitorContactNo" => $row['AlternateVisitorContactNo'],
-        "WhomToMeet" => $row['WhomToMeet'],
+        "NoOfPeople" => $row['NoOfPeople'], 
+        "WhomToMeet" => $row['WhomToMeet'], 
         "ReasonToMeet" => $row['ReasonToMeet'],
+        "StartDate" => $row['StartDate'],
+        "Duration" => $row['Duration'],
         "updated_by" => $row['updated_by'],
         "updated_at" => $row['updated_at'],
         "action" => '<!-- Button trigger modal -->
