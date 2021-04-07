@@ -32,7 +32,6 @@ if ($searchValue != '') {
         NoOfPeople like '%" . $searchValue . "%') ";
 }
 
-//CHECK THIS PENDING
 $filterQuery = "1 ";
 #filters
 if (isset($_POST['filters'])) {

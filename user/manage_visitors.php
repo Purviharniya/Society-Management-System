@@ -206,7 +206,7 @@ function getFilters() {
         }
     }
     // console.log("Normalized Filters: ");
-    console.log(normalizedFilters);
+    // console.log(normalizedFilters);
     return normalizedFilters
 }
 
@@ -237,13 +237,13 @@ function loadCurrent() {
             className: "btn btn-outline-primary  mx-2",
             action: newExportAction,
             exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8] //CHECK THIS-->pending
+                columns: [1, 2, 3, 4, 5, 6, 7, 8]
             },
         }, ],
         ajax: {
             'url': 'includes/loadInfo/manage_visitors.php',
             "data": function(d) {
-                console.log(d);
+                // console.log(d);
                 d.filters = getFilters();
                 return d
             }
@@ -343,10 +343,10 @@ function loadModalCurrent() {
     var aPos = $("#dataTable-visitors").dataTable().fnGetPosition(target_row.get(0));
     var areaData = $('#dataTable-visitors').DataTable().row(aPos).data()
     console.log("AreaData"+areaData);
-    console.log(areaData);
+
     var json_areaData = JSON.stringify(areaData)
     console.log("Json Area data modal: "+json_areaData)
-    console.log(json_areaData);
+    
     $.ajax({
         type: "POST",
         url: "includes/loadInfo/loadmodal_visitors.php",
@@ -368,8 +368,8 @@ function loadModalCurrent() {
                     name: $("#delete_visitors_btn").attr('name'),
                     value: $("#delete_visitors_btn").attr('value')
                 });
-                alert('hi');
-                console.log(form_serialize);
+                // alert('hi');
+                // console.log(form_serialize);
                 $("#delete_visitors_btn").text("Deleting...");
                 $("#delete_visitors_btn").attr("disabled", true);
                 $.ajax({
@@ -424,8 +424,8 @@ function update_visitors(e) {
         url: "includes/queries/visitors.php",
         data: form_serialize,
         success: function(data) {
-            alert(data); // show response from the php script.
-            console.log(data);
+            // alert(data); // show response from the php script.
+            // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
                     '*This data already exists! Please change the Visitor Name'); //check this
@@ -439,14 +439,10 @@ function update_visitors(e) {
                 var row = $("#update-del-modal").closest('tr');
                 var aPos = $("#dataTable-visitors").dataTable().fnGetPosition(row.get(0));
                 var temp = $("#dataTable-visitors").DataTable().row(aPos).data();
-                console.log('temp: ');
-                console.log(temp);
-                console.log('form_serialize: ');
-                console.log(form_serialize);
                 
-                // temp['BlockNumber'] = form_serialize[0].value; //new values
-                // temp['FlatNumber'] = form_serialize[2].value; //new values
-
+                // console.log('form_serialize: ');
+                // console.log(form_serialize);
+                
                 temp['VisitorName'] = form_serialize[0].value; //new values
                 temp['VisitorContactNo'] = form_serialize[2].value; //new values
                 temp['AlternateVisitorContactNo'] = form_serialize[4].value; //new values
@@ -454,7 +450,7 @@ function update_visitors(e) {
                 temp['NoOfPeople'] = form_serialize[8].value;
                 temp['StartDate'] = form_serialize[10].value;
                 temp['Duration'] = form_serialize[12].value;
-                //BRO PENDING
+                
                 // temp['updated_at'] = form_serialize[8].value;
                 // temp['Updatedby'] = $_SESSION['username'];
                 
@@ -468,15 +464,14 @@ function update_visitors(e) {
     });
 }
 
-// FROM HERE CHANGES ARE REMAINING
 $("#delete_selected_response_btn").click(function(e) {
-    console.log('Entered delete section')
+    // console.log('Entered delete section')
     alert("You have selected " + $("#dataTable-visitors tbody tr.selected").length + " record(s) for deletion");
     var delete_rows = $("#dataTable-visitors").DataTable().rows('.selected').data()
     var delete_data = {}
     for (var i = 0; i < delete_rows.length; i++) {
-        console.log('Delete Rows : ');
-        console.log(delete_rows[i]);
+        // console.log('Delete Rows : ');
+        // console.log(delete_rows[i]);
         baseData = {}
         // baseData['block'] = delete_rows[i].BlockNumber
         // baseData['flatno'] = delete_rows[i].FlatNumber
@@ -484,20 +479,20 @@ $("#delete_selected_response_btn").click(function(e) {
         baseData['vname'] = delete_rows[i].VisitorName
         delete_data[i] = baseData
         console.log("Base Data:"+baseData);
-        console.log(baseData);
+
     }
     var actual_data = {}
     actual_data['type'] = 'current'
     actual_data['delete_data'] = delete_data
     actual_delete_data_json = JSON.stringify(actual_data)
-    console.log("Actual Data:"+actual_delete_data_json)
-    console.log(actual_delete_data_json)
+    // console.log("Actual Data:"+actual_delete_data_json)
+
     $.ajax({
         type: "POST",
         url: "includes/queries/delete_multiple_visitors.php",
         data: actual_delete_data_json,
         success: function(data) {
-            console.log("Returned data: "+data)
+            // console.log("Returned data: "+data)
             $("#dataTable-visitors").DataTable().draw(false);
         }
     })

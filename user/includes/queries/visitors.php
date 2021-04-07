@@ -5,7 +5,6 @@ include '../../../config.php';
 function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){ 
     
     $enddate = date('Y-m-d', strtotime($startdate . " + ". $duration." day"));
-    // echo $enddate;
     $fields = array(
         "sender_id" => "CHKSMS",
         // "message" => $vname." your Visiting OTP is <strong>". $visitorOTP ." </strong>valid from <strong> ". $startdate . " to ". $enddate ."</strong>",
@@ -14,10 +13,7 @@ function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){
         "route" => "s", //check
         // "numbers" => '"' . $number1 . ', ' . $number2 . '"', //not working
         "numbers" => $vcno ,
-        // "numbers" => '"' . $numbers .'"', //not working
     );
-    print_r($fields);
-
     // echo '<script>console.log('.$fields.')</script>';
     $curl = curl_init();
 
@@ -25,8 +21,8 @@ function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){
     CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
-    CURLOPT_MAXREDIRS => 10, //c
-    CURLOPT_TIMEOUT => $duration*24*3600,//c
+    CURLOPT_MAXREDIRS => 10, 
+    CURLOPT_TIMEOUT => $duration*24*3600,
     CURLOPT_SSL_VERIFYHOST => 0,
     CURLOPT_SSL_VERIFYPEER => 0,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -50,7 +46,7 @@ function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){
     
     } else {
     //echo $response;
-    echo "<script>console.log('Done succ')</script>";
+    // echo "<script>console.log('Done succ')</script>";
     // return $visitorOTP;
     }
 }
