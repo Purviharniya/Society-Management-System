@@ -232,23 +232,19 @@ unset($_SESSION['error_message']);
                         <div class="form-group">
                             <label for="block">Block:</label>
                             <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
-                                required>
-                            <small id="blockHelp" class="form-text text-muted">Enter the block name (make it a drop down
-                                later)</small>
+                                readonly>
                         </div>
                         <div class="form-group">
                             <label for="fno">Flat no:</label>
                             <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
-                                required>
-                            <small id="fnoHelp" class="form-text text-muted">Enter the Flat number (make it a drop down
-                                later)</small>
+                            readonly>
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Name:</label>
+                            <label for="name">Visitor Name:</label>
                             <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp"
                                 required>
-                            <small id="nameHelp" class="form-text text-muted">Enter the flat owner's name</small>
+                            <small id="nameHelp" class="form-text text-muted">Enter the visitor's name</small>
                         </div>
                         <div class="form-group">
                             <label for="contact">Contact No.:</label>
@@ -271,17 +267,26 @@ unset($_SESSION['error_message']);
                             <small id="peopleHelp" class="form-text text-muted">Enter the number of people</small>
                         </div>
                         <div class="form-group">
-                            <label for="whomToMeet">Whom to Meet:</label>
-                            <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
-                                aria-describedby="whomToMeetHelp">
-                            <small id="whomToMeetHelp" class="form-text text-muted">Enter the whom to meet(flat owner's name)</small>
-                        </div>
-                        <div class="form-group">
                             <label for="reasonToMeet">Reason to Meet:</label>
                             <textarea class="form-control" id="reasonToMeet" name="reasonToMeet"  
                                 aria-describedby="reasonToMeetHelp"rows="3"></textarea>
                             <small id="reasonToMeetHelp" class="form-text text-muted">Enter the reason to meet</small>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="startDate">Start Date:</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate"  
+                                    aria-describedby="startDateHelp">
+                                <small id="startDateHelp" class="form-text text-muted">Enter the start date to visit</small>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="duration">Duration:</label>
+                                <input type="number" class="form-control" id="duration" name="duration"  
+                                    aria-describedby="durationHelp">
+                                <small id="durationHelp" class="form-text text-muted">Enter the duration</small>
+                            </div>
+                        </div>
+                        
                         <!-- <div class="form-group">
                             <label for="contact">Email ID:</label>
                             <input type="text" class="form-control" id="contact" name="contact"

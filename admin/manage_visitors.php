@@ -54,7 +54,7 @@ include './includes/shared/header.php';
 $block_numbers = array();
 // $user = $_SESSION['username'];
 
-$query = "SELECT DISTINCT(BlockNumber) FROM visitors"; //removing distinct
+$query = "SELECT DISTINCT(BlockNumber) FROM visitors"; 
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);
     while ($row = mysqli_fetch_array($result)) {
@@ -466,7 +466,7 @@ function update_visitors(e) {
                 temp['NoOfPeople'] = form_serialize[12].value;
                 temp['StartDate'] = form_serialize[14].value;
                 temp['Duration'] = form_serialize[16].value;
-                //BRO PENDING
+                
                 // temp['updated_at'] = form_serialize[8].value;
                 // temp['Updatedby'] = $_SESSION['username'];
                 temp['Updatedby'] = 'Admin1';
@@ -480,7 +480,6 @@ function update_visitors(e) {
     });
 }
 
-// FROM HERE CHANGES ARE REMAINING
 $("#delete_selected_response_btn").click(function(e) {
     console.log('Entered delete section')
     alert("You have selected " + $("#dataTable-visitors tbody tr.selected").length + " record(s) for deletion");

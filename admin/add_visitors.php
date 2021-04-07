@@ -253,7 +253,7 @@ unset($_SESSION['error_message']);
                             <label for="name">Name:</label>
                             <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp"
                                 required>
-                            <small id="nameHelp" class="form-text text-muted">Enter the flat owner's name</small>
+                            <small id="nameHelp" class="form-text text-muted">Enter the visitor's name</small>
                         </div>
                         <div class="form-group">
                             <label for="contact">Contact No.:</label>

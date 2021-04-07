@@ -106,7 +106,7 @@ if (isset($_POST['addvisitors-btn'])) {
             $_SESSION['success_message'] = "<strong>Success!</strong> Visitor added successfully!";
 
             // redirect to the form page again with success message or to the datatable page
-            // header("Location: ../../add_visitors.php");
+            header("Location: ../../add_visitors.php");
 
             exit();
         
@@ -117,7 +117,7 @@ if (isset($_POST['addvisitors-btn'])) {
             $result = mysqli_query($con, $query);
 
             $_SESSION['error_message'] = "<strong>Failure!</strong>Could not able to execute the query!";
-            // header("Location: ../../add_visitors.php");
+            header("Location: ../../add_visitors.php");
             exit();
             // echo "ERROR: Could not able to execute " .mysqli_error($con);
         }
