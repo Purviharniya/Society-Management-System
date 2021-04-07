@@ -12,6 +12,9 @@ $result = mysqli_query($con, "select * from visitors WHERE BlockNumber='$block' 
 $row = mysqli_fetch_assoc($result);
 $vcontact = $row['VisitorContactNo'];
 $whomTomeet = $row['WhomToMeet'];
+$people = $row['NoOfPeople'];
+$startdate = $row['StartDate'];
+$duration = $row['Duration'];
 $reasonTomeet = $row['ReasonToMeet'];
 $visitorID = $row['VisitorID'];
 $date =  date("Y-m-d H:i:s");
@@ -40,8 +43,9 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1"><i class="text-danger">*This will delete all the information related to the flat area</i>
                                             <br>Are you sure you want to delete the record of <br> Block: <i><small><b>' . $block . '</b></small></i>,
-                                            Flat Number: <i><small><b>' . $flatno . '</b></small></i>, Visitor Name: <i><small><b>' . $vname . '</small></b></i>
-                                            ,Whom to Meet: <i><small><b>' . $whomTomeet . '</b></small></i> ?
+                                            Flat Number: <i><small><b>' . $flatno . '</b></small></i>, Visitor Name: <i><small><b>' . $vname . '</small></b></i>, 
+                                            Whom to Meet: <i><small><b>' . $whomTomeet . '</b></small></i>, Start Date: <i><small><b>' . $startdate . '</b></small></i>,  
+                                            Duration: <i><small><b>' . $duration . '</b></small></i> ?
                                         </label>
                                         <br>
                                         <input type="hidden" name="visitor_id" value="' . $visitorID . '">
@@ -74,30 +78,50 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <div class="col-12" id="error_record">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="areaf"><b>Visitor Name</b></label>
+                                            <label for="vname"><b>Visitor Name</b></label>
                                             <input type="text" class="form-control"  placeholder="Visitor Name" name="vname_new" value="' . $vname . '">
                                             <input type="hidden" name="vname_old" value="' . $vname . '">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="frate"><b>Visitor Contact Number</b></label>
+                                            <label for="vcno"><b>Visitor Contact Number</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="Visitor Contact Number" name="vcontact_new" id="vcontact_new" value="' . $vcontact . '">
                                             <input type="hidden" name="vcontact_old" value="' . $vcontact . '">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label for="ftyp"><b>Whom to Meet</b></label>
+                                            <label for="whomTomeet"><b>Whom to Meet</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="Whom to Meet" name="whom_new" value="' . $whomTomeet . '">
                                         </div>
                                         <input type="hidden" name="whom_old" value="' . $whomTomeet . '">
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label for="ftyp"><b>Reason to Meet</b></label>
+                                            <label for="reasonTomeet"><b>Reason to Meet</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="Reason to Meet" name="reason_new" value="' . $reasonTomeet . '">
                                         </div>
                                         <input type="hidden" name="reason_old" value="' . $reasonTomeet . '">
                                     </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="people"><b>Number of People</b></label>
+                                            <input type="number" class="form-control" required="required" placeholder="Number of People" name="people_new" value="' . $people . '">
+                                        </div>
+                                        <input type="hidden" name="people_old" value="' . $people . '">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="startdate"><b>Start Date</b></label>
+                                            <input type="date" class="form-control"  placeholder="Start Date" name="startdate_new" value="' . $startdate . '">
+                                            <input type="hidden" name="startdate_old" value="' . $startdate . '">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="duration"><b>Duration</b></label>
+                                            <input type="text" class="form-control" required="required" placeholder="Duration" name="duration_new" id="duration_new" value="' . $duration . '">
+                                            <input type="hidden" name="duration_old" value="' . $duration . '">
+                                        </div>
+                                    </div>
+                                    
                                     
                                     <input type="hidden" name="visitor_id" value="' . $visitorID . '">
                                     <div class="form-row">

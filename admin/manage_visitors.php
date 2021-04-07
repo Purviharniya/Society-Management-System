@@ -455,12 +455,17 @@ function update_visitors(e) {
                 var temp = $("#dataTable-visitors").DataTable().row(aPos).data();
                 // console.log('temp: ');
                 // console.log(temp);
+                console.log('form_serialize: ');
+                console.log(form_serialize);
                 temp['BlockNumber'] = form_serialize[0].value; //new values
                 temp['FlatNumber'] = form_serialize[2].value; //new values
                 temp['VisitorName'] = form_serialize[4].value; //new values
                 temp['VisitorContactNo'] = form_serialize[6].value; //new values
                 temp['WhomToMeet'] = form_serialize[8].value;
                 temp['ReasonToMeet'] = form_serialize[10].value;
+                temp['NoOfPeople'] = form_serialize[12].value;
+                temp['StartDate'] = form_serialize[14].value;
+                temp['Duration'] = form_serialize[16].value;
                 //BRO PENDING
                 // temp['updated_at'] = form_serialize[8].value;
                 // temp['Updatedby'] = $_SESSION['username'];
