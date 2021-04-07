@@ -209,7 +209,7 @@ include 'includes/shared/topbar.php';
                         </div>
                     </div>
                     <!-- Close upload modal -->
-                    <form action="./includes/queries/flats.php" autocomplete="off" method="POST">
+                    <form action="./includes/queries/flats.php" autocomplete="off" method="POST" name="addflat">
                         <div class="form-group">
                             <label for="fno">Flat number:</label>
                             <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
@@ -217,7 +217,7 @@ include 'includes/shared/topbar.php';
                             <small id="fnoHelp" class="form-text text-muted">Enter the Flat number</small>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="flattype">Flat Type:</label>
                             <select class="form-control" id="flattype" name="flattype">
                                 <option value="1 BHK">1BHK</option>
@@ -225,7 +225,7 @@ include 'includes/shared/topbar.php';
                                 <option value="3 BHK">3BHK</option>
                                 <option value="4 BHK">4BHK</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="floorno">Floor:</label>
                             <input type="text" class="form-control" id="floorno" name="floorno"
@@ -234,9 +234,9 @@ include 'includes/shared/topbar.php';
                         </div>
                         <div class="form-group">
                             <label for="block">Block:</label>
-                            <input type="text" class="form-control" id="block" name="blockname"
-                                aria-describedby="blockHelp" required>
-                            <small id="blockHelp" class="form-text text-muted">Enter the block name</small>
+                            <select class="form-control" id="blocks" name="block" required>
+                                <!-- <option value="" selected> Select Block</option> -->
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-themeblack" name="flat">Add</button>
                         <button type="clear" class="btn btn-themeblack">Clear</button>
@@ -247,8 +247,30 @@ include 'includes/shared/topbar.php';
     </div>
 </div>
 <!-- /container-fluid -->
+<script>
+$("#floorno").change(function() {
+    getblocks();
+});
 
+function getblocks() {
+    //var data = $("#series").val();
+    var data = $('#fno').val() - (100 * $('#floorno').val());
+    console.log("Series selected: ", data);
+    $.ajax({
+        type: "POST",
+        data: {
+            block: data
+        },
+        url: "includes/handlers/add_flat.php",
+        success: function(res) {
+            //alert(res);
+            //console.log(res);
+            $("#blocks").html(res);
+        }
+    });
 
+}
+</script>
 
 <?php
 
