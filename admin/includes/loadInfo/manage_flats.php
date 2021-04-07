@@ -19,10 +19,10 @@ $searchValue = $_POST['search']['value']; // Search value
 ## Search 
 $searchQuery = "1";
 if ($searchValue != '') {
-    $searchQuery = "(BlockNumber like '%" . $searchValue . "%' or 
-        FlatType like '%" . $searchValue . "%' or 
+    $searchQuery = "(BlockNumber like '%" . $searchValue . "%' or         
         FlatNumber like '%" . $searchValue . "%' ) ";
 }
+//FlatType like '%" . $searchValue . "%' or 
 
 $filterQuery = "1 ";
 #filters
@@ -32,10 +32,10 @@ if (isset($_POST['filters'])) {
     if (isset($filters['block'])) {
         $filterQuery .= "&& BlockNumber in(" . "'" . implode("', '", $filters['block']) . "'" . ")" . " ";
     }
-
+    /* 
     if (isset($filters['ftypes'])) {
         $filterQuery .= "&& FlatType in(" . "'" . implode("', '", $filters['ftypes']) . "'" . ")" . " ";
-    }
+    } */
 
     if (isset($filters['flatnumber'])) {
         $filterQuery .= "&& FlatNumber in(" . "'" . implode("', '", $filters['flatnumber']) . "'" . ")" . " ";
@@ -59,7 +59,7 @@ $totalRecordwithFilter = $records['totalcountfilters'];
 
 ## Fetch records
 
-$sql = "select FlatID,FlatNumber,FlatType,BlockNumber,Floor,FlatAreaID from flats f WHERE 1 and "
+$sql = "select FlatID,FlatNumber,BlockNumber,Floor,FlatAreaID from flats f WHERE 1 and "
     . $searchQuery . "&& (" . $filterQuery . ")" . $orderQuery . " limit " . $row . "," . $rowperpage;
 $areaRecords = mysqli_query($con, $sql);
 $data = array();
@@ -68,10 +68,11 @@ $fullname = "";
 
 while ($row = mysqli_fetch_assoc($areaRecords)) {
     $faid = $row['FlatAreaID'];
-    $maintenance = mysqli_query($con, "SELECT Ratepsq, FlatArea from flatarea where FlatAreaID = '$faid'");
+    $maintenance = mysqli_query($con, "SELECT Ratepsq, FlatArea,FlatType from flatarea where FlatAreaID = '$faid'");
     $res = mysqli_fetch_assoc($maintenance);
     $rate = $res['Ratepsq'];
     $area = $res['FlatArea'];
+    $ftype = $res['FlatType'];
     $m = $rate * $area;
     $data[] = array(
 
@@ -82,7 +83,7 @@ while ($row = mysqli_fetch_assoc($areaRecords)) {
                      </div>',
         "FlatNumber" => $row['FlatNumber'],
         "BlockNumber" => $row['BlockNumber'],
-        "FlatType" => $row['FlatType'],
+        "FlatType" => $ftype,
         "Maintenance" => $m,
         "Floor" => $row['Floor'],
         "action" => '<!-- Button trigger modal -->

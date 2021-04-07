@@ -8,9 +8,9 @@ include_once('../../../config.php');
 $data = json_decode(file_get_contents("php://input"), true);
 $block = mysqli_escape_string($con, $data['BlockNumber']);
 $fno = mysqli_escape_string($con, $data['FlatNumber']);
-$ftype = mysqli_escape_string($con, $data['FlatType']);
+//$ftype = mysqli_escape_string($con, $data['FlatType']);
 $floor = mysqli_escape_string($con, $data['Floor']);
-$result = mysqli_query($con, "select FlatID,FlatNumber,FlatType,BlockNumber,Floor,FlatAreaID from flats WHERE BlockNumber='$block' and FlatNumber='$fno' and FlatType='$ftype'");
+$result = mysqli_query($con, "select FlatID,FlatNumber,BlockNumber,Floor,FlatAreaID from flats WHERE BlockNumber='$block' and FlatNumber='$fno'");
 $row = mysqli_fetch_assoc($result);
 $recordID = $row['FlatID'];
 $flatareaID = $row['FlatAreaID'];
@@ -66,31 +66,26 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <div class="form-group col-md-6">
                                             <label for="block"><b>Block Number</b></label> 
                                             <input type="text" class="form-control"  placeholder="Block Number" name="blockno_new" value="' . $block . '">
+                                            <input type="hidden" class="form-control"  name="blockno_old" id="blockno_old" value="' . $block . '">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="seri"><b>Flat Number</b></label> 
-                                            <input type="text" class="form-control"  placeholder="Flat Number" name="number_new" value="' . $fno . '">
+                                            <input type="number" class="form-control"  placeholder="Flat Number" name="number_new" value="' . $fno . '">
+                                            <input type="hidden" class="form-control"  name="number_old" id="number_old" value="' . $fno . '">
                                         </div>
                                         <div class="col-12" id="error_record" class="text-danger"> 
 
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="areaf"><b>Floor</b></label> 
-                                            <input type="text" class="form-control"  placeholder="Floor" name="floor_new" value="' . $floor . '">
-                                        </div>  
-                                        <div class="form-group col-md-6">
-                                            
+                                            <input type="number" class="form-control"  placeholder="Floor" name="floor_new" value="' . $floor . '">
+                                            <input type="hidden" class="form-control" name="floor_old" value="' . $floor . '">
                                             <input type="hidden" class="form-control"  name="recordID" id="recordID" value="' . $recordID . '">
                                             <input type="hidden" class="form-control"  name="flatareaID" id="flatareaID" value="' . $flatareaID . '">
-                                        </div>                                   
+                                        
+                                        </div>                                 
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="ftyp"><b>Flat Type</b></label>
-                                            <input type="text" class="form-control" required="required" placeholder="New Flat type" name="flattype_new" value="' . $ftype . '">
-                                            <input type="hidden" class="form-control"  name="flattype_old" value="' . $ftype . '">
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">
                                             <button type="submit" class="btn btn-primary" id="update_flats_btn" name="update_flats">Update</button>

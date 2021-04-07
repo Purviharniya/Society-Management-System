@@ -4,8 +4,8 @@ if (isset($_POST["flat"])) {
 
     $fno = mysqli_real_escape_string($con, $_POST["fno"]);
     $floor = mysqli_real_escape_string($con, $_POST["floorno"]);
-    $block = mysqli_real_escape_string($con, $_POST["blockname"]);
-    $flattype = mysqli_real_escape_string($con, $_POST["flattype"]);
+    $block = mysqli_real_escape_string($con, $_POST["block"]);
+    //$flattype = mysqli_real_escape_string($con, $_POST["flattype"]);
 
     $queryy  = "SELECT * from flats";
     $records = mysqli_query($con, $queryy);
@@ -25,39 +25,42 @@ if (isset($_POST["flat"])) {
             //extracting the flat series
             $flatseries = $fno - 100 * $floor;
             //checking if series present in flatarea table
-            $q = mysqli_query($con, "SELECT FlatSeries,BlockNumber from flatarea");
-            $recordd = mysqli_fetch_all($q);
-            $flag = 0;
-            foreach ($recordd as $r) {
-                if ($r['FlatSeries'] == $flatseries && $r['BlockNumber'] == $block) {
-                    $flag = 1;
+            // $q = mysqli_query($con, "SELECT FlatSeries,BlockNumber from flatarea");
+            // $recordd = mysqli_fetch_all($q);
+            // $flag = 0;
+            // foreach ($recordd as $r) {
+            //     if ($r['FlatSeries'] == $flatseries && $r['BlockNumber'] == $block) {
+            //         $flag = 1;
+            //     }
+            // }
+            //if ($flag == 1) {
+            $queryforeign = "SELECT * FROM `flatarea` WHERE (FlatSeries = $flatseries and BlockNumber = '$block')";
+            $record = mysqli_query($con, $queryforeign);
+            if ($record) {
+                foreach ($record as $r) {
+                    $flatareaid = $r["FlatAreaID"];
+                    //$flatarea = $r["FlatArea"];
+                    //$rate = $r["Ratepsq"];
                 }
-            }
-            if ($flag == 1) {
-                $queryforeign = "SELECT * FROM `flatarea` WHERE (FlatSeries = $flatseries and BlockNumber = '$block')";
-                $record = mysqli_query($con, $queryforeign);
-                if ($record) {
-                    foreach ($record as $r) {
-                        $flatareaid = $r["FlatAreaID"];
-                        //$flatarea = $r["FlatArea"];
-                        //$rate = $r["Ratepsq"];
-                    }
 
-                    //$maintenance = $flatarea * $rate;
-                    $query = "INSERT INTO flats(`FlatID`, `FlatNumber`, `FlatType`, `BlockNumber`, `Floor`, `FlatAreaID`) VALUES ('' , '$fno', '$flattype', '$block', '$floor', '$flatareaid')";
-                    mysqli_query($con, $query);
-                    $_SESSION['success_message'] = "<strong>Success!</strong> Flat record added successfully!";
-                    header("Location: ../../add_flat.php");
-                } else {
-                    echo "no record";
-                }
-            } else {
-                $_SESSION['error_message'] = "<strong>Failure!</strong> Flat series not available!";
+                //$maintenance = $flatarea * $rate;
+                $query = "INSERT INTO flats(`FlatID`, `FlatNumber`, `BlockNumber`, `Floor`, `FlatAreaID`) VALUES ('' , '$fno','$block', '$floor', '$flatareaid')";
+                mysqli_query($con, $query);
+                $_SESSION['success_message'] = "<strong>Success!</strong> Flat record added successfully!";
                 header("Location: ../../add_flat.php");
+            } else {
+                echo "no record";
             }
+            // } else {
+            //     $_SESSION['error_message'] = "<strong>Failure!</strong> Flat series not available!";
+            //     header("Location: ../../add_flat.php");
+            // }
 
             /**/
         }
+    } else {
+        $_SESSION['error_message'] = "<strong>Failure!</strong> Fields not correct";
+        header("Location: ../../add_flat.php");
     }
 }
 if (isset($_POST['delete_flats'])) {
@@ -85,24 +88,36 @@ if (isset($_POST['delete_flats'])) {
 if (isset($_POST['update_flats'])) {
 
     $block_new = mysqli_escape_string($con, $_POST['blockno_new']);
+    $blockno_old = mysqli_escape_string($con, $_POST['blockno_old']);
+
     $flatnumber_new = mysqli_escape_string($con, $_POST['number_new']);
+    $number_old = mysqli_escape_string($con, $_POST['number_old']);
+
     $floor_new = mysqli_escape_string($con, $_POST['floor_new']);
-    //$rate_new = mysqli_escape_string($con, $_POST['rate_new']);
+    $floor_old = mysqli_escape_string($con, $_POST['floor_old']);
+
     $recordID = mysqli_escape_string($con, $_POST['recordID']);
-    $flattype_new = mysqli_escape_string($con, $_POST['flattype_new']);
+    //$flattype_new = mysqli_escape_string($con, $_POST['flattype_new']);
     $flatareaid = mysqli_escape_string($con, $_POST['flatareaID']);
     //$flatareaid = mysqli_query($con, "SELECT FlatAreaID FROM `flatarea` WHERE (FlatSeries = ($flatnumber_new-100*$floor_new) and BlockNumber = '$block')");
     // $added_by = $_SESSION['username'];        
     $updated_at = date("Y-m-d H:i:s");
 
-    $check_query = "SELECT * from flats where BlockNumber='$block_new' AND FlatNumber='$flatnumber_new' AND FlatType = '$flattype_new' AND FlatAreaID = '$flatareaid' AND Floor='$floor_new';";
-    $check_result = mysqli_query($con, $check_query);
-    if (mysqli_num_rows($check_result) != 0) {
-        echo "Exists record";
+    if (($block_new == $blockno_old) && ($floor_new == $floor_old) && ($number_new == $number_old)) {
+        //echo "Record exists. Change the value to update";
+        echo "Exists_record";
     } else {
-        $sql = "UPDATE flats SET FlatNumber='$flatnumber_new',FlatType='$flattype_new',BlockNumber='$block_new',Floor='$floor_new',FlatAreaID='$flatareaid',updated_at='$updated_at' WHERE flatID='$recordID';";
-        mysqli_query($con, $sql);
-        exit();
+        //if (is_numeric($fno) && is_numeric($floor) && !is_numeric($block)) {
+        //}
+        $check_query = "SELECT * from flats where BlockNumber='$block_new' AND FlatNumber='$flatnumber_new' AND FlatAreaID = '$flatareaid' AND Floor='$floor_new';";
+        $check_result = mysqli_query($con, $check_query);
+        if (mysqli_num_rows($check_result) != 0) {
+            echo "Exists_record";
+        } else {
+            $sql = "UPDATE flats SET FlatNumber='$flatnumber_new',BlockNumber='$block_new',Floor='$floor_new',FlatAreaID='$flatareaid',updated_at='$updated_at' WHERE flatID='$recordID';";
+            mysqli_query($con, $sql);
+            exit();
+        }
     }
 }
 ?>

@@ -53,17 +53,29 @@ include 'includes/shared/topbar.php';
                     <form action="./includes/queries/allotments.php" autocomplete="off" method='POST'>
                         <div class="form-group">
                             <label for="block">Block:</label>
-                            <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
-                                required>
-                            <small id="blockHelp" class="form-text text-muted">Enter the block name (make it a drop down
-                                later)</small>
+                            <select class="form-control" id="block" name="block" required>
+                                <option value="" selected> Select a Block</option>
+                                <?php
+
+                                $sql = "SELECT distinct(BlockNumber) from flats";
+                                $res = mysqli_query($con, $sql);
+
+                                while ($row = mysqli_fetch_assoc($res)) {
+                                    echo '
+                                    <option value="' . $row["BlockNumber"] . '">' . $row["BlockNumber"] . ' </option>';
+                                }
+                                ?>
+                            </select>
+                            <small id="blockHelp" class="form-text text-muted">Select block</small>
                         </div>
                         <div class="form-group">
                             <label for="fno">Flat number:</label>
-                            <input type="number" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
-                                required>
-                            <small id="fnoHelp" class="form-text text-muted">Enter the Flat number (make it a drop down
-                                later)</small>
+                            <select class="form-control" id="fno" name="fno" required>
+                                <option value="" selected> Select a Flat</option>
+                            </select>
+                            <!-- <input type="number" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
+                                required> -->
+                            <small id="fno" class="form-text text-muted">Select flat number</small>
                         </div>
                         <div class="form-group">
                             <label for="oname">Owner Name:</label>
@@ -157,6 +169,28 @@ include 'includes/shared/topbar.php';
 </div>
 <!-- /container-fluid -->
 <script>
+$("#block").change(function() {
+    getflats();
+});
+
+function getflats() {
+    var data = $("#block").val();
+    //console.log("Block selected: ", data);
+    $.ajax({
+        type: "POST",
+        data: {
+            block: data
+        },
+        url: "includes/handlers/add_allotment.php",
+        success: function(res) {
+            // alert(res);
+            // console.log(res);
+            $("#fno").html(res);
+        }
+    });
+
+}
+
 function myFunction() {
     var checkBox = document.getElementById("isRent");
     // Get the output text

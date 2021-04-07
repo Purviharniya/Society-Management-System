@@ -87,7 +87,7 @@
                                         <br>
                                         <?php
                                         $ftypes = array();
-                                        $query = "SELECT distinct(FlatType) FROM flats";
+                                        $query = "SELECT distinct(FlatType) FROM flatarea where BlockNumber in (Select BlockNumber from flats)";
                                         if ($result = mysqli_query($con, $query)) {
                                             $rowcount = mysqli_num_rows($result);
                                             while ($row = mysqli_fetch_array($result)) {
@@ -431,11 +431,12 @@ function update_flats(e) {
                 var aPos = $("#dataTable-flats").dataTable().fnGetPosition(row.get(0));
                 var temp = $("#dataTable-flats").DataTable().row(aPos).data();
                 // console.log(temp)
-                //console.log("Hi ", form_serialize)
+                console.log("Hi ", form_serialize)
                 temp['BlockNumber'] = form_serialize[0].value; //new values
-                temp['FlatNumber'] = form_serialize[1].value; //new values
-                temp['FlatType'] = form_serialize[5].value;
-                temp['Floor'] = form_serialize[2].value;
+                //temp['']
+                temp['FlatNumber'] = form_serialize[2].value; //new values
+                //temp['FlatType'] = form_serialize[3].value;
+                temp['Floor'] = form_serialize[4].value;
                 //temp['updated_at'] = date("Y-m-d H:i:s");
                 // temp['Updatedby'] = $_SESSION['username'];
                 $('#dataTable-flats').dataTable().fnUpdate(temp, aPos, undefined, false);
