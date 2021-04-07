@@ -93,50 +93,67 @@ unset($_SESSION['error_message']);
                                                 <div class="form-group col-md-6">
                                                     <label for="block">Block:</label>
                                                     <input type="text" class="form-control" id="block" name="block"
-                                                        value="block" placeholder="Column name of Block" required>
+                                                        value="BlockNumber" placeholder="Column name of Block" readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="fno">Flat no:</label>
                                                     <input type="text" class="form-control" id="flatno" name="flatno"
-                                                        value="flatno" placeholder="Column name of Flat number" required>
+                                                        value="FlatNumber" placeholder="Column name of Flat number" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                     <label for="name">Visitor Name:</label>
                                                     <input type="text" class="form-control" id="vname" name="vname"
-                                                        value="vname" placeholder="Column name of Visitor Name" required>
+                                                        value="VisitorName" placeholder="Column name of Visitor Name" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="contact col-md-6">Contact No.:</label>
+                                                    <label for="contact col-md-6">Visitor Contact No.:</label>
                                                     <input type="text" class="form-control" id="contact" name="contact"
-                                                        value="contact" placeholder="Column name of Contact no"
-                                                        required>
+                                                        value="VisitorContactNo" placeholder="Column name of Contact no"
+                                                        readonly>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="contact1">Alternate Contact No.:</label>
+                                                    <label for="contact1">Alternate Visitor Contact No.:</label>
                                                     <input type="text" class="form-control" id="contact1"
-                                                        name="contact1" value="contact1"
-                                                        placeholder="Column name of alternate contact no" required>
+                                                        name="contact1" value="AlternateVisitorContactNo"
+                                                        placeholder="Column name of alternate contact no" readonly>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="people">Number of People:</label>
-                                                <input type="number" class="form-control" id="people" name="people"
-                                                    value="people" placeholder="Column name of number of people">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="whomToMeet">Whom to Meet:</label>
-                                                <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
-                                                       value="whomToMeet" placeholder="Column name of whom to meet" required>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="people">Number of People:</label>
+                                                    <!-- DO REMEMBER -->
+                                                    <input type="text" class="form-control" id="people" name="people"
+                                                        placeholder="Column name of number of people" value="NoOfPeople" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="whomToMeet">Whom to Meet:</label>
+                                                    <input type="text" class="form-control" id="whomToMeet" name="whomToMeet"
+                                                        value="WhomToMeet" placeholder="Column name of whom to meet" readonly>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="reasonToMeet">Reason to Meet:</label>
-                                                <textarea class="form-control" id="reasonToMeet" name="reasonToMeet"
-                                                          value="reasonToMeet" placeholder="Column name of whom to meet" rows="3"  
-                                                        required></textarea>
+                                                <!-- DO REMEMBER -->
+                                                <input type="text" class="form-control" id="reasonToMeet" name="reasonToMeet"
+                                                          value="ReasonToMeet" placeholder="Column name of whom to meet" rows="3"  
+                                                        readonly>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="startdate">Start Date:</label>
+                                                    <!-- DO REMEMBER -->
+                                                    <input type="text" class="form-control" id="startdate" name="startdate"
+                                                        placeholder="Column name of start date" value="StartDate" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="duration">Duration:</label>
+                                                    <input type="text" class="form-control" id="duration" name="duration"
+                                                        value="Duration" placeholder="Column name of duration in days" readonly>
+                                                </div>
                                             </div>
                                             <br>
                                             <div class="form-group files color">

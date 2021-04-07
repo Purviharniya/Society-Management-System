@@ -1,60 +1,64 @@
-# import pymysql
-# import xlrd
-# import sys
-# # PENDING
-# import re
-# import json
-# mapper = {
-#     # check this
-#     "added": 1,
-#     "timestamp": 2,
-#     "vname_col": 3,
-#     "vcno_col": 4,
-#     "alternatevcno_col": 5,
-#     "block_col": 6,
-#     "flatno_col": 7,
-#     "flattype_col": 8,
-#     "whom_col": 9,
-#     "reason_col": 10,
-#     "host": 11,
-#     "username_db": 12,
-#     "password_db": 13,
-#     "dbname": 12,
-#     "file_location": 10,    
-#     "upload_constraint": 14,
-#     "login_role": 15,
-# }
+import pymysql
+import xlrd
+import sys
+# PENDING
+import re
+import json
+mapper = {
+    # check this
+    "added": 1,
+    "timestamp": 2,
+    "vname_col": 3,
+    "vcno_col": 4,
+    "alternatevcno_col": 5,
+    "block_col": 6,
+    "flatno_col": 7,
+    "people_col": 8,
+    "whom_col": 9,
+    "reason_col": 10,
+    "startdate_col": 11,
+    "duration_col": 12,
+    "host": 13,
+    "username_db": 15,
+    "password_db": 17,
+    "dbname": 16,
+    "file_location": 14,   
+    "upload_constraint": 18,
+    "login_role": 19,
+}
 
-# header = []
-# header_id = {}
-# end_col = 8
-# startcol_index = 3
-# passw = ""
-# file = xlrd.open_workbook(sys.argv[mapper['file_location']])
-# data = file.sheet_by_index(0)
-# for y in range(0, data.ncols):
-#     header.append(data.cell(0, y).value)
-# # print(header)
-# if len(sys.argv) != 16:
-#     # print("len",len(sys.argv))
-#     end_col = 5
-# else: 
-#     passw = sys.argv[mapper['password_db']]
-# try:
-#     for x in range(startcol_index, len(sys.argv)-end_col):
-#         # print("x:",sys.argv[x])
-#         header_id[sys.argv[x]] = header.index(sys.argv[x])
+header = []
+header_id = {}
+end_col = 8
+startcol_index = 3
+passw = ""
+file = xlrd.open_workbook(sys.argv[mapper['file_location']])
+data = file.sheet_by_index(0)
+for y in range(0, data.ncols):
+    header.append(data.cell(0, y).value)
+# print(header)
+if len(sys.argv) != 16:
+    # print("len",len(sys.argv))
+    end_col = 5
+else: 
+    passw = sys.argv[mapper['password_db']]
+try:
+    for x in range(startcol_index, len(sys.argv)-end_col):
+        # print("x:",sys.argv[x])
+        header_id[sys.argv[x]] = header.index(sys.argv[x])
 
 
-# except Exception as e:
-#     # print("ex occured!")
-#     print(re.findall(r"'(.*?)'", str(e),)
-#           [0]+" is not a column in the uploaded sheet")
-#     sys.exit(0)
+except Exception as e:
+    # print("ex occured!")
+    print(re.findall(r"'(.*?)'", str(e),)
+          [0]+" is not a column in the uploaded sheet")
+    sys.exit(0)
 
-# # print("hi")
-# insert_area = """ Insert into flatarea(FlatAreaID, BlockNumber, FlatSeries , FlatArea , FlatType , Ratepsq , Updatedby ,UpdatedAt) VALUES('',%s,%s,%s,%s,%s,%s,%s); """
-# update_area = "update flatarea set FlatArea=%s,FlatType=%s,Ratepsq=%s,Updatedby=%s,UpdatedAt=%s where BlockNumber=%s and FlatSeries=%s"
+# print("hi")
+# FLAT ID DOUBT
+insert_visitors = """ Insert into visitors(VisitorID, FlatID, VisitorName, VisitorContactNo, AlternateVisitorContactNo, BlockNumber, FlatNumber, NoOfPeople, WhomToMeet, ReasonToMeet, OTP, StartDate, Duration, updated_by, updated_at)
+VALUES('','',%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s); """
+# update_visitors = "update visitors set FlatArea=%s,FlatType=%s,Ratepsq=%s,Updatedby=%s,UpdatedAt=%s where BlockNumber=%s and FlatSeries=%s"
 
 # # print (insert_faculty)
 # # print(sys.argv[mapper['dbname']])
@@ -83,12 +87,12 @@
 #     if sys.argv[mapper['upload_constraint']] == "2":
 #         # operation_performed = "UPDATE"
 #         # status = "updated details " 
-#         updated_records_count += cursor.execute(update_area, update_values)
+#         updated_records_count += cursor.execute(update_visitors, update_values)
         
 #     else:
 #         # operation_performed = "INSERT"
 #         # status = "Area record inserted"
-#         cursor.execute(insert_area, values_insert)
+#         cursor.execute(insert_visitors, values_insert)
 #         inserted_records_count += 1        
 
 # try:
@@ -126,7 +130,7 @@
 #                     values = (flatarea, flattype, frate, added, timestamp, blockno, seriesno)
 #                     try:
 #                         # operation_performed = "UPDATE"
-#                         cursor.execute(update_area, values)
+#                         cursor.execute(update_visitors, values)
 #                         updated_records_count += 1
                        
 #                     except Exception as e:

@@ -181,7 +181,7 @@ if (isset($_POST['update_visitors'])) {
                 mysqli_query($con, $query);     
                 generateOTP($otp_new,$vcontact_new,$vname_new,$startdate_new, $duration_new);//JUST FOR NOW
             }
-            echo "1k";
+            
             $sql = "UPDATE visitors
                     SET VisitorName = '$vname_new', VisitorContactNo='$vcontact_new', AlternateVisitorContactNo='$altvcontact_new', 
                     ReasonToMeet = '$reason_new', NoOfPeople = '$people_new', StartDate = '$startdate_new', 
@@ -203,12 +203,11 @@ if (isset($_POST['update_visitors'])) {
             mysqli_query($con, $query);     
             generateOTP($otp_new,$vcontact_new,$vname_new,$startdate_new, $duration_new);//JUST FOR NOW
         }
-        echo "2k";
+        
         $sql = "UPDATE visitors 
                 SET VisitorName='$vname_new', VisitorContactNo='$vcontact_new', AlternateVisitorContactNo='$altvcontact_new',
                 ReasonToMeet = '$reason_new', NoOfPeople = '$people_new', StartDate = '$startdate_new', 
                 Duration = '$duration_new',updated_at='$timestamp' WHERE VisitorID='$visitorID';";
-            echo '<script>console.log('.$sql.')</script>';
             mysqli_query($con, $sql);
             exit();
     }

@@ -14,9 +14,8 @@ if ($data['type'] == 'current') {
     $delete_data = $data['delete_data'];
     foreach ($delete_data as $key => $val) {
         
-        print_r($delete_data);
+        // print_r($delete_data);
         $sql = "DELETE from visitors where BlockNumber='" . $block . "' AND FlatNumber=". $flatno ." AND VisitorName='" . $val['vname'] . "';";
-        echo '<script>console.log('.$sql.')</script>';
         mysqli_query($con, $sql);
     }
 

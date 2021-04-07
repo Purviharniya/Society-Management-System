@@ -70,7 +70,7 @@ $totalRecordwithFilter = $records['totalcountfilters'];
 
 $sql = "select VisitorName, VisitorContactNo, AlternateVisitorContactNo, NoOfPeople, ReasonToMeet, StartDate, Duration, updated_by, updated_at from visitors v WHERE BlockNumber='" . $block ."' AND  FlatNumber=" . $flatno . " AND "
     . $searchQuery . "&& (" . $filterQuery . ")" . $orderQuery . " limit " . $row . "," . $rowperpage;
-// echo $sql;
+
 $visitorsRecords = mysqli_query($con, $sql);
 $data = array();
 $count = 0;

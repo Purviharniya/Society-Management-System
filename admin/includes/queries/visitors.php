@@ -15,7 +15,6 @@ function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){
         "route" => "s", //check
         // "numbers" => '"' . $number1 . ', ' . $number2 . '"', //not working
         "numbers" => $vcno ,
-        // "numbers" => '"' . $numbers .'"', //not working
     );
     print_r($fields);
 
@@ -67,7 +66,7 @@ if (isset($_POST['addvisitors-btn'])) {
     $people = mysqli_escape_string($con, $_POST['people']);
     $whomtomeet = mysqli_escape_string($con, $_POST['whomToMeet']);
     $reasontomeet = mysqli_escape_string($con, $_POST['reasonToMeet']);
-    // $otp = 1234; //WE HAVE TO DO THIS
+    
     $startdate = mysqli_escape_string($con, $_POST['startDate']);
     $duration = mysqli_escape_string($con, $_POST['duration']);
 
