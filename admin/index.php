@@ -6,6 +6,25 @@ include './includes/shared/header.php';
 
 <?php include './includes/shared/topbar.php';?>
 
+<?php
+
+$allot_sql = mysqli_query($con, "SELECT * from allotments");
+$allot = mysqli_num_rows($allot_sql);
+
+$complaint_sql = mysqli_query($con, "SELECT * from complaints");
+$complaint = mysqli_num_rows($complaint_sql);
+
+$visit_sql = mysqli_query($con, "SELECT * from visitors");
+$visit = mysqli_num_rows($visit_sql);
+
+$bill_sql = mysqli_query($con, "SELECT * from bills");
+$bill = mysqli_num_rows($bill_sql);
+
+$security_sql = mysqli_query($con, "SELECT * from security");
+$security = mysqli_num_rows($security_sql);
+
+?>
+
 <style>
 .card1,
 .card2,
@@ -62,7 +81,7 @@ include './includes/shared/header.php';
 .card4:hover .overlay,
 .card5:hover .overlay,
 .card6:hover .overlay {
-    transform: scale(7) translateZ(0);
+    transform: scale(9) translateZ(0);
 }
 
 .card1:hover .circle {
@@ -156,8 +175,8 @@ include './includes/shared/header.php';
 }
 
 .circle {
-    width: 115px;
-    height: 115px;
+    width: 105px;
+    height: 105px;
     border-radius: 50%;
     background: #fff;
     display: flex;
@@ -219,8 +238,8 @@ include './includes/shared/header.php';
 
 .circle:after {
     content: "";
-    width: 98px;
-    height: 98px;
+    width: 88px;
+    height: 88px;
     display: block;
     position: absolute;
     border-radius: 50%;
@@ -260,7 +279,7 @@ include './includes/shared/header.php';
 }
 
 .overlay {
-    width: 98px;
+    width: 88px;
     position: absolute;
     height: 118px;
     border-radius: 50%;
@@ -322,6 +341,20 @@ include './includes/shared/header.php';
 .card6 i {
     color: #6fc0c0;
 }
+
+.line-chart {
+    height: 350px !important;
+    width: 100% !important;
+}
+
+.mixed-chart {
+    height: 350px !important;
+}
+
+.pie-chart-container {
+    height: 60% !important;
+    width: 60% !important;
+}
 </style>
 
 
@@ -331,11 +364,11 @@ include './includes/shared/header.php';
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title text-info">Dashboard</h4>
+                    <h4 class="card-title font-weight-bold text-info">Dashboard: <?php echo $_SESSION['username'];?>
+                    </h4>
                     <div class="mt-5">
                         <div class="card-deck mx-2">
-
-                            <div class="card card1 shadow justify-content-center">
+                            <div class="card card5 shadow justify-content-center">
                                 <div class="card-body row justify-content-center align-items-center text-center">
                                     <div class="col-lg-6">
                                         <div class="overlay"></div>
@@ -346,7 +379,8 @@ include './includes/shared/header.php';
                                     <div class="col-lg-6">
                                         <div class="card-heading align-self-center font-weight-bold"
                                             style="font-size:1.5rem;color: #4C5656;">
-                                            23 <br> Allotments
+                                            <span class="counter" data-target='<?php echo $allot; ?>'>0</span> <br>
+                                            Allotments
                                         </div>
                                     </div>
                                 </div>
@@ -363,7 +397,8 @@ include './includes/shared/header.php';
                                     <div class="col-lg-6">
                                         <div class="card-heading align-self-center font-weight-bold"
                                             style="font-size:1.5rem;color: #4C5656;">
-                                            10 <br> Complaints
+                                            <span class="counter" data-target='<?php echo $complaint;?>'>0</span> <br>
+                                            Complaints
                                         </div>
                                     </div>
                                 </div>
@@ -380,7 +415,8 @@ include './includes/shared/header.php';
                                     <div class="col-lg-6">
                                         <div class="card-heading align-self-center font-weight-bold"
                                             style="font-size:1.5rem;color: #4C5656;">
-                                            <span class="text-wrap">12500</span> <br> Visitors
+                                            <span class="counter" data-target='<?php echo $visit; ?>'>0</span> <br>
+                                            Visitors
                                         </div>
                                     </div>
                                 </div>
@@ -388,7 +424,29 @@ include './includes/shared/header.php';
                         </div>
 
                         <div class="container my-5">
-                            <canvas id="myChart" width="200px" height="100px"></canvas>
+                            <h4 class="col-12 text-center font-weight-bold pb-4">Visitors Distribution
+                            </h4>
+                            <!-- <canvas id="myChart" width="100px" height="30px"></canvas> -->
+                            <div class="mixed-chart-container">
+                                <canvas class="mixed-chart" id="mixed" width="100px" height="300px">
+                                </canvas>
+                            </div>
+                            <div class="row justify-content-center align-items-center my-5">
+                                <h4 class="col-12 text-center font-weight-bold py-4">Complaints Distribution
+                                </h4>
+                                <div class="col-md-6">
+                                    <div class="line-chart-container">
+                                        <canvas class="line-chart" id="line">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pie-chart-container mx-auto">
+                                        <canvas class="pie-chart" id="pie">
+                                        </canvas>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-deck mx-2">
                             <div class="card card4 shadow justify-content-center">
@@ -402,11 +460,12 @@ include './includes/shared/header.php';
                                     <div class="col-lg-6">
                                         <div class="card-heading align-self-center font-weight-bold"
                                             style="font-size:1.5rem;color: #4C5656;">
-                                            23 <br> Bills</div>
+                                            <span class="counter" data-target='<?php echo $bill; ?>'>0</span> <br> Bills
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card card5 shadow justify-content-center">
+                            <div class="card card1 shadow justify-content-center">
                                 <div class="card-body row justify-content-center align-items-center text-center">
                                     <div class="col-lg-6">
                                         <div class="overlay"></div>
@@ -417,7 +476,9 @@ include './includes/shared/header.php';
                                     <div class="col-lg-6">
                                         <div class="card-heading align-self-center font-weight-bold"
                                             style="font-size:1.5rem;color: #4C5656;">
-                                            10 <br> Security</div>
+                                            <span class="counter" data-target='<?php echo $security; ?>'>0</span> <br>
+                                            Security
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -433,7 +494,7 @@ include './includes/shared/header.php';
                                     <div class="col-lg-6">
                                         <div class="card-heading align-self-center font-weight-bold"
                                             style="font-size:1.5rem;color: #4C5656;">
-                                            <span class="text-wrap">12</span> <br> Annoucements
+                                            <span class="counter" data-target='20'>0</span> <br> Annoucements
                                         </div>
                                     </div>
                                 </div>
@@ -447,41 +508,109 @@ include './includes/shared/header.php';
     </div>
     <!-- /.container-fluid -->
     <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+    //mixed chart
+    var mixed = document.getElementById('mixed');
+    var mixedConfig = new Chart(mixed, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['data-1', 'data-2', 'data-3', 'data-4', 'data-5', 'data-6', 'data-7'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                label: '# of data',
+                data: [18, 12, 9, 11, 8, 4, 2],
+                backgroundColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+                    'rgba(225, 50, 64, 1)', 'rgba(64, 159, 64, 1)'
                 ],
                 borderWidth: 1
+            }, {
+                label: '# of data', // Name the series
+                data: [20, 19, 18, 14, 12, 15, 10],
+                type: 'line', // Specify the data values array
+                fill: false,
+                borderColor: '#2196f3', // Add custom color border (Line)
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+                borderWidth: 1,
+                order: 2
             }]
         },
         options: {
             scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            responsive: true, // Instruct chart js to respond nicely.
+            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+        }
+    })
+    </script>
+    <script>
+    //line chart
+    var line = document.getElementById('line');
+    line.height = 200
+    var lineConfig = new Chart(line, {
+        type: 'line',
+        data: {
+            labels: ['data-1', 'data-2', 'data-3', 'data-4', 'data-5', 'data-6'],
+            datasets: [{
+                label: '# of data', // Name the series
+                data: [10, 15, 20, 10, 25, 5, 10], // Specify the data values array
+                fill: false,
+                borderColor: '#2196f3', // Add custom color border (Line)
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+                borderWidth: 1 // Specify bar border width
+            }]
+        },
+        options: {
+            responsive: true, // Instruct chart js to respond nicely.
+            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+        }
+    })
+    </script>
+    <script>
+    //pie chart
+    var pie = document.getElementById('pie');
+    var pieConfig = new Chart(pie, {
+        type: 'pie',
+        data: {
+            labels: ['data-1', 'data-2'],
+            datasets: [{
+                label: '# of data',
+                data: [40, 80],
+                backgroundColor: ['rgba(103, 216, 239, 1)', 'rgba(246, 26, 104,1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true, // Instruct chart js to respond nicely.
+            maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
         }
     });
+    </script>
+    <!-- COUNTER SCRIPT-->
+    <script>
+    const counters = document.querySelectorAll('.counter');
+    const speed = 100000000;
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute(
+                'data-target'); //Adding the + sign converts type string to numbers
+            // console.log(typeof target);
+            const count = +counter.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 50);
+                // console.log( count + inc);
+            } else {
+                counter.innerText = target;
+            }
+        }
+        updateCount();
+    })
     </script>
     <?php
 

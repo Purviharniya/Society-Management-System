@@ -94,7 +94,7 @@
         </div>
     </li> -->
 
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages8" aria-expanded="true"
