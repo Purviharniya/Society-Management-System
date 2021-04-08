@@ -93,7 +93,7 @@ try:
         # print("in for loop")
         # print(x)
         # print(data.cell(x, header_id[sys.argv[mapper['block_col']]]).value)
-        blockno = data.cell(
+            blockno = data.cell(
             x, header_id[sys.argv[mapper['block_col']]]).value
         # print("b",blockno)
         seriesno = data.cell(

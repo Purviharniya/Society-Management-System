@@ -46,20 +46,22 @@ unset($_SESSION['error_message']);
                 <div class="card-body">
                     <div class="col-12 mb-3">
                         <h4 class="font-weight-bold text-primary mb-5">Settings</h4>
-                        <form action="" name="settings_form">
+                        <form action="includes/queries/settings.php" method="POST" name="settings_form">
                             <div class="form-group">
-                                <label for="a_name" class="font-weight-bold">Current Password:</label>
-                                <input type="text" class="form-control" name="a_name" id="a_name">
+                                <label for="curr_pass" class="font-weight-bold mr-2">Current Password:</label>
+                                <input type="password" class="form-control mr-2" name="curr_pass" id="curr_pass"
+                                    required>
                             </div>
 
                             <div class="form-group">
-                                <label for="au_name" class="font-weight-bold">New Password:</label>
-                                <input type="text" class="form-control" name="au_name" id="au_name">
+                                <label for="new_pass" class="font-weight-bold">New Password:</label>
+                                <input type="password" class="form-control" name="new_pass" id="new_pass" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="a_contact" class="font-weight-bold">Confirm Password:</label>
-                                <input type="number" class="form-control" name="a_contact" id="a_contact">
+                                <label for="confirm_new_pass" class="font-weight-bold">Confirm Password:</label>
+                                <input type="password" class="form-control" name="confirm_new_pass"
+                                    id="confirm_new_pass" required>
                             </div>
 
                             <input type="submit" class="btn btn-primary" value="Change" name="settings_submit">

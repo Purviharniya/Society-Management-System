@@ -6,26 +6,26 @@ include 'includes/shared/topbar.php';
 
 ?>
 
-<?php   
+<?php
 
-if(isset($_POST['block_select']) && isset($_POST['flat_select'])){
+if (isset($_POST['block_select']) && isset($_POST['flat_select'])) {
     $block = $_POST['block_select'];
     $flat = $_POST['flat_select'];
 
     $allotment_sql = "SELECT * from allotments where FlatNumber='$flat' and BlockNumber='$block'";
-    $res_allotment = mysqli_query($con,$allotment_sql);
+    $res_allotment = mysqli_query($con, $allotment_sql);
     $row = mysqli_fetch_assoc($res_allotment);
-    $flat_series = substr($flat,-2); //to get the series to which the flat belongs to
-    
+    $flat_series = substr($flat, -2); //to get the series to which the flat belongs to
+
     $oname = $row['OwnerName'];
     $isRent = $row['isRent'];
     $ocontact = $row['OwnerContactNumber'];
     $oacontact = $row['OwnerAlternateContactNumber'];
     $oemail = $row['OwnerEmail'];
     $omembers = $row['OwnerMemberCount'];
-    
+
     $rname = $rcontact = $racontact = $remail = $rmembers = '';
-    if($isRent == '1'){
+    if ($isRent == '1') {
         $rname = $row['RenteeName'];
         $rcontact = $row['RenteeContactNumber'];
         $racontact = $row['RenteeAlternateContactNumber'];
@@ -35,15 +35,15 @@ if(isset($_POST['block_select']) && isset($_POST['flat_select'])){
 
     //get the maintenance charges
     $rate_sql = "SELECT * from flatarea where BlockNumber='$block' and FlatSeries='$flat_series'";
-    $rate_res = mysqli_query($con,$rate_sql);
+    $rate_res = mysqli_query($con, $rate_sql);
     $row2 = mysqli_fetch_assoc($rate_res);
 
     $ftype = $row2['FlatType'];
     $flatarea = $row2['FlatArea'];
     $rpsq = $row2['Ratepsq'];
     $maintenance = $flatarea * $rpsq;
-    
-}else{
+
+} else {
     $_SESSION["error_message"] = "Please fill the form first";
     header("Location: add_bills.php");
     exit();
@@ -62,67 +62,67 @@ if(isset($_POST['block_select']) && isset($_POST['flat_select'])){
                                 <tbody>
                                     <tr>
                                         <th scope="col"> Block Number: </th>
-                                        <td> <?php echo $block;?> </td>
+                                        <td> <?php echo $block; ?> </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Flat Number: </th>
-                                        <td> <?php echo $flat;?> </td>
+                                        <td> <?php echo $flat; ?> </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Flat Type: </th>
-                                        <td> <?php echo $ftype;?> </td>
+                                        <td> <?php echo $ftype; ?> </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Owner's Name: </th>
-                                        <td> <?php echo $oname;?> </td>
+                                        <td> <?php echo $oname; ?> </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Owner's Contact Number: </th>
-                                        <td> <?php echo "+91 " .$ocontact . ", +91 " . $oacontact ;?></td>
+                                        <td> <?php echo "+91 " . $ocontact . ", +91 " . $oacontact; ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Owner's Email ID: </th>
-                                        <td> <?php echo $oemail;?></td>
+                                        <td> <?php echo $oemail; ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Total Members in the family: </th>
-                                        <td> <?php echo $omembers;?></td>
+                                        <td> <?php echo $omembers; ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Flat on Rent? </th>
-                                        <td> <?php echo $isRent=='1'?"Yes":"No";?> </td>
+                                        <td> <?php echo $isRent == '1' ? "Yes" : "No"; ?> </td>
                                     </tr>
-                                    <?php 
-                                    if($isRent=='1'){?>
+                                    <?php
+if ($isRent == '1') {?>
                                     <tr>
                                         <th scope="col"> Rentee Name: </th>
                                         <td> <?php echo $rname; ?> </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Rentee Contact Number: </th>
-                                        <td> <?php echo $rcontact . ", " . $racontact ;?> </td>
+                                        <td> <?php echo $rcontact . ", " . $racontact; ?> </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Rentee Email ID: </th>
-                                        <td><?php echo $remail ;?></td>
+                                        <td><?php echo $remail; ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Rentee Member Count: </th>
-                                        <td> <?php echo $rmembers ;?></td>
+                                        <td> <?php echo $rmembers; ?></td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php }?>
 
                                     <tr>
                                         <th scope="col"> Flat Area: </th>
-                                        <td><?php echo $flatarea ;?> sq.ft.</td>
+                                        <td><?php echo $flatarea; ?> sq.ft.</td>
                                     </tr>
                                     <tr>
                                         <th scope="col"> Rate per square feet: </th>
-                                        <td>Rs. <?php echo $rpsq ;?> /sq.ft.</td>
+                                        <td>Rs. <?php echo $rpsq; ?> /sq.ft.</td>
                                     </tr>
                                     <tr>
                                         <th scope="col">Maintenance Charges: </th>
-                                        <th>Rs. <?php echo $maintenance ;?></th>
+                                        <th>Rs. <?php echo $maintenance; ?></th>
                                     </tr>
                                     <tr>
                                         <th scope="col">Any Additional Charges: </th>
@@ -141,8 +141,8 @@ if(isset($_POST['block_select']) && isset($_POST['flat_select'])){
             </div>
         </div>
     </div>
-    <div>
-        <?php
+</div>
+<?php
 
 include './includes/shared/footer.php';
 include './includes/shared/scripts.php';

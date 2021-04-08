@@ -1,10 +1,11 @@
-<?php 
- 
+<?php
+
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
- include('../config.php');
- $_SESSION['flatno'] = '801';
- $_SESSION['blockno'] = 'A'; //comment later
+include '../config.php';
+$_SESSION['flatno'] = '801'; //comment later
+$_SESSION['blockno'] = 'A'; //comment later
+$_SESSION['login_role'] = 'owner'; //comment later
 // if(isset($_SESSION['flatno']) && isset($_SESSION['role']) && $_SESSION['role]=='user'){
 //     $username = $_SESSION['username'];
 //     $role = $_SESSION['role'];

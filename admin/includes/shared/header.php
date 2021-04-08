@@ -1,8 +1,8 @@
-<?php 
- 
+<?php
+
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
-include('../config.php');
+include '../config.php';
 // if(isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role']=='admin' ){
 //     $username = $_SESSION['username'];
 //     $role = $_SESSION['role'];
@@ -10,7 +10,7 @@ include('../config.php');
 // else{
 //     header("Location: ../login.php");
 // }
-$_SESSION['username']='Admin1';
+$_SESSION['username'] = 'Admin1'; //comment this to test the admin profile update
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +37,7 @@ $_SESSION['username']='Admin1';
     <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet">
     <link href="../vendor/css/fonts.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body id="page-top">

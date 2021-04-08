@@ -81,7 +81,7 @@
 
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages7" aria-expanded="true"
             aria-controls="collapseUtilities">
             <i class="fas fa-file" aria-hidden="true"></i>
@@ -92,7 +92,7 @@
                 <a class="collapse-item" href="visitor_reports.php">Visitors b/w dates</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <hr class="sidebar-divider">
 

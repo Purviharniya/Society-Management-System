@@ -6,6 +6,19 @@ include 'includes/shared/topbar.php';
 
 ?>
 
+<?php
+
+$sql = "SELECT * from admin where Username='{$_SESSION["username"]}'";
+$res = mysqli_query($con, $sql);
+$row = mysqli_fetch_assoc($res);
+// echo $_SESSION['username'];
+$username = $row['Username'];
+$contact = $row['ContactNumber'];
+$email = $row['EmailID'];
+$name = $row['Name'];
+
+?>
+
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -46,25 +59,31 @@ unset($_SESSION['error_message']);
                 <div class="card-body">
                     <div class="col-12 mb-3">
                         <h4 class="font-weight-bold text-primary mb-5">Admin Profile</h4>
-                        <form action="" name="profile_form">
+                        <form action="includes/queries/profile.php" method="POST" name="profile_form">
                             <div class="form-group">
                                 <label for="a_name" class="font-weight-bold">Admin Name:</label>
-                                <input type="text" class="form-control" name="a_name" id="a_name">
+                                <input type="text" class="form-control" name="a_name" id="a_name"
+                                    value="<?php echo $name; ?>">
                             </div>
 
                             <div class="form-group">
                                 <label for="au_name" class="font-weight-bold">UserName:</label>
-                                <input type="text" class="form-control" name="au_name" id="au_name">
+                                <input type="text" class="form-control" name="au_name_new" id="au_name"
+                                    value="<?php echo $username; ?>">
+                                <input type="hidden" class="form-control" name="au_name_old" id="au_name"
+                                    value="<?php echo $username; ?>">
                             </div>
 
                             <div class="form-group">
                                 <label for="a_contact" class="font-weight-bold">Contact Number:</label>
-                                <input type="number" class="form-control" name="a_contact" id="a_contact">
+                                <input type="number" class="form-control" name="a_contact" id="a_contact"
+                                    value="<?php echo $contact; ?>">
                             </div>
 
                             <div class="form-group">
                                 <label for="a_email" class="font-weight-bold">Email Address:</label>
-                                <input type="email" class="form-control" name="a_email" id="a_email">
+                                <input type="email" class="form-control" name="a_email" id="a_email"
+                                    value="<?php echo $email; ?>">
                             </div>
                             <input type="submit" class="btn btn-primary" value="Update" name="profile_submit">
                         </form>

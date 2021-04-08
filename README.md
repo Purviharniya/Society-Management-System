@@ -5,7 +5,7 @@ Add your TODOs here:
 3. Login Admin Backend C
 4. Login User Backend C
 
-5. * Forgot password \* -> NC
+5. - Forgot password \* -> NC
 
 -------------- ADMIN -------------------
 
@@ -28,7 +28,7 @@ Add your TODOs here:
 1. Bills - 1 page - NC
 2. Complaints - 4 pages - C
 3. Visitors - NC
-4. Security - 1 page (view security guards) - C 
+4. Security - 1 page (view security guards) - C
 5. Meetings - 3 pages - NC
 6. Shoutbox - 1 page - C
 7. Report - 1 pages - NC
@@ -44,12 +44,23 @@ Add your TODOs here:
 4. Email - for bills and forgot password(admin) is left
 5. Payment - last priority
 
-
 To modify:
 
-1. For user profile, check if the logged in person is a rentee, if he is a rentee then allow only rentee fields to be changed; if he is a owner, then allow only the owner details to be changed. 
+1. For user profile, check if the logged in person is a rentee, if he is a rentee then allow only rentee fields to be changed; if he is a owner, then allow only the owner details to be changed.
 2. For 2, we have to store a login_role in session, for the user as well => owner or rentee depending on the login contact number
 3. Complete EXCEL IMPORT for all the modules first
 4. For bills, after generating, should we give an option to modify? Because there are no fields except for additional charges
-5. After generating the bill, how will the admin come to know that the users have paid the bill or not
-6. How should we display the bill on the user side, other than mailing a pdf to him. 
+5. After generating the bill, how will the admin come to know that the users have paid the bill or not?
+6. How should we display the bill on the user side, other than mailing a pdf to him.
+7. Fix the error(warning) on the login page.
+
+8. Admin ke username ka update baki tables me bhi change karna chaiye (updated_by me).
+9. User ka contact number change hua toh complaints me bhi change karo.
+
+10. Remove Error: Notice: Undefined index: otp in C:\xampp\htdocs\Society-Management-System\login.php on line 54
+
+---- BILLS ----
+
+1. Button generate bill- Email to user + disable button + dashboard notification + (Save to db)
+2. View bills - only view the documents(bills) that were mailed 
+
