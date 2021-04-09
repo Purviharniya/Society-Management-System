@@ -93,11 +93,10 @@ try:
         # print("in for loop")
         # print(x)
         # print(data.cell(x, header_id[sys.argv[mapper['block_col']]]).value)
-            blockno = data.cell(
-            x, header_id[sys.argv[mapper['block_col']]]).value
+        blockno = data.cell(
+        x, header_id[sys.argv[mapper['block_col']]]).value
         # print("b",blockno)
-        seriesno = data.cell(
-            x, header_id[sys.argv[mapper['series_col']]]).value
+        seriesno = data.cell(x, header_id[sys.argv[mapper['series_col']]]).value
         seriesno = str(int(seriesno)).zfill(2)
         # print(seriesno)
         flattype = data.cell(

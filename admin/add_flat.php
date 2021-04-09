@@ -66,7 +66,7 @@ include 'includes/shared/topbar.php';
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <form method="POST" enctype="multipart/form-data" id="bulkUploadInternal">
+                                        <form method="POST" enctype="multipart/form-data" id="bulkUploadFlats">
                                             <label for="">
                                                 <h6>Information for mapping Data from excel sheet columns to database
                                                     columns</h6>
@@ -80,39 +80,33 @@ include 'includes/shared/topbar.php';
                                                     <select class="form-control" id="upload_constraint"
                                                         name="upload_constraint" required>
                                                         <option value="0">Only insert new Records</option>
-                                                        <option value="1">Insert and update Existing</option>
-                                                        <option value="2">Only Update existing records</option>
+                                                        <!-- <option value="1">Insert and update Existing</option>
+                                                        <option value="2">Only Update existing records</option> -->
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-row mt-4">
-                                                <div class="form-group col-md-6">
-                                                    <label for="fcode"><b>Block</b></label>
-                                                    <input type="text" class="form-control" id="block"
-                                                        placeholder="Column name of Block" name="block" value="block"
-                                                        required>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="fno"><b>Flat Number</b></label>
+                                                        <input type="text" class="form-control" id="fno"
+                                                            placeholder="Column name of Flat Number" name="fno"
+                                                            value="FlatNumber" required>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="floor"><b>Floor</b></label>
+                                                        <input type="text" class="form-control" id="floor"
+                                                            placeholder="Column name of Floor" name="floor"
+                                                            value="Floor" required>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="eid"><b>Flat Series</b></label>
-                                                    <input type="text" class="form-control" id="series"
-                                                        placeholder="Column name of Flat Series" name="series"
-                                                        value="series" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="name"><b>Flat Area</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Flat Area" name="farea"
-                                                        value="farea" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="name"><b>Maintenance Rate per square feet</b></label>
-                                                    <input type="text" class="form-control" id="farea"
-                                                        placeholder="Column name of Rate per sq feet" name="frateps"
-                                                        value="frateps" required>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-8">
+                                                        <label for="block"><b>Block</b></label>
+                                                        <input type="text" class="form-control" id="block"
+                                                            placeholder="Column name of Block" name="block"
+                                                            value="BlockNumber" required>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <br>
@@ -140,7 +134,7 @@ include 'includes/shared/topbar.php';
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                                     name="close">Close</button>
                                                 <button type="submit" class="btn btn-primary" name="save_changes"
-                                                    id="upload_farea">Upload</button>
+                                                    id="upload_flats">Upload</button>
                                             </div>
                                         </form>
                                     </div>
@@ -212,7 +206,7 @@ include 'includes/shared/topbar.php';
                     <form action="./includes/queries/flats.php" autocomplete="off" method="POST" name="addflat">
                         <div class="form-group">
                             <label for="fno">Flat number:</label>
-                            <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
+                            <input type="text" class="form-control" id="fnoo" name="fno" aria-describedby="fnoHelp"
                                 required>
                             <small id="fnoHelp" class="form-text text-muted">Enter the Flat number</small>
                         </div>
@@ -254,7 +248,7 @@ $("#floorno").change(function() {
 
 function getblocks() {
     //var data = $("#series").val();
-    var data = $('#fno').val() - (100 * $('#floorno').val());
+    var data = $('#fnoo').val() - (100 * $('#floorno').val());
     console.log("Series selected: ", data);
     $.ajax({
         type: "POST",
@@ -270,6 +264,43 @@ function getblocks() {
     });
 
 }
+
+$("#bulkUploadFlats").submit(function(e) {
+    e.preventDefault();
+    form = this;
+    //console.log(this.fno);
+    var formData = new FormData(this);
+    // $("#upload_flats").attr("disabled", true);
+    // $("#upload_flats").text("Uploading...")
+    $.ajax({
+        url: "includes/bulkUpload/add_flats.php",
+        type: 'POST',
+        data: formData,
+        success: function(data) {
+            console.log(data);
+            let [status, response] = $.trim(data).split("+");
+            console.log(status);
+            if (status == "Successful") {
+                const resData = JSON.parse(response);
+                console.log(resData)
+                $("#upload_flats").text("Upload Successfull!");
+                $("#upload_flats").removeClass("btn-primary");
+                $("#upload_flats").addClass("btn-success");
+                alert("Status:" + status + "\nInserted : " + resData.insertedRecords +
+                    "\nUpdated : " + resData.updatedRecords + "\nNo Operation : " + (resData
+                        .totalRecords - (resData.updatedRecords + resData.insertedRecords)))
+            } else {
+                $("#upload_flats").text("Upload Failed");
+                $("#upload_flats").addClass("btn-danger");
+                alert(data);
+            }
+            // form.reset();
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+})
 </script>
 
 <?php
