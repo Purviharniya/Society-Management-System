@@ -132,7 +132,12 @@ try:
         rmem = data.cell(
             x, header_id[sys.argv[mapper['rmem']]]).value
         val = (blockno, flatno)
-        flatid = cursor.execute(flat_id,val)
+        cursor.execute(flat_id,val)
+        flatid_tuple = cursor.fetchall()
+        #print(flatid_tuple)
+        for i in flatid_tuple:
+            flatid = i
+
         if(isRent == "Yes"):
             isRent = 1
         elif(isRent == "No"):
