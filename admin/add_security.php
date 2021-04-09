@@ -90,13 +90,13 @@ unset($_SESSION['error_message']);
                                                     <label for="securityid"><b>SecurityID</b></label>
                                                     <input type="text" class="form-control" id="securityid"
                                                         placeholder="Column name of SecurityID" name="securityid"
-                                                        value="SecurityNumber" required>
+                                                        value="SecurityID" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="name"><b>Name</b></label>
                                                     <input type="text" class="form-control" id="name"
-                                                        placeholder="Column name of Name" name="name"
-                                                        value="Name" required>
+                                                        placeholder="Column name of Name" name="name" value="Name"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -105,13 +105,13 @@ unset($_SESSION['error_message']);
                                                     <label for="contactnumber"><b>Contact Number</b></label>
                                                     <input type="text" class="form-control" id="contactnumber"
                                                         placeholder="Column name of Contact Number" name="contactnumber"
-                                                        value="Contact Number" required>
+                                                        value="ContactNumber" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="shift"><b>Shift</b></label>
                                                     <input type="text" class="form-control" id="shift"
-                                                        placeholder="Column name of Shift" name="shift"
-                                                        value="Shift" required>
+                                                        placeholder="Column name of Shift" name="shift" value="Shift"
+                                                        required>
                                                 </div>
                                             </div>
 
@@ -214,14 +214,14 @@ unset($_SESSION['error_message']);
 
                         <div class="form-group">
                             <label for="securityid">SecurityID:</label>
-                            <input type="text" class="form-control" id="securityid" name="securityid" aria-describedby="securityid"
-                                required>
+                            <input type="text" class="form-control" id="securityid" name="securityid"
+                                aria-describedby="securityid" required>
                             <small id="securityid" class="form-text text-muted">Enter the SecurityID</small>
                         </div>
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                aria-describedby="name" required>
+                            <input type="text" class="form-control" id="name" name="name" aria-describedby="name"
+                                required>
                             <small id="name" class="form-text text-muted">Enter the name</small>
                         </div>
                         <div class="form-group">
@@ -240,7 +240,7 @@ unset($_SESSION['error_message']);
                             </select>
                             <small id="shift" class="form-text text-muted">Enter the shift</small>
                         </div>
-                        
+
 
                         <button type="submit" class="btn btn-themeblack" name='addsecurity-btn'>Add</button>
                         <button type="reset" class="btn btn-themeblack">Clear</button>
@@ -277,8 +277,8 @@ $("#bulkUploadSecurity").submit(function(e) {
                     "\nUpdated : " + resData.updatedRecords + "\nNo Operation : " + (resData
                         .totalRecords - (resData.updatedRecords + resData.insertedRecords)))
             } else {
-                $("#upload_upload_security").text("Upload Failed");
-                $("#upload_upload_security").addClass("btn-danger");
+                $("#upload_security").text("Upload Failed");
+                $("#upload_security").addClass("btn-danger");
                 alert(data);
             }
             // form.reset();

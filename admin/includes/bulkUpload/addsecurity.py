@@ -3,8 +3,7 @@ import xlrd
 import sys
 import re
 import json
-mapper = {
-    
+mapper = {    
     "securityid_col": 1,
     "name_col": 2,
     "contactnumber_col": 3,
@@ -12,17 +11,17 @@ mapper = {
     "createdat_col": 5,
     "updatedat_col":6,
     "host": 7,
+    "file_location": 8,
     "username_db": 9,
-    "password_db": 11,
     "dbname": 10,
-    "file_location": 8,    
+    "password_db": 11,        
     "upload_constraint": 12,
     "login_role": 13,
 }
 
 header = []
 header_id = {}
-end_col = 6
+end_col = 9
 startcol_index = 1
 passw = ""
 file = xlrd.open_workbook(sys.argv[mapper['file_location']])
@@ -31,13 +30,14 @@ for y in range(0, data.ncols):
     header.append(data.cell(0, y).value)
 # print(header)
 if len(sys.argv) != 14:
-    # print("len",len(sys.argv))
-    end_col = 6
+    #print("len",len(sys.argv))
+    end_col = 9
 else: 
     passw = sys.argv[mapper['password_db']]
 try:
+    #print(len(sys.argv))
     for x in range(startcol_index, len(sys.argv)-end_col):
-        # print("x:",sys.argv[x])
+        #print("x:",sys.argv[x])
         header_id[sys.argv[x]] = header.index(sys.argv[x])
 
 
@@ -48,8 +48,8 @@ except Exception as e:
     sys.exit(0)
 
 # print("hi")
-insert_security = """ Insert into security(SecurityID , Name , ContactNumber , Shift , created_at , updated_at) VALUES(%s,%s,%s,%s,%s,''); """
-update_security = "update security set ContactNumber=%s,Shift=%s,updatedAt=%s where SecurityID=%s and Name=%s"
+insert_security = """ Insert into security(SecurityID , Name , ContactNumber , Shift , created_at , updated_at) VALUES(%s,%s,%s,%s,%s,%s); """
+update_security = "update security set ContactNumber=%s,Shift=%s,updated_at=%s where SecurityID=%s and Name=%s"
 
 # print (insert_faculty)
 # print(sys.argv[mapper['dbname']])
@@ -61,8 +61,8 @@ connection = pymysql.connect(host=sys.argv[mapper['host']],
 # print("hi conn established!")
 cursor = connection.cursor()
 # print(cursor)
-timestamp = sys.argv[mapper['timestamp']]
-# added = sys.argv[mapper['added']]
+#timestamp = sys.argv[mapper['#timestamp']]
+createdat = sys.argv[mapper['createdat_col']]
 upload_constraint = sys.argv[mapper['upload_constraint']]
 login_role = sys.argv[mapper['login_role']]
 # print("hi")
@@ -90,26 +90,33 @@ try:
     # print("inside try")
     # print(data.nrows)
     for x in range(1, data.nrows):
-        # print("in for loop")
+        #print("in for loop")
         # print(x)
         # print(data.cell(x, header_id[sys.argv[mapper['block_col']]]).value)
         securityid = data.cell(
             x, header_id[sys.argv[mapper['securityid_col']]]).value
+        securityid = int(securityid)
         # print("b",blockno)
         name = data.cell(
             x, header_id[sys.argv[mapper['name_col']]]).value
+        name = str(name)
         # print(seriesno)
         contactnumber = data.cell(
-            x, header_id[sys.argv[mapper['contactnumber_col']]]).value.upper()  
+            x, header_id[sys.argv[mapper['contactnumber_col']]]).value
+        contactnumber = int(contactnumber)
+        #print(contactnumber)
         shift = data.cell(
             x, header_id[sys.argv[mapper['shift_col']]]).value
-        createdat = data.cell(
-            x, header_id[sys.argv[mapper['createdat_col']]]).value
-        values = (securityid,name,contactnumber,shift,createdat,'')
+        #print(shift)
+        #shift = str(shift)
+        #print(shift)
+        #shift = "Morning"
+        values = (securityid,name,contactnumber,shift,createdat,createdat)
+        #print(values)
 
         try:
             if login_role in ['admin']:
-                update_values = (securityid,name,contactnumber,shift,createdat,'')
+                update_values = (contactnumber,shift,createdat,securityid,name)
                 insert_record(update_values, values)    
 
         except Exception as e:
@@ -117,7 +124,7 @@ try:
                 if upload_constraint == "0":
                     pass
                 elif upload_constraint == "1":
-                    values = (securityid,name,contactnumber,shift,createdat,'')
+                    values = (contactnumber,shift,createdat,securityid,name)
                     try:
                         # operation_performed = "UPDATE"
                         cursor.execute(update_security, values)
@@ -129,14 +136,14 @@ try:
                         sys.exit(0)
                 else:
                     print("something's wrong :(")
-                    sys.exit(0)
-                
+                    sys.exit(0)                
 
             else:
                 print("The upload was unsuccessful.")
                 print(e)
                 sys.exit(0)
 except Exception as e:
+    #print("her")
     print(str(e))
     sys.exit(0)
 
