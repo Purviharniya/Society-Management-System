@@ -29,15 +29,15 @@ for y in range(0, data.ncols):
     header.append(data.cell(0, y).value)
 # print(header)
 if len(sys.argv) != 12:
-    print("len",len(sys.argv))
+    #print("len",len(sys.argv))
     end_col = 6
 else: 
     passw = sys.argv[mapper['password_db']]
-    print("p",passw)
+    #print("p",passw)
 try:
     #print(len(sys.argv)-end_col)
     for x in range(startcol_index, len(sys.argv)-end_col):
-        print("x:",sys.argv[x])
+        #print("x:",sys.argv[x])
         header_id[sys.argv[x]] = header.index(sys.argv[x])
 
 
@@ -48,7 +48,7 @@ except Exception as e:
     sys.exit(0)
 
 # print("hi")
-insert_flat = """ Insert into flats(FlatID, FlatNumber, BlockNumber, Floor , FlatAreaID, created_at , updated_at) VALUES('',%s,%s,%s,%s,%s,%s,%s); """
+insert_flat = """ Insert into flats(FlatID, FlatNumber, BlockNumber, Floor , FlatAreaID, created_at , updated_at) VALUES('',%s,%s,%s,%s,%s,%s); """
 update_flat = "update flats set FlatNumber=%s,BlockNumber=%s,Floor=%s,FlatAreaID=%s,created_at=%s,updated_by=%s where BlockNumber=%s and FlatNumber=%s"
 flat_area_id = "select FlatAreaID from flatarea where BlockNumber=%s and FlatSeries=%s"
 #
@@ -66,9 +66,9 @@ cursor = connection.cursor()
 timestamp = sys.argv[mapper['timestamp']]
 #added = sys.argv[mapper['#']]
 upload_constraint = sys.argv[mapper['upload_constraint']]
-print("c",upload_constraint)
+#print("c",upload_constraint)
 login_role = sys.argv[mapper['login_role']]
-print("hi")
+#print("hi")
 password_set = 0
 inserted_records_count = 0
 updated_records_count = 0
@@ -90,10 +90,10 @@ def insert_record(update_values, values_insert):
         inserted_records_count += 1        
 
 try:
-    print("inside try")
+    #print("inside try")
     # print(data.nrows)
     for x in range(1, data.nrows):
-        print("in for loop")
+        #print("in for loop")
         #print(x)
         #print(data.cell(x, header_id[sys.argv[mapper['block_col']]]).value)
         blockno = data.cell(x, header_id[sys.argv[mapper['block_col']]]).value
@@ -104,31 +104,31 @@ try:
         floor = data.cell(x, header_id[sys.argv[mapper['floor_col']]]).value
         flatseries = flatno - (100*floor)
         flatseries = int(flatseries)
-        print("series",flatseries)
+        #print("series",flatseries)
         val = (str(blockno),flatseries)
-        print(val)
+        #print(val)
         cursor.execute(flat_area_id, val) 
         flatareaid_tuple = cursor.fetchone()
         for i in flatareaid_tuple:
            flatareaid = int(i) 
         # print(cursor.execute(flat_area_id, val))
-        print("id",flatareaid)
+        #print("id",flatareaid)
         values = (flatno, blockno, floor, flatareaid, timestamp, timestamp)
 
         try:
             if login_role in ['admin']:
-                print("here")
+                #print("here")
                 update_values = (flatno, blockno, floor,flatareaid, timestamp, timestamp)
                 insert_record(update_values, values)    
 
         except Exception as e:
             if "Duplicate entry" in str(e):
                 if upload_constraint == "0":
-                    print("Co")
+                    #print("Co")
                     pass
                 elif upload_constraint == "1":
                     values = (flatno, blockno, floor, flatareaid, timestamp, timestamp)
-                    print(values)
+                    #print(values)
                     try:
                         # operation_performed = "UPDATE"
                         cursor.execute(update_flat, values)
@@ -149,7 +149,7 @@ try:
                 print(e)
                 sys.exit(0)
 except Exception as e:
-    print("ok")
+    #print("ok")
     print(str(e))
     sys.exit(0)
 

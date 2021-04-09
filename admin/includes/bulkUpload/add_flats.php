@@ -38,7 +38,7 @@ $timestamp = date("Y-m-d H:i:s");
 //echo $servername;
 $cmd = 'python addflats.py "' . $timestamp . '" "' . $fno . '" "' . $floor . '" "' . $block . '" "' . $servername . '" "' . $target_location . '" "' . $username . '" "' . $password . '" "' . $dbname . '" "' . $upload_constraint . '" "' . $login_role . '" ';
 //"' . $addedby . '" 
-echo $cmd;
+//echo $cmd;
 $output = shell_exec($cmd);
 echo $output;
 //  if(strpos($output,"Duplicate entry")){

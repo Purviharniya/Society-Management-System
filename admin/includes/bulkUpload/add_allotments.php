@@ -44,14 +44,7 @@ $target_location = $base_dir . $rel_file_path;
 move_uploaded_file($_FILES['Uploadfile']['tmp_name'], $target_location);
 date_default_timezone_set('Asia/Kolkata');
 $timestamp = date("Y-m-d H:i:s");
-$cmd = ' python addallotments.py "' . $addedby . '"
-" ' . $timestamp . '" "' . $fno . '""' . $block . '" 
-"' . $oname . '" "' . $oemail . '" "' . $ocontact . '" 
-"' . $oacontact . '" "' . $omembers . '" "' . $isRent . '"
-"' . $rname . '" "' . $remail . '" "' . $rcontact . '" 
-"' . $racontact . '" "' . $rmembers . '" "' . $servername . '" 
-"' . $target_location . '" "' . $username . '" "' . $dbname . '"
-"' . $password . '" "' . $upload_constraint . '" "' . $login_role . '" ';
+$cmd = ' python addallotments.py "' . $addedby . '" " ' . $timestamp . '" "' . $fno . '""' . $block . '" "' . $oname . '" "' . $oemail . '" "' . $ocontact . '" "' . $oacontact . '" "' . $omembers . '" "' . $isRent . '" "' . $rname . '" "' . $remail . '" "' . $rcontact . '" "' . $racontact . '" "' . $rmembers . '" "' . $servername . '" "' . $target_location . '" "' . $username . '" "' . $dbname . '" "' . $password . '" "' . $upload_constraint . '" "' . $login_role . '" ';
 echo $cmd;
 $output = shell_exec($cmd);
 echo $output;
