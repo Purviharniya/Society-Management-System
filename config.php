@@ -8,7 +8,7 @@ $username = "root";
 $password = "";
 $dbname = "sms";
 $port = "3306";
-$con = mysqli_connect("localhost", "root", "", "sms");
+$con = mysqli_connect("localhost","root","","sms");
 $base_dir = "C:/xampp/uploads/society-management-system\\";
 
 // ini_set('SMTP', "smtp.gmail.com");
@@ -18,3 +18,4 @@ $base_dir = "C:/xampp/uploads/society-management-system\\";
 if (mysqli_connect_errno()) {
     echo "Could not connect to the database:" . mysqli_connect_errno();
 }
+?>

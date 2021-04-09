@@ -53,12 +53,12 @@ unset($_SESSION['error_message']);
                     <h4 class="card-title text-info mb-5">Add Visitors</h4>
                     <div class="col text-center">
                         <button type="button" class="btn btn-themeblack" name="addcourse" data-toggle="modal"
-                            data-target="#uploadarea">
+                            data-target="#uploadvisitor">
                             Upload excel&nbsp;&nbsp;<i class="fas fa-upload"></i>
                         </button>
                     </div>
                     <!-- Modal for importing -->
-                    <div class="modal fade" id="uploadarea" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="uploadvisitor" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle0" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -70,7 +70,7 @@ unset($_SESSION['error_message']);
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <form method="POST" enctype="multipart/form-data" id="bulkUploadInternal">
+                                        <form method="POST" enctype="multipart/form-data" id="bulkUploadVisitor">
                                             <label for="">
                                                 <h6>Information for mapping Data from excel sheet columns to database
                                                     columns </h6>
@@ -342,6 +342,44 @@ unset($_SESSION['error_message']);
     </div>
 </div>
 <!-- /container-fluid -->
+<script>
+$("#bulkUploadVisitor").submit(function(e) {
+    e.preventDefault();
+    form = this;
+    //console.log(this.fno);
+    var formData = new FormData(this);
+    // $("#upload_visitors").attr("disabled", true);
+    // $("#upload_visitors").text("Uploading...")
+    $.ajax({
+        url: "includes/bulkUpload/add_visitors.php",
+        type: 'POST',
+        data: formData,
+        success: function(data) {
+            console.log(data);
+            let [status, response] = $.trim(data).split("+");
+            console.log(status);
+            if (status == "Successful") {
+                const resData = JSON.parse(response);
+                console.log(resData)
+                $("#upload_visitors").text("Upload Successfull!");
+                $("#upload_visitors").removeClass("btn-primary");
+                $("#upload_visitors").addClass("btn-success");
+                alert("Status:" + status + "\nInserted : " + resData.insertedRecords +
+                    "\nUpdated : " + resData.updatedRecords + "\nNo Operation : " + (resData
+                        .totalRecords - (resData.updatedRecords + resData.insertedRecords)))
+            } else {
+                $("#upload_visitors").text("Upload Failed");
+                $("#upload_visitors").addClass("btn-danger");
+                alert(data);
+            }
+            // form.reset();
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+})
+</script>
 
 
 
