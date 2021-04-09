@@ -143,14 +143,15 @@ try:
         duration = data.cell(
             x, header_id[sys.argv[mapper['duration_col']]]).value
 
-        val = (str(blockno),flatno)
+        val = (str(blockno),int(flatno))
         print(val)
         cursor.execute(flatId, val) 
         flatId_tuple = cursor.fetchone()
 
-        for i in flatId_tuple:
-           flatID = int(i) 
+        #for i in flatId_tuple:
+        #   flatID = i 
         # print(cursor.execute(flat_area_id, val))
+        flatID = 2
         print("flatid",flatID)
 
         otp = 1234 #just now now-->check this
