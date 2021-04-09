@@ -44,18 +44,21 @@ session_start();
                     <li class="nav-item"> <a class="nav-link" id="pills-admin-tab" data-toggle="pill"
                             href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
                     </li>
+                    <li class="nav-item"> <a class="nav-link" id="pills-security-tab" data-toggle="pill"
+                            href="#pills-security" role="tab" aria-controls="pills-security"
+                            aria-selected="false">Security Guard</a>
+                    </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-user" role="tabpanel"
                         aria-labelledby="pills-user-tab">
                         <div class="col-sm-12 border border-primary shadow rounded pt-2">
-                            
+
                             <?php
-                            if($_SESSION["otp"]==0){
+                            if(!isset($_SESSION["otp"])){
                                 include('./user/login.php');
                             }
                             else{
-                                
                                 include('./user/verify.php');
                                 
                             }
@@ -66,6 +69,12 @@ session_start();
                         aria-labelledby="pills-admin-tab">
                         <div class="col-sm-12 border border-primary shadow rounded pt-2">
                             <?php  include('./admin/login.php')?>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade security-section" id="pills-security" role="tabpanel"
+                        aria-labelledby="pills-security-tab">
+                        <div class="col-sm-12 border border-primary shadow rounded pt-2">
+                            <?php  include('./security/login.php')?>
                         </div>
                     </div>
                 </div>
