@@ -1,6 +1,6 @@
 <?php
 
-$_SESSION["otp"] = 0;
+//$_SESSION["otp"] = 0;
 
 if (isset($_POST["flatno"]) && isset($_POST["contactno"]) && isset($_POST['blockno'])) {
     $flatno = $_POST["flatno"];
