@@ -30,20 +30,22 @@ mapper = {
 
 header = []
 header_id = {}
-end_col = 16
+end_col = 7
 startcol_index = 3
 passw = ""
+#print(sys.argv)
 file = xlrd.open_workbook(sys.argv[mapper['file_location']])
 data = file.sheet_by_index(0)
 for y in range(0, data.ncols):
     header.append(data.cell(0, y).value)
 # print(header)
 if len(sys.argv) != 23:
-    # print("len",len(sys.argv))
+    #print("len",len(sys.argv))
     end_col = 7
 else: 
     passw = sys.argv[mapper['password_db']]
 try:
+    #print(len(sys.argv)-end_col)
     for x in range(startcol_index, len(sys.argv)-end_col):
         # print("x:",sys.argv[x])
         header_id[sys.argv[x]] = header.index(sys.argv[x])
@@ -140,7 +142,7 @@ try:
 
         try:
             if login_role in ['admin']:
-                update_values = (oname, oemail, ocno, oacno, omem, isRent , rname, remail, rcno, racno, rmem, added, timestamp)
+                update_values = (oname, oemail, ocno, oacno, omem, isRent , rname, remail, rcno, racno, rmem, added, timestamp, blockno, flatno)
                 insert_record(update_values, values)    
 
         except Exception as e:
@@ -148,7 +150,7 @@ try:
                 if upload_constraint == "0":
                     pass
                 elif upload_constraint == "1":
-                    values = (oname, oemail, ocno, oacno, omem, isRent , rname, remail, rcno, racno, rmem, added, timestamp)
+                    values = (oname, oemail, ocno, oacno, omem, isRent , rname, remail, rcno, racno, rmem, added, timestamp, blockno, flatno)
                     try:
                         # operation_performed = "UPDATE"
                         cursor.execute(update_allotment, values)
