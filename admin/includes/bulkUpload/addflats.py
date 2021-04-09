@@ -20,7 +20,7 @@ mapper = {
 
 header = []
 header_id = {}
-end_col = 5
+end_col = 7
 startcol_index = 2
 passw = ""
 file = xlrd.open_workbook(sys.argv[mapper['file_location']])
@@ -67,7 +67,7 @@ timestamp = sys.argv[mapper['timestamp']]
 #added = sys.argv[mapper['#']]
 upload_constraint = sys.argv[mapper['upload_constraint']]
 print("c",upload_constraint)
-login_role = sys.argv[mapper['login_role']-1]
+login_role = sys.argv[mapper['login_role']]
 print("hi")
 password_set = 0
 inserted_records_count = 0
@@ -107,14 +107,18 @@ try:
         print("series",flatseries)
         val = (str(blockno),flatseries)
         print(val)
-        flatareaid = cursor.execute(flat_area_id, val) 
+        cursor.execute(flat_area_id, val) 
+        flatareaid_tuple = cursor.fetchone()
+        for i in flatareaid_tuple:
+           flatareaid = int(i) 
+        # print(cursor.execute(flat_area_id, val))
         print("id",flatareaid)
-        values = (flatno, blockno, floor, 7, timestamp, timestamp)
+        values = (flatno, blockno, floor, flatareaid, timestamp, timestamp)
 
         try:
             if login_role in ['admin']:
                 print("here")
-                update_values = (flatno, blockno, floor, 7, timestamp, timestamp)
+                update_values = (flatno, blockno, floor,flatareaid, timestamp, timestamp)
                 insert_record(update_values, values)    
 
         except Exception as e:
