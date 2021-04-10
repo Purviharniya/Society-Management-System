@@ -31,7 +31,8 @@
         </a>
         <div id="collapsePages3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="add_bills.php">View Bills</a>
+                <a class="collapse-item" href="view_additional_charges.php">View Additional <br>Charges</a>
+                <a class="collapse-item" href="view_bills.php">View Bills</a>
             </div>
         </div>
     </li>
