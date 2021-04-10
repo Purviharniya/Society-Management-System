@@ -1,9 +1,10 @@
 <?php
+include_once('../../../config.php');
 // echo 'Hi';
 $allowed_roles = array("admin");
 // if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
 // echo 'Hi';
-include_once('../../../config.php');
+
 
 $data = json_decode(file_get_contents("php://input"), true);
 $block = mysqli_escape_string($con, $data['BlockNumber']);

@@ -307,9 +307,9 @@ function loadCurrent() {
                 "targets": [1]
             },
             {
-                width: "5%",
-                targets: [6]
-            }
+                width: "3%",
+                targets: [0, 1, 6]
+            },
         ],
     });
     table.columns.adjust()
@@ -351,7 +351,7 @@ function loadModalCurrent() {
             $(document).on('hidden.bs.modal', '#update-del-modal', function() {
                 $("#update-del-modal").remove();
             });
-            $('#delete_security').submit(function(e) { 
+            $('#delete_security').submit(function(e) {
                 e.preventDefault();
                 var form = $(this);
                 var form_serialize = form.serializeArray(); // serializes the form's elements.
@@ -436,7 +436,7 @@ function update_security(e) {
                 console.log('form serilize');
                 console.log(form_serialize);
                 console.log("Hi ", form_serialize)
-                
+
                 temp['SecurityID'] = form_serialize[6].value; //new values
                 temp['Name'] = form_serialize[0].value; //new values
                 temp['ContactNumber'] = form_serialize[2].value;

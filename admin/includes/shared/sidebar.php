@@ -77,6 +77,7 @@
         <div id="collapsePages3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="add_bills.php">Add Bills</a>
+                <a class="collapse-item" href="manage_charges_flats.php">Manage Additional <br>Charges</a>
                 <a class="collapse-item" href="manage_bills.php">Manage Bills</a>
             </div>
         </div>

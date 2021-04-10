@@ -153,7 +153,8 @@ if ($isRent == '1') {?>
                                     </tbody>
                                 </table>
 
-                                <button type="submit" class="btn btn-primary" name="generate_bill">Add Charges</button>
+                                <button type="submit" class="btn btn-primary" name="add_charges_single">Add
+                                    Charges</button>
                             </form>
                         </div>
                     </div>
