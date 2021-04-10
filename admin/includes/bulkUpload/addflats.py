@@ -53,7 +53,6 @@ update_flat = "update flats set FlatNumber=%s,BlockNumber=%s,Floor=%s,FlatAreaID
 flat_area_id = "select FlatAreaID from flatarea where BlockNumber=%s and FlatSeries=%s"
 #
 
-# print (insert_faculty)
 # print(sys.argv[mapper['dbname']])
 # print("hi")
 connection = pymysql.connect(host=sys.argv[mapper['host']],

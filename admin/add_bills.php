@@ -53,7 +53,8 @@ unset($_SESSION['error_message']);
                         </h4>
                     </div>
 
-                    <form action=".php" method="POST" autocomplete="off" id="add_charges_all">
+                    <form action="includes/queries/add_additional_charges_bills.php" method="POST" autocomplete="off"
+                        id="add_charges_all">
                         <div class="form-group">
                             <label for="billmonth">Bill month:</label>
                             <input type="text" class="form-control" name="bill_month" value="<?php echo $prevmonth;?>"

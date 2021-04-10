@@ -34,7 +34,7 @@ Add your TODOs here:
 7. Report - 1 pages - NC
 8. Search - 1 pages - NC
 9. Dashboard - 1 page - NC
-10. Profile - NC
+10. Profile - C
 
 ---------------- EXTRA ------------------
 

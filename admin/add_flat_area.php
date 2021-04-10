@@ -50,7 +50,7 @@ unset($_SESSION['error_message']);
                         <h4 class="font-weight-bold text-primary">Add Flat Area</h4>
                     </div>
                     <div class="col text-center">
-                        <button type="button" class="btn btn-themeblack" name="addcourse" data-toggle="modal"
+                        <button type="button" class="btn btn-themeblack" name="addfarea" data-toggle="modal"
                             data-target="#uploadarea">
                             Upload excel&nbsp;&nbsp;<i class="fas fa-upload"></i>
                         </button>

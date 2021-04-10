@@ -123,4 +123,41 @@ if (isset($_POST['update_charges'])){
     }
 }
 
+if(isset($_POST['addchargesall-btn'])){
+    $bill_month = mysqli_escape_string($con, $_POST['bill_month']);
+    $charges = mysqli_escape_string($con, $_POST['additional_charges']);
+    $reason = mysqli_escape_string($con, $_POST['charges_reason']);
+    $timestamp = date("Y-m-d H:i:s");
+    $added_by = $_SESSION['username']; 
+    
+    if($bill_month == '' || $charges=='' || $reason==''){
+        $_SESSION['error_message'] = "All the fields are required";
+        header("Location: ../../add_bills.php");
+        exit();
+    }
+
+    if($charges<=0){
+        $_SESSION['error_message'] = "Additional Charges cannot be negative";
+        header("Location: ../../add_bills.php");
+        exit();
+    }
+    
+    else{
+    $get_flats_sql = mysqli_query($con,"SELECT * from flats");
+    while($frow = mysqli_fetch_assoc($get_flats_sql)){
+        
+        $flatid = $frow['FlatID'];
+        
+        $sql = "INSERT INTO additional_charges(`ChargeID`, `FlatID`, `Amount`, `Reason`, `Bill_month`, `Updated_at`, `Updated_by`) VALUES ('','$flatid','$charges','$reason','$bill_month','$timestamp','$added_by')";
+        mysqli_query($con, $sql);
+    }
+ 
+    $_SESSION['success_message'] = "Additional Charges for all the flats inserted successfully!";
+    header("Location: ../../add_bills.php");
+    exit();   
+    }
+}
+
+
+
 ?>
