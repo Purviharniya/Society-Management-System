@@ -1,9 +1,11 @@
 import pymysql
 import xlrd
 import sys
-# PENDING
 import re
 import json
+from datetime import datetime
+import random
+
 mapper = {
     # check this
     "added": 1,
@@ -54,8 +56,8 @@ except Exception as e:
           [0]+" is not a column in the uploaded sheet")
     sys.exit(0)
 
-print("hi")
-# FLAT ID DOUBT
+# print("hi")
+
 insert_visitors = """ Insert into visitors(VisitorID, FlatID, VisitorName, VisitorContactNo, AlternateVisitorContactNo, BlockNumber, FlatNumber, NoOfPeople, WhomToMeet, ReasonToMeet, OTP, StartDate, Duration, updated_by, updated_at)
                         VALUES('',%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s); """
 
@@ -66,16 +68,16 @@ update_visitors = "update visitors set VisitorContactNo=%s, WhomToMeet=%s, Reaso
 # fetch Flat Id from flats table
 flatId = "select FlatID from flats where BlockNumber=%s and FlatNumber=%s"
 
-# print (insert_visitors)
-print(sys.argv[mapper['dbname']])
-print("hi")
+# print(sys.argv[mapper['dbname']])
+# print("hi")
 connection = pymysql.connect(host=sys.argv[mapper['host']],
                              user=sys.argv[mapper['username_db']],
                              passwd=passw,
+                             port=3325,
                              database=sys.argv[mapper['dbname']])
-print("hi conn established!")
+#print("hi conn established!")
 cursor = connection.cursor()
-print(cursor)
+#print(cursor)
 timestamp = sys.argv[mapper['timestamp']]
 added = sys.argv[mapper['added']]
 upload_constraint = sys.argv[mapper['upload_constraint']]
@@ -84,84 +86,260 @@ login_role = sys.argv[mapper['login_role']]
 password_set = 0
 inserted_records_count = 0
 updated_records_count = 0
+send_otp_list = {}
+
+def insert_otp(check_query_values, otp):
+    global send_otp_list
+
+    # print("In insert otp func")
+    otp_query_values = list(check_query_values)
+    otp_query_values.insert(0,otp)
+    # print("otp_query_values",otp_query_values)
+
+    otp_query_values = tuple(otp_query_values)
+    # print("after tuple converion otp_query_values: ",otp_query_values)
+
+    otp_query = "update visitors set OTP=%s where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+    cursor.execute(otp_query, otp_query_values)
+            
+
+def update_otp(check_sd_values,otp):
+    # print("in update otp func")
+    # print("Changed the date or duration")
+
+    otp_query_values = list(check_sd_values)
+    otp_query_values.insert(0,otp)
+    # print("otp_query_values",otp_query_values)
+    otp_query_values = tuple(otp_query_values)
+    # print("after tuple converion otp_query_values: ",otp_query_values)
+
+    otp_query = "update visitors set OTP=%s where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+    cursor.execute(otp_query, otp_query_values)
+
+def check_sd(update_values):
+    # print("in check sd func")
+    check_sd_query = "select StartDate, Duration from visitors where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+    check_sd_values = (update_values[8],update_values[9],update_values[10])
+    res= cursor.execute(check_sd_query, check_sd_values)
+    row = cursor.fetchone()
+
+    return check_sd_values,row
+
+            
+          
 
 def insert_record(update_values, values_insert):
-    global updated_records_count, inserted_records_count
+    global updated_records_count, inserted_records_count, send_otp_list
     # operation_performed = ""
     # status = ""
 
     if sys.argv[mapper['upload_constraint']] == "2":
         # operation_performed = "UPDATE"
         # status = "updated details " 
+
+        # print("update_values",update_values)
+        
+        # check whether the duration or startdate is been changed or not
+        # print('In my update')
+
+        # check_sd_query = "select StartDate, Duration from visitors where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+        # check_sd_values = (update_values[8],update_values[9],update_values[10])
+        # res= cursor.execute(check_sd_query, check_sd_values)
+        # row = cursor.fetchone()
+        # # print("result from query", row)
+
+        check_sd_values,row = check_sd(update_values) 
+
+        startdate_old = row[0]
+        duration_old = row[1]
+        
+        startdate_new = update_values[4]
+        duration_new = update_values[5] 
+
+        if ((startdate_new != startdate_old) or (duration_new != duration_old)):
+            
+            otp = random.randint(100000, 999999)
+            # print("otp", otp)
+            update_otp(check_sd_values,otp)
+
+            # print("Changed the date or duration")
+            # otp = random.randint(100000, 999999)
+            # print("otp", otp)
+
+            # otp_query_values = list(check_sd_values)
+            # otp_query_values.insert(0,otp)
+            # # print("otp_query_values",otp_query_values)
+            # otp_query_values = tuple(otp_query_values)
+            # print("after tuple converion otp_query_values: ",otp_query_values)
+
+            # otp_query = "update visitors set OTP=%s where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+            # cursor.execute(otp_query, otp_query_values)
+
+            send_otp_list[otp] = update_values[0]
+            # print("send_otp_list: ",send_otp_list)
+
+
         updated_records_count += cursor.execute(update_visitors, update_values)
+
+    elif sys.argv[mapper['upload_constraint']] == "1":
+        
+        # print("values passed",values_insert)
+        compare_tuple = (values_insert[0],values_insert[1],values_insert[4],values_insert[5])
+        # print("compare tuple",compare_tuple)
+        check_query_values = (values_insert[4],values_insert[5],values_insert[1])
+        check_query = "select FlatID, VisitorName, BlockNumber, FlatNumber from visitors where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+        cursor.execute(check_query, check_query_values)
+        result = cursor.fetchone()
+        # print("result",result)
+
+        if compare_tuple == result:
+            # print('Record Already Exists!')
+            # print('So updating the further!')
+            # print(update_values)
+
+            check_sd_values,row = check_sd(update_values)  # Function
+        
+            startdate_old = row[0]
+            duration_old = row[1]
+            startdate_new = update_values[4]
+            duration_new = update_values[5] 
+
+            if ((startdate_new != startdate_old) or (duration_new != duration_old)):
+                
+                otp = random.randint(100000, 999999)
+                # print("otp", otp)
+                update_otp(check_sd_values,otp) # Function
+                send_otp_list[otp] = update_values[0]
+                # print("send_otp_list: ",send_otp_list)
+
+            updated_records_count += cursor.execute(update_visitors, update_values)
+            
+
+        elif (cursor.rowcount) == 0:
+            # print('Inserting the Record')
+            # print(values_insert)
+            
+            otp = random.randint(100000, 999999)
+            # print("otp", otp)
+
+            # Query for checking whether the record exists or not in DB
+            check_query_values = (values_insert[4],values_insert[5],values_insert[1])
+            check_query = "select * from visitors where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+            cursor.execute(check_query, check_query_values)
+
+
+            cursor.execute(insert_visitors, values_insert) # insert query
+
+            insert_otp(check_query_values, otp) # Function
+
+            send_otp_list[otp] = values_insert[2]
+            # print("send_otp_list: ",send_otp_list)
+            inserted_records_count += 1  
+
         
     else:
         # operation_performed = "INSERT"
         # status = "Area record inserted"
-        cursor.execute(insert_visitors, values_insert)
-        inserted_records_count += 1        
+        
+        # print('In my insert part')
+        
+        # print("values_insert: ",values_insert)
+
+        otp = random.randint(100000, 999999)
+        # print("otp", otp)
+
+        # Query for checking whether the record exists or not in DB
+        check_query_values = (values_insert[4],values_insert[5],values_insert[1])
+        check_query = "select * from visitors where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+        cursor.execute(check_query, check_query_values)
+
+        if cursor.rowcount != 0:
+            # print('Record Already Exists!')
+            pass
+        else:
+            # print('Inserting the Record')
+            cursor.execute(insert_visitors, values_insert)
+
+            insert_otp(check_query_values, otp) #Function
+
+            # otp_query_values = list(check_query_values)
+            # otp_query_values.insert(0,otp)
+            # print("otp_query_values",otp_query_values)
+
+            # otp_query_values = tuple(otp_query_values)
+            # print("after tuple converion otp_query_values: ",otp_query_values)
+
+            # otp_query = "update visitors set OTP=%s where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
+            # cursor.execute(otp_query, otp_query_values)
+
+            send_otp_list[otp] = values_insert[2]
+            # print("send_otp_list: ",send_otp_list)
+            inserted_records_count += 1        
 
 try:
-    print("inside try")
-    print(data.nrows)
+    # print("inside try")
+    # print(data.nrows)
     for x in range(1, data.nrows):
-        print("in for loop")
-        print(x)
-        print(data.cell(x, header_id[sys.argv[mapper['block_col']]]).value)
+        # print("in for loop")
+        # print(x)
+        # print(data.cell(x, header_id[sys.argv[mapper['block_col']]]).value)
         
-        vname = data.cell(
-            x, header_id[sys.argv[mapper['vname_col']]]).value
-        print(vname)
+        vname = data.cell(x, header_id[sys.argv[mapper['vname_col']]]).value
+        # print(vname)
 
-        vcno = data.cell(
-            x, header_id[sys.argv[mapper['vcno_col']]]).value
+        vcno = int(data.cell(x, header_id[sys.argv[mapper['vcno_col']]]).value)
 
-        alternatevcno = data.cell(
-            x, header_id[sys.argv[mapper['alternatevcno_col']]]).value
+        alternatevcno = int(data.cell(x, header_id[sys.argv[mapper['alternatevcno_col']]]).value)
 
-        blockno = data.cell(
-            x, header_id[sys.argv[mapper['block_col']]]).value
-        print(blockno)
+        blockno = data.cell(x, header_id[sys.argv[mapper['block_col']]]).value
+        # print(blockno)
         
-        flatno = data.cell(
-            x, header_id[sys.argv[mapper['flatno_col']]]).value
-        # flatno = str(int(flatno)).zfill(2)
-        print(flatno)
+        flatno = int(data.cell(x, header_id[sys.argv[mapper['flatno_col']]]).value)
+        # print(flatno)
 
-        people = data.cell(
-            x, header_id[sys.argv[mapper['people_col']]]).value
+        people = int(data.cell(x, header_id[sys.argv[mapper['people_col']]]).value)
 
-        whom = data.cell(
-            x, header_id[sys.argv[mapper['whom_col']]]).value
+        whom = data.cell(x, header_id[sys.argv[mapper['whom_col']]]).value
 
-        reason = data.cell(
-            x, header_id[sys.argv[mapper['reason_col']]]).value
+        reason = data.cell(x, header_id[sys.argv[mapper['reason_col']]]).value
 
-        startdate = data.cell(
-            x, header_id[sys.argv[mapper['startdate_col']]]).value
+        excel_date = data.cell(x, header_id[sys.argv[mapper['startdate_col']]]).value
+        # print("excel_date",excel_date)
+        startdate = datetime(*xlrd.xldate_as_tuple(excel_date, 0))
+        startdate = startdate.date()
+        # print("startdate",startdate)
 
-        duration = data.cell(
-            x, header_id[sys.argv[mapper['duration_col']]]).value
+        duration = int(data.cell(x, header_id[sys.argv[mapper['duration_col']]]).value)
 
-        val = (str(blockno),int(flatno))
-        print(val)
-        cursor.execute(flatId, val) 
+        val = (str(blockno),flatno)
+        # print(val)
+        cursor.execute(flatId, val)  # executing the fetch flatId query
         flatId_tuple = cursor.fetchone()
 
-        #for i in flatId_tuple:
-        #   flatID = i 
-        # print(cursor.execute(flat_area_id, val))
-        flatID = 2
-        print("flatid",flatID)
+        flatID = 2 # remove this later
+        # print("flatid",flatID)
+        
+        # print('flatid_tuple',flatId_tuple)
+        try:
+            # print('In my try')
+            for i in flatId_tuple:
+                #   flatID = i 
+                # print("i",i)
+                x = i
+        except Exception as e:
+            # print('In my except')
+            # print('error',e)
+            # print("Flat with Block Number: {} and Flat Number: {} does not exist".format(blockno,flatno))
+            continue
 
-        otp = 1234 #just now now-->check this
+        otp = 0 #just now now-->check this
 
         #for Insert query
         values = (flatID, vname, vcno, alternatevcno, blockno, flatno, people, whom, reason, otp, startdate, duration, added, timestamp)
         
 
         try:
-            if login_role in ['admin']:
+            if login_role in ['admin']: # iska explanation kya h?? yeh kyu kiya h aise
                 update_values = (vcno, whom, reason, people, startdate, duration, added, timestamp, blockno, flatno,vname)
                 insert_record(update_values, values)    
 
@@ -184,6 +362,10 @@ try:
                     print("error+Block No.: "+blockno+", Flat No.: " +
                           flatno + " and Visitor Name: "+vname+" has duplicate entry.")
                     sys.exit(0)
+            elif "'NoneType' object" in str(e):
+                # print("Reached")
+                if upload_constraint == "2":
+                    pass
 
             else:
                 print("The upload was unsuccessful.")
@@ -195,7 +377,8 @@ except Exception as e:
 
 connection.commit()
 output = {"insertedRecords": inserted_records_count,
-          "updatedRecords": updated_records_count, "totalRecords": data.nrows-1}
-print('Successful+%s' %
+          "updatedRecords": updated_records_count, "totalRecords": data.nrows-1,"otp_list": send_otp_list}
+# print('output',output)
+print('Successful+ %s' %
       (json.dumps(output)))
 connection.close()

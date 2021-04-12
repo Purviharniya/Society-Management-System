@@ -355,11 +355,12 @@ $("#bulkUploadVisitor").submit(function(e) {
         type: 'POST',
         data: formData,
         success: function(data) {
+            console.log("data");
             console.log(data);
             let [status, response] = $.trim(data).split("+");
             console.log(status);
             if (status == "Successful") {
-                const resData = JSON.parse(response);
+                let resData = JSON.parse(response);
                 console.log(resData)
                 $("#upload_visitors").text("Upload Successfull!");
                 $("#upload_visitors").removeClass("btn-primary");

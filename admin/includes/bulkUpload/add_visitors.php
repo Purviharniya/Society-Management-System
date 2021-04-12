@@ -1,6 +1,7 @@
 <?php
 // include_once('../../verify.php');
 include_once '../../../config.php';
+include '../handlers/visitors_otp.php';
 
 $block = $_POST['block'];
 $flatno = $_POST['flatno'];
@@ -41,11 +42,32 @@ move_uploaded_file($_FILES['Uploadfile']['tmp_name'], $target_location);
 date_default_timezone_set('Asia/Kolkata');
 $timestamp = date("Y-m-d H:i:s");
 $cmd = 'python addvisitors.py "' . $addedby . '" "' . $timestamp . '" "' . $vname . '" "' . $contact . '" "' . $contact1 . '" "' . $block . '" "' . $flatno . '" "' . $people . '" "' . $whomToMeet . '" "' . $reasonToMeet . '" "' . $startdate . '" "' . $duration . '" "' . $servername . '" "' . $target_location . '" "' . $username . '" "' . $dbname . '" "' . $password . '" "' . $upload_constraint . '" "' . $login_role . '" ';
-echo $cmd;
+// echo $cmd;
 $output = shell_exec($cmd);
 echo $output;
+
+$list = explode(" ",$output,2);
+$jsonDecode = json_decode($list[1],true);
+// print_r($jsonDecode["otp_list"]);
+
+if (strpos($output,"unsuccessful") == False){
+    // echo "Reached";
+    
+    foreach($jsonDecode["otp_list"] as $visitorOTP => $vcno) {
+        // echo 'Your key is: '.$key.' and the value of the key is:'.$value;
+        generateOTP( $visitorOTP,$vcno);
+    }
+        
+}
+
+// echo "json";
+// echo $jsonDecode;
+// echo "Blah blah <br>";
+// echo '<script>console.log('.$output.')</script>';
 //  if(strpos($output,"Duplicate entry")){
 //     echo "Import Unsuccessful as adding caused duplicate entries";
 // }else{
 //     echo $output;
 // }
+
+
