@@ -56,3 +56,10 @@ To modify:
 ---- SHOULD WE DO THIS? ---- 
 3. Disable update/delete additional charges, once the bill has been generated 
 
+BILLS METHODOLOGY: 
+
+Once the button is clicked:
+1. add all the emails(Data) to be sent to a bill email queue table with sent status=0
+2. Fetch from the database and then send the email and update sent status=1 
+3. Display a sent successfully message
+

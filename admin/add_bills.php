@@ -146,8 +146,10 @@ unset($_SESSION['error_message']);
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                        <a class="btn btn-primary" href="queries/generatebill.php"
-                                            name="generate_bill_btn">Yes</a>
+                                        <form method="POST" action="includes/queries/generatebill.php">
+                                            <button type="submit" name="genbill-btn"
+                                                class="btn btn-primary">Yes</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
