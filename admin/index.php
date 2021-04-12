@@ -17,7 +17,7 @@ $complaint = mysqli_num_rows($complaint_sql);
 $visit_sql = mysqli_query($con, "SELECT * from visitors");
 $visit = mysqli_num_rows($visit_sql);
 
-$bill_sql = mysqli_query($con, "SELECT * from bills");
+$bill_sql = mysqli_query($con, "SELECT * from bill_queue");
 $bill = mysqli_num_rows($bill_sql);
 
 $security_sql = mysqli_query($con, "SELECT * from security");
@@ -364,7 +364,7 @@ $security = mysqli_num_rows($security_sql);
         <div class="col-md-12 grid-margin stretch-card mt-2">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title font-weight-bold text-info">Dashboard: <?php echo $_SESSION['username'];?>
+                    <h4 class="card-title font-weight-bold text-info">Dashboard: <?php echo $_SESSION['username']; ?>
                     </h4>
                     <div class="mt-5">
                         <div class="card-deck mx-2">
@@ -397,7 +397,7 @@ $security = mysqli_num_rows($security_sql);
                                     <div class="col-lg-6">
                                         <div class="card-heading align-self-center font-weight-bold"
                                             style="font-size:1.5rem;color: #4C5656;">
-                                            <span class="counter" data-target='<?php echo $complaint;?>'>0</span> <br>
+                                            <span class="counter" data-target='<?php echo $complaint; ?>'>0</span> <br>
                                             Complaints
                                         </div>
                                     </div>
