@@ -73,7 +73,7 @@ if ($result = mysqli_query($con, $query)) {
     while ($row = mysqli_fetch_array($result)) {
         $bmonth = $row['Bill_month'];
         echo '<div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input checked type="checkbox" name="filter_bmonth[]" class="custom-control-input" value="' . $bmonth. '" id="filter_bmonth_' . $bmonth . '">
+                                                            <input checked type="checkbox" name="filter_bmonth[]" class="custom-control-input" value="' . $bmonth . '" id="filter_bmonth_' . $bmonth . '">
                                                             <label class="custom-control-label" for="filter_bmonth_' . $bmonth . '">' . $bmonth . '</label>
                                                         </div>';
     }
@@ -95,7 +95,7 @@ if ($result = mysqli_query($con, $query)) {
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-responsive" id="dataTable-complaints" width="100%"
+                    <table class="table table-bordered table-responsive" id="dataTable-additionalcharges" width="100%"
                         cellspacing="0">
                         <thead>
                             <tr>
@@ -158,7 +158,7 @@ function getFilters() {
 
 //DATATABLE CREATE
 function loadCurrent() {
-    var table = $('#dataTable-complaints').DataTable({
+    var table = $('#dataTable-additionalcharges').DataTable({
         processing: true,
         serverSide: true,
         destroy: true,
@@ -194,26 +194,6 @@ function loadCurrent() {
                 return d
             }
         },
-        fnDrawCallback: function() {
-            $(".action-btn").on('click', loadModalCurrent)
-            $(".selectrow").attr("disabled", true);
-            $("th").removeClass('selectbox');
-            $(".selectbox").click(function(e) {
-                var row = $(this).closest('tr')
-                var checkbox = $(this).find('input');
-                console.log(checkbox);
-                checkbox.attr("checked", !checkbox.attr("checked"));
-                row.toggleClass('selected table-secondary')
-                if ($("#dataTable-complaints tbody tr.selected").length != $(
-                        "#dataTable-complaints tbody tr").length) {
-                    $("#select_all").prop("checked", true)
-                    $("#select_all").prop("checked", false)
-                } else {
-                    $("#select_all").prop("checked", false)
-                    $("#select_all").prop("checked", true)
-                }
-            })
-        },
         columns: [{
                 data: 'Amount'
             },
@@ -247,171 +227,17 @@ function loadCurrent() {
     });
     table.columns.adjust()
 }
-//SELECT CHECKALL
-$("#select_all").click(function(e) {
-    // console.log("Hi")
-    //   var row=$(this).closest('tr')
-    if ($(this).is(":checked")) {
-        $("#dataTable-complaints tbody tr").addClass("selected table-secondary");
-        $(".selectrow").attr("checked", true);
-    } else {
-        $(".selectrow").attr("checked", false);
-        $("#dataTable-complaints tbody tr").removeClass("selected table-secondary");
-    }
-    //   row.toggleClass('selected table-secondary')
-})
-
-//action modal part
-function loadModalCurrent() {
-    var target_row = $(this).closest("tr"); // this line did the trick
-    // console.log(target_row)
-    // var btn=$(this);
-    var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(target_row.get(0));
-    var areaData = $('#dataTable-complaints').DataTable().row(aPos).data()
-    // console.log("AreaData"+areaData);
-    var json_areaData = JSON.stringify(areaData)
-    console.log("Json Area data modal: " + json_areaData)
-    $.ajax({
-        type: "POST",
-        url: "includes/loadInfo/loadmodal_complaints.php",
-        // data: form_serialize,
-        // dataType: "json",
-        data: json_areaData,
-        success: function(output) {
-            // $("#"+x).text("Deleted Successfully");
-            target_row.append(output);
-            $('#update-del-modal').modal('show')
-            $(document).on('hidden.bs.modal', '#update-del-modal', function() {
-                $("#update-del-modal").remove();
-            });
-            $('#delete_complaints').submit(function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var form_serialize = form.serializeArray(); // serializes the form's elements.
-                form_serialize.push({
-                    name: $("#delete_complaints_btn").attr('name'),
-                    value: $("#delete_complaints_btn").attr('value')
-                });
-                // alert('hi');
-                console.log(form_serialize);
-                $("#delete_complaints_btn").text("Deleting...");
-                $("#delete_complaints_btn").attr("disabled", true);
-                $.ajax({
-                    type: "POST",
-                    url: "includes/queries/raise_complaint.php",
-                    data: form_serialize,
-                    success: function(data) {
-                        // alert(data); // show response from the php script.
-                        if (data == "Status_0") {
-                            $("#delete_complaints_btn").text("Can not be deleted");
-                            $('.modal-backdrop').remove();
-                        } else {
-                            $("#delete_complaints_btn").text("Deleted Successfully");
-                            var row = $("#update-del-modal").closest('tr');
-                            var aPos = $("#dataTable-complaints").dataTable()
-                                .fnGetPosition(
-                                    row.get(0));
-                            $('#update-del-modal').modal('hide');
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-                        }
-                        // row.remove();
-                        loadCurrent();
-
-                        // console.log(aPos);
-                        // console.log(row)
-                    }
-                });
-            });
-            $('#update_complaints').submit(function(e) {
-                update_complaints(e);
-                // $('#update-del-modal').modal('hide');
-            });
-        }
-    });
-}
 
 $("#filter_charges_form").submit(function(e) {
     e.preventDefault();
     console.log("hi");
-    $('#dataTable-complaints').DataTable().ajax.reload();
+    $('#dataTable-additionalcharges').DataTable().ajax.reload();
     $("#exampleModalCenter1").modal("hide")
-})
-
-function update_complaints(e) {
-    e.preventDefault();
-    var form = $('#update_complaints');
-    var form_serialize = form.serializeArray(); // serializes the form's elements.
-    console.log("formser:", form_serialize)
-    form_serialize.push({
-        name: $("#update_complaints_btn").attr('name'),
-        value: $("#update_complaints_btn").attr('value')
-    });
-    $("#update_complaints_btn").text("Updating...");
-    $("#update_complaints_btn").attr("disabled", true);
-    $.ajax({
-        type: "POST",
-        url: "includes/queries/raise_complaint.php",
-        data: form_serialize,
-        success: function(data) {
-            // alert(data); // show response from the php script.
-            // console.log(data);
-
-            $("#update_complaints_btn").text("Updated Successfully");
-            $("#update_complaints_btn").removeClass("btn-primary");
-            $("#update_complaints_btn").addClass("btn-success");
-            var row = $("#update-del-modal").closest('tr');
-            var aPos = $("#dataTable-complaints").dataTable().fnGetPosition(row.get(0));
-            var temp = $("#dataTable-complaints").DataTable().row(aPos).data();
-            // console.log(temp)
-            // console.log("Hi", form_serialize)
-            temp['ComplaintType'] = form_serialize[0].value; //new values
-            temp['Description'] = form_serialize[2].value; //new values
-            temp['updated_at'] = form_serialize[5].value;
-            $('#dataTable-complaints').dataTable().fnUpdate(temp, aPos, undefined, false);
-            $('.action-btn').off('click')
-            $('.action-btn').on('click', loadModalCurrent)
-            // $("#dataTable-complaints").DataTable().row(aPos).draw(false);
-            $('#error_record').remove();
-
-        }
-    });
-}
-
-
-$("#delete_selected_response_btn").click(function(e) {
-    alert("You have selected " + $("#dataTable-complaints tbody tr.selected").length +
-        " record(s) for deletion");
-    var delete_rows = $("#dataTable-complaints").DataTable().rows('.selected').data()
-    var delete_data = {}
-    for (var i = 0; i < delete_rows.length; i++) {
-        // console.log("delete:" + delete_rows[i].Status)
-        baseData = {}
-        baseData['record_id'] = delete_rows[i].RequestID
-        baseData['status'] = delete_rows[i].Status
-        delete_data[i] = baseData
-        // console.log("Base Data:"+baseData);
-    }
-    var actual_data = {}
-    actual_data['type'] = 'current'
-    actual_data['delete_data'] = delete_data
-    actual_delete_data_json = JSON.stringify(actual_data)
-    // console.log("Actual Data:" + actual_delete_data_json)
-    $.ajax({
-        type: "POST",
-        url: "includes/queries/delete_multiple_complaints.php",
-        data: actual_delete_data_json,
-        success: function(data) {
-            // console.log("Returned data: " + data)
-            alert(data + " record(s) have been deleted. ");
-            $("#dataTable-complaints").DataTable().draw(false);
-        }
-    })
 })
 
 $("#clear-filters").click(function(e) {
     $('#filter_charges_form').trigger('reset');
-    $('#dataTable-complaints').DataTable().ajax.reload(false);
+    $('#dataTable-additionalcharges').DataTable().ajax.reload(false);
 });
 </script>
 

@@ -37,7 +37,7 @@ if (isset($_POST['genbill-btn'])) {
         $getdets_sql = mysqli_query($con, "SELECT flatarea.Ratepsq, flatarea.FlatArea,
         GROUP_CONCAT(additional_charges.Amount) as Amount, GROUP_CONCAT(additional_charges.Reason) as Reason,
         allotments.OwnerName, allotments.OwnerEmail, allotments.OwnerContactNumber,
-        allotments.OwnerAlternateContactNumber, flats.BlockNumber,flats.Floor, flats.FlatNumber from flatarea
+        allotments.OwnerAlternateContactNumber, flats.BlockNumber,flats.Floor,flatarea.FlatArea,flats.FlatNumber from flatarea
         inner join flats on flatarea.FlatAreaID=flats.FlatAreaID inner join allotments on
         allotments.FlatID=flats.FlatID inner join additional_charges on additional_charges.FlatID = flats.FlatID
         where flats.FlatID='$flatid'; ");
@@ -54,6 +54,7 @@ if (isset($_POST['genbill-btn'])) {
         $blockno = $getdets_row['BlockNumber'];
         $flatno = $getdets_row['FlatNumber'];
         $floor = $getdets_row['Floor'];
+        $farea = $getdets_row['FlatArea'];
         //calculating maint charges
         $mcharges = $rate * $farea;
 
@@ -79,7 +80,7 @@ if (isset($_POST['genbill-btn'])) {
         $filemime = "application/pdf";
         $data = $bill_dir . '' . $blockno . '-' . $flatno . '-' . $bmonth . '.pdf';
 
-        $html_code = bill_template($blockno, $flatno, $floor, $oname, $oemail, $ocontact, $oacontact, $bmonth, $mcharges, $acharges, $acharges_reasons, $tcharges, $gen_date, $due_date, $charges_after_due);
+        $html_code = bill_template($blockno, $flatno, $farea, $floor, $oname, $oemail, $ocontact, $oacontact, $bmonth, $mcharges, $acharges, $acharges_reasons, $tcharges, $gen_date, $due_date, $charges_after_due);
         echo $html_code;
         $pdf->load_html($html_code);
         $pdf->render();
@@ -97,15 +98,15 @@ if (isset($_POST['genbill-btn'])) {
     }
     //mailing to each owner and also updating the is_sent status to 1 in the database
 
-    $myMail = new PHPMailerHelper();
-    $myMail->sendEmail();
+    // $myMail = new PHPMailerHelper();
+    // $myMail->sendEmail();
 
-    $_SESSION['success_message'] = "Bills generated and sent successfully";
-    header("Location: ../../add_bills.php");
-    exit();
+    // $_SESSION['success_message'] = "Bills generated and sent successfully";
+    // header("Location: ../../add_bills.php");
+    // exit();
 }
 
-function bill_template($block, $flat, $floor, $oname, $oemail, $ocontact, $oacontact, $bmonth, $mcharges, $acharges, $reason, $tcharges, $gen_date, $due_date, $charges_after_due)
+function bill_template($block, $flat, $farea, $floor, $oname, $oemail, $ocontact, $oacontact, $bmonth, $mcharges, $acharges, $reason, $tcharges, $gen_date, $due_date, $charges_after_due)
 {
 
     return $html_code = '<style>
@@ -118,7 +119,7 @@ function bill_template($block, $flat, $floor, $oname, $oemail, $ocontact, $oacon
 
     th,
     td {
-        padding: 15px;
+        padding: 5px;
     }
 
     .name {
@@ -145,7 +146,7 @@ function bill_template($block, $flat, $floor, $oname, $oemail, $ocontact, $oacon
     }
     </style>
 
-<div class="wrapper" style="margin:50px;">
+<div class="wrapper">
     <table style="width:100%">
         <tr>
             <td colspan="4" class="name" style="align: center; text-align: center;">
@@ -159,24 +160,24 @@ function bill_template($block, $flat, $floor, $oname, $oemail, $ocontact, $oacon
                 MAINTENANCE BILL</td>
         </tr>
         <tr>
-            <td style="width:15%;border: none;">Unit No.:' . $block . ' -' . $flat . '</td>
-            <td style="border: none;">Unit Area: 1000 Sq Ft</td>
-            <td style="border: none;">Unit Type: Residential</td>
-            <td style="border: none;">Bill No.: 1</td>
+            <td style="border: none;" colspan="2">Unit No.:' . $block . ' -' . $flat . '</td>
+            <td style="border: none;" colspan="1">Name: ' . $oname . '</td>
 
+            <td style="border: none;" colspan="1">Bill No.: 1</td>
         </tr>
         <tr>
-            <td style="border: none;" colspan="2">Name: ' . $oname . '</td>
-            <td style="border: none;" colspan="2">Bill Date:' . $gen_date . ' </td>
+        <td style="border: none;" colspan="2">Unit Area:' . $farea . ' Sq Ft</td>
+
+        <td style="border: none;" colspan="1">Floor: ' . $floor . '</td>
+        <td style="border: none;" colspan="1">Bill Date:' . $gen_date . ' </td>
         </tr>
         <tr>
-            <td style="border: none;" colspan="2">Bill For:' . $bmonth . ' </td>
-            <td style="border: none;" colspan="2">Due Date: ' . $due_date . '</td>
+        <td style="border: none;" colspan="3">Unit Type: Residential</td>
+        <td style="border: none;" colspan="1">Bill For:' . $bmonth . ' </td>
         </tr>
         <tr>
-            <td style="width: 15%;border: none;">Block No.: ' . $block . '</td>
-            <td style="border: none;">Flat Number: ' . $flat . ' </td>
-            <td style="border: none;" colspan="2">Floor: ' . $floor . '</td>
+        <td style="border: none;" colspan="3"></td>
+        <td style="border: none;" colspan="1">Due Date: ' . $due_date . '</td>
         </tr>
         </td>
         </tr>
@@ -287,8 +288,8 @@ class PHPMailerHelper
             $mail->Host = "smtp.gmail.com";
             $mail->Port = 465; // or 587
             $mail->IsHTML(true);
-            $mail->Username = 'Email here ';
-            $mail->Password = 'password here';
+            $mail->Username = 'Email';
+            $mail->Password = 'Password';
 // $mail->Port = 465;
 
         } catch (Exception $e) {
@@ -326,7 +327,12 @@ class PHPMailerHelper
                 if ($mail->send()) {
                     echo "Successfully Sent the email to";
                     $updateQuery = "Update bill_queue set is_sent = 1 where bill_id = {$row['bill_id']}";
+                    $updated_at = date("Y-m-d H:i:s");
                     $this->conn->query($updateQuery);
+                    $insertbillq = "INSERT into bills_paid (`BillID`, `BillQueueID`, `FlatID`, `BillAmount`, `Status`, `Receipt`, `ReceiptName`, `updated_at`) values
+                    ('','{$row['bill_id']}','{$row['FlatID']}','{$row['total_charges']}','0','','','$updated_at') ";
+                    $this->conn->query($insertbillq);
+                    echo $insertbillq;
                 } else {
                     echo "Error";
                 }

@@ -275,6 +275,7 @@ $("#bulkUploadAreaRate").submit(function(e) {
     e.preventDefault();
     form = this;
     var formData = new FormData(this);
+    console.log(formData);
     // $("#upload_farea").attr("disabled", true);
     // $("#upload_farea").text("Uploading...")
     $.ajax({

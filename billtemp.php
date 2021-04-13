@@ -42,7 +42,7 @@ $charges = 5000;
 
 ?>
 
-<div class="wrapper" style="margin:50px;">
+<div class="wrapper">
     <table style="width:100%">
         <tr>
             <td colspan="4" class="name" style="align: center; text-align: center;">
@@ -64,16 +64,19 @@ $charges = 5000;
         </tr>
         <tr>
             <td style="border: none;" colspan="2">Name: PERJ PERJ</td>
-            <td style="border: none;" colspan="2">Bill Date: 10th March 2021</td>
+            <td style="border: none;" colspan="1">Block No.: A</td>
+            <td style="border: none;" colspan="1">Bill Date: 10th March 2021</td>
         </tr>
         <tr>
-            <td style="border: none;" colspan="2">Bill For: March 2021</td>
-            <td style="border: none;" colspan="2">Due Date: 20th April 2021</td>
+            <td style="border: none;" colspan="2">Flat Number: 101</td>
+            <td style="border: none;" colspan="1">Floor: 1</td>
+            <td style="border: none;" colspan="1">Bill For: March 2021</td>
+
         </tr>
         <tr>
-            <td style="width: 15%;border: none;">Block No.: A</td>
-            <td style="border: none;">Flat Number: 101</td>
-            <td style="border: none;" colspan="2">Floor: 1</td>
+            <td style="border: none;" colspan="3"></td>
+            <td style="border: none;" colspan="1">Due Date: 20th April 2021</td>
+
         </tr>
         </td>
         </tr>
