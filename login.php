@@ -46,7 +46,7 @@ session_start();
                     </li>
                     <li class="nav-item"> <a class="nav-link" id="pills-security-tab" data-toggle="pill"
                             href="#pills-security" role="tab" aria-controls="pills-security"
-                            aria-selected="false">Security Guard</a>
+                            aria-selected="false">Security</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
