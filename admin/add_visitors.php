@@ -253,15 +253,31 @@ unset($_SESSION['error_message']);
                     <form action="includes/queries/visitors.php" method="POST" autocomplete="">
                         <div class="form-group">
                             <label for="block">Block:</label>
-                            <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
-                                required>
+                            <!-- <input type="text" class="form-control" id="block" name="block" aria-describedby="blockHelp"
+                                required> -->
+                            <select class="form-control" id="block_select" name="block" required>
+                                <option value="" selected> Select a Block</option>
+                                <?php 
+                                
+                                $sql = "SELECT distinct(BlockNumber) from allotments";
+                                $res = mysqli_query($con,$sql);
+
+                                while($row= mysqli_fetch_assoc($res)){
+                                    echo '
+                                    <option value="'. $row["BlockNumber"].'">' .$row["BlockNumber"]. ' </option>';
+                                }
+                                ?>
+                            </select>
                             <small id="blockHelp" class="form-text text-muted">Enter the block name (make it a drop down
                                 later)</small>
                         </div>
                         <div class="form-group">
                             <label for="fno">Flat no:</label>
-                            <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
-                                required>
+                            <!-- <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
+                                required> -->
+                            <select class="form-control" id="flat_select" name="flat" required>
+                                <option value="" selected> Select a Flat</option>
+                            </select>
                             <small id="fnoHelp" class="form-text text-muted">Enter the Flat number (make it a drop down
                                 later)</small>
                         </div>
@@ -380,6 +396,28 @@ $("#bulkUploadVisitor").submit(function(e) {
         processData: false
     });
 })
+
+$("#block_select").change(function() {
+    getflats();
+});
+
+function getflats() {
+    var data = $("#block_select").val();
+    console.log("Block selected: ", data);
+    $.ajax({
+        type: "POST",
+        data: {
+            block: data
+        },
+        url: "includes/handlers/add_visitor_flats.php",
+        success: function(res) {
+            // alert(res);
+            // console.log(res);
+            $("#flat_select").html(res);
+        }
+    });
+
+}
 </script>
 
 

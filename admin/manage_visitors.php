@@ -467,6 +467,7 @@ function update_visitors(e) {
                 temp['StartDate'] = form_serialize[14].value;
                 temp['Duration'] = form_serialize[16].value;
                 
+        
                 // temp['updated_at'] = form_serialize[8].value;
                 // temp['Updatedby'] = $_SESSION['username'];
                 temp['Updatedby'] = 'Admin1';
