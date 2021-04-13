@@ -11,8 +11,7 @@ function generateOTP($visitorOTP, $vcno, $vname, $startdate, $duration)
         // "message" => $vname." your Visiting OTP is <strong>". $visitorOTP ." </strong>valid from <strong> ". $startdate . " to ". $enddate ."</strong>",
         "message" => "2",
         "variables_values" => $visitorOTP,
-        "route" => "s", //check
-        // "numbers" => '"' . $number1 . ', ' . $number2 . '"', //not working
+        "route" => "s", 
         "numbers" => $vcno,
     );
     // echo '<script>console.log('.$fields.')</script>';
@@ -134,7 +133,7 @@ if (isset($_POST['delete_visitors'])) {
     // header("Location: ../bla.php");
     exit();
 }
-//CHECK CHECK
+
 if (isset($_POST['update_visitors'])) {
 
     // $block = $_SESSION['blockno'];

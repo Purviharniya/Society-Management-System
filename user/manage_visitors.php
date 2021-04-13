@@ -221,16 +221,17 @@ function loadCurrent() {
         serverMethod: 'post',
         aaSorting: [],
         dom: '<"d-flex justify-content-between table-buttons-addvisitors"fBl>tip',
-        buttons: [{
-            extend: 'excel',
-            title: "visitors-data",
-            text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
-            className: "btn btn-outline-primary  ",
-            action: newExportAction,
-            exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9] //CHECK THIS-->pending
-            }
-        }, {
+        // buttons: [{
+        //     extend: 'excel',
+        //     title: "visitors-data",
+        //     text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
+        //     className: "btn btn-outline-primary  ",
+        //     action: newExportAction,
+        //     exportOptions: {
+        //         columns: [1, 2, 3, 4, 5, 6, 7, 8, 9] //CHECK THIS-->pending
+        //     }
+        // },
+        {
             extend: "pdfHtml5",
             title: "visitors-data",
             text: '<span> <i class="fas fa-download "></i> PDF</span>',
@@ -309,7 +310,7 @@ function loadCurrent() {
                 targets: [0],
             },
             {
-                className: "VisitorName", //CHECK THIS
+                className: "VisitorName", 
                 "targets": [1],
             },
             {
@@ -428,7 +429,7 @@ function update_visitors(e) {
             // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
-                    '*This data already exists! Please change the Visitor Name'); //check this
+                    '*This data already exists! Please change the Visitor Name'); 
                 $('#error_record').addClass('text-danger');
                 $("#update_visitors_btn").text("Update");
                 $("#update_visitors_btn").attr("disabled", false);
