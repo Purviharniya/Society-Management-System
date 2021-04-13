@@ -12,5 +12,4 @@ if (isset($_POST['update_bill'])) {
 
     $sql = "UPDATE bills_paid set Status='$status_new', updated_at='$timestamp' where BillID='$recordid' and FlatID='$flatid'";
     mysqli_query($con, $sql);
-
 }

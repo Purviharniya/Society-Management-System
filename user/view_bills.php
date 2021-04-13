@@ -293,21 +293,16 @@ function loadModalCurrent() {
                         // let [status, response] = $.trim(data).split("+");
                         console.log(status);
                         if (status == "Successful") {
-                            const resData = JSON.parse(response);
-                            console.log(resData)
-                            // $("#upload_farea").text("Upload Successfull!");
-                            // $("#upload_farea").removeClass("btn-primary");
-                            // $("#upload_farea").addClass("btn-success");
-                            // alert("Status:" + status + "\nInserted : " + resData
-                            //     .insertedRecords +
-                            //     "\nUpdated : " + resData.updatedRecords +
-                            //     "\nNo Operation : " + (resData
-                            //         .totalRecords - (resData.updatedRecords +
-                            //             resData.insertedRecords)))
+                            // const resData = JSON.parse(response);
+                            // console.log(resData)
+                            $("#update_bills_btn").text("Upload Successfull!");
+                            $("#update_bills_btn").removeClass("btn-primary");
+                            $("#update_bills_btn").addClass("btn-success");
+                            window.location.reload();
                         } else {
-                            // $("#upload_farea").text("Upload Failed");
-                            // $("#upload_farea").addClass("btn-danger");
-                            // alert(data);
+                            $("#update_bills_btn").text("Upload Failed");
+                            $("#update_bills_btn").addClass("btn-danger");
+                            alert(data);
                         }
                         // form.reset();
                     },

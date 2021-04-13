@@ -31,3 +31,5 @@ move_uploaded_file($_FILES['Uploadfile']['tmp_name'], $target_location);
 
 $sql = "UPDATE bills_paid set Receipt='$target_location', ReceiptName='$rel_file_path' where BillID='$recordid' and FlatID='$flatid'";
 mysqli_query($con, $sql);
+
+echo "Successful";
