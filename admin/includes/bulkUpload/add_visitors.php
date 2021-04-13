@@ -48,16 +48,20 @@ echo $output;
 
 $list = explode(" ",$output,2);
 $jsonDecode = json_decode($list[1],true);
+$otp_list = $jsonDecode["otp_list"];
 // print_r($jsonDecode["otp_list"]);
+
 
 if (strpos($output,"unsuccessful") == False){
     // echo "Reached";
-    
-    foreach($jsonDecode["otp_list"] as $visitorOTP => $vcno) {
-        // echo 'Your key is: '.$key.' and the value of the key is:'.$value;
-        generateOTP( $visitorOTP,$vcno);
+
+    $keys = array_keys($otp_list);
+    for($i = 0; $i < count($otp_list); $i++) {
+        //   echo $keys[$i] . "<br>";
+        //   echo $otp_list[$keys[$i]][0] . " : " . $otp_list[$keys[$i]][1] . "<br>";
+          generateOTP( $keys[$i],$otp_list[$keys[$i]][0],$otp_list[$keys[$i]][1]); //otp,vcno,duration
     }
-        
+  
 }
 
 // echo "json";

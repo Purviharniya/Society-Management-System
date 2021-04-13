@@ -1,5 +1,5 @@
 <?php
-function generateOTP( $visitorOTP,$vcno){ 
+function generateOTP( $visitorOTP,$vcno, $duration){ 
     
     // $enddate = date('Y-m-d', strtotime($startdate . " + ". $duration." day"));
     // echo $enddate;
@@ -23,8 +23,7 @@ function generateOTP( $visitorOTP,$vcno){
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10, //c
-    //CURLOPT_TIMEOUT => $duration*24*3600,//c
-    CURLOPT_TIMEOUT => 24*3600,//c
+    CURLOPT_TIMEOUT => $duration*24*3600,//c
     CURLOPT_SSL_VERIFYHOST => 0,
     CURLOPT_SSL_VERIFYPEER => 0,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,

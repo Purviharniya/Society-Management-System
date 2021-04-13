@@ -175,7 +175,8 @@ def insert_record(update_values, values_insert):
             # otp_query = "update visitors set OTP=%s where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
             # cursor.execute(otp_query, otp_query_values)
 
-            send_otp_list[otp] = update_values[0]
+            check_duration = duration_new if duration_new !=duration_old else duration_old
+            send_otp_list[otp] = [update_values[0],check_duration]
             # print("send_otp_list: ",send_otp_list)
 
 
@@ -209,7 +210,8 @@ def insert_record(update_values, values_insert):
                 otp = random.randint(100000, 999999)
                 # print("otp", otp)
                 update_otp(check_sd_values,otp) # Function
-                send_otp_list[otp] = update_values[0]
+                check_duration = duration_new if duration_new !=duration_old else duration_old
+                send_otp_list[otp] = [update_values[0],check_duration]
                 # print("send_otp_list: ",send_otp_list)
 
             updated_records_count += cursor.execute(update_visitors, update_values)
@@ -232,7 +234,7 @@ def insert_record(update_values, values_insert):
 
             insert_otp(check_query_values, otp) # Function
 
-            send_otp_list[otp] = values_insert[2]
+            send_otp_list[otp] = [values_insert[2],values_insert[11]]
             # print("send_otp_list: ",send_otp_list)
             inserted_records_count += 1  
 
@@ -272,7 +274,7 @@ def insert_record(update_values, values_insert):
             # otp_query = "update visitors set OTP=%s where BlockNumber = %s and FlatNumber=%s and VisitorName=%s"
             # cursor.execute(otp_query, otp_query_values)
 
-            send_otp_list[otp] = values_insert[2]
+            send_otp_list[otp] = [values_insert[2],values_insert[11]]
             # print("send_otp_list: ",send_otp_list)
             inserted_records_count += 1        
 
