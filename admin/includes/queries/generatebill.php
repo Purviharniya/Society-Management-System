@@ -98,12 +98,12 @@ if (isset($_POST['genbill-btn'])) {
     }
     //mailing to each owner and also updating the is_sent status to 1 in the database
 
-    // $myMail = new PHPMailerHelper();
-    // $myMail->sendEmail();
+    $myMail = new PHPMailerHelper();
+    $myMail->sendEmail();
 
-    // $_SESSION['success_message'] = "Bills generated and sent successfully";
-    // header("Location: ../../add_bills.php");
-    // exit();
+    $_SESSION['success_message'] = "Bills generated and sent successfully";
+    header("Location: ../../add_bills.php");
+    exit();
 }
 
 function bill_template($block, $flat, $farea, $floor, $oname, $oemail, $ocontact, $oacontact, $bmonth, $mcharges, $acharges, $reason, $tcharges, $gen_date, $due_date, $charges_after_due)
