@@ -52,7 +52,7 @@ include './includes/shared/header.php';
                                         <?php
 
 $complaint_types = array();
-$flatno = '802';
+$flatno = $_SESSION['flatno'];
 $query = "SELECT DISTINCT(complainttypes.complaint_type),complainttypes.complaint_id from complaints INNER JOIN complainttypes ON complainttypes.complaint_id = complaints.ComplaintType where complaints.FlatNumber=" . $flatno . "";
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);
@@ -74,7 +74,7 @@ if ($result = mysqli_query($con, $query)) {
                                         <br>
                                         <?php
 $status = array();
-$statustype=array("0"=>"Unresolved", "1"=>"In-progress", "2"=>"Resolved");
+$statustype = array("0" => "Unresolved", "1" => "In-progress", "2" => "Resolved");
 $query = "SELECT distinct(Status) FROM complaints where FlatNumber=" . $flatno . "";
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);

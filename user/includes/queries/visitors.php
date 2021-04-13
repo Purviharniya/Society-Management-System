@@ -2,9 +2,10 @@
 
 include '../../../config.php';
 
-function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){ 
-    
-    $enddate = date('Y-m-d', strtotime($startdate . " + ". $duration." day"));
+function generateOTP($visitorOTP, $vcno, $vname, $startdate, $duration)
+{
+
+    $enddate = date('Y-m-d', strtotime($startdate . " + " . $duration . " day"));
     $fields = array(
         "sender_id" => "CHKSMS",
         // "message" => $vname." your Visiting OTP is <strong>". $visitorOTP ." </strong>valid from <strong> ". $startdate . " to ". $enddate ."</strong>",
@@ -12,28 +13,28 @@ function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){
         "variables_values" => $visitorOTP,
         "route" => "s", //check
         // "numbers" => '"' . $number1 . ', ' . $number2 . '"', //not working
-        "numbers" => $vcno ,
+        "numbers" => $vcno,
     );
     // echo '<script>console.log('.$fields.')</script>';
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => "",
-    CURLOPT_MAXREDIRS => 10, 
-    CURLOPT_TIMEOUT => $duration*24*3600,
-    CURLOPT_SSL_VERIFYHOST => 0,
-    CURLOPT_SSL_VERIFYPEER => 0,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => json_encode($fields),
-    CURLOPT_HTTPHEADER => array(
-        "authorization: 4XTW3u2vgelpOVUiDj0K1RSd9fc8GHNyYsFqL5aJoM7PAwQBIbuFjJ8IVgKcLQhrvdOfmzYB1WplUMo2",
-        "accept: */*",
-        "cache-control: no-cache",
-        "content-type: application/json"
-    ),
+        CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => $duration * 24 * 3600,
+        CURLOPT_SSL_VERIFYHOST => 0,
+        CURLOPT_SSL_VERIFYPEER => 0,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($fields),
+        CURLOPT_HTTPHEADER => array(
+            "authorization: 4XTW3u2vgelpOVUiDj0K1RSd9fc8GHNyYsFqL5aJoM7PAwQBIbuFjJ8IVgKcLQhrvdOfmzYB1WplUMo2",
+            "accept: */*",
+            "cache-control: no-cache",
+            "content-type: application/json",
+        ),
     ));
 
     $response = curl_exec($curl);
@@ -42,12 +43,12 @@ function generateOTP( $visitorOTP,$vcno, $vname,$startdate, $duration){
     curl_close($curl);
 
     if ($err) {
-    echo "cURL Error #:" . $err;
-    
+        echo "cURL Error #:" . $err;
+
     } else {
-    //echo $response;
-    // echo "<script>console.log('Done succ')</script>";
-    // return $visitorOTP;
+        //echo $response;
+        // echo "<script>console.log('Done succ')</script>";
+        // return $visitorOTP;
     }
 }
 
@@ -57,12 +58,12 @@ if (isset($_POST['addvisitors-btn'])) {
     $vname = mysqli_escape_string($con, $_POST['name']);
     $contactno = mysqli_escape_string($con, $_POST['contact']);
     $altcontactno = mysqli_escape_string($con, $_POST['contact1']);
-    
+
     // $block = $_SESSION['blockno'];
     //$flatno = $_SESSION['flatno'];
 
-    $block = 'A' ;//remove it later
-    $flatno = '101';//remove it later
+    $block = 'A'; //remove it later
+    $flatno = '101'; //remove it later
 
     $people = mysqli_escape_string($con, $_POST['people']);
 
@@ -74,19 +75,19 @@ if (isset($_POST['addvisitors-btn'])) {
     $duration = mysqli_escape_string($con, $_POST['duration']);
     $timestamp = date("Y-m-d H:i:s");
 
-    // $added_by = $_SESSION['username'];
-    $added_by = 'admin1';
-    
+    $added_by = $_SESSION['username'];
+    // $added_by = 'admin1';
+
     //Fetching the FlatID from Flats table
     $fetch_query = "SELECT FlatID from flats where BlockNumber='" . $block . "' AND FlatNumber=" . $flatno . ";";
     $result = mysqli_query($con, $fetch_query);
     $flatID = mysqli_fetch_array($result);
     // print_r($flatID);
-    $flatID['FlatID'] = 1; //FOR NOW, REMOVE IT LATER 
+    $flatID['FlatID'] = 1; //FOR NOW, REMOVE IT LATER
 
     $check_query = "SELECT * from visitors where BlockNumber='" . $block . "' AND FlatNumber=" . $flatno . " AND VisitorName='" . $vname . "' ;";
     $check_res = mysqli_query($con, $check_query);
-    
+
     if (mysqli_num_rows($check_res) != 0) {
         $_SESSION['error_message'] = "<strong>Failure!</strong> Record for visitor already exists!";
         header("Location: ../../add_visitors.php");
@@ -96,14 +97,14 @@ if (isset($_POST['addvisitors-btn'])) {
         // store in the database; check if error doesnt occur while storing
         $otp = rand(100000, 999999);
         // $otp = generateOTP($contactno, $altcontactno,$vname,$startdate, $duration);//
-        $query = "INSERT INTO visitors(`VisitorID`,`FlatID`, `VisitorName`,`VisitorContactNo`,`AlternateVisitorContactNo`,`BlockNumber`, `FlatNumber`, `NoOfPeople`,`WhomToMeet`, `ReasonToMeet`, `OTP`,`StartDate`,`Duration`,`updated_by`, `updated_at`) 
-                  VALUES ('' ,".$flatID['FlatID'].",'$vname' , '$contactno' , ' $altcontactno' , '$block' , '$flatno' , '$people', '$whomtomeet' , '$reasontomeet', '$otp', '$startdate', '$duration', '$added_by' , '$timestamp' )";
-    
-        echo "\n".$query;
+        $query = "INSERT INTO visitors(`VisitorID`,`FlatID`, `VisitorName`,`VisitorContactNo`,`AlternateVisitorContactNo`,`BlockNumber`, `FlatNumber`, `NoOfPeople`,`WhomToMeet`, `ReasonToMeet`, `OTP`,`StartDate`,`Duration`,`updated_by`, `updated_at`)
+                  VALUES ('' ," . $flatID['FlatID'] . ",'$vname' , '$contactno' , ' $altcontactno' , '$block' , '$flatno' , '$people', '$whomtomeet' , '$reasontomeet', '$otp', '$startdate', '$duration', '$added_by' , '$timestamp' )";
+
+        echo "\n" . $query;
         echo "\n";
-        if(mysqli_query($con, $query)){
+        if (mysqli_query($con, $query)) {
             echo "Visitor Added successfully\n";
-            generateOTP($otp,$contactno, $vname,$startdate, $duration);
+            generateOTP($otp, $contactno, $vname, $startdate, $duration);
             //Start the session if already not started.
             $_SESSION['success_message'] = "<strong>Success!</strong> Visitor added successfully!";
 
@@ -111,11 +112,11 @@ if (isset($_POST['addvisitors-btn'])) {
             header("Location: ../../add_visitors.php");
 
             exit();
-        
-        } else{
-            $query = "UPDATE visitors SET OTP = 0 
+
+        } else {
+            $query = "UPDATE visitors SET OTP = 0
                       WHERE BlockNumber='$block', FlatNumber='$flatno',VisitorName = '$vname'";
-    
+
             $result = mysqli_query($con, $query);
 
             $_SESSION['error_message'] = "<strong>Failure!</strong>Could not able to execute the query!";
@@ -135,13 +136,12 @@ if (isset($_POST['delete_visitors'])) {
 }
 //CHECK CHECK
 if (isset($_POST['update_visitors'])) {
-    
+
     // $block = $_SESSION['blockno'];
     //$flatno = $_SESSION['flatno'];
 
-    $block = 'A' ;//remove it later
-    $flatno = '101';//remove it later
-
+    $block = 'A'; //remove it later
+    $flatno = '101'; //remove it later
 
     $visitorID = mysqli_escape_string($con, $_POST['visitor_id']);
     $vname_new = mysqli_escape_string($con, $_POST['vname_new']);
@@ -164,52 +164,50 @@ if (isset($_POST['update_visitors'])) {
     $duration_old = mysqli_escape_string($con, $_POST['duration_old']);
 
     // if the user is changing unique value constraints, we check if they already exist or not
-    if ($vname_new != $vname_old ) {  
-        
+    if ($vname_new != $vname_old) {
+
         $check_query = "SELECT * from visitors where BlockNumber='$block' AND FlatNumber='$flatno' AND VisitorName = '$vname_new';";
         $check_result = mysqli_query($con, $check_query);
         if (mysqli_num_rows($check_result) != 0) {
             echo "Exists_record";
         } else {
-            
+
             //check whether the start date or duration is changing
-            if (($startdate_new != $startdate_old) || ($duration_new != $duration_old))
-            {
-                
+            if (($startdate_new != $startdate_old) || ($duration_new != $duration_old)) {
+
                 $otp_new = rand(100000, 999999);
                 $query = "UPDATE visitors SET OTP = '$otp_new' WHERE VisitorID='$visitorID'";
-                mysqli_query($con, $query);     
-                generateOTP($otp_new,$vcontact_new,$vname_new,$startdate_new, $duration_new);//JUST FOR NOW
+                mysqli_query($con, $query);
+                generateOTP($otp_new, $vcontact_new, $vname_new, $startdate_new, $duration_new); //JUST FOR NOW
             }
-            
+
             $sql = "UPDATE visitors
-                    SET VisitorName = '$vname_new', VisitorContactNo='$vcontact_new', AlternateVisitorContactNo='$altvcontact_new', 
-                    ReasonToMeet = '$reason_new', NoOfPeople = '$people_new', StartDate = '$startdate_new', 
+                    SET VisitorName = '$vname_new', VisitorContactNo='$vcontact_new', AlternateVisitorContactNo='$altvcontact_new',
+                    ReasonToMeet = '$reason_new', NoOfPeople = '$people_new', StartDate = '$startdate_new',
                     Duration = '$duration_new', updated_at='$timestamp' WHERE VisitorID='$visitorID';";
-            
-            mysqli_query($con, $sql);        
+
+            mysqli_query($con, $sql);
             exit();
         }
     }
     //unique value constraints are not changing, so will be update it directly
-    else{
-        
+    else {
+
         //check whether the start date or duration is changing
-        if (($startdate_new != $startdate_old) || ($duration_new != $duration_old))
-        {
-           
+        if (($startdate_new != $startdate_old) || ($duration_new != $duration_old)) {
+
             $otp_new = rand(100000, 999999);
             $query = "UPDATE visitors SET OTP = '$otp_new' WHERE VisitorID='$visitorID'";
-            mysqli_query($con, $query);     
-            generateOTP($otp_new,$vcontact_new,$vname_new,$startdate_new, $duration_new);//JUST FOR NOW
+            mysqli_query($con, $query);
+            generateOTP($otp_new, $vcontact_new, $vname_new, $startdate_new, $duration_new); //JUST FOR NOW
         }
-        
-        $sql = "UPDATE visitors 
+
+        $sql = "UPDATE visitors
                 SET VisitorName='$vname_new', VisitorContactNo='$vcontact_new', AlternateVisitorContactNo='$altvcontact_new',
-                ReasonToMeet = '$reason_new', NoOfPeople = '$people_new', StartDate = '$startdate_new', 
+                ReasonToMeet = '$reason_new', NoOfPeople = '$people_new', StartDate = '$startdate_new',
                 Duration = '$duration_new',updated_at='$timestamp' WHERE VisitorID='$visitorID';";
-            mysqli_query($con, $sql);
-            exit();
+        mysqli_query($con, $sql);
+        exit();
     }
 
 }

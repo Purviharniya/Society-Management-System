@@ -15,7 +15,7 @@ if (isset($_POST['addallotment-btn'])) {
     $omembers = mysqli_escape_string($con, $_POST['omembers']);
     $isRent = 0;
     // echo $_POST['isRent'];
-    if(isset($_POST['isRent'])){
+    if (isset($_POST['isRent'])) {
         $isRent = mysqli_escape_string($con, $_POST['isRent']);
     }
     echo $isRent;
@@ -26,8 +26,8 @@ if (isset($_POST['addallotment-btn'])) {
     $remail = mysqli_escape_string($con, $_POST['remail']);
     $rmembers = mysqli_escape_string($con, $_POST['rmembers']);
     $updated_at = date("Y-m-d H:i:s");
-    // $added_by = $_SESSION['username'];
-    $updated_by = 'admin1';
+    $added_by = $_SESSION['username'];
+    // $updated_by = 'admin1';
 
     // echo "hi";
 
@@ -90,7 +90,6 @@ if (isset($_POST['delete_allotments'])) {
     exit();
 }
 
-
 if (isset($_POST["update_allotments"])) {
     $block = mysqli_escape_string($con, $_POST['blockno_new']);
     $fno = mysqli_escape_string($con, $_POST['fno_new']);
@@ -101,17 +100,17 @@ if (isset($_POST["update_allotments"])) {
     $oacontact = mysqli_escape_string($con, $_POST['oacontact_new']);
     $oemail = mysqli_escape_string($con, $_POST['oemail_new']);
     $omembers = mysqli_escape_string($con, $_POST['omembers_new']);
-    
+
     $rname = $rcontact = $racontact = $remail = $rmembers = '';
 
-    if($isRent == '1'){
+    if ($isRent == '1') {
         $rname = mysqli_escape_string($con, $_POST['rname_new']);
         $rcontact = mysqli_escape_string($con, $_POST['rcontact_new']);
         $racontact = mysqli_escape_string($con, $_POST['racontact_new']);
         $remail = mysqli_escape_string($con, $_POST['remail_new']);
         $rmembers = mysqli_escape_string($con, $_POST['rmembers_new']);
     }
-    
+
     $updated_by = mysqli_escape_string($con, $_POST['updated_by']);
     $timestamp = mysqli_escape_string($con, $_POST['timestamp']);
 
@@ -119,78 +118,77 @@ if (isset($_POST["update_allotments"])) {
     $fno_old = mysqli_escape_string($con, $_POST['fno_old']);
     $error_array = array(); // to push validation errors
     //check all the form validations, contact length, and email id and all
-    
-     //check for null fields
-     if($block =='' || $fno == '' || $oname=='' || $oemail=='' || $ocontact=='' || $oacontact == '' || $omembers ==''){
-        
-        array_push($error_array,"All the owner fields are required!<br>");
+
+    //check for null fields
+    if ($block == '' || $fno == '' || $oname == '' || $oemail == '' || $ocontact == '' || $oacontact == '' || $omembers == '') {
+
+        array_push($error_array, "All the owner fields are required!<br>");
     }
-    
-    //check for owner contact 
+
+    //check for owner contact
     if (strlen($ocontact) != 10 || strlen($oacontact) != 10) {
-        array_push($error_array,"Owner's contact number is invalid!");
+        array_push($error_array, "Owner's contact number is invalid!");
     }
-    
+
     //check for owner email
-    if (!filter_var($oemail, FILTER_VALIDATE_EMAIL)){
-        array_push($error_array,"Owner's email address is invalid!");
+    if (!filter_var($oemail, FILTER_VALIDATE_EMAIL)) {
+        array_push($error_array, "Owner's email address is invalid!");
     }
     //check for rentee email and contact
-    if($isRent=='1'){
-        if(strlen($rcontact) != 10 || strlen($racontact) != 10){
-            array_push($error_array,"Rentee's contact number is invalid!");
+    if ($isRent == '1') {
+        if (strlen($rcontact) != 10 || strlen($racontact) != 10) {
+            array_push($error_array, "Rentee's contact number is invalid!");
         }
-        if (!filter_var($remail, FILTER_VALIDATE_EMAIL)){
-            array_push($error_array,"Rentee's email address is invalid!");
+        if (!filter_var($remail, FILTER_VALIDATE_EMAIL)) {
+            array_push($error_array, "Rentee's email address is invalid!");
         }
-        if($remail == '' || $rname = '' || $rcontact=='' || $racontact == '' || $rmembers ==''){
-            array_push($error_array,"All the rentee fields are required!");
+        if ($remail == '' || $rname = '' || $rcontact == '' || $racontact == '' || $rmembers == '') {
+            array_push($error_array, "All the rentee fields are required!");
         }
     }
 
-    if(!empty($error_array)){
+    if (!empty($error_array)) {
         print_r("error_array#");
         echo implode(" ", $error_array);
         exit();
     }
-    
+
     // if the admin is changing unique value constraints, we check if they already exist or not
-    if(($block!= $block_old) || ($fno!= $fno_old)){
+    if (($block != $block_old) || ($fno != $fno_old)) {
         $check = "SELECT * from allotments where BlockNumber='$block' AND FlatNumber='$fno'";
-        $check_res = mysqli_query($con,$check);
+        $check_res = mysqli_query($con, $check);
         if (mysqli_num_rows($check_res) != 0) {
             echo "Allotment_0"; //allotment record already exists
             exit();
-        }
-        else{
+        } else {
             //update karo db me
-            $getflatid_query = "SELECT FlatID from flats where FlatNumber='".$fno."' and BlockNumber='".$block."'"; //get flat id
-                $flat_res = mysqli_query($con,$getflatid_query);
-                if(mysqli_num_rows($flat_res)!=0){  //check if the flat exists
-                    $row = mysqli_fetch_assoc($flat_res);
-                    $flatid = $row['FlatID'];
-                }else{
-                    echo "Flat_0";  //flat doesnt exist
-                    exit();
-                }
+            $getflatid_query = "SELECT FlatID from flats where FlatNumber='" . $fno . "' and BlockNumber='" . $block . "'"; //get flat id
+            $flat_res = mysqli_query($con, $getflatid_query);
+            if (mysqli_num_rows($flat_res) != 0) { //check if the flat exists
+                $row = mysqli_fetch_assoc($flat_res);
+                $flatid = $row['FlatID'];
+            } else {
+                echo "Flat_0"; //flat doesnt exist
+                exit();
+            }
 
             $sql = "UPDATE allotments set FlatID='$flatid',FlatNumber='$fno',BlockNumber='$block',OwnerName='$oname',OwnerEmail='$oemail',OwnerContactNumber='$ocontact',OwnerAlternateContactNumber='$oacontact',OwnerMemberCount='$omembers',isRent='$isRent',RenteeName='$rname',RenteeEmail='$remail',RenteeContactNumber='$rcontact',RenteeAlternateContactNumber= '$racontact',RenteeMemberCount='$rmembers',updated_by='$updated_by',updated_at='$timestamp' WHERE AllotmentID='$recordid'";
-            mysqli_query($con,$sql);
-            exit();  
+            mysqli_query($con, $sql);
+            exit();
         }
-    }else{
-        //update karo db me 
-        $getflatid_query = "SELECT FlatID from flats where FlatNumber='".$fno."' and BlockNumber='".$block."'"; //get flat id
-        $flat_res = mysqli_query($con,$getflatid_query);
-        if(mysqli_num_rows($flat_res)!=0){  //check if the flat exists
+    } else {
+        //update karo db me
+        $getflatid_query = "SELECT FlatID from flats where FlatNumber='" . $fno . "' and BlockNumber='" . $block . "'"; //get flat id
+        $flat_res = mysqli_query($con, $getflatid_query);
+        if (mysqli_num_rows($flat_res) != 0) { //check if the flat exists
             $row = mysqli_fetch_assoc($flat_res);
             $flatid = $row['FlatID'];
-        }else{
-            echo "Flat_0";  //flat doesnt exist
+        } else {
+            echo "Flat_0"; //flat doesnt exist
             exit();
         }
         $sql = "UPDATE allotments set FlatID='$flatid',FlatNumber='$fno',BlockNumber='$block',OwnerName='$oname',OwnerEmail='$oemail',OwnerContactNumber='$ocontact',OwnerAlternateContactNumber='$oacontact',OwnerMemberCount='$omembers',isRent='$isRent',RenteeName='$rname',RenteeEmail='$remail',RenteeContactNumber='$rcontact',RenteeAlternateContactNumber= '$racontact',RenteeMemberCount='$rmembers',updated_by='$updated_by',updated_at='$timestamp' WHERE AllotmentID='$recordid'";
-        mysqli_query($con,$sql);
+        mysqli_query($con, $sql);
         exit();
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 //$_SESSION["otp"] = 0;
-
+// session_start();
 if (isset($_POST["flatno"]) && isset($_POST["contactno"]) && isset($_POST['blockno'])) {
     $flatno = $_POST["flatno"];
     $contactno = $_POST["contactno"];
@@ -30,7 +30,7 @@ if (isset($_POST["flatno"]) && isset($_POST["contactno"]) && isset($_POST['block
             } else {
                 $_SESSION['login_role'] = 'rentee';
             }
-            //session_start();
+            session_start();
             $_SESSION["flatno"] = $flatno;
             $_SESSION["contactno"] = $contactno;
             $_SESSION["blockno"] = $blockno;

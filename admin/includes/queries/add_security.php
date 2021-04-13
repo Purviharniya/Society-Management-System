@@ -36,7 +36,6 @@ if (isset($_POST['addsecurity-btn'])) {
 
 // :)
 
-
 if (isset($_POST['delete_flatarea'])) {
     $recordID = mysqli_escape_string($con, $_POST['record_id']);
     $sql = "DELETE FROM flatarea WHERE FlatAreaID='$recordID'";
@@ -53,15 +52,15 @@ if (isset($_POST['update_flatarea'])) {
     $rate_new = mysqli_escape_string($con, $_POST['rate_new']);
     $recordID = mysqli_escape_string($con, $_POST['recordID']);
     $flattype_new = mysqli_escape_string($con, $_POST['flattype_new']);
-    $added_by = 'Admin1';
-    // $added_by = $_SESSION['username'];
+    // $added_by = 'Admin1';
+    $added_by = $_SESSION['username'];
     $timestamp = date("Y-m-d H:i:s");
     $block_old = mysqli_escape_string($con, $_POST['blockno_old']);
     $series_old = mysqli_escape_string($con, $_POST['series_old']);
 
     // if the admin is changing unique value constraints, we check if they already exist or not
-    if (($block_new != $block_old) || ($series_new != $series_old) ) {  
-        
+    if (($block_new != $block_old) || ($series_new != $series_old)) {
+
         $check_query = "SELECT * from flatarea where BlockNumber='$block_new' AND FlatSeries='$series_new';";
         // echo $check_query;
         $check_result = mysqli_query($con, $check_query);
@@ -75,11 +74,11 @@ if (isset($_POST['update_flatarea'])) {
         }
     }
     //and agar exist nahi karta toh it will be unique and we can directly update
-    else{
+    else {
         $sql = "UPDATE flatarea SET BlockNumber='$block_new', FlatSeries='$series_new',FlatArea='$area_new',FlatType='$flattype_new',Ratepsq='$rate_new',Updatedby='$added_by',UpdatedAt='$timestamp' WHERE FlatAreaID='$recordID';";
-            // echo $sql;
-            mysqli_query($con, $sql);
-            exit();
+        // echo $sql;
+        mysqli_query($con, $sql);
+        exit();
     }
 
 }
