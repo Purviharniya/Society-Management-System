@@ -7,7 +7,6 @@ from datetime import datetime
 import random
 
 mapper = {
-    # check this
     "added": 1,
     "timestamp": 2,
     "vname_col": 3,
@@ -61,8 +60,6 @@ except Exception as e:
 insert_visitors = """ Insert into visitors(VisitorID, FlatID, VisitorName, VisitorContactNo, AlternateVisitorContactNo, BlockNumber, FlatNumber, NoOfPeople, WhomToMeet, ReasonToMeet, OTP, StartDate, Duration, updated_by, updated_at)
                         VALUES('',%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s); """
 
-#check the where clause visitor name add karna h ya nahi-->check this-->ek baar dala h vname
-# yaha otp ka updation bakhi h just remember ->check this
 update_visitors = "update visitors set VisitorContactNo=%s, WhomToMeet=%s, ReasonToMeet=%s, NoOfPeople=%s, StartDate=%s, Duration=%s, updated_by=%s,updated_at=%s where BlockNumber=%s and FlatNumber=%s and VisitorName=%s"
 
 # fetch Flat Id from flats table
@@ -124,9 +121,6 @@ def check_sd(update_values):
     row = cursor.fetchone()
 
     return check_sd_values,row
-
-            
-          
 
 def insert_record(update_values, values_insert):
     global updated_records_count, inserted_records_count, send_otp_list
@@ -287,17 +281,14 @@ try:
         # print(data.cell(x, header_id[sys.argv[mapper['block_col']]]).value)
         
         vname = data.cell(x, header_id[sys.argv[mapper['vname_col']]]).value
-        # print(vname)
 
         vcno = int(data.cell(x, header_id[sys.argv[mapper['vcno_col']]]).value)
 
         alternatevcno = int(data.cell(x, header_id[sys.argv[mapper['alternatevcno_col']]]).value)
 
         blockno = data.cell(x, header_id[sys.argv[mapper['block_col']]]).value
-        # print(blockno)
         
         flatno = int(data.cell(x, header_id[sys.argv[mapper['flatno_col']]]).value)
-        # print(flatno)
 
         people = int(data.cell(x, header_id[sys.argv[mapper['people_col']]]).value)
 
@@ -325,23 +316,23 @@ try:
         try:
             # print('In my try')
             for i in flatId_tuple:
-                #   flatID = i 
+                #   flatID = i # uncomment this later
                 # print("i",i)
-                x = i
+                x = i          # comment this later
         except Exception as e:
             # print('In my except')
             # print('error',e)
             # print("Flat with Block Number: {} and Flat Number: {} does not exist".format(blockno,flatno))
             continue
 
-        otp = 0 #just now now-->check this
+        otp = 0 #defined
 
         #for Insert query
         values = (flatID, vname, vcno, alternatevcno, blockno, flatno, people, whom, reason, otp, startdate, duration, added, timestamp)
         
 
         try:
-            if login_role in ['admin']: # iska explanation kya h?? yeh kyu kiya h aise
+            if login_role in ['admin']: 
                 update_values = (vcno, whom, reason, people, startdate, duration, added, timestamp, blockno, flatno,vname)
                 insert_record(update_values, values)    
 

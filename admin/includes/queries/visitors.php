@@ -131,7 +131,7 @@ if (isset($_POST['delete_visitors'])) {
     // header("Location: ../bla.php");
     exit();
 }
-//CHECK CHECK
+
 if (isset($_POST['update_visitors'])) {
 
     $visitorID = mysqli_escape_string($con, $_POST['visitor_id']);

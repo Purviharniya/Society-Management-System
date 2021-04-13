@@ -1,6 +1,3 @@
-<!-- PENDING
-    1. UPLOAD EXCEL
- -->
 <?php
 
 include 'includes/shared/header.php';

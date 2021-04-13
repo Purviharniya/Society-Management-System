@@ -228,7 +228,7 @@ function loadCurrent() {
         //     className: "btn btn-outline-primary  ",
         //     action: newExportAction,
         //     exportOptions: {
-        //         columns: [1, 2, 3, 4, 5, 6, 7, 8, 9] //CHECK THIS-->pending
+        //         columns: [1, 2, 3, 4, 5, 6, 7, 8, 9] 
         //     }
         // },
         {
