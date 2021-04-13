@@ -73,7 +73,7 @@ flatId = "select FlatID from flats where BlockNumber=%s and FlatNumber=%s"
 connection = pymysql.connect(host=sys.argv[mapper['host']],
                              user=sys.argv[mapper['username_db']],
                              passwd=passw,
-                             port=3325,
+                            #  port=3325,
                              database=sys.argv[mapper['dbname']])
 #print("hi conn established!")
 cursor = connection.cursor()
