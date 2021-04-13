@@ -236,12 +236,12 @@ unset($_SESSION['error_message']);
                             <div class="form-group">
                                 <label for="block">Block:</label>
                                 <input type="text" class="form-control" id="block" name="block"
-                                    aria-describedby="blockHelp" readonly>
+                                    aria-describedby="blockHelp" value="<?php echo $_SESSION['blockno'] ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="fno">Flat no:</label>
                                 <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
-                                    readonly>
+                                    value="<?php echo $_SESSION['flatno'] ?>" readonly>
                             </div>
 
                             <div class="form-group">
