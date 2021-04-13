@@ -51,7 +51,7 @@ except Exception as e:
 insert_area = """ Insert into flatarea(FlatAreaID, BlockNumber, FlatSeries , FlatArea , FlatType , Ratepsq , Updatedby ,UpdatedAt) VALUES('',%s,%s,%s,%s,%s,%s,%s); """
 update_area = "update flatarea set FlatArea=%s,FlatType=%s,Ratepsq=%s,Updatedby=%s,UpdatedAt=%s where BlockNumber=%s and FlatSeries=%s"
 
-# print (insert_faculty)
+
 # print(sys.argv[mapper['dbname']])
 # print("hi")
 connection = pymysql.connect(host=sys.argv[mapper['host']],

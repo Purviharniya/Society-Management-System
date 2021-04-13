@@ -218,7 +218,6 @@ function getFilters() {
 
 //DATATABLE CREATE
 function loadCurrent() {
-    // document.querySelector("#addCoursebtn").style.display="none"
     var table = $('#dataTable-flats').DataTable({
         processing: true,
         serverSide: true,

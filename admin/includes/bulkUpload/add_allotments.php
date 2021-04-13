@@ -18,10 +18,10 @@ $remail = mysqli_escape_string($con, $_POST['remail']);
 $rmembers = mysqli_escape_string($con, $_POST['rmem']);
 // $role = $_POST['role'];
 $upload_constraint = mysqli_escape_string($con, $_POST['upload_constraint']);
-// $login_role = $_SESSION['role'];
-// $addedby = $_SESSION['username'];
-$login_role = 'admin';
-$addedby = "Admin1";
+$login_role = $_SESSION['role'];
+$addedby = $_SESSION['username'];
+// $login_role = 'admin';
+// $addedby = "Admin1";
 $file_name = $_FILES['Uploadfile']['name'];
 
 $ext = pathinfo($_FILES["Uploadfile"]["name"])['extension'];

@@ -429,8 +429,8 @@ function update_flatarea(e) {
                 temp['FlatType'] = form_serialize[7].value;
                 temp['Ratepsq'] = form_serialize[5].value;
                 temp['UpdatedAt'] = form_serialize[8].value;
-                // temp['Updatedby'] = $_SESSION['username'];
-                temp['Updatedby'] = 'Admin1';
+                temp['Updatedby'] = $_SESSION['username'];
+                // temp['Updatedby'] = 'Admin1';
                 $('#dataTable-flatarea').dataTable().fnUpdate(temp, aPos, undefined, false);
                 $('.action-btn').off('click')
                 $('.action-btn').on('click', loadModalCurrent)

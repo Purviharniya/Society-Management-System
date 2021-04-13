@@ -51,7 +51,6 @@ except Exception as e:
 insert_security = """ Insert into security(SecurityID , Name , ContactNumber , Shift , created_at , updated_at) VALUES(%s,%s,%s,%s,%s,%s); """
 update_security = "update security set ContactNumber=%s,Shift=%s,updated_at=%s where SecurityID=%s and Name=%s"
 
-# print (insert_faculty)
 # print(sys.argv[mapper['dbname']])
 # print("hi")
 connection = pymysql.connect(host=sys.argv[mapper['host']],

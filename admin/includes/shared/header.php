@@ -11,6 +11,7 @@ include '../config.php';
 //     header("Location: ../login.php");
 // }
 $_SESSION['username'] = 'Admin1'; //comment this to test the admin profile update
+$_SESSION['login_role'] = 'admin';
 ?>
 <!DOCTYPE html>
 <html lang="en">

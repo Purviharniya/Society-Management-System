@@ -31,7 +31,8 @@
         </a>
         <div id="collapsePages3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="add_bills.php">View Bills</a>
+                <a class="collapse-item" href="view_additional_charges.php">View Additional <br>Charges</a>
+                <a class="collapse-item" href="view_bills.php">View Bills</a>
             </div>
         </div>
     </li>
@@ -109,7 +110,7 @@
         </div>
     </li>
 
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider">
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages9" aria-expanded="true"
@@ -122,7 +123,7 @@
                 <a class="collapse-item" href="schedule_meetings.php">View Meetings</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <hr class="sidebar-divider">
 

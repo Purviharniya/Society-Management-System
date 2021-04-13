@@ -77,6 +77,7 @@
         <div id="collapsePages3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="add_bills.php">Add Bills</a>
+                <a class="collapse-item" href="manage_charges_flats.php">Manage Additional <br>Charges</a>
                 <a class="collapse-item" href="manage_bills.php">Manage Bills</a>
             </div>
         </div>
@@ -112,9 +113,9 @@
             </div>
         </div>
     </li>
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages6" aria-expanded="true"
             aria-controls="collapseUtilities">
             <i class="fas fa-search" aria-hidden="true"></i>
@@ -144,7 +145,7 @@
                 <a class="collapse-item" href="visitor_reports.php">Visitors b/w dates</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <hr class="sidebar-divider">
 
@@ -162,7 +163,7 @@
         </div>
     </li>
 
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider">
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages9" aria-expanded="true"
@@ -176,7 +177,7 @@
                 <a class="collapse-item" href="manage_meetings.php">Manage Meetings</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <hr class="sidebar-divider">
 

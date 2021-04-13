@@ -16,7 +16,7 @@ include './includes/shared/header.php';
                     <div class="row align-items-center">
                         <div class="col-12 mb-3">
                             <h4 class="m-0 font-weight-bold text-primary">Visitors Records</h4>
-                        </div>  
+                        </div>
                         <div class="col-6 offset-md-8 col-md-1 text-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#exampleModalCenter1">
@@ -54,7 +54,7 @@ include './includes/shared/header.php';
 $block_numbers = array();
 // $user = $_SESSION['username'];
 
-$query = "SELECT DISTINCT(BlockNumber) FROM visitors"; 
+$query = "SELECT DISTINCT(BlockNumber) FROM visitors";
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);
     while ($row = mysqli_fetch_array($result)) {
@@ -188,7 +188,7 @@ function getFilters() {
             case "filter_block[]":
                 if (!normalizedFilters.block) {
                     normalizedFilters.block = []
-                    
+
                 }
                 normalizedFilters.block.push(filter.value)
                 // console.log(normalizedFilters.block);
@@ -336,7 +336,7 @@ function loadCurrent() {
         ],
     });
     table.columns.adjust()
-    
+
 }
 //SELECT CHECKALL
 $("#select_all").click(function(e) {
@@ -355,7 +355,7 @@ $("#select_all").click(function(e) {
 function loadModalCurrent() {
     var target_row = $(this).closest("tr"); // this line did the trick
     // console.log('target_row : '+target_row)
-    var btn=$(this);
+    var btn = $(this);
     var aPos = $("#dataTable-visitors").dataTable().fnGetPosition(target_row.get(0));
     var areaData = $('#dataTable-visitors').DataTable().row(aPos).data()
     // console.log("AreaData"+areaData);
@@ -466,11 +466,10 @@ function update_visitors(e) {
                 temp['NoOfPeople'] = form_serialize[12].value;
                 temp['StartDate'] = form_serialize[14].value;
                 temp['Duration'] = form_serialize[16].value;
-                
-        
+
                 // temp['updated_at'] = form_serialize[8].value;
-                // temp['Updatedby'] = $_SESSION['username'];
-                temp['Updatedby'] = 'Admin1';
+                temp['Updatedby'] = $_SESSION['username'];
+                // temp['Updatedby'] = 'Admin1';
                 $('#dataTable-visitors').dataTable().fnUpdate(temp, aPos, undefined, false);
                 $('.action-btn').off('click')
                 $('.action-btn').on('click', loadModalCurrent)
@@ -506,7 +505,7 @@ $("#delete_selected_response_btn").click(function(e) {
         url: "includes/queries/delete_multiple_visitors.php",
         data: actual_delete_data_json,
         success: function(data) {
-            console.log("Returned data: "+data)
+            console.log("Returned data: " + data)
             $("#dataTable-visitors").DataTable().draw(false);
         }
     })

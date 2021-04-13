@@ -62,7 +62,7 @@ insert_allotment = """ Insert into allotments(AllotmentID, FlatID, FlatNumber , 
 update_allotment = "update allotments set OwnerName=%s, OwnerEmail=%s, OwnerContactNumber=%s, OwnerAlternateContactNumber=%s, OwnerMemberCount=%s, isRent=%s, RenteeName=%s, RenteeEmail=%s, RenteeContactNumber=%s, RenteeAlternateContactNumber=%s, RenteeMemberCount=%s, updated_by=%s,updated_at=%s where BlockNumber=%s and FlatNumber=%s"
 flat_id = "select FlatID from flats where BlockNumber=%s and FlatNumber=%s"
 
-# print (insert_faculty)
+
 # print(sys.argv[mapper['dbname']])
 # print("hi")
 connection = pymysql.connect(host=sys.argv[mapper['host']],

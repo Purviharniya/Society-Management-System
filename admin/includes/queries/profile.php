@@ -54,9 +54,11 @@ if (isset($_POST['profile_submit'])) {
 
         $sql2 = "UPDATE allotments set updated_by='$username_new' where updated_by='$username_old'"; //allotment updated_by
         $sql3 = "UPDATE flatarea set Updatedby='$username_new' where Updatedby='$username_old'"; //flatarea Updatedby
+        $sql4 = "UPDATE additional_charges set Updated_by='$username_new' where Updated_by='$username_old'"; 
         mysqli_query($con, $sql2);
         mysqli_query($con, $sql3);
-
+        mysqli_query($con, $sql4);
+        
         $_SESSION['success_message'] = 'Success! Details Updated Successfully';
         header("Location: ../../admin_profile.php");
         exit();
