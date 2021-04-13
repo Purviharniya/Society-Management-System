@@ -9,10 +9,10 @@ $data = json_decode(file_get_contents("php://input"), true);
 $block = mysqli_escape_string($con, $data['BlockNumber']);
 $fno = mysqli_escape_string($con, $data['FlatNumber']);
 $isRent = mysqli_escape_string($con, $data['isRent']);
-$rname = $remail = $rcontact = $racontact = $rmembers = '' ;
+$rname = $remail = $rcontact = $racontact = $rmembers = '';
 $timestamp = date("Y-m-d H:i:s");
-// $updatedby = $_SESSION['username'];
-$updatedby = 'Admin1';
+$updatedby = $_SESSION['username'];
+// $updatedby = 'Admin1';
 $result = mysqli_query($con, "select AllotmentID, FlatNumber, BlockNumber, OwnerName, OwnerEmail, OwnerContactNumber, OwnerAlternateContactNumber, OwnerMemberCount,isRent, RenteeName, RenteeEmail, RenteeContactNumber, RenteeAlternateContactNumber, RenteeMemberCount, updated_by, updated_at from allotments WHERE BlockNumber='$block' and FlatNumber='$fno' ");
 //isRent, RenteeName, RenteeEmail, RenteeContactNumber, RenteeAlternateContactNumber, RenteeMemberCount,
 $row = mysqli_fetch_assoc($result);
@@ -23,7 +23,7 @@ $oacontact = $row['OwnerAlternateContactNumber'];
 $oemail = $row['OwnerEmail'];
 $omembers = $row['OwnerMemberCount'];
 $recordID = $row['AllotmentID'];
-if($isRent != "No"){
+if ($isRent != "No") {
     $rname = $row['RenteeName'];
     $remail = $row['RenteeEmail'];
     $rcontact = $row['RenteeContactNumber'];
@@ -31,7 +31,7 @@ if($isRent != "No"){
     $rmembers = $row['RenteeMemberCount'];
 }
 
-$date =  date("Y-m-d H:i:s");
+$date = date("Y-m-d H:i:s");
 //, Rentee name <i><small><b> ' . $isRent == 1 ? $rname : "-" . '</b></small></i>
 echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -58,8 +58,8 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <label for="exampleFormControlSelect1"><i class="text-danger">*This will delete all the information related to the flat area</i>
                                             <br>Are you sure you want to delete the record of <br> Block <i><small><b>' . $block . '</b></small></i>
                                             ,Flat Number <i><small><b>' . $fno . '</small></b></i> , Rented Flat? <i><small><b>' . $isRent . ' </b></small></i>
-                                            ,Owner name <i><small><b> ' . $oname . '.</b></small></i> 
-        
+                                            ,Owner name <i><small><b> ' . $oname . '.</b></small></i>
+
                                         </label>
                                         <br>
                                         <input type="hidden" name="record_id" value="' . $recordID . '">
@@ -126,18 +126,18 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <div class="form-group col-md-6">
                                             <label for="isRent"><b>Flat on rent?</b></label>
                                             <select class="form-control" id="isRent" name="isRent">
-                                                <option value="1" ';  
-                                                $isRent=='Yes' ?  print("selected"): "";
-                                                echo' > Yes</option>
-                                                <option value="0" ';  
-                                                $isRent=='No' ?  print("selected"): "";
-                                                echo' > No </option>
+                                                <option value="1" ';
+$isRent == 'Yes' ? print("selected") : "";
+echo ' > Yes</option>
+                                                <option value="0" ';
+$isRent == 'No' ? print("selected") : "";
+echo ' > No </option>
                                             </select>
                                             <input type="hidden" class="form-control"  name="recordID" id="recordID" value="' . $recordID . '">
-                                        </div>     
+                                        </div>
                                     </div>
                                     <section id="rentee-section">
-                                        <div class="form-row justify-content-center my-4 text-center text-success font-weight-bold">-----&nbsp;&nbsp;Rentee Details&nbsp;&nbsp;-----</div>                                   
+                                        <div class="form-row justify-content-center my-4 text-center text-success font-weight-bold">-----&nbsp;&nbsp;Rentee Details&nbsp;&nbsp;-----</div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="block"><b>Rentee Name</b></label>
@@ -169,8 +169,8 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             </div>
                                         </div>
                                     </section>
-                                    <input type="hidden" name="timestamp" value="'.$timestamp.'">
-                                    <input type="hidden" name="updated_by" value="'.$updatedby.'">
+                                    <input type="hidden" name="timestamp" value="' . $timestamp . '">
+                                    <input type="hidden" name="updated_by" value="' . $updatedby . '">
                                     <div class="form-row mt-4">
                                         <div class="form-group col-md-6 text-center">
                                             <button type="submit" class="btn btn-primary" id="update_allotments_btn" name="update_allotments">Update</button>
@@ -189,21 +189,21 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                     </div>
                 </div>
             </div>
-            
+
             <script>
 
                 $(document).ready(function() {
                     renteeFields();
-                });       
+                });
 
                 $("#isRent").change(function() {
                     renteeFields();
                 });
-                
+
                 function renteeFields(){
                     // console.log("hi");
                     var isRent = $("#isRent").val();
-                    if(isRent=="0"){ 
+                    if(isRent=="0"){
                     $("#rentee-section").addClass("d-none");
                     }
                     else{

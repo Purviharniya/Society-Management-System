@@ -15,10 +15,10 @@ $startdate = $_POST['startdate'];
 $duration = $_POST['duration'];
 // $role = $_POST['role'];
 $upload_constraint = mysqli_escape_string($con, $_POST['upload_constraint']);
-// $login_role = $_SESSION['role'];
-// $addedby = $_SESSION['username'];
-$login_role = 'admin';
-$addedby = "Admin1";
+$login_role = $_SESSION['role'];
+$addedby = $_SESSION['username'];
+// $login_role = 'admin';
+// $addedby = "Admin1";
 $file_name = $_FILES['Uploadfile']['name'];
 
 $ext = pathinfo($_FILES["Uploadfile"]["name"])['extension'];
@@ -46,22 +46,21 @@ $cmd = 'python addvisitors.py "' . $addedby . '" "' . $timestamp . '" "' . $vnam
 $output = shell_exec($cmd);
 echo $output;
 
-$list = explode(" ",$output,2);
-$jsonDecode = json_decode($list[1],true);
+$list = explode(" ", $output, 2);
+$jsonDecode = json_decode($list[1], true);
 $otp_list = $jsonDecode["otp_list"];
 // print_r($jsonDecode["otp_list"]);
 
-
-if (strpos($output,"unsuccessful") == False){
+if (strpos($output, "unsuccessful") == false) {
     // echo "Reached";
 
     $keys = array_keys($otp_list);
-    for($i = 0; $i < count($otp_list); $i++) {
+    for ($i = 0; $i < count($otp_list); $i++) {
         //   echo $keys[$i] . "<br>";
         //   echo $otp_list[$keys[$i]][0] . " : " . $otp_list[$keys[$i]][1] . "<br>";
-          generateOTP( $keys[$i],$otp_list[$keys[$i]][0],$otp_list[$keys[$i]][1]); //otp,vcno,duration
+        generateOTP($keys[$i], $otp_list[$keys[$i]][0], $otp_list[$keys[$i]][1]); //otp,vcno,duration
     }
-  
+
 }
 
 // echo "json";
@@ -73,5 +72,3 @@ if (strpos($output,"unsuccessful") == False){
 // }else{
 //     echo $output;
 // }
-
-

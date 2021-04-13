@@ -9,11 +9,11 @@ if (isset($_POST['addsecurity-btn'])) {
     $name = mysqli_escape_string($con, $_POST['Name']);
     $contactnumber = mysqli_escape_string($con, $_POST['ContactNumber']);
     $shift = mysqli_escape_string($con, $_POST['Shift']);
-    
+
     $timestamp = date("Y-m-d H:i:s");
-    // $added_by = $_SESSION['username'];
-    $added_by = 'admin1';
-    
+    $added_by = $_SESSION['username'];
+    // $added_by = 'admin1';
+
     //Fetching the SecurityID from Security table
     $fetch_query = "SELECT SecurityID from security where Name='" . $name . "' AND ContactNumber=" . $contactnumber . " AND Shift='" . $shift . "' ;";
     $result = mysqli_query($con, $fetch_query);
@@ -21,7 +21,7 @@ if (isset($_POST['addsecurity-btn'])) {
 
     $check_query = "SELECT * from security where SecurityID=" . $securityid . " AND Name='" . $name . "' AND ContactNumber=" . $contactnumber . " AND Shift='" . $shift . "' ;";
     $check_res = mysqli_query($con, $check_query);
-    
+
     if (mysqli_num_rows($check_res) != 0) {
         $_SESSION['error_message'] = "<strong>Failure!</strong> Record for this SecurityID already exists!";
         header("Location: ../../add_security.php");
@@ -29,12 +29,12 @@ if (isset($_POST['addsecurity-btn'])) {
 
     } else {
         // store in the database; check if error doesnt occur while storing
-        $query = "INSERT INTO security(`SecurityID`,`Name`, `ContactNumber`,`Shift`,`updated_at`) 
+        $query = "INSERT INTO security(`SecurityID`,`Name`, `ContactNumber`,`Shift`,`updated_at`)
                   VALUES ('$securityid' ,'$name' , '$contactnumber' , ' $shift' , '$timestamp' )";
-    
-        echo "\n".$query;
+
+        echo "\n" . $query;
         echo "\n";
-        if(mysqli_query($con, $query)){
+        if (mysqli_query($con, $query)) {
             echo "Security Guard Added successfully\n";
             //Start the session if already not started.
             $_SESSION['success_message'] = "<strong>Success!</strong> Security Guard added successfully!";
@@ -43,8 +43,8 @@ if (isset($_POST['addsecurity-btn'])) {
             header("Location: ../../add_security.php");
 
             exit();
-        
-        } else{
+
+        } else {
             $_SESSION['error_message'] = "<strong>Failure!</strong>Could not able to execute the query!";
             header("Location: ../../add_security.php");
             exit();
@@ -70,8 +70,8 @@ if (isset($_POST['update_security'])) {
     $name_new = mysqli_escape_string($con, $_POST['name_new']);
     $contactnumber_new = mysqli_escape_string($con, $_POST['contactnumber_new']);
     $shift_new = mysqli_escape_string($con, $_POST['shift_new']);
-    $added_by = 'Admin1';
-    // $added_by = $_SESSION['username'];
+    // $added_by = 'Admin1';
+    $added_by = $_SESSION['username'];
     $timestamp = date("Y-m-d H:i:s");
 
     $name_old = mysqli_escape_string($con, $_POST['name_old']);
@@ -79,8 +79,8 @@ if (isset($_POST['update_security'])) {
     $shift_old = mysqli_escape_string($con, $_POST['shift_old']);
 
     // if the admin is changing unique value constraints, we check if they already exist or not
-    if (($name_new != $name_old) || ($contactnumber_new != $contactnumber_old ) || ($shift_new != $shift_old )) {  
-        
+    if (($name_new != $name_old) || ($contactnumber_new != $contactnumber_old) || ($shift_new != $shift_old)) {
+
         $check_query = "SELECT * from security where Name='$name_new' AND ContactNumber='$contactnumber_new' AND Shift = '$shift_new';";
         $check_result = mysqli_query($con, $check_query);
         if (mysqli_num_rows($check_result) != 0) {
@@ -90,19 +90,19 @@ if (isset($_POST['update_security'])) {
                     SET Name='$name_new', ContactNumber='$contactnumber_new',Shift = '$shift_new',
                     updated_at='$timestamp' WHERE SecurityID='$securityid';";
 
-            mysqli_query($con, $sql);        
+            mysqli_query($con, $sql);
             exit();
         }
     }
     //unique value constraints are not changing, so will be update it directly
-    else{
-    
+    else {
+
         $sql = "UPDATE security
                     SET Name='$name_new', ContactNumber='$contactnumber_new',Shift = '$shift_new',
                     updated_at='$timestamp' WHERE SecurityID='$securityid';";
-            // echo $sql;
-            mysqli_query($con, $sql);
-            exit();
+        // echo $sql;
+        mysqli_query($con, $sql);
+        exit();
     }
 
 }

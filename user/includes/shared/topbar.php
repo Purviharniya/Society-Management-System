@@ -159,8 +159,8 @@
                 style="background:black;">
                 <a class="dropdown-item" href="#" style="color:white;">
                     <div>
-                        <span class="prof-drop-name">801-A</span>
-
+                        <span
+                            class="prof-drop-name"><?php echo $_SESSION['flatno']; ?>-<?php echo $_SESSION['blockno']; ?></span>
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
