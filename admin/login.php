@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="forgotPass" class="btn btn-primary"><i class="fa fa-mobile"></i> Send
+                    <button type="submit" name="forgotPass" class="btn btn-primary"><i class="fa fa-phone"></i> Send
                         OTP</button>
                 </div>
             </div>
