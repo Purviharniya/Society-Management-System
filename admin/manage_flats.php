@@ -1,6 +1,6 @@
-<?php include './includes/shared/header.php'; ?>
-<?php include './includes/shared/sidebar.php'; ?>
-<?php include './includes/shared/topbar.php'; ?>
+<?php include './includes/shared/header.php';?>
+<?php include './includes/shared/sidebar.php';?>
+<?php include './includes/shared/topbar.php';?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -46,20 +46,20 @@
                                         <label for="">Block</label>
                                         <br>
                                         <?php
-                                        $block_numbers = array();
-                                        //$user = $_SESSION['username'];
-                                        $query = "SELECT distinct(BlockNumber) FROM flats";
-                                        if ($result = mysqli_query($con, $query)) {
-                                            $rowcount = mysqli_num_rows($result);
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $block_numbers = $row['BlockNumber'];
-                                                echo '<div class="custom-control custom-checkbox custom-control-inline">
+$block_numbers = array();
+//$user = $_SESSION['username'];
+$query = "SELECT distinct(BlockNumber) FROM flats";
+if ($result = mysqli_query($con, $query)) {
+    $rowcount = mysqli_num_rows($result);
+    while ($row = mysqli_fetch_array($result)) {
+        $block_numbers = $row['BlockNumber'];
+        echo '<div class="custom-control custom-checkbox custom-control-inline">
                                                             <input type="checkbox" checked name="filter_block[]" class="custom-control-input" value="' . $block_numbers . '" id="filter_block_' . $block_numbers . '">
                                                             <label class="custom-control-label" for="filter_block_' . $block_numbers . '">' . $block_numbers . '</label>
                                                         </div>';
-                                            }
-                                        }
-                                        ?>
+    }
+}
+?>
                                     </div>
                                     <br />
 
@@ -67,38 +67,38 @@
                                         <label for="">Flat Number</label>
                                         <br>
                                         <?php
-                                        $flatnumber = array();
-                                        $query = "SELECT distinct(FlatNumber) FROM flats";
-                                        if ($result = mysqli_query($con, $query)) {
-                                            $rowcount = mysqli_num_rows($result);
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $flatnumber = $row['FlatNumber'];
-                                                echo '<div class="custom-control custom-checkbox custom-control-inline">
+$flatnumber = array();
+$query = "SELECT distinct(FlatNumber) FROM flats";
+if ($result = mysqli_query($con, $query)) {
+    $rowcount = mysqli_num_rows($result);
+    while ($row = mysqli_fetch_array($result)) {
+        $flatnumber = $row['FlatNumber'];
+        echo '<div class="custom-control custom-checkbox custom-control-inline">
                                                             <input checked type="checkbox" name="filter_flatnumber[]" class="custom-control-input" value="' . $flatnumber . '" id="filter_series_' . $flatnumber . '">
                                                             <label class="custom-control-label" for="filter_series_' . $flatnumber . '">' . $flatnumber . '</label>
                                                         </div>';
-                                            }
-                                        }
-                                        ?>
+    }
+}
+?>
                                     </div>
                                     <br />
                                     <div class="form-check">
                                         <label for="">Flat Type</label>
                                         <br>
                                         <?php
-                                        $ftypes = array();
-                                        $query = "SELECT distinct(FlatType) FROM flatarea where BlockNumber in (Select BlockNumber from flats)";
-                                        if ($result = mysqli_query($con, $query)) {
-                                            $rowcount = mysqli_num_rows($result);
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $ftypes = $row['FlatType'];
-                                                echo '<div class="custom-control custom-checkbox custom-control-inline">
+$ftypes = array();
+$query = "SELECT distinct(FlatType) FROM flatarea where BlockNumber in (Select BlockNumber from flats)";
+if ($result = mysqli_query($con, $query)) {
+    $rowcount = mysqli_num_rows($result);
+    while ($row = mysqli_fetch_array($result)) {
+        $ftypes = $row['FlatType'];
+        echo '<div class="custom-control custom-checkbox custom-control-inline">
                                                             <input checked type="checkbox" name="filter_ftypes[]" class="custom-control-input" value="' . $ftypes . '" id="filter_ftypes_' . $ftypes . '">
                                                             <label class="custom-control-label" for="filter_ftypes_' . $ftypes . '">' . $ftypes . '</label>
                                                         </div>';
-                                            }
-                                        }
-                                        ?>
+    }
+}
+?>
                                     </div>
 
                                     <br />
@@ -106,19 +106,19 @@
                                         <label for="">Floor</label>
                                         <br>
                                         <?php
-                                        $ftypes = array();
-                                        $query = "SELECT distinct(Floor) FROM flats";
-                                        if ($result = mysqli_query($con, $query)) {
-                                            $rowcount = mysqli_num_rows($result);
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $ftypes = $row['Floor'];
-                                                echo '<div class="custom-control custom-checkbox custom-control-inline">
+$ftypes = array();
+$query = "SELECT distinct(Floor) FROM flats";
+if ($result = mysqli_query($con, $query)) {
+    $rowcount = mysqli_num_rows($result);
+    while ($row = mysqli_fetch_array($result)) {
+        $ftypes = $row['Floor'];
+        echo '<div class="custom-control custom-checkbox custom-control-inline">
                                                             <input checked type="checkbox" name="filter_ftypes[]" class="custom-control-input" value="' . $ftypes . '" id="filter_ftypes_' . $ftypes . '">
                                                             <label class="custom-control-label" for="filter_ftypes_' . $ftypes . '">' . $ftypes . '</label>
                                                         </div>';
-                                            }
-                                        }
-                                        ?>
+    }
+}
+?>
                                     </div>
 
                                     <div class="modal-footer">
@@ -341,7 +341,7 @@ function loadModalCurrent() {
     $.ajax({
         type: "POST",
         url: "includes/loadInfo/loadmodal_flats.php",
-        // data: form_serialize, 
+        // data: form_serialize,
         // dataType: "json",
         data: json_areaData,
         success: function(output) {
@@ -415,8 +415,8 @@ function update_flats(e) {
         url: "includes/queries/flats.php",
         data: form_serialize,
         success: function(data) {
-            // alert(data); // show response from the php script.
-            // console.log(data);
+            alert(data); // show response from the php script.
+            console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
                     '*This data already exists! Please change the Block or flat value');
