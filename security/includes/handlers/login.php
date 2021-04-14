@@ -44,7 +44,7 @@ $count=mysqli_num_rows($result);
 			//echo "Cookies are not  Set";
 		}
 		
-        //echo '<script>window.location.replace("../../index.php")</script>';
+        echo '<script>window.location.replace("../../index.php")</script>';
         
 	}
 

@@ -2,15 +2,16 @@
 
 if (isset($_POST["contactno"]) && isset($_POST["username"]) ) {
 
-
     $contactno = $_POST["contactno"];
     $username = $_POST["username"];
+    //echo $contactno;
+    //echo $username;
     $_SESSION['contactno']=$contactno;
     
     $db = mysqli_connect('localhost', 'root', '', 'sms') or
     die('Error connecting to MySQL server.');
 
-    $query = "SELECT * FROM admin WHERE ContactNumber='{$contactno}'and Username='{$username}' ;";
+    $query = "SELECT security.ContactNumber,securitylogin.Username FROM security inner join securitylogin on security.SecurityID=securitylogin.SecurityID WHERE security.ContactNumber='{$contactno}' and  securitylogin.Username='{$username}' ;";
     //echo $query;
     $result = mysqli_query($db, $query);
 
@@ -19,7 +20,7 @@ if (isset($_POST["contactno"]) && isset($_POST["username"]) ) {
         $count = mysqli_num_rows($result);
 
         if ($count == 0 && isset($_SESSION['contactno'])) {
-            echo "<script>alert('This is not a registered contact number . Please try again!');</script>";
+          echo "<script>alert('Either username or contact number is not correct. Please try again!');</script>";
         } else {
 
             $otp = rand(100000, 999999);

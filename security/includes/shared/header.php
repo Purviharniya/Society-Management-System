@@ -6,13 +6,13 @@ include '../config.php';
 //$_SESSION['flatno'] = '801'; //comment later
 //$_SESSION['blockno'] = 'A'; //comment later
 //$_SESSION['login_role'] = 'security'; //comment later
-// if(isset($_SESSION['flatno']) && isset($_SESSION['role']) && $_SESSION['role]=='user'){
-//     $username = $_SESSION['username'];
-//     $role = $_SESSION['role'];
-// }
-// else{
-//     redirect('../login.php');
-// }
+if(isset($_SESSION['username']) && isset($_SESSION['login_role']) && $_SESSION['login_role']=='security'){
+    $username = $_SESSION['username'];
+    $login_role = $_SESSION['login_role'];
+}
+else{
+    header("Location: ../login.php");
+}
 
 ?>
 
