@@ -127,7 +127,6 @@ unset($_SESSION['error_message']);
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for="people">Number of People:</label>
-                                                    <!-- DO REMEMBER -->
                                                     <input type="text" class="form-control" id="people"
                                                         name="people" placeholder="Column name of number of people"
                                                         value="NoOfPeople" readonly>
@@ -141,7 +140,6 @@ unset($_SESSION['error_message']);
                                             </div>
                                             <div class="form-group">
                                                 <label for="reasonToMeet">Reason to Meet:</label>
-                                                <!-- DO REMEMBER -->
                                                 <input type="text" class="form-control" id="reasonToMeet"
                                                     name="reasonToMeet" value="ReasonToMeet"
                                                     placeholder="Column name of whom to meet" rows="3" readonly>
@@ -149,7 +147,6 @@ unset($_SESSION['error_message']);
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for="startdate">Start Date:</label>
-                                                    <!-- DO REMEMBER -->
                                                     <input type="text" class="form-control" id="startdate"
                                                         name="startdate" placeholder="Column name of start date"
                                                         value="StartDate" readonly>

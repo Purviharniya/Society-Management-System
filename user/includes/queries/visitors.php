@@ -58,16 +58,16 @@ if (isset($_POST['addvisitors-btn'])) {
     $contactno = mysqli_escape_string($con, $_POST['contact']);
     $altcontactno = mysqli_escape_string($con, $_POST['contact1']);
 
-    // $block = $_SESSION['blockno'];
-    //$flatno = $_SESSION['flatno'];
+    $block = $_SESSION['blockno'];
+    $flatno = $_SESSION['flatno'];
 
-    $block = 'A'; //remove it later
-    $flatno = '101'; //remove it later
+    // $block = 'A'; //remove it later
+    // $flatno = '101'; //remove it later
 
     $people = mysqli_escape_string($con, $_POST['people']);
 
-    //$whomtomeet = $_SESSION['username'];
-    $whomtomeet = 'Esha'; //remove it later
+    $whomtomeet = $_SESSION['username'];
+    // $whomtomeet = 'Esha'; //remove it later
 
     $reasontomeet = mysqli_escape_string($con, $_POST['reasonToMeet']);
     $startdate = mysqli_escape_string($con, $_POST['startDate']);
@@ -82,7 +82,7 @@ if (isset($_POST['addvisitors-btn'])) {
     $result = mysqli_query($con, $fetch_query);
     $flatID = mysqli_fetch_array($result);
     // print_r($flatID);
-    $flatID['FlatID'] = 1; //FOR NOW, REMOVE IT LATER
+    // $flatID['FlatID'] = 1; //FOR NOW, REMOVE IT LATER
 
     $check_query = "SELECT * from visitors where BlockNumber='" . $block . "' AND FlatNumber=" . $flatno . " AND VisitorName='" . $vname . "' ;";
     $check_res = mysqli_query($con, $check_query);
@@ -136,11 +136,11 @@ if (isset($_POST['delete_visitors'])) {
 
 if (isset($_POST['update_visitors'])) {
 
-    // $block = $_SESSION['blockno'];
-    //$flatno = $_SESSION['flatno'];
+    $block = $_SESSION['blockno'];
+    $flatno = $_SESSION['flatno'];
 
-    $block = 'A'; //remove it later
-    $flatno = '101'; //remove it later
+    // $block = 'A'; //remove it later
+    // $flatno = '101'; //remove it later
 
     $visitorID = mysqli_escape_string($con, $_POST['visitor_id']);
     $vname_new = mysqli_escape_string($con, $_POST['vname_new']);

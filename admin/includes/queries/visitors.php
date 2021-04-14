@@ -176,7 +176,7 @@ if (isset($_POST['update_visitors'])) {
                 mysqli_query($con, $query);
                 generateOTP($otp_new, $vcontact_new, $vname_new, $startdate_new, $duration_new);
             }
-            echo "1k";
+            
             $sql = "UPDATE visitors
                     SET BlockNumber='$block_new', FlatNumber='$flatno_new',VisitorName = '$vname_new',
                     VisitorContactNo='$vcontact_new', WhomToMeet = '$whom_new', ReasonToMeet = '$reason_new',
@@ -198,7 +198,7 @@ if (isset($_POST['update_visitors'])) {
             mysqli_query($con, $query);
             generateOTP($otp_new, $vcontact_new, $vname_new, $startdate_new, $duration_new);
         }
-        echo "2k";
+        
         $sql = "UPDATE visitors
                 SET BlockNumber='$block_new', FlatNumber='$flatno_new',VisitorName='$vname_new',
                 VisitorContactNo='$vcontact_new', WhomToMeet = '$whom_new', ReasonToMeet = '$reason_new',

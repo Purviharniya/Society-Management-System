@@ -5,11 +5,11 @@ include_once '../../../config.php';
 $data = json_decode(file_get_contents("php://input"), true);
 if ($data['type'] == 'current') {
 
-    // $block = $_SESSION['blockno'];
-    // $flatno = $_SESSION['flatno'];
+    $block = $_SESSION['blockno'];
+    $flatno = $_SESSION['flatno'];
     
-    $flatno = 101; //remove it later
-    $block = 'A'; //remove it later
+    // $flatno = 101; //remove it later
+    // $block = 'A'; //remove it later
     
     $delete_data = $data['delete_data'];
     foreach ($delete_data as $key => $val) {

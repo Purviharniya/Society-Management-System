@@ -5,11 +5,11 @@ include_once '../../../config.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-// $block = $_SESSION['blockno'];
-//$flatno = $_SESSION['flatno'];
+$block = $_SESSION['blockno'];
+$flatno = $_SESSION['flatno'];
 
-$block = 'A' ;//remove it later
-$flatno = '101';//remove it later
+// $block = 'A' ;//remove it later
+// $flatno = '101';//remove it later
 
 $vname = mysqli_escape_string($con, $data['VisitorName']);
 $result = mysqli_query($con, "select * from visitors WHERE BlockNumber='$block' and FlatNumber='$flatno' and VisitorName='$vname'"); //VisitorID,BlockNumber,FlatNumber,VisitorName,VisitorContactNo,WhomToMeet,ReasonToMeet

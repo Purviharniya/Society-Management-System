@@ -5,11 +5,11 @@ $draw = $_POST['draw'];
 $row = $_POST['start'];
 $rowperpage = $_POST['length']; // Rows display per page
     
-// $block = $_SESSION['blockno'];
-//$flatno = $_SESSION['flatno'];
+$block = $_SESSION['blockno'];
+$flatno = $_SESSION['flatno'];
 
-$block = 'A' ;//remove it later
-$flatno = '101';//remove it later
+// $block = 'A' ;//remove it later
+// $flatno = '101';//remove it later
 
 if (isset($_POST['order'])) {
     $columnIndex = $_POST['order'][0]['column']; // Column index

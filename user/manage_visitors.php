@@ -46,11 +46,11 @@
                                         <label for="">Name</label>
                                         <br>
                                         <?php
-// $block = $_SESSION['blockno'];
-//$flatno = $_SESSION['flatno'];
+$block = $_SESSION['blockno'];
+$flatno = $_SESSION['flatno'];
 
-$block = 'A' ;//remove it later
-$flatno = '101';//remove it later
+// $block = 'A' ;//remove it later
+// $flatno = '101';//remove it later
 
 $vname = array();
 $query = "SELECT distinct(VisitorName) FROM visitors WHERE BlockNumber='" . $block ."' AND  FlatNumber=" . $flatno . ";";
