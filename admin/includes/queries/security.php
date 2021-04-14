@@ -65,7 +65,7 @@ if (isset($_POST['delete_security'])) {
 
 if (isset($_POST['update_security'])) {
 
-    echo "<script>console.log('Entered update security')</script>";
+    //echo "<script>console.log('Entered update security')</script>";
     $securityid = mysqli_escape_string($con, $_POST['security_id']);
     $name_new = mysqli_escape_string($con, $_POST['name_new']);
     $contactnumber_new = mysqli_escape_string($con, $_POST['contactnumber_new']);
@@ -81,10 +81,11 @@ if (isset($_POST['update_security'])) {
     // if the admin is changing unique value constraints, we check if they already exist or not
     if (($name_new != $name_old) || ($contactnumber_new != $contactnumber_old) || ($shift_new != $shift_old)) {
 
-        $check_query = "SELECT * from security where Name='$name_new' AND ContactNumber='$contactnumber_new' AND Shift = '$shift_new';";
+        $check_query = "SELECT * from security where Name='$name_new' AND ContactNumber='$contactnumber_new';";
         $check_result = mysqli_query($con, $check_query);
         if (mysqli_num_rows($check_result) != 0) {
             echo "Exists_record";
+            exit();
         } else {
             $sql = "UPDATE security
                     SET Name='$name_new', ContactNumber='$contactnumber_new',Shift = '$shift_new',
