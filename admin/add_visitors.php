@@ -274,18 +274,14 @@ unset($_SESSION['error_message']);
                             }
                             ?>
                         </select>
-                        <small id="blockHelp" class="form-text text-muted">Enter the block name (make it a drop down
-                            later)</small>
+                        <small id="blockHelp" class="form-text text-muted">Select the block name</small>
                     </div>
                     <div class="form-group">
                         <label for="fno">Flat no:</label>
-                        <!-- <input type="text" class="form-control" id="fno" name="fno" aria-describedby="fnoHelp"
-                            required> -->
                         <select class="form-control" id="flat_select" name="flat" required>
                             <option value="" selected> Select a Flat</option>
                         </select>
-                        <small id="fnoHelp" class="form-text text-muted">Enter the Flat number (make it a drop down
-                            later)</small>
+                        <small id="fnoHelp" class="form-text text-muted">Select the Flat number</small>
                     </div>
 
                         <div class="form-group">
@@ -340,7 +336,7 @@ unset($_SESSION['error_message']);
                                 <label for="duration">Duration:</label>
                                 <input type="number" class="form-control" id="duration" name="duration"
                                     aria-describedby="durationHelp">
-                                <small id="durationHelp" class="form-text text-muted">Enter the duration</small>
+                                <small id="durationHelp" class="form-text text-muted">Enter the duration in days</small>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-themeblack" name='addvisitors-btn'>Add</button>

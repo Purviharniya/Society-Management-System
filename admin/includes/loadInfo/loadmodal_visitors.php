@@ -117,7 +117,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <input type="hidden" name="startdate_old" value="' . $startdate . '">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="duration"><b>Duration</b></label>
+                                            <label for="duration"><b>Duration in days</b></label>
                                             <input type="text" class="form-control" required="required" placeholder="Duration" name="duration_new" id="duration_new" value="' . $duration . '">
                                             <input type="hidden" name="duration_old" value="' . $duration . '">
                                         </div>

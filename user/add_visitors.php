@@ -108,7 +108,7 @@ unset($_SESSION['error_message']);
                                     <label for="duration">Duration:</label>
                                     <input type="number" class="form-control" id="duration" name="duration"
                                         aria-describedby="durationHelp">
-                                    <small id="durationHelp" class="form-text text-muted">Enter the duration</small>
+                                    <small id="durationHelp" class="form-text text-muted">Enter the duration in days</small>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-themeblack" name='addvisitors-btn'>Add</button>
