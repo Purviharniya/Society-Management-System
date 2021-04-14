@@ -159,7 +159,7 @@
                 style="background:black;">
                 <a class="dropdown-item" href="#" style="color:white;">
                     <div>
-                        <span class="prof-drop-name">Admin Test</span>
+                        <span class="prof-drop-name"><?php echo $_SESSION['username']; ?></span>
 
                     </div>
                 </a>

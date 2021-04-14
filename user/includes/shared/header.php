@@ -6,11 +6,10 @@ include '../config.php';
 // $_SESSION['flatno'] = '801'; //comment later
 // $_SESSION['blockno'] = 'A'; //comment later
 // $_SESSION['login_role'] = 'owner'; //comment later
-if(isset($_SESSION['flatno']) && isset($_SESSION['role'])){
-    $username = $_SESSION['username'];
+if (isset($_SESSION['flatno']) && isset($_SESSION['role'])) {
+    $flat = $_SESSION['flatno'];
     $role = $_SESSION['login_role'];
-}
-else{
+} else {
     header("Location: ../login.php");
 }
 

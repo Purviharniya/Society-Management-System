@@ -80,7 +80,6 @@ if (isset($_POST['addvisitors-btn'])) {
     $result = mysqli_query($con, $fetch_query);
     $flatID = mysqli_fetch_array($result);
 
-
     $check_query = "SELECT * from visitors where BlockNumber='" . $block . "' AND FlatNumber=" . $flatno . " AND VisitorName='" . $vname . "' ;";
     $check_res = mysqli_query($con, $check_query);
 

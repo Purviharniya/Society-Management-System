@@ -67,7 +67,7 @@
     </li>
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages6" aria-expanded="true"
             aria-controls="collapseUtilities">
             <i class="fas fa-search" aria-hidden="true"></i>
@@ -80,7 +80,7 @@
         </div>
     </li>
 
-    <hr class="sidebar-divider">
+    <hr class="sidebar-divider"> -->
 
     <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages7" aria-expanded="true"

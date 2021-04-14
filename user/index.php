@@ -9,11 +9,13 @@ include './includes/shared/header.php';
 <?php
 
 $flatid_sql = mysqli_query($con, "SELECT FlatID from flats where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}'");
-$row_flat = mysqli_fetch_array($flatid_sql);
+$row_flat = mysqli_fetch_assoc($flatid_sql);
 $flatid = $row_flat['FlatID'];
+// echo $row_flat['FlatID'];
 
-$meetings_s = mysqli_query($con, "SELECT * from meetings");
-$meetings = mysqli_num_rows($meetings_s);
+// $meetings_s = mysqli_query($con, "SELECT * from meetings");
+// $meetings = mysqli_num_rows($meetings_s);
+$meetings = 1;
 
 $complaint_sql = mysqli_query($con, "SELECT * from complaints where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}'");
 $complaint = mysqli_num_rows($complaint_sql);
