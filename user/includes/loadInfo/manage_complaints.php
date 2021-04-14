@@ -4,7 +4,7 @@ include_once '../../../config.php';
 $draw = $_POST['draw'];
 $row = $_POST['start'];
 $flatno = $_SESSION['flatno'];
-$contactno = $_SESSION['contactno'];
+// $contactno = $_SESSION['contactno'];
 $block = $_SESSION['blockno'];
 
 // echo $flatno;

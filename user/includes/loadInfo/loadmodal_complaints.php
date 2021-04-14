@@ -14,11 +14,11 @@ $status = mysqli_escape_string($con, $data['Status']);
 $resolveddate = mysqli_escape_string($con, $data['ResolvedDate']);
 $requestID = mysqli_escape_string($con, $data['RequestID']);
 $flatno = $_SESSION['flatno'];
-$contactno = $_SESSION['contactno'];
+// $contactno = $_SESSION['contactno'];
 // $contactno = '9029996333';
 // $flatno = '802';
 
-$result = mysqli_query($con, "select complaint_type,ComplaintType,Description,RaisedDate,AdminRemark,Status,ResolvedDate,updated_at FROM complaints inner join complainttypes on complainttypes.complaint_id = complaints.ComplaintType WHERE FlatNumber=" . $flatno . " and ContactNumber=" . $contactno . " and RequestID=" . $requestID . "");
+$result = mysqli_query($con, "select complaint_type,ComplaintType,Description,RaisedDate,AdminRemark,Status,ResolvedDate,updated_at FROM complaints inner join complainttypes on complainttypes.complaint_id = complaints.ComplaintType WHERE FlatNumber=" . $flatno . " and RequestID=" . $requestID . "");
 $row = mysqli_fetch_assoc($result);
 $cid = $row['ComplaintType'];
 $date = date("Y-m-d H:i:s");

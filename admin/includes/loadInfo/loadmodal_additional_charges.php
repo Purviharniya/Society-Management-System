@@ -2,7 +2,7 @@
 include_once '../../../config.php';
 
 $allowed_roles = array("admin");
-// if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
+// if (isset($_SESSION['username']) && in_array($_SESSION['role'], $allowed_roles)) {
 // echo 'Hi';
 
 $data = json_decode(file_get_contents("php://input"), true);

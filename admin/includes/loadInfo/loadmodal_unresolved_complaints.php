@@ -2,27 +2,26 @@
 // echo 'Hi';
 include_once '../../../config.php';
 $allowed_roles = array("admin");
-// if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
+// if (isset($_SESSION['username']) && in_array($_SESSION['role'], $allowed_roles)) {
 // echo 'Hi';
-
 
 $data = json_decode(file_get_contents("php://input"), true);
 $ctype = mysqli_escape_string($con, $data['ComplaintType']);
 $cdesc = mysqli_escape_string($con, $data['Description']);
 $raiseddate = mysqli_escape_string($con, $data['RaisedDate']);
-$adminRemark= mysqli_escape_string($con,$data['AdminRemark']);
-$status =  mysqli_escape_string($con,$data['Status']);
-$resolveddate = mysqli_escape_string($con,$data['ResolvedDate']);
-$requestID = mysqli_escape_string($con,$data['RequestID']);
+$adminRemark = mysqli_escape_string($con, $data['AdminRemark']);
+$status = mysqli_escape_string($con, $data['Status']);
+$resolveddate = mysqli_escape_string($con, $data['ResolvedDate']);
+$requestID = mysqli_escape_string($con, $data['RequestID']);
 
-$result = mysqli_query($con, "select FlatNumber,BlockNumber,complaint_type,ComplaintType,Description,RaisedDate,AdminRemark,Status,ResolvedDate,updated_at FROM complaints inner join complainttypes on complainttypes.complaint_id = complaints.ComplaintType WHERE RequestID=".$requestID. "");
+$result = mysqli_query($con, "select FlatNumber,BlockNumber,complaint_type,ComplaintType,Description,RaisedDate,AdminRemark,Status,ResolvedDate,updated_at FROM complaints inner join complainttypes on complainttypes.complaint_id = complaints.ComplaintType WHERE RequestID=" . $requestID . "");
 $row = mysqli_fetch_assoc($result);
-$cid=$row['ComplaintType'];
+$cid = $row['ComplaintType'];
 $date = date("Y-m-d H:i:s");
-$block=$row['BlockNumber'];
-$flat=$row['FlatNumber'];
+$block = $row['BlockNumber'];
+$flat = $row['FlatNumber'];
 
-$statusarray=array("1"=>"In-progress", "2"=>"Resolved");
+$statusarray = array("1" => "In-progress", "2" => "Resolved");
 
 echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -39,49 +38,47 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     <div class="form-row mt-4">
                                         <div class="form-group col-md-12">
                                             <label><i class="text-danger mx-auto">*The admin shall select the status and provide his remark.</i></label>
-                                            <div class="table-responsive">  
+                                            <div class="table-responsive">
                                                 <table class="table table-bordered">
                                                     <tbody>
                                                         <tr>
                                                             <th scope="col"> RequestID: </th>
-                                                            <td> '. $requestID . ' </td>
+                                                            <td> ' . $requestID . ' </td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="col"> Complaint Type: </th>
-                                                            <td> '. $ctype . ' </td>
+                                                            <td> ' . $ctype . ' </td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="col"> Complaint Raised on: </th>
-                                                            <td> '. $raiseddate . ' </td>
+                                                            <td> ' . $raiseddate . ' </td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="col"> Complaint Raised by: </th>
-                                                            <td> '. $block .'-'. $flat . ' </td>
+                                                            <td> ' . $block . '-' . $flat . ' </td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="col"> Complaint Description: </th>
-                                                            <td> '. $cdesc . ' </td>
+                                                            <td> ' . $cdesc . ' </td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="col"> Complaint Status: </th>
-                                                            <td> '. $status . ' </td>
+                                                            <td> ' . $status . ' </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>   
-                                           
+                                            </div>
+
                                             <label for="block"><b>Change Status:</b></label>
-                                            <select class="form-control" name="status_new" required>';                                              
-                                                foreach($statusarray as $i=>$value)
-                                                {
-                                                    if($i=='1'){
-                                                        echo "<option value= '" .$i. "' selected>" . $value . "</option>";
-                                                    }
-                                                    else{
-                                                        echo "<option value= '" .$i. "'>" . $value . "</option>";
-                                                    }
-                                                }                                                                                                                                    
-                                    echo '  </select>
+                                            <select class="form-control" name="status_new" required>';
+foreach ($statusarray as $i => $value) {
+    if ($i == '1') {
+        echo "<option value= '" . $i . "' selected>" . $value . "</option>";
+    } else {
+        echo "<option value= '" . $i . "'>" . $value . "</option>";
+    }
+}
+echo '  </select>
                                     <input type="hidden" name="status_old" value="' . $status . '">
                                     </div>
                                     <div class="form-group col-md-12">
@@ -92,8 +89,8 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <input type="hidden" class="form-control" name="recordID" id="recordID" value="' . $requestID . '">
                                         <input type="hidden" class="form-control" name="blockno" id="blockno" value="' . $block . '">
                                         <input type="hidden" class="form-control" name="flatno" id="flatno" value="' . $flat . '">
-                                        <input type="hidden" name="timestamp" value="' . $date .'">
-                                        
+                                        <input type="hidden" name="timestamp" value="' . $date . '">
+
                                     </div>
                                     <div class="col-12" id="error_record">
                                     </div>
@@ -109,14 +106,13 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                 </form>
                                 <br>
                                 </div>
-                            
+
                             <!--end Update-->
 
                         </div>
                     </div>
-                </div>  
-            </div>  
+                </div>
+            </div>
         </div>';
-
 
 // }

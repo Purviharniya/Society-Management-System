@@ -1,7 +1,7 @@
 <?php
-include_once('../../../config.php');
+include_once '../../../config.php';
 // $allowed_roles = array("admin");
-// if (isset($_SESSION['email']) && in_array($_SESSION['login_role'], $allowed_roles)) {
+// if (isset($_SESSION['email']) && in_array($_SESSION['role'], $allowed_roles)) {
 
 $data = json_decode(file_get_contents("php://input"), true);
 if ($data['type'] == 'current') {
@@ -24,10 +24,10 @@ if ($data['type'] == 'current') {
         /*
         $sql = "DELETE FROM bills WHERE FlatID='$recordID'";
         mysqli_query($con, $sql);
-        
+
         $sql = "DELETE FROM meetings WHERE FlatID='$recordID'";
         mysqli_query($con, $sql);
-        */
+         */
         $sql = "DELETE from flats where BlockNumber='" . $val['block'] . "' AND FlatNumber=" . $val['flatnumber'] . ";";
         echo $sql;
         mysqli_query($con, $sql);
