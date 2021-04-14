@@ -338,7 +338,7 @@ include 'includes/shared/topbar.php';
                         </div>
                         <div class=" form-check">
                             <label class="form-check-label" for="isRent">
-                                <input class="form-check-input" type="checkbox" value="1" id="isRent" name="isRent"
+                                <input class="form-check-input" type="checkbox" id="isRentt" name="isRent"
                                     onclick="myFunction()">
                                 Flat on rent?
                             </label>
@@ -417,18 +417,19 @@ function getflats() {
 }
 
 function myFunction() {
-    var checkBox = document.getElementById("isRent");
+    var checkBox = document.getElementById("isRentt");
     // Get the output text
     var text = document.getElementById("rentee");
-
+    console.log(checkBox);
+    console.log(text);
     // If the checkbox is checked, display the output text
     if (checkBox.checked == true) {
         // checkBox.value = 1;
-        console.log(checkBox.value);
+        //console.log(checkBox.value);
         text.style.display = "block";
     } else {
-        checkBox.value = 0;
-        console.log(checkBox.value);
+        //checkBox.value = 0;
+        //console.log(checkBox.value);
         text.style.display = "none";
     }
 };
