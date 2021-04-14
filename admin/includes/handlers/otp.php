@@ -19,7 +19,7 @@ if (isset($_POST["contactno"]) && isset($_POST["username"]) ) {
         $count = mysqli_num_rows($result);
 
         if ($count == 0 && isset($_SESSION['contactno'])) {
-            echo "<script>alert('This is not a registered contact number . Please try again!');</script>";
+            echo "<script>alert('Either username or contact number is not correct. Please try again!');</script>";
         } else {
 
             $otp = rand(100000, 999999);
