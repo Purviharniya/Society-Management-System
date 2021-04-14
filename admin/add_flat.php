@@ -9,7 +9,7 @@ include 'includes/shared/topbar.php';
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php
-    if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
+if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
     ?>
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,12 +20,12 @@ include 'includes/shared/topbar.php';
     </div>
 
     <?php
-        unset($_SESSION['success_message']);
-    }
-    ?>
+unset($_SESSION['success_message']);
+}
+?>
 
     <?php
-    if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
+if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
     ?>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -36,9 +36,9 @@ include 'includes/shared/topbar.php';
     </div>
 
     <?php
-        unset($_SESSION['error_message']);
-    }
-    ?>
+unset($_SESSION['error_message']);
+}
+?>
     <h3 class="my-4">Flats</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
@@ -243,6 +243,10 @@ include 'includes/shared/topbar.php';
 <!-- /container-fluid -->
 <script>
 $("#floorno").change(function() {
+    getblocks();
+});
+
+$("#fnoo").change(function() {
     getblocks();
 });
 

@@ -12,7 +12,7 @@ if (isset($_POST['order'])) {
 } else {
     // $columnName='sem';
     // $columnSortOrder='asc';
-    $orderQuery = ' order by BlockNumber asc ';
+    $orderQuery = ' order by BlockNumber asc, FlatNumber asc ';
 }
 $searchValue = $_POST['search']['value']; // Search value
 
