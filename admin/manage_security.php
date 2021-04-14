@@ -420,7 +420,8 @@ function update_security(e) {
             // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
-                    '*This data already exists! Please change the Security ID value');
+                    '*This data already exists!');
+                $('#error_record').addClass("text-danger");
                 $("#update_security_btn").text("Update");
                 $("#update_security_btn").attr("disabled", false);
             } else {
