@@ -40,24 +40,31 @@
                             aria-hidden="true">&times;</span> </button>
                 </div>
                 <div class="modal-body">
+                <div class="form-group">
+                        <label>Enter user name</label>
+                        <input type="text" name="username" id="username" class="form-control"
+                            placeholder="Enter the user name..." required>
+                    </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="forgotemail" id="forgotemail" class="form-control"
-                            placeholder="Enter your valid email..." required>
+                        <label>Enter Contact number</label>
+                        <input type="number" name="contactno" id="contactno" class="form-control"
+                            placeholder="Enter your contact number..." required>
                     </div>
                     <div class="form-group">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sign In</button>
-                    <button type="submit" name="forgotPass" class="btn btn-primary"><i class="fa fa-envelope"></i> Send
-                        Request</button>
+                    <button type="submit" name="forgotPass" class="btn btn-primary"><i class="fa fa-phone"></i> Send
+                        OTP</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
+<?php
+include('admin/includes/handlers/otp.php');
+?>
 <script>
 const togglePassword = document.querySelector('#togglePassword');
 const password = document.querySelector('#password');

@@ -2,9 +2,8 @@
 include_once '../../../config.php';
 // echo 'Hi';
 $allowed_roles = array("admin");
-// if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
+// if (isset($_SESSION['username']) && in_array($_SESSION['role'], $allowed_roles)) {
 // echo 'Hi';
-
 
 $data = json_decode(file_get_contents("php://input"), true);
 $block = mysqli_escape_string($con, $data['BlockNumber']);
@@ -15,7 +14,7 @@ $row = mysqli_fetch_assoc($result);
 $farea = $row['FlatArea'];
 $rate = $row['Ratepsq'];
 $recordID = $row['FlatAreaID'];
-$date =  date("Y-m-d H:i:s");
+$date = date("Y-m-d H:i:s");
 
 echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -88,27 +87,27 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         <div class="form-group col-md-6">
                                             <label for="ftyp"><b>Flat Type</b></label>
                                             <select class="form-control" id="flattype_new" name="flattype_new">
-                                                <option value="1BHK" ';  
-                                                $ftype=='1BHK' ?  print("selected"): "";
-                                                echo' > 1BHK</option>
-                                                <option value="2BHK" ';  
-                                                $ftype=='2BHK' ?  print("selected"): "";
-                                                echo' > 2BHK </option>
-                                                <option value="3BHK" ';  
-                                                $ftype=='3BHK' ?  print("selected"): "";
-                                                echo' > 3BHK </option>
-                                                <option value="4BHK" ';  
-                                                $ftype=='4BHK' ?  print("selected"): "";
-                                                echo' > 4BHK </option>
-                                                <option value="other" ';  
-                                                $ftype=='other' ?  print("selected"): "";
-                                                echo' > other </option>
+                                                <option value="1BHK" ';
+$ftype == '1BHK' ? print("selected") : "";
+echo ' > 1BHK</option>
+                                                <option value="2BHK" ';
+$ftype == '2BHK' ? print("selected") : "";
+echo ' > 2BHK </option>
+                                                <option value="3BHK" ';
+$ftype == '3BHK' ? print("selected") : "";
+echo ' > 3BHK </option>
+                                                <option value="4BHK" ';
+$ftype == '4BHK' ? print("selected") : "";
+echo ' > 4BHK </option>
+                                                <option value="other" ';
+$ftype == 'other' ? print("selected") : "";
+echo ' > other </option>
                                             </select>
                                         </div>
-                                        <input type="hidden" name="timestamp" value="' . $date .'">
+                                        <input type="hidden" name="timestamp" value="' . $date . '">
                                     </div>
-                                    
-                                    
+
+
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">
                                             <button type="submit" class="btn btn-primary" id="update_flatarea_btn" name="update_flatarea">Update</button>

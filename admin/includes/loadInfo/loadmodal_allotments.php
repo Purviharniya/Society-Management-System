@@ -1,7 +1,7 @@
 <?php
 // echo 'Hi';
 $allowed_roles = array("admin");
-// if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
+// if (isset($_SESSION['username']) && in_array($_SESSION['role'], $allowed_roles)) {
 // echo 'Hi';
 include_once '../../../config.php';
 

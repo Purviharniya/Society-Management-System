@@ -9,11 +9,5 @@ if(isset($_SESSION['username'])){
     //redirect to login page.
     header("Location: ../login.php");
 }
-/* else{
-    print_r($_SESSION);
-    session_unset();
-    session_destroy();
-    //header("Location: ../login.php");
-}
- */
+
 ?>

@@ -1,8 +1,7 @@
 <?php
 include_once '../../../config.php';
 $allowed_roles = array("admin");
-// if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
-
+// if (isset($_SESSION['username']) && in_array($_SESSION['role'], $allowed_roles)) {
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -18,7 +17,7 @@ $startdate = $row['StartDate'];
 $duration = $row['Duration'];
 $reasonTomeet = $row['ReasonToMeet'];
 $visitorID = $row['VisitorID'];
-$date =  date("Y-m-d H:i:s");
+$date = date("Y-m-d H:i:s");
 
 echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -44,8 +43,8 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1"><i class="text-danger">*This will delete all the information related to the flat area</i>
                                             <br>Are you sure you want to delete the record of <br> Block: <i><small><b>' . $block . '</b></small></i>,
-                                            Flat Number: <i><small><b>' . $flatno . '</b></small></i>, Visitor Name: <i><small><b>' . $vname . '</small></b></i>, 
-                                            Whom to Meet: <i><small><b>' . $whomTomeet . '</b></small></i>, Start Date: <i><small><b>' . $startdate . '</b></small></i>,  
+                                            Flat Number: <i><small><b>' . $flatno . '</b></small></i>, Visitor Name: <i><small><b>' . $vname . '</small></b></i>,
+                                            Whom to Meet: <i><small><b>' . $whomTomeet . '</b></small></i>, Start Date: <i><small><b>' . $startdate . '</b></small></i>,
                                             Duration: <i><small><b>' . $duration . '</b></small></i> ?
                                         </label>
                                         <br>
@@ -122,8 +121,8 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <input type="hidden" name="duration_old" value="' . $duration . '">
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                     <input type="hidden" name="visitor_id" value="' . $visitorID . '">
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">

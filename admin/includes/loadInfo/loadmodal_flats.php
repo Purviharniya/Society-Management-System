@@ -1,10 +1,9 @@
 <?php
-include_once('../../../config.php');
+include_once '../../../config.php';
 // echo 'Hi';
 $allowed_roles = array("admin");
-// if (isset($_SESSION['username']) && in_array($_SESSION['login_role'], $allowed_roles)) {
+// if (isset($_SESSION['username']) && in_array($_SESSION['role'], $allowed_roles)) {
 // echo 'Hi';
-
 
 $data = json_decode(file_get_contents("php://input"), true);
 $block = mysqli_escape_string($con, $data['BlockNumber']);
@@ -25,12 +24,12 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    
+
                     <div class="modal-body">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-delete-tab" data-toggle="tab" href="#nav-delete" role="tab" aria-controls="nav-delete" aria-selected="true">Deletion</a>
-                                <a class="nav-item nav-link" id="nav-update-tab" data-toggle="tab" href="#nav-update" role="tab" aria-controls="nav-update" aria-selected="false">Update</a>                        
+                                <a class="nav-item nav-link" id="nav-update-tab" data-toggle="tab" href="#nav-update" role="tab" aria-controls="nav-update" aria-selected="false">Update</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -53,7 +52,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                             <div class="col-md-6 text-right">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" name="close">Close</button>
                                             </div>
-                                        </div>    
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -65,28 +64,28 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                 <form method="POST" id="update_flats">
                                     <div class="form-row mt-4">
                                         <div class="form-group col-md-6">
-                                            <label for="block"><b>Block Number</b></label> 
+                                            <label for="block"><b>Block Number</b></label>
                                             <input type="text" class="form-control"  placeholder="Block Number" name="blockno_new" value="' . $block . '">
                                             <input type="hidden" class="form-control"  name="blockno_old" id="blockno_old" value="' . $block . '">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="seri"><b>Flat Number</b></label> 
+                                            <label for="seri"><b>Flat Number</b></label>
                                             <input type="number" class="form-control"  placeholder="Flat Number" name="number_new" value="' . $fno . '">
                                             <input type="hidden" class="form-control"  name="number_old" id="number_old" value="' . $fno . '">
                                         </div>
-                                        <div class="col-12" id="error_record" class="text-danger"> 
+                                        <div class="col-12" id="error_record" class="text-danger">
 
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="areaf"><b>Floor</b></label> 
+                                            <label for="areaf"><b>Floor</b></label>
                                             <input type="number" class="form-control"  placeholder="Floor" name="floor_new" value="' . $floor . '">
                                             <input type="hidden" class="form-control" name="floor_old" value="' . $floor . '">
                                             <input type="hidden" class="form-control"  name="recordID" id="recordID" value="' . $recordID . '">
                                             <input type="hidden" class="form-control"  name="flatareaID" id="flatareaID" value="' . $flatareaID . '">
-                                        
-                                        </div>                                 
+
+                                        </div>
                                     </div>
-                                    
+
                                     <div class="form-row">
                                         <div class="form-group col-md-6 text-center">
                                             <button type="submit" class="btn btn-primary" id="update_flats_btn" name="update_flats">Update</button>
@@ -103,6 +102,6 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                     </div>
                 </div>
             </div>';
-    // echo 'Hi';
+// echo 'Hi';
 
 // }

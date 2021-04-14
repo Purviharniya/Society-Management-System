@@ -3,15 +3,15 @@
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
 include '../config.php';
-// if(isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role']=='admin' ){
-//     $username = $_SESSION['username'];
-//     $role = $_SESSION['role'];
-// }
-// else{
-//     header("Location: ../login.php");
-// }
-$_SESSION['username'] = 'Admin1'; //comment this to test the admin profile update
-$_SESSION['login_role'] = 'admin';
+if(isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role']=='admin' ){
+    $username = $_SESSION['username'];
+    $role = $_SESSION['role'];
+}
+else{
+    header("Location: ../login.php");
+}
+// $_SESSION['username'] = 'Admin1'; //comment this to test the admin profile update
+// $_SESSION['role'] = 'admin';
 ?>
 <!DOCTYPE html>
 <html lang="en">
