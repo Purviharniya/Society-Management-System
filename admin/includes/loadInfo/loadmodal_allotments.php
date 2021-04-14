@@ -108,12 +108,12 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="block"><b>Owner Contact Number</b></label>
-                                            <input type="text" class="form-control"  placeholder="Contact Number" name="ocontact_new" value="' . $ocontact . '">
+                                            <input type="number" class="form-control"  placeholder="Contact Number" name="ocontact_new" value="' . $ocontact . '">
                                             <input type="hidden" name="ocontact_old" value="' . $ocontact . '">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="fno"><b>Alternate Contact Number</b></label>
-                                            <input type="text" class="form-control" id="oacontact" placeholder="Alternate Contact Number" name="oacontact_new" value="' . $oacontact . '">
+                                            <input type="number" class="form-control" id="oacontact" placeholder="Alternate Contact Number" name="oacontact_new" value="' . $oacontact . '">
                                             <input type="hidden" name="oacontact_old" value="' . $oacontact . '">
                                         </div>
                                     </div>
@@ -153,19 +153,19 @@ echo ' > No </option>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="block"><b>Rentee Contact Number</b></label>
-                                                <input type="text" class="form-control"  placeholder="Rentee Contact Number" name="rcontact_new" value="' . $rcontact . '">
+                                                <input type="number" class="form-control"  placeholder="Rentee Contact Number" name="rcontact_new" value="' . $rcontact . '">
                                                 <input type="hidden" name="rcontact_old" value="' . $rcontact . '">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="fno"><b>Alternate Contact Number</b></label>
-                                                <input type="text" class="form-control" placeholder="Alternate Contact Number" name="racontact_new" value="' . $racontact . '">
+                                                <input type="number" class="form-control" placeholder="Alternate Contact Number" name="racontact_new" value="' . $racontact . '">
                                                 <input type="hidden" name="racontact_old" value="' . $racontact . '">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="block"><b>Total Members</b></label>
-                                                <input type="text" class="form-control"  placeholder="Rentee Members" name="rmembers_new" value="' . $rmembers . '">
+                                                <input type="number" class="form-control"  placeholder="Rentee Members" name="rmembers_new" value="' . $rmembers . '">
                                             </div>
                                         </div>
                                     </section>
