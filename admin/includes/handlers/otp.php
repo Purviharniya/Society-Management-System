@@ -1,15 +1,16 @@
 <?php
 
-if (isset($_POST["contactno"])) {
+if (isset($_POST["contactno"]) && isset($_POST["username"]) ) {
 
 
     $contactno = $_POST["contactno"];
+    $username = $_POST["username"];
     $_SESSION['contactno']=$contactno;
     
     $db = mysqli_connect('localhost', 'root', '', 'sms') or
     die('Error connecting to MySQL server.');
 
-    $query = "SELECT * FROM admin WHERE ContactNumber='{$contactno}' ;";
+    $query = "SELECT * FROM admin WHERE ContactNumber='{$contactno}'and Username='{$username}' ;";
     //echo $query;
     $result = mysqli_query($db, $query);
 

@@ -40,9 +40,14 @@
                             aria-hidden="true">&times;</span> </button>
                 </div>
                 <div class="modal-body">
+                <div class="form-group">
+                        <label>Enter user name</label>
+                        <input type="text" name="username" id="username" class="form-control"
+                            placeholder="Enter the user name..." required>
+                    </div>
                     <div class="form-group">
                         <label>Enter Contact number</label>
-                        <input type="contactno" name="contactno" id="contactno" class="form-control"
+                        <input type="number" name="contactno" id="contactno" class="form-control"
                             placeholder="Enter your contact number..." required>
                     </div>
                     <div class="form-group">
