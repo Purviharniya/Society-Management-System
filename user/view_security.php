@@ -16,8 +16,8 @@
                     </div>
                 </div>
 
-
-    <table class="table table-bordered">
+    <div class="container-fluid mt-3">
+    <table class="table table-bordered" style="width:100%">
     <thead>
     <tr>
     <th>SecurityID</th>
@@ -48,7 +48,7 @@
     ?>
     </tbody>
     </table>
-
+</div>
 <?php
 include './includes/shared/footer.php';
 include './includes/shared/scripts.php';
