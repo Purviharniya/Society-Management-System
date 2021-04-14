@@ -17,7 +17,7 @@ function generateOTP($visitorOTP, $vcno, $vname, $startdate, $duration)
         // "numbers" => '"' . $number1 . ', ' . $number2 . '"', //not working
         "numbers" => $vcno,
     );
-    print_r($fields);
+    // print_r($fields);
 
     // echo '<script>console.log('.$fields.')</script>';
     $curl = curl_init();
@@ -51,7 +51,7 @@ function generateOTP($visitorOTP, $vcno, $vname, $startdate, $duration)
 
     } else {
         //echo $response;
-        echo "<script>console.log('Done succ')</script>";
+        // echo "<script>console.log('Done succ')</script>";
         // return $visitorOTP;
     }
 }
@@ -63,7 +63,7 @@ if (isset($_POST['addvisitors-btn'])) {
     $contactno = mysqli_escape_string($con, $_POST['contact']);
     $altcontactno = mysqli_escape_string($con, $_POST['contact1']);
     $block = mysqli_escape_string($con, $_POST['block']);
-    $flatno = mysqli_escape_string($con, $_POST['fno']);
+    $flatno = mysqli_escape_string($con, $_POST['flat']);
     $people = mysqli_escape_string($con, $_POST['people']);
     $whomtomeet = mysqli_escape_string($con, $_POST['whomToMeet']);
     $reasontomeet = mysqli_escape_string($con, $_POST['reasonToMeet']);
@@ -79,8 +79,7 @@ if (isset($_POST['addvisitors-btn'])) {
     $fetch_query = "SELECT FlatID from flats where BlockNumber='" . $block . "' AND FlatNumber=" . $flatno . ";";
     $result = mysqli_query($con, $fetch_query);
     $flatID = mysqli_fetch_array($result);
-    // print_r($flatID);
-    // $flatID['FlatID'] = 1; //FOR NOW, REMOVE IT LATER
+
 
     $check_query = "SELECT * from visitors where BlockNumber='" . $block . "' AND FlatNumber=" . $flatno . " AND VisitorName='" . $vname . "' ;";
     $check_res = mysqli_query($con, $check_query);
@@ -100,9 +99,7 @@ if (isset($_POST['addvisitors-btn'])) {
         echo "\n";
         if (mysqli_query($con, $query)) {
             echo "Visitor Added successfully\n";
-
             generateOTP($otp, $contactno, $vname, $startdate, $duration);
-
             //Start the session if already not started.
             $_SESSION['success_message'] = "<strong>Success!</strong> Visitor added successfully!";
 
