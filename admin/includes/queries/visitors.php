@@ -100,9 +100,9 @@ if (isset($_POST['addvisitors-btn'])) {
         echo "\n";
         if (mysqli_query($con, $query)) {
             echo "Visitor Added successfully\n";
-            
-            // generateOTP($otp, $contactno, $vname, $startdate, $duration);
-            
+
+            generateOTP($otp, $contactno, $vname, $startdate, $duration);
+
             //Start the session if already not started.
             $_SESSION['success_message'] = "<strong>Success!</strong> Visitor added successfully!";
 
@@ -177,7 +177,7 @@ if (isset($_POST['update_visitors'])) {
                 mysqli_query($con, $query);
                 generateOTP($otp_new, $vcontact_new, $vname_new, $startdate_new, $duration_new);
             }
-            
+
             $sql = "UPDATE visitors
                     SET BlockNumber='$block_new', FlatNumber='$flatno_new',VisitorName = '$vname_new',
                     VisitorContactNo='$vcontact_new', WhomToMeet = '$whom_new', ReasonToMeet = '$reason_new',
@@ -199,7 +199,7 @@ if (isset($_POST['update_visitors'])) {
             mysqli_query($con, $query);
             generateOTP($otp_new, $vcontact_new, $vname_new, $startdate_new, $duration_new);
         }
-        
+
         $sql = "UPDATE visitors
                 SET BlockNumber='$block_new', FlatNumber='$flatno_new',VisitorName='$vname_new',
                 VisitorContactNo='$vcontact_new', WhomToMeet = '$whom_new', ReasonToMeet = '$reason_new',
