@@ -4,28 +4,31 @@
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-user"></i></span>
-            <input type="username" class="form-control" name="username" placeholder="Username" id="username" required>
+            <input type="username" class="form-control forrm" name="username" placeholder="Username" id="username"
+                required>
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+            <input type="password" class="form-control forrm" name="password" id="password" placeholder="Password"
+                required>
             <i class="fa fa-eye" id="togglePassword"></i>
         </div>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col">
-                <label><input type="checkbox" name="rememberme" id="rememberme"> Remember me</label>
+                <label class="rmme"><input type="checkbox" class="forrm" name="rememberme" id="rememberme"> Remember
+                    me</label>
             </div>
             <div class="col text-right">
-                <a href="#" data-toggle="modal" data-target="#forgotPass">Forgot Password?</a>
+                <a class="rmme" href="#" data-toggle="modal" data-target="#forgotPass">Forgot Password?</a>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <input type="submit" name="adminsubmit" value="Login" class="btn btn-block btn-primary">
+        <input type="submit" name="adminsubmit" value="Login" class="btn btn-block btn-black">
     </div>
 </form>
 
@@ -40,7 +43,7 @@
                             aria-hidden="true">&times;</span> </button>
                 </div>
                 <div class="modal-body">
-                <div class="form-group">
+                    <div class="form-group">
                         <label>Enter user name</label>
                         <input type="text" name="username" id="username" class="form-control"
                             placeholder="Enter the user name..." required>
@@ -54,7 +57,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="forgotPass" class="btn btn-primary"><i class="fa fa-phone"></i> Send
+                    <button type="submit" name="forgotPass" class="btn btn-black"><i class="fa fa-phone"
+                            style="margin-right: 2px;"></i> Send
                         OTP</button>
                 </div>
             </div>
@@ -63,7 +67,7 @@
 </div>
 
 <?php
-include('admin/includes/handlers/otp.php');
+include 'admin/includes/handlers/otp.php';
 ?>
 <script>
 const togglePassword = document.querySelector('#togglePassword');

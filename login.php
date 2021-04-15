@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //include("config.php"); //to access the db connection and setting session if validation returns true
 //include("./admin/includes/handlers/login.php"); //write admin validations, functions, etc in this file
@@ -35,16 +35,16 @@ session_start();
 
 <body id="page-top">
     <!-- Page Wrapper -->
-    <div id="wrapper">
-        <div class="container forms-section mt-2 mb-4">
-            <div class="col-sm-8 ml-auto mr-auto">
-                <ul class="nav nav-pills nav-fill mb-1" id="pills-tab" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" id="pills-user-tab" data-toggle="pill"
+    <div id="wrapper" class="login-wrapper">
+        <div class="container forms-section mb-4">
+            <div class="col-sm-8 ml-auto mr-auto form-container-l1">
+                <ul class="nav nav-pills nav-fill " id="pills-tab" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active linker" id="pills-user-tab" data-toggle="pill"
                             href="#pills-user" role="tab" aria-controls="pills-user" aria-selected="true">User</a> </li>
-                    <li class="nav-item"> <a class="nav-link" id="pills-admin-tab" data-toggle="pill"
+                    <li class="nav-item"> <a class="nav-link linker" id="pills-admin-tab" data-toggle="pill"
                             href="#pills-admin" role="tab" aria-controls="pills-admin" aria-selected="false">Admin</a>
                     </li>
-                    <li class="nav-item"> <a class="nav-link" id="pills-security-tab" data-toggle="pill"
+                    <li class="nav-item"> <a class="nav-link linker" id="pills-security-tab" data-toggle="pill"
                             href="#pills-security" role="tab" aria-controls="pills-security"
                             aria-selected="false">Security</a>
                     </li>
@@ -52,29 +52,28 @@ session_start();
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-user" role="tabpanel"
                         aria-labelledby="pills-user-tab">
-                        <div class="col-sm-12 border border-primary shadow rounded pt-2">
+                        <div class="col-sm-12 border border-dark shadow rounded pt-2">
 
                             <?php
-                            if(!isset($_SESSION["otp"])){
-                                include('./user/login.php');
-                            }
-                            else{
-                                include('./user/verify.php');
-                                
-                            }
-                            ?>
+if (!isset($_SESSION["otp"])) {
+    include './user/login.php';
+} else {
+    include './user/verify.php';
+
+}
+?>
                         </div>
                     </div>
                     <div class="tab-pane fade admin-section" id="pills-admin" role="tabpanel"
                         aria-labelledby="pills-admin-tab">
-                        <div class="col-sm-12 border border-primary shadow rounded pt-2">
-                            <?php  include('./admin/login.php')?>
+                        <div class="col-sm-12 border border-dark shadow rounded pt-2">
+                            <?php include './admin/login.php'?>
                         </div>
                     </div>
                     <div class="tab-pane fade security-section" id="pills-security" role="tabpanel"
                         aria-labelledby="pills-security-tab">
-                        <div class="col-sm-12 border border-primary shadow rounded pt-2">
-                            <?php  include('./security/login.php')?>
+                        <div class="col-sm-12 border border-dark shadow rounded pt-2">
+                            <?php include './security/login.php'?>
                         </div>
                     </div>
                 </div>

@@ -4,28 +4,28 @@
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-user"></i></span>
-            <input type="text" class="form-control" name="uname" placeholder="Username" id="uname" required>
+            <input type="text" class="form-control forrm" name="uname" placeholder="Username" id="uname" required>
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" class="form-control" name="passw" id="passw" placeholder="Password" required>
+            <input type="password" class="form-control forrm" name="passw" id="passw" placeholder="Password" required>
             <i class="fa fa-eye" id="togglePass"></i>
         </div>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col">
-                <label><input type="checkbox" name="rme" id="rme"> Remember me</label>
+                <label class="rmme"><input type="checkbox" class="forrm" name="rme" id="rme"> Remember me</label>
             </div>
             <div class="col text-right">
-                <a href="#" data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a>
+                <a class="rmme" href="#" data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <input type="submit" name="securitysubmit" value="Login" class="btn btn-block btn-primary">
+        <input type="submit" name="securitysubmit" value="Login" class="btn btn-block btn-black">
     </div>
 </form>
 
@@ -54,7 +54,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="forgotPass" class="btn btn-primary"><i class="fa fa-phone"></i> Send
+                    <button type="submit" name="forgotPass" class="btn btn-black"><i class="fa fa-phone"
+                            style="margin-right: 2px;"></i> Send
                         OTP</button>
                 </div>
             </div>
@@ -63,7 +64,7 @@
 </div>
 
 <?php
-include('security/includes/handlers/otp.php');
+include 'security/includes/handlers/otp.php';
 ?>
 
 <script>
