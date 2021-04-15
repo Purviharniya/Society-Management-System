@@ -47,6 +47,20 @@
   margin-right: auto;
 }
 
+@media only screen and (max-width: 769px) {
+  .text-header {
+    font-size: 1.5rem;
+  }
+
+  .buttons-home {
+    padding-bottom: 20px;
+  }
+
+  .home-container {
+    padding-top: 84px !important;
+  }
+}
+
 .home-img-col {
   padding-right: 0 !important;
 }
