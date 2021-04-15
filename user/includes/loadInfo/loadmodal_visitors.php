@@ -105,7 +105,7 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="startdate"><b>Start Date</b></label>
-                                            <input type="date" class="form-control"  placeholder="Start Date" name="startdate_new" value="' . $startdate . '">
+                                            <input type="date" class="form-control startDate1"  placeholder="Start Date" name="startdate_new" value="' . $startdate . '">
                                             <input type="hidden" name="startdate_old" value="' . $startdate . '">
                                         </div>
                                         <div class="form-group col-md-6">
@@ -136,3 +136,19 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
 // echo 'Hi';
 
 // }
+?>
+<script>
+var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    $('.startDate1').attr("min",today);
+</script>

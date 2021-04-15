@@ -1,9 +1,5 @@
-<?php
-include './includes/shared/header.php';
-?>
-
+<?php include './includes/shared/header.php';?>
 <?php include './includes/shared/sidebar.php';?>
-
 <?php include './includes/shared/topbar.php';?>
 
 <!-- Begin Page Content -->
@@ -361,6 +357,10 @@ function loadModalCurrent() {
     // console.log("AreaData"+areaData);
     var json_areaData = JSON.stringify(areaData)
     // console.log("Json Area data modal: "+json_areaData)
+
+    
+
+
     $.ajax({
         type: "POST",
         url: "includes/loadInfo/loadmodal_visitors.php",

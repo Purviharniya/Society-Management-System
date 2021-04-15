@@ -221,7 +221,8 @@ function loadCurrent() {
         serverMethod: 'post',
         aaSorting: [],
         dom: '<"d-flex justify-content-between table-buttons-addvisitors"fBl>tip',
-        // buttons: [{
+        buttons: [
+        // {
         //     extend: 'excel',
         //     title: "visitors-data",
         //     text: '<span> <i class="fas fa-download "></i> EXCEL</span>',
@@ -343,10 +344,10 @@ function loadModalCurrent() {
     var btn=$(this);
     var aPos = $("#dataTable-visitors").dataTable().fnGetPosition(target_row.get(0));
     var areaData = $('#dataTable-visitors').DataTable().row(aPos).data()
-    console.log("AreaData"+areaData);
+    // console.log("AreaData"+areaData);
 
     var json_areaData = JSON.stringify(areaData)
-    console.log("Json Area data modal: "+json_areaData)
+    // console.log("Json Area data modal: "+json_areaData)
     
     $.ajax({
         type: "POST",

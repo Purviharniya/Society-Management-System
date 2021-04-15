@@ -28,6 +28,16 @@
 
 <!-- Page level custom scripts -->
 <script src=" ../vendor/js/demo/datatables-demo.js"> </script>
+<!-- Date Validation js file -->
+<?php 
+  if (strpos($_SERVER['PHP_SELF'], "add_visitors")){
+
+?>  
+    <script src=" ../vendor/js/date_validation.js"> </script>
+    <!-- <script>console.log("yup");</script> -->
+<?php
+  }
+?>
 <script>
 // Add custom scripts here
 
