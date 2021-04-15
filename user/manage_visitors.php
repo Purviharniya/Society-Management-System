@@ -222,7 +222,7 @@ function loadCurrent() {
         aaSorting: [],
         dom: '<"d-flex justify-content-between table-buttons-addvisitors"fBl>tip',
         buttons: [
-        // {
+            // {
         //     extend: 'excel',
         //     title: "visitors-data",
         //     text: '<span> <i class="fas fa-download "></i> EXCEL</span>',

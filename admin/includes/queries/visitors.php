@@ -123,8 +123,17 @@ if (isset($_POST['addvisitors-btn'])) {
 
 if (isset($_POST['delete_visitors'])) {
     $visitorID = mysqli_escape_string($con, $_POST['visitor_id']);
-    $sql = "DELETE FROM visitors WHERE VisitorID='$visitorID'";
-    mysqli_query($con, $sql);
+    $startdate = mysqli_escape_string($con, $_POST['startdate']);
+    $duration = mysqli_escape_string($con, $_POST['duration']);
+
+    $enddate = date('Y-m-d', strtotime($startdate. ' + ' . $duration .'day'));
+    $todaysDate = date("Y-m-d");
+    
+    if (strtotime($enddate) > strtotime($todaysDate)){  
+        $sql = "DELETE FROM visitors WHERE VisitorID='$visitorID'";
+        mysqli_query($con, $sql);
+    }
+
     // header("Location: ../bla.php");
     exit();
 }

@@ -485,6 +485,7 @@ $("#delete_selected_response_btn").click(function(e) {
     alert("You have selected " + $("#dataTable-visitors tbody tr.selected").length + " record(s) for deletion");
     var delete_rows = $("#dataTable-visitors").DataTable().rows('.selected').data()
     var delete_data = {}
+    // console.log(delete_rows);
     for (var i = 0; i < delete_rows.length; i++) {
         // console.log('Delete Rows : ');
         // console.log(delete_rows[i]);
@@ -492,8 +493,11 @@ $("#delete_selected_response_btn").click(function(e) {
         baseData['block'] = delete_rows[i].BlockNumber
         baseData['flatno'] = delete_rows[i].FlatNumber
         baseData['vname'] = delete_rows[i].VisitorName
+        baseData['startdate'] = delete_rows[i].StartDate
+        baseData['duration'] = delete_rows[i].Duration
         delete_data[i] = baseData
-        // console.log("Base Data:"+baseData);
+        console.log("Base Data:"+baseData);
+        // console.log(baseData);
     }
     var actual_data = {}
     actual_data['type'] = 'current'

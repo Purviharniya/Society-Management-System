@@ -49,6 +49,8 @@ echo '<div class="modal fade mymodal" id="update-del-modal" tabindex="-1" role="
                                         </label>
                                         <br>
                                         <input type="hidden" name="visitor_id" value="' . $visitorID . '">
+                                        <input type="hidden" name="startdate" value="' . $startdate . '">
+                                        <input type="hidden" name="duration" value="' . $duration . '">
                                         <div class="row">
                                             <div class="col-md-6 text-left">
                                                 <button type="submit" class="btn btn-primary" id="delete_visitors_btn" name="delete_visitors">Yes</button>
