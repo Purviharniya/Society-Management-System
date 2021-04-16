@@ -1,17 +1,16 @@
-<?php include './includes/shared/header.php'; ?>
-<?php include './includes/shared/sidebar.php'; ?>
-<?php include './includes/shared/topbar.php'; ?>
+<?php include './includes/shared/header.php';?>
+<?php include './includes/shared/sidebar.php';?>
+<?php include './includes/shared/topbar.php';?>
 
 <?php //SELECT shoutbox.FlatID, ShoutBoxID, Chat, FlatNumber, BlockNumber from shoutbox inner join flats on shoutbox.FlatID=flats.FlatID;
- 
- $sql = "SELECT FlatID from flats where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}'";
- $res=mysqli_query($con,$sql);
 
- $row = mysqli_fetch_assoc($res);
+$sql = "SELECT FlatID from flats where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}'";
+$res = mysqli_query($con, $sql);
+
+$row = mysqli_fetch_assoc($res);
 $_SESSION['flatid'] = $row['FlatID'];
- 
- 
- ?>
+
+?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -81,7 +80,7 @@ $_SESSION['flatid'] = $row['FlatID'];
                                         This
                                         is a dummy message.</p>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="chat-outgoing flex-column">
                                 <div class="msger">
                                     A-202, timestamp
@@ -96,13 +95,11 @@ $_SESSION['flatid'] = $row['FlatID'];
                         <form action="" class="typing-area">
                             <input type="text" placeholder="Type a message...." name="shout-msg" id="shout-msg">
                             <input type="hidden" name="shout-owner" id="shout-owner"
-                                value="<?php echo $_SESSION['flatid'];?>">
-                            <button type="submit" name="submit-shout" id="submit-shout"><i class="fa fa-telegram">
+                                value="<?php echo $_SESSION['flatid']; ?>">
+                            <button type="submit" name="submit-shout" id="submit-shout"><i class="fa fa-paper-plane">
                                 </i></button>
                         </form>
                     </section>
-
-
                 </div>
             </div>
         </div>
