@@ -735,3 +735,248 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+(15, 'Admin1', '', 'Hello everyone, welcome to the dashboard of our society! From today this shoutbox will be used to report any situations and alerts, so please keep checking it regularly!', '2021-03-27 07:17:24'),
+(21, '', '3', 'good morning', '2021-03-30 22:47:30'),
+(26, 'Admin2', '', 'Meeting at 7pm, Venue: Google meet, Link will be shared later', '2021-04-16 09:16:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitors`
+--
+
+CREATE TABLE `visitors` (
+  `VisitorID` bigint(20) NOT NULL,
+  `FlatID` bigint(20) NOT NULL,
+  `VisitorName` varchar(100) NOT NULL,
+  `VisitorContactNo` bigint(10) NOT NULL,
+  `AlternateVisitorContactNo` bigint(20) NOT NULL,
+  `BlockNumber` varchar(50) NOT NULL,
+  `FlatNumber` bigint(20) NOT NULL,
+  `NoOfPeople` int(11) NOT NULL,
+  `WhomToMeet` varchar(100) NOT NULL,
+  `ReasonToMeet` varchar(1000) NOT NULL,
+  `OTP` bigint(20) NOT NULL,
+  `StartDate` date NOT NULL,
+  `Duration` bigint(20) NOT NULL,
+  `updated_by` varchar(50) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visitors`
+--
+
+INSERT INTO `visitors` (`VisitorID`, `FlatID`, `VisitorName`, `VisitorContactNo`, `AlternateVisitorContactNo`, `BlockNumber`, `FlatNumber`, `NoOfPeople`, `WhomToMeet`, `ReasonToMeet`, `OTP`, `StartDate`, `Duration`, `updated_by`, `updated_at`) VALUES
+(1, 1, 'Esha Gupta', 9967778160, 9967778160, 'A', 101, 7, 'Purvi Harniya', 'Birthday celebration', 987456, '2021-04-16', 1, 'Admin1', '2021-04-16 14:14:35'),
+(2, 2, 'Jill Shah', 7303702757, 7303702757, 'A', 102, 1, 'Riya Joshi', 'Return a novel', 125463, '2021-04-08', 1, 'Admin1', '2021-04-16 14:16:43');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `additional_charges`
+--
+ALTER TABLE `additional_charges`
+  ADD PRIMARY KEY (`ChargeID`),
+  ADD UNIQUE KEY `Added_by` (`ChargeID`),
+  ADD KEY `additional_charges_ibfk_1` (`FlatID`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`AdminID`),
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `ContactNumber` (`ContactNumber`);
+
+--
+-- Indexes for table `allotments`
+--
+ALTER TABLE `allotments`
+  ADD PRIMARY KEY (`AllotmentID`),
+  ADD UNIQUE KEY `FlatNumber` (`FlatNumber`,`BlockNumber`,`isRent`),
+  ADD KEY `FOREIGN` (`FlatID`);
+
+--
+-- Indexes for table `bills_paid`
+--
+ALTER TABLE `bills_paid`
+  ADD PRIMARY KEY (`BillID`),
+  ADD KEY `FOREIGN` (`FlatID`),
+  ADD KEY `BillQueueID` (`BillQueueID`);
+
+--
+-- Indexes for table `bill_queue`
+--
+ALTER TABLE `bill_queue`
+  ADD PRIMARY KEY (`bill_id`),
+  ADD KEY `FlatID` (`FlatID`);
+
+--
+-- Indexes for table `complaints`
+--
+ALTER TABLE `complaints`
+  ADD PRIMARY KEY (`RequestID`);
+
+--
+-- Indexes for table `complainttypes`
+--
+ALTER TABLE `complainttypes`
+  ADD PRIMARY KEY (`complaint_id`);
+
+--
+-- Indexes for table `flatarea`
+--
+ALTER TABLE `flatarea`
+  ADD PRIMARY KEY (`FlatAreaID`),
+  ADD UNIQUE KEY `BlockNumber` (`BlockNumber`,`FlatSeries`);
+
+--
+-- Indexes for table `flats`
+--
+ALTER TABLE `flats`
+  ADD PRIMARY KEY (`FlatID`),
+  ADD UNIQUE KEY `FlatNumber` (`FlatNumber`,`BlockNumber`),
+  ADD KEY `FlatAreaID` (`FlatAreaID`);
+
+--
+-- Indexes for table `security`
+--
+ALTER TABLE `security`
+  ADD PRIMARY KEY (`SecurityID`),
+  ADD UNIQUE KEY `Name` (`Name`,`ContactNumber`);
+
+--
+-- Indexes for table `securitylogin`
+--
+ALTER TABLE `securitylogin`
+  ADD PRIMARY KEY (`SecID`),
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `SecurityID` (`SecurityID`),
+  ADD KEY `FOREIGN` (`SecurityID`);
+
+--
+-- Indexes for table `shoutbox`
+--
+ALTER TABLE `shoutbox`
+  ADD PRIMARY KEY (`ShoutBoxID`),
+  ADD KEY `FOREIGN` (`FlatID`);
+
+--
+-- Indexes for table `visitors`
+--
+ALTER TABLE `visitors`
+  ADD PRIMARY KEY (`VisitorID`),
+  ADD KEY `FOREIGN` (`FlatID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `additional_charges`
+--
+ALTER TABLE `additional_charges`
+  MODIFY `ChargeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `AdminID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `allotments`
+--
+ALTER TABLE `allotments`
+  MODIFY `AllotmentID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `bills_paid`
+--
+ALTER TABLE `bills_paid`
+  MODIFY `BillID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `bill_queue`
+--
+ALTER TABLE `bill_queue`
+  MODIFY `bill_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+
+--
+-- AUTO_INCREMENT for table `complaints`
+--
+ALTER TABLE `complaints`
+  MODIFY `RequestID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `complainttypes`
+--
+ALTER TABLE `complainttypes`
+  MODIFY `complaint_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `flatarea`
+--
+ALTER TABLE `flatarea`
+  MODIFY `FlatAreaID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+
+--
+-- AUTO_INCREMENT for table `flats`
+--
+ALTER TABLE `flats`
+  MODIFY `FlatID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- AUTO_INCREMENT for table `security`
+--
+ALTER TABLE `security`
+  MODIFY `SecurityID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123457;
+
+--
+-- AUTO_INCREMENT for table `securitylogin`
+--
+ALTER TABLE `securitylogin`
+  MODIFY `SecID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `shoutbox`
+--
+ALTER TABLE `shoutbox`
+  MODIFY `ShoutBoxID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `visitors`
+--
+ALTER TABLE `visitors`
+  MODIFY `VisitorID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `additional_charges`
+--
+ALTER TABLE `additional_charges`
+  ADD CONSTRAINT `additional_charges_ibfk_1` FOREIGN KEY (`FlatID`) REFERENCES `flats` (`FlatID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `bills_paid`
+--
+ALTER TABLE `bills_paid`
+  ADD CONSTRAINT `bills_paid_ibfk_1` FOREIGN KEY (`BillQueueID`) REFERENCES `bill_queue` (`bill_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bills_paid_ibfk_2` FOREIGN KEY (`FlatID`) REFERENCES `bill_queue` (`FlatID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `bill_queue`
+--
+ALTER TABLE `bill_queue`
+  ADD CONSTRAINT `bill_queue_ibfk_1` FOREIGN KEY (`FlatID`) REFERENCES `flats` (`FlatID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
