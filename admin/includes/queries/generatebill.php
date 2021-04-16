@@ -28,7 +28,7 @@ if (isset($_POST['genbill-btn'])) {
     $due_date = date_format($due_date, "Y/m/d");
 
     //get all flats
-    $getflat_sql = mysqli_query($con, "SELECT * from flats");
+    $getflat_sql = mysqli_query($con, "SELECT * from allotments");
 
     while ($f_row = mysqli_fetch_assoc($getflat_sql)) {
 
