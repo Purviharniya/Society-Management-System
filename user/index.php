@@ -29,6 +29,30 @@ $bill = mysqli_num_rows($bill_sql);
 $security_sql = mysqli_query($con, "SELECT * from security");
 $security = mysqli_num_rows($security_sql);
 
+// Count of all types of complaints
+$comp_count_sql = mysqli_query($con, "SELECT COUNT(*) as count, status from complaints where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}' group by STATUS ");
+$comp_count_rows = mysqli_fetch_all($comp_count_sql);
+// print_r($comp_count_row);
+$ccount_0 = $ccount_1 = $ccount_2 = 0;
+foreach ($comp_count_rows as $arr) {
+    // print_r($arr);
+    if ($arr[1] == '0') {
+        $ccount_0 = $arr[0];
+    }
+
+    if ($arr[1] == '1') {
+        $ccount_1 = $arr[0];
+    }
+
+    if ($arr[1] == '2') {
+        $ccount_2 = $arr[0];
+    }
+}
+// echo $ccount_2;
+
+$comp_date_sql = mysqli_query($con, "SELECT DATE(RaisedDate), COUNT(*) AS count FROM complaints where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}' GROUP BY DATE(RaisedDate) ORDER BY RaisedDate LIMIT 7");
+$comp_date_rows = mysqli_fetch_all($comp_date_sql);
+// print_r($comp_date_rows[0][0]);
 ?>
 
 <style>
@@ -431,13 +455,13 @@ $security = mysqli_num_rows($security_sql);
                         </div>
 
                         <div class="container my-5">
-                            <h4 class="col-12 text-center font-weight-bold pb-4">Visitors Distribution
-                            </h4>
+                            <!-- <h4 class="col-12 text-center font-weight-bold pb-4">Visitors Distribution
+                            </h4> -->
                             <!-- <canvas id="myChart" width="100px" height="30px"></canvas> -->
-                            <div class="mixed-chart-container">
+                            <!-- <div class="mixed-chart-container">
                                 <canvas class="mixed-chart" id="mixed" width="100px" height="300px">
                                 </canvas>
-                            </div>
+                            </div> -->
                             <div class="row justify-content-center align-items-center my-5">
                                 <h4 class="col-12 text-center font-weight-bold py-4">Complaints Distribution
                                 </h4>
@@ -560,10 +584,20 @@ $security = mysqli_num_rows($security_sql);
     var lineConfig = new Chart(line, {
         type: 'line',
         data: {
-            labels: ['data-1', 'data-2', 'data-3', 'data-4', 'data-5', 'data-6'],
+            labels: [<?php
+                        foreach ($comp_date_rows as $val) {
+                            echo '"' . $val[0] . '"' . ',';
+                        }
+                    ?>],
             datasets: [{
-                label: '# of data', // Name the series
-                data: [10, 15, 20, 10, 25, 5, 10], // Specify the data values array
+                label: 'No. of complaints', // Name the series
+                data: [
+                    <?php
+                        foreach ($comp_date_rows as $val) {
+                            echo $val[1] . ',';
+                     }
+                    ?>
+                ], // Specify the data values array
                 fill: false,
                 borderColor: '#2196f3', // Add custom color border (Line)
                 backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
@@ -582,11 +616,13 @@ $security = mysqli_num_rows($security_sql);
     var pieConfig = new Chart(pie, {
         type: 'pie',
         data: {
-            labels: ['data-1', 'data-2'],
+            labels: ['Un-resolved', 'In-progress', 'Resolved'],
             datasets: [{
                 label: '# of data',
-                data: [40, 80],
-                backgroundColor: ['rgba(103, 216, 239, 1)', 'rgba(246, 26, 104,1)'],
+                data: [<?php echo $ccount_0; ?>, <?php echo $ccount_1; ?>, <?php echo $ccount_2; ?>],
+                backgroundColor: ['rgba(246, 26, 104,1)', ' rgba(103, 216, 239, 1)',
+                    'rgba(64, 159, 64, 1)'
+                ],
                 borderWidth: 1
             }]
         },
