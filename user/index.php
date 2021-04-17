@@ -32,6 +32,7 @@ $security = mysqli_num_rows($security_sql);
 // Count of all types of complaints
 $comp_count_sql = mysqli_query($con, "SELECT COUNT(*) as count, status from complaints where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}' group by STATUS ");
 $comp_count_rows = mysqli_fetch_all($comp_count_sql);
+$comp_count_count = mysqli_num_rows($comp_count_sql);
 // print_r($comp_count_row);
 $ccount_0 = $ccount_1 = $ccount_2 = 0;
 foreach ($comp_count_rows as $arr) {
@@ -52,6 +53,7 @@ foreach ($comp_count_rows as $arr) {
 
 $comp_date_sql = mysqli_query($con, "SELECT DATE(RaisedDate), COUNT(*) AS count FROM complaints where FlatNumber='{$_SESSION['flatno']}' and BlockNumber='{$_SESSION['blockno']}' GROUP BY DATE(RaisedDate) ORDER BY RaisedDate LIMIT 7");
 $comp_date_rows = mysqli_fetch_all($comp_date_sql);
+$comp_date_count = mysqli_num_rows($comp_date_sql);
 // print_r($comp_date_rows[0][0]);
 ?>
 
@@ -467,14 +469,32 @@ $comp_date_rows = mysqli_fetch_all($comp_date_sql);
                                 </h4>
                                 <div class="col-md-6">
                                     <div class="line-chart-container">
-                                        <canvas class="line-chart" id="line">
-                                        </canvas>
+                                        <?php 
+                                        
+                                        if($comp_count_count >0){
+                                            echo '<canvas class="line-chart" id="line">
+                                            </canvas>';
+                                        }
+                                        else{
+                                            echo 'No data available';
+                                        }
+                                        ?>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="pie-chart-container mx-auto">
-                                        <canvas class="pie-chart" id="pie">
-                                        </canvas>
+                                        <?php 
+                                        
+                                        if($comp_count_count >0){
+                                            echo '<canvas class="pie-chart" id="pie">
+                                            </canvas>';
+                                        }
+                                        else{
+                                            echo 'No data available';
+                                        }
+                                        ?>
+
                                     </div>
                                 </div>
                             </div>
