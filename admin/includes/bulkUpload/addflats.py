@@ -108,8 +108,20 @@ try:
         #print(val)
         cursor.execute(flat_area_id, val) 
         flatareaid_tuple = cursor.fetchone()
-        for i in flatareaid_tuple:
-           flatareaid = int(i) 
+        #for i in flatareaid_tuple:
+        #   flatareaid = int(i) 
+        try:
+            # print('In my try')
+            for i in flatareaid_tuple:
+                flatareaid = i
+                #   flatID = i # uncomment this later
+                # print("i",i)
+                #x = i          # comment this later
+        except Exception as e:
+            # print('In my except')
+            # print('error',e)
+            # print("Flat with Block Number: {} and Flat Number: {} does not exist".format(blockno,flatno))
+            continue
         # print(cursor.execute(flat_area_id, val))
         #print("id",flatareaid)
         values = (flatno, blockno, floor, flatareaid, timestamp, timestamp)
