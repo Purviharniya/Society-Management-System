@@ -91,13 +91,13 @@ unset($_SESSION['error_message']);
                                                         <label for="fno"><b>Flat Number</b></label>
                                                         <input type="text" class="form-control" id="fno"
                                                             placeholder="Column name of Flat Number" name="fno"
-                                                            value="FlatNumber" required>
+                                                            value="FlatNumber" required readonly>
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label for="floor"><b>Floor</b></label>
                                                         <input type="text" class="form-control" id="floor"
                                                             placeholder="Column name of Floor" name="floor"
-                                                            value="Floor" required>
+                                                            value="Floor" required readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
@@ -105,7 +105,7 @@ unset($_SESSION['error_message']);
                                                         <label for="block"><b>Block</b></label>
                                                         <input type="text" class="form-control" id="block"
                                                             placeholder="Column name of Block" name="block"
-                                                            value="BlockNumber" required>
+                                                            value="BlockNumber" required readonly>
                                                     </div>
                                                 </div>
                                             </div>

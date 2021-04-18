@@ -92,13 +92,13 @@ unset($_SESSION['error_message']);
                                                     <label for="fcode"><b>Block</b></label>
                                                     <input type="text" class="form-control" id="block"
                                                         placeholder="Column name of Block" name="block"
-                                                        value="BlockNumber" required>
+                                                        value="BlockNumber" required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="eid"><b>Flat Series</b></label>
                                                     <input type="text" class="form-control" id="series"
                                                         placeholder="Column name of Flat Series" name="series"
-                                                        value="FlatSeries" required>
+                                                        value="FlatSeries" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -107,13 +107,13 @@ unset($_SESSION['error_message']);
                                                     <label for="name"><b>Flat Type</b></label>
                                                     <input type="text" class="form-control" id="flattype"
                                                         placeholder="Column name of Flat Type" name="flattype"
-                                                        value="FlatType" required>
+                                                        value="FlatType" required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="name"><b>Flat Area</b></label>
                                                     <input type="text" class="form-control" id="area"
                                                         placeholder="Column name of Flat Area" name="area"
-                                                        value="FlatArea" required>
+                                                        value="FlatArea" required readonly>
                                                 </div>
                                             </div>
 
@@ -122,7 +122,7 @@ unset($_SESSION['error_message']);
                                                     <label for="name"><b>Maintenance Rate /sq feet</b></label>
                                                     <input type="text" class="form-control" id="rate"
                                                         placeholder="Column name of Rate per sq feet" name="rate"
-                                                        value="Ratepsq" required>
+                                                        value="Ratepsq" required readonly>
                                                 </div>
                                             </div>
 

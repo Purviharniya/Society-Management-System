@@ -6,7 +6,7 @@ include 'includes/shared/topbar.php';
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php
-    if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
+if (isset($_SESSION['success_message']) && !empty($_SESSION['success_message'])) {
     ?>
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -17,12 +17,12 @@ include 'includes/shared/topbar.php';
     </div>
 
     <?php
-        unset($_SESSION['success_message']);
-    }
-    ?>
+unset($_SESSION['success_message']);
+}
+?>
 
     <?php
-    if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
+if (isset($_SESSION['error_message']) && !empty($_SESSION['error_message'])) {
     ?>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -33,9 +33,9 @@ include 'includes/shared/topbar.php';
     </div>
 
     <?php
-        unset($_SESSION['error_message']);
-    }
-    ?>
+unset($_SESSION['error_message']);
+}
+?>
     <h3 class="my-4">Allotments</h3>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card mt-2">
@@ -90,13 +90,13 @@ include 'includes/shared/topbar.php';
                                                     <label for="flat"><b>Flat Number</b></label>
                                                     <input type="text" class="form-control" id="flat"
                                                         placeholder="Column name of Flat" name="flat" value="FlatNumber"
-                                                        required>
+                                                        required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="block"><b>Block</b></label>
                                                     <input type="text" class="form-control" id="block"
                                                         placeholder="Column name of Block" name="block"
-                                                        value="BlockNumber" required>
+                                                        value="BlockNumber" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -104,13 +104,13 @@ include 'includes/shared/topbar.php';
                                                     <label for="oname"><b>Owner Name</b></label>
                                                     <input type="text" class="form-control" id="oname"
                                                         placeholder="Column name of Owner name" name="oname"
-                                                        value="OwnerName" required>
+                                                        value="OwnerName" required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="oemail"><b>Owner Email</b></label>
                                                     <input type="text" class="form-control" id="oemail"
                                                         placeholder="Column name of Owner email" name="oemail"
-                                                        value="OwnerEmail" required>
+                                                        value="OwnerEmail" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -120,13 +120,13 @@ include 'includes/shared/topbar.php';
 
                                                     <input type="text" class="form-control" id="ocno"
                                                         placeholder="Column name of Owner contact number" name="ocno"
-                                                        value="OwnerContactNumber" required>
+                                                        value="OwnerContactNumber" required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="oacno"><b>Owner Alternate Contact Number</b></label>
                                                     <input type="text" class="form-control" id="oacno"
                                                         placeholder="Column name of Owner alt contact num" name="oacno"
-                                                        value="OwnerAlternateContactNumber" required>
+                                                        value="OwnerAlternateContactNumber" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -134,13 +134,13 @@ include 'includes/shared/topbar.php';
                                                     <label for="omem"><b>Owner Member count</b></label>
                                                     <input type="text" class="form-control" id="omem"
                                                         placeholder="Column name of Owner Member count" name="omem"
-                                                        value="OwnerMemberCount" required>
+                                                        value="OwnerMemberCount" required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="isRent"><b>Flat on Rent?</b></label>
                                                     <input type="text" class="form-control" id="isRent"
                                                         placeholder="Column name of on rent?" name="isRent"
-                                                        value="isRent" required>
+                                                        value="isRent" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -148,13 +148,13 @@ include 'includes/shared/topbar.php';
                                                     <label for="rname"><b>Rentee Name</b></label>
                                                     <input type="text" class="form-control" id="rname"
                                                         placeholder="Column name of Rentee name" name="rname"
-                                                        value="RenteeName" required>
+                                                        value="RenteeName" required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="remail"><b>Rentee Email</b></label>
                                                     <input type="text" class="form-control" id="remail"
                                                         placeholder="Column name of Rentee email" name="remail"
-                                                        value="RenteeEmail" required>
+                                                        value="RenteeEmail" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -164,13 +164,13 @@ include 'includes/shared/topbar.php';
 
                                                     <input type="text" class="form-control" id="rcno"
                                                         placeholder="Column name of Rentee contact number" name="rcno"
-                                                        value="RenteeContactNumber" required>
+                                                        value="RenteeContactNumber" required readonly>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="racno"><b>Rentee Alternate Contact Number</b></label>
                                                     <input type="text" class="form-control" id="racno"
                                                         placeholder="Column name of Rentee alt contact num" name="racno"
-                                                        value="RenteeAlternateContactNumber" required>
+                                                        value="RenteeAlternateContactNumber" required readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -178,7 +178,7 @@ include 'includes/shared/topbar.php';
                                                     <label for="rmem"><b>Rentee Member count</b></label>
                                                     <input type="text" class="form-control" id="rmem"
                                                         placeholder="Column name of Rentee Member count" name="rmem"
-                                                        value="RenteeMemberCount" required>
+                                                        value="RenteeMemberCount" required readonly>
                                                 </div>
                                             </div>
                                             <br>
@@ -282,14 +282,14 @@ include 'includes/shared/topbar.php';
                                 <option value="" selected> Select a Block</option>
                                 <?php
 
-                                $sql = "SELECT distinct(BlockNumber) from flats";
-                                $res = mysqli_query($con, $sql);
+$sql = "SELECT distinct(BlockNumber) from flats";
+$res = mysqli_query($con, $sql);
 
-                                while ($row = mysqli_fetch_assoc($res)) {
-                                    echo '
+while ($row = mysqli_fetch_assoc($res)) {
+    echo '
                                     <option value="' . $row["BlockNumber"] . '">' . $row["BlockNumber"] . ' </option>';
-                                }
-                                ?>
+}
+?>
                             </select>
                             <small id="blockHelp" class="form-text text-muted">Select block</small>
                         </div>
