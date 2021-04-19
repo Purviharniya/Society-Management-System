@@ -296,7 +296,7 @@ function loadCurrent() {
             },
         ],
         columnDefs: [{
-                targets: [0, 6], // column index (start from 0)
+                targets: [0, 3, 5, 6], // column index (start from 0)
                 orderable: false, // set orderable false for selected columns
             },
             {
