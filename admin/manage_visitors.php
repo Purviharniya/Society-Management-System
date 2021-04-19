@@ -313,7 +313,7 @@ function loadCurrent() {
             },
         ],
         columnDefs: [{
-                targets: [0, 10], // column index (start from 0)
+                targets: [0, 13], // column index (start from 0)
                 orderable: false, // set orderable false for selected columns
             },
             {
@@ -358,7 +358,7 @@ function loadModalCurrent() {
     var json_areaData = JSON.stringify(areaData)
     // console.log("Json Area data modal: "+json_areaData)
 
-    
+
 
 
     $.ajax({
@@ -496,7 +496,7 @@ $("#delete_selected_response_btn").click(function(e) {
         baseData['startdate'] = delete_rows[i].StartDate
         baseData['duration'] = delete_rows[i].Duration
         delete_data[i] = baseData
-        console.log("Base Data:"+baseData);
+        console.log("Base Data:" + baseData);
         // console.log(baseData);
     }
     var actual_data = {}
