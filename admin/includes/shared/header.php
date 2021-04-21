@@ -3,11 +3,10 @@
 //  UNCOMMENT THIS AFTER LOGIN MODULE IS IMPLEMENTED
 
 include '../config.php';
-if(isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role']=='admin' ){
+if (isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
     $username = $_SESSION['username'];
     $role = $_SESSION['role'];
-}
-else{
+} else {
     header("Location: ../login.php");
 }
 // $_SESSION['username'] = 'Admin1'; //comment this to test the admin profile update
@@ -31,6 +30,7 @@ else{
     <!-- Custom styles for this template-->
     <link href="../vendor/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../vendor/css/shoutbox.css" rel="stylesheet">
+    <link href="../vendor/css/loader.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -42,5 +42,12 @@ else{
 </head>
 
 <body id="page-top">
+    <div id="loading-container">
+        <div class="cube" id="cube1"></div>
+        <div class="cube" id="cube2"></div>
+        <div class="cube" id="cube3"></div>
+        <div class="cube" id="cube4"></div>
+        <h4 class="text-center font-weight-bold py-4">Loading...</h4>
+    </div>
     <!-- Page Wrapper -->
     <div id="wrapper">

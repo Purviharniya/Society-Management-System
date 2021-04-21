@@ -74,6 +74,12 @@ function newExportAction(e, dt, button, config) {
 };
 </script>
 
+<script>
+$(window).on("load", function() {
+    // "use strict";
+    $("#loading-container").delay(500).fadeOut("slow");
+});
+</script>
 
 </body>
 
