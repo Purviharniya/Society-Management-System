@@ -11,9 +11,9 @@ if (isset($_POST["flat"])) {
     $records = mysqli_query($con, $queryy);
     foreach ($records as $rec) {
         if ($rec["FlatNumber"] == $fno && $rec["BlockNumber"] == $block) {
-            //$_SESSION['error_message'] = "<strong>Failure!</strong> Record for this flat number already exists!";
-            //header("Location: ../../add_flat.php");
-            echo "flat number";
+            $_SESSION['error_message'] = "<strong>Failure!</strong> Record for this flat number already exists!";
+            header("Location: ../../add_flat.php");
+            //echo "flat number";
             $error = 1;
             break;
         } else {
