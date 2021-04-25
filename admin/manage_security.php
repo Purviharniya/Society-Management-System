@@ -441,7 +441,7 @@ function update_security(e) {
                 temp['Name'] = form_serialize[0].value; //new values
                 temp['ContactNumber'] = form_serialize[2].value;
                 temp['Shift'] = form_serialize[4].value;
-                //temp['updated_at'] = date("Y-m-d H:i:s");
+                // temp['updated_at'] = date("Y-m-d H:i:s");
                 // temp['Updatedby'] = $_SESSION['username'];
                 $('#dataTable-security').dataTable().fnUpdate(temp, aPos, undefined, false);
                 $('.action-btn').off('click')

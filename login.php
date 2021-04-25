@@ -6,7 +6,7 @@
 
 session_start();
 //session_unset();
-
+// print_r($_SESSION['otp']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

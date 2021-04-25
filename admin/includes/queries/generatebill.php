@@ -39,7 +39,7 @@ if (isset($_POST['genbill-btn'])) {
         allotments.OwnerName, allotments.OwnerEmail, allotments.OwnerContactNumber,
         allotments.OwnerAlternateContactNumber, flats.BlockNumber,flats.Floor,flatarea.FlatArea,flats.FlatNumber from flatarea
         inner join flats on flatarea.FlatAreaID=flats.FlatAreaID inner join allotments on
-        allotments.FlatID=flats.FlatID inner join additional_charges on additional_charges.FlatID = flats.FlatID
+        allotments.FlatID=flats.FlatID left join additional_charges on additional_charges.FlatID = flats.FlatID
         where flats.FlatID='$flatid'; ");
 
         $getdets_row = mysqli_fetch_assoc($getdets_sql);
@@ -49,6 +49,7 @@ if (isset($_POST['genbill-btn'])) {
         $acharges_reasons = (explode(",", $getdets_row['Reason']));
         $oname = $getdets_row['OwnerName'];
         $oemail = $getdets_row['OwnerEmail'];
+        echo $oemail;
         $ocontact = $getdets_row['OwnerContactNumber'];
         $oacontact = $getdets_row['OwnerAlternateContactNumber'];
         $blockno = $getdets_row['BlockNumber'];
@@ -92,6 +93,7 @@ if (isset($_POST['genbill-btn'])) {
         `additional_charges`, `total_charges`, `bill_gen_date`, `bill_due_date`, `charges_after_due`,
         `filename`, `filemime`, `data`, `is_sent`) VALUES ('','$flatid','$oemail','$bmonth','$mcharges','$acharges','$tcharges',
         '$gen_date','$due_date','$charges_after_due','$file_name','$filemime','$data','0')";
+// echo   $bill_sql ;
 
         mysqli_query($con, $bill_sql);
         // echo $flatid;
