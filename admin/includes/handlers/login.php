@@ -31,8 +31,8 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
             // remember me
 
             if (!empty($_POST["rememberme"])) {
-                setcookie("username", $_POST["username"], time() + 3600); // stored for 1 day
-                setcookie("password", $_POST["password"], time() + 3600); // stored for 1 day
+                setcookie("username", $_POST["username"], time() + 3600,'/'); // stored for 1 day
+                setcookie("password", $_POST["password"], time() + 3600,'/'); // stored for 1 day
                 //echo "Cookies are set";
             } else {
                 setcookie("username", "");

@@ -4,20 +4,34 @@
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-user"></i></span>
-            <input type="text" class="form-control forrm" name="uname" placeholder="Username" id="uname" required>
+            <input type="text" class="form-control forrm" name="uname" placeholder="Username" id="uname" required value="<?php
+if (isset($_COOKIE["sec_username"])) {
+    echo $_COOKIE["sec_username"];
+} else {
+    echo '';
+}
+?>">
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-lock"></i></span>
-            <input type="password" class="form-control forrm" name="passw" id="passw" placeholder="Password" required>
+            <input type="password" class="form-control forrm" name="passw" id="passw" placeholder="Password" required
+                value="<?php
+if (isset($_COOKIE["sec_password"])) {
+    echo $_COOKIE["sec_password"];
+} else {
+    echo '';
+}
+?>">
             <i class="fa fa-eye" id="togglePass"></i>
         </div>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col">
-                <label class="rmme"><input type="checkbox" class="forrm" name="rme" id="rme"> Remember me</label>
+                <label class="rmme"><input type="checkbox" class="forrm" name="rme" id="rme"
+                        <?php if (isset($_COOKIE["sec_username"])) {?> checked <?php }?>> Remember me</label>
             </div>
             <div class="col text-right">
                 <a class="rmme" href="#" data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a>

@@ -5,21 +5,34 @@
         <div class="input-group">
             <span><i class="fa fa-user"></i></span>
             <input type="username" class="form-control forrm" name="username" placeholder="Username" id="username"
-                required>
+                value="<?php
+if (isset($_COOKIE["username"])) {
+    echo $_COOKIE["username"];
+} else {
+    echo '';
+}
+?>" required>
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span><i class="fa fa-lock"></i></span>
             <input type="password" class="form-control forrm" name="password" id="password" placeholder="Password"
-                required>
+                value="<?php
+if (isset($_COOKIE["password"])) {
+    echo $_COOKIE["password"];
+} else {
+    echo '';
+}
+?>" required>
             <i class="fa fa-eye" id="togglePassword"></i>
         </div>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col">
-                <label class="rmme"><input type="checkbox" class="forrm" name="rememberme" id="rememberme"> Remember
+                <label class="rmme"><input type="checkbox" class="forrm" name="rememberme" id="rememberme"
+                        <?php if (isset($_COOKIE["username"])) {?> checked <?php }?>> Remember
                     me</label>
             </div>
             <div class="col text-right">

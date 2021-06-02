@@ -34,16 +34,16 @@ $count=mysqli_num_rows($result);
 		$query1 = mysqli_fetch_assoc($result1);
 		$_SESSION["name"] =  $query1['Name'];
         if(!empty($_POST["rme"])) {
-			setcookie ("username",mysqli_escape_string($_POST["uname"]),time()+ 3600); // stored for 1 day
-			setcookie ("password",mysqli_escape_string($_POST["uname"]),time()+ 3600); // stored for 1 day
+			setcookie ("sec_username",mysqli_escape_string($db,$_POST["uname"]),time()+ 3600,'/'); // stored for 1 day
+			setcookie ("sec_password",mysqli_escape_string($db,$_POST["passw"]),time()+ 3600,'/'); // stored for 1 day
 			//echo "Cookies are set";
 		} 
         else {
-			setcookie("username","");
-			setcookie("password","");
+			setcookie("sec_username","");
+			setcookie("sec_password","");
 			//echo "Cookies are not  Set";
 		}
-		
+		// echo $_COOKIE['sec_username'];
         echo '<script>window.location.replace("../../index.php")</script>';
         
 	}
