@@ -26,7 +26,7 @@ if (isset($_POST['addallotment-btn'])) {
     $remail = mysqli_escape_string($con, $_POST['remail']);
     $rmembers = mysqli_escape_string($con, $_POST['rmembers']);
     $updated_at = date("Y-m-d H:i:s");
-    $added_by = $_SESSION['username'];
+    $updated_by = $_SESSION['username'];
     // $updated_by = 'admin1';
 
     // echo "hi";
@@ -110,6 +110,7 @@ if (isset($_POST["update_allotments"])) {
         $remail = mysqli_escape_string($con, $_POST['remail_new']);
         $rmembers = mysqli_escape_string($con, $_POST['rmembers_new']);
     }
+    // echo "Rname:" . $rname;
 
     $updated_by = mysqli_escape_string($con, $_POST['updated_by']);
     $timestamp = mysqli_escape_string($con, $_POST['timestamp']);
@@ -142,7 +143,7 @@ if (isset($_POST["update_allotments"])) {
         if (!filter_var($remail, FILTER_VALIDATE_EMAIL)) {
             array_push($error_array, "Rentee's email address is invalid!");
         }
-        if ($remail == '' || $rname = '' || $rcontact == '' || $racontact == '' || $rmembers == '') {
+        if ($remail == '' || $rname == '' || $rcontact == '' || $racontact == '' || $rmembers == '') {
             array_push($error_array, "All the rentee fields are required!");
         }
     }
@@ -188,6 +189,7 @@ if (isset($_POST["update_allotments"])) {
             exit();
         }
         $sql = "UPDATE allotments set FlatID='$flatid',FlatNumber='$fno',BlockNumber='$block',OwnerName='$oname',OwnerEmail='$oemail',OwnerContactNumber='$ocontact',OwnerAlternateContactNumber='$oacontact',OwnerMemberCount='$omembers',isRent='$isRent',RenteeName='$rname',RenteeEmail='$remail',RenteeContactNumber='$rcontact',RenteeAlternateContactNumber= '$racontact',RenteeMemberCount='$rmembers',updated_by='$updated_by',updated_at='$timestamp' WHERE AllotmentID='$recordid'";
+        // echo "<br>" . $sql;
         mysqli_query($con, $sql);
         exit();
     }

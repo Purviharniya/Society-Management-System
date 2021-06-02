@@ -415,11 +415,17 @@ function update_flats(e) {
         url: "includes/queries/flats.php",
         data: form_serialize,
         success: function(data) {
-            alert(data); // show response from the php script.
+            // alert(data); // show response from the php script.
             console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
                     '*This data already exists! Please change the Block or flat value');
+                $('#error_record').addClass("text-danger");
+                $("#update_flats_btn").text("Update");
+                $("#update_flats_btn").attr("disabled", false);
+            } else if (data == 'Block_no_exist') {
+                $('#error_record').text(
+                    '*Block Number does not exist!');
                 $('#error_record').addClass("text-danger");
                 $("#update_flats_btn").text("Update");
                 $("#update_flats_btn").attr("disabled", false);

@@ -99,7 +99,16 @@ if (isset($_POST['update_flats'])) {
     $recordID = mysqli_escape_string($con, $_POST['recordID']);
     //$flattype_new = mysqli_escape_string($con, $_POST['flattype_new']);
     //$flatareaid = mysqli_escape_string($con, $_POST['flatareaID']);
-    $flatareaid = mysqli_query($con, "SELECT FlatAreaID FROM `flatarea` WHERE (FlatSeries = ($flatnumber_new-100*$floor_new) and BlockNumber = '$block_new')");
+    $flatareaid_query = "SELECT FlatAreaID FROM `flatarea` WHERE (FlatSeries = ($flatnumber_new-100*$floor_new) and BlockNumber = '$block_new')";
+    $flatareaid_sql = mysqli_query($con, $flatareaid_query);
+    
+    if(mysqli_num_rows($flatareaid_sql)==0){
+        echo "Block_no_exist";
+        exit();
+    }
+    $flatareaid_row = mysqli_fetch_assoc($flatareaid_sql);
+    // echo $flatareaid_query;
+    $flatareaid = $flatareaid_row['FlatAreaID'];
     // $added_by = $_SESSION['username'];
     $updated_at = date("Y-m-d H:i:s");
 
@@ -111,6 +120,7 @@ if (isset($_POST['update_flats'])) {
         //if (is_numeric($fno) && is_numeric($floor) && !is_numeric($block)) {
         //}
         $check_query = "SELECT * from flats where BlockNumber='$block_new' AND FlatNumber='$flatnumber_new' AND Floor='$floor_new';";
+        // echo $check_query;
         $check_result = mysqli_query($con, $check_query);
         // echo $block_new . "-" . $blockno_old;
         // echo mysqli_num_rows($check_result);
@@ -120,6 +130,7 @@ if (isset($_POST['update_flats'])) {
             exit();
         } else {
             $sql = "UPDATE flats SET FlatNumber='$flatnumber_new',BlockNumber='$block_new',Floor='$floor_new',FlatAreaID='$flatareaid',updated_at='$updated_at' WHERE flatID='$recordID';";
+            // echo $sql;
             mysqli_query($con, $sql);
             exit();
         }

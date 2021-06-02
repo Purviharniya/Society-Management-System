@@ -420,15 +420,15 @@ function myFunction() {
     var checkBox = document.getElementById("isRentt");
     // Get the output text
     var text = document.getElementById("rentee");
-    //console.log(checkBox);
+    // console.log(checkBox);
     //console.log(text);
     // If the checkbox is checked, display the output text
     if (checkBox.checked == true) {
-        // checkBox.value = 1;
-        //console.log(checkBox.value);
+        checkBox.value = 1;
+        console.log(checkBox.value);
         text.style.display = "block";
     } else {
-        //checkBox.value = 0;
+        checkBox.value = 0;
         //console.log(checkBox.value);
         text.style.display = "none";
     }

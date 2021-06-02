@@ -438,8 +438,8 @@ function update_visitors(e) {
         url: "includes/queries/visitors.php",
         data: form_serialize,
         success: function(data) {
-            alert(data); // show response from the php script.
-            console.log(data);
+            // alert(data); // show response from the php script.
+            // console.log(data);
             if (data === "Exists_record") {
                 $('#error_record').text(
                     '*This data already exists! Please change the Block or Flat Number value');
@@ -466,9 +466,8 @@ function update_visitors(e) {
                 temp['NoOfPeople'] = form_serialize[12].value;
                 temp['StartDate'] = form_serialize[14].value;
                 temp['Duration'] = form_serialize[16].value;
-
                 // temp['updated_at'] = form_serialize[8].value;
-                temp['Updatedby'] = $_SESSION['username'];
+                temp['Updatedby'] = '<?php echo $_SESSION['username']; ?>';
                 // temp['Updatedby'] = 'Admin1';
                 $('#dataTable-visitors').dataTable().fnUpdate(temp, aPos, undefined, false);
                 $('.action-btn').off('click')
