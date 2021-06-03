@@ -39,8 +39,8 @@ $count=mysqli_num_rows($result);
 			//echo "Cookies are set";
 		} 
         else {
-			setcookie("sec_username","");
-			setcookie("sec_password","");
+			setcookie("sec_username","", time()-3600,'/');
+			setcookie("sec_password","", time()-3600,'/');
 			//echo "Cookies are not  Set";
 		}
 		// echo $_COOKIE['sec_username'];

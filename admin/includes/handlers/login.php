@@ -35,8 +35,8 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
                 setcookie("password", $_POST["password"], time() + 3600,'/'); // stored for 1 day
                 //echo "Cookies are set";
             } else {
-                setcookie("username", "");
-                setcookie("password", "");
+                setcookie("username", "", time()-3600,'/');
+                setcookie("password", "", time()-3600,'/');
                 //echo "Cookies are not  Set";
             }
             echo '<script>window.location.replace("../../index.php")</script>';
