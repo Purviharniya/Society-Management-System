@@ -46,7 +46,7 @@ include './includes/shared/header.php';
                                         <?php
 
 $complaint_types = array();
-$query = "SELECT DISTINCT(complainttypes.complaint_type),complainttypes.complaint_id from complaints INNER JOIN complainttypes ON complainttypes.complaint_id = complaints.ComplaintType";
+$query = "SELECT DISTINCT(complainttypes.complaint_type),complainttypes.complaint_id from complaints INNER JOIN complainttypes ON complainttypes.complaint_id = complaints.ComplaintType where complaints.Status='2'";
 if ($result = mysqli_query($con, $query)) {
     $rowcount = mysqli_num_rows($result);
     while ($row = mysqli_fetch_array($result)) {
